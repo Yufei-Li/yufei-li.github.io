@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>正则表达式 - 李雨菲的博客 Leah&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲" /><meta name="description" content="元字符 常用正则表达式 校验数字的表达式 数字：^[0-9]*$ n位的数字：^\d{n}$ 至少n位的数字：^\d{n,}$ m-n位的数字：^\d{" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/regular_expression/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="正则表达式" />
+<meta property="og:description" content="元字符 常用正则表达式 校验数字的表达式 数字：^[0-9]*$ n位的数字：^\d{n}$ 至少n位的数字：^\d{n,}$ m-n位的数字：^\d{" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/regular_expression/" />
+<meta property="article:published_time" content="2020-07-13T10:30:55+08:00" />
+<meta property="article:modified_time" content="2020-07-13T10:30:55+08:00" />
+<meta itemprop="name" content="正则表达式">
+<meta itemprop="description" content="元字符 常用正则表达式 校验数字的表达式 数字：^[0-9]*$ n位的数字：^\d{n}$ 至少n位的数字：^\d{n,}$ m-n位的数字：^\d{">
+<meta itemprop="datePublished" content="2020-07-13T10:30:55&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-13T10:30:55&#43;08:00" />
+<meta itemprop="wordCount" content="3010">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="正则表达式"/>
+<meta name="twitter:description" content="元字符 常用正则表达式 校验数字的表达式 数字：^[0-9]*$ n位的数字：^\d{n}$ 至少n位的数字：^\d{n,}$ m-n位的数字：^\d{"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leah</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leah</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">正则表达式</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-13 </span>
+        <div class="post-category">
+            <a href="/categories/cs%E5%BF%85%E5%A4%87%E7%9F%A5%E8%AF%86%E7%82%B9/"> cs必备知识点 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#元字符">元字符</a></li>
+    <li><a href="#常用正则表达式">常用正则表达式</a>
+      <ul>
+        <li><a href="#校验数字的表达式">校验数字的表达式</a></li>
+        <li><a href="#校验字符的表达式">校验字符的表达式</a></li>
+        <li><a href="#特殊需求表达式">特殊需求表达式</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="元字符">元字符</h2>
+<p><img src="https://upload-images.jianshu.io/upload_images/24055888-fb8afb909f5e01f7.gif?imageMogr2/auto-orient/strip" alt="1.gif"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/24055888-8305328dd9f4a4e4.gif?imageMogr2/auto-orient/strip" alt="2.gif"></p>
+<h2 id="常用正则表达式">常用正则表达式</h2>
+<h3 id="校验数字的表达式">校验数字的表达式</h3>
+<ol>
+<li>
+<p>数字：^[0-9]*$</p>
+</li>
+<li>
+<p>n位的数字：^\d{n}$</p>
+</li>
+<li>
+<p>至少n位的数字：^\d{n,}$</p>
+</li>
+<li>
+<p>m-n位的数字：^\d{m,n}$</p>
+</li>
+<li>
+<p>零和非零开头的数字：^(0|[1-9][0-9]*)$</p>
+</li>
+<li>
+<p>非零开头的最多带两位小数的数字：^([1-9][0-9]*)+(.[0-9]{1,2})?$</p>
+</li>
+<li>
+<p>带1-2位小数的正数或负数：^(-)?\d+(.\d{1,2})?$</p>
+</li>
+<li>
+<p>正数、负数、和小数：^(-|+)?\d+(.\d+)?$</p>
+</li>
+<li>
+<p>有两位小数的正实数：^[0-9]+(.[0-9]{2})?$</p>
+</li>
+<li>
+<p>有1~3位小数的正实数：^[0-9]+(.[0-9]{1,3})?$</p>
+</li>
+<li>
+<p>非零的正整数：^[1-9]\d<em>$ 或 ^([1-9][0-9]</em>){1,3}$ 或 ^+?[1-9][0-9]*$</p>
+</li>
+<li>
+<p>非零的负整数：^-[1-9][]0-9&rdquo;<em>$ 或 ^-[1-9]\d</em>$</p>
+</li>
+<li>
+<p>非负整数：^\d+$ 或 ^[1-9]\d*|0$</p>
+</li>
+<li>
+<p>非正整数：^-[1-9]\d*|0$ 或 ^((-\d+)|(0+))$</p>
+</li>
+<li>
+<p>非负浮点数：^\d+(.\d+)?$ 或 ^[1-9]\d*.\d*|0.\d*[1-9]\d*|0?.0+|0$</p>
+</li>
+<li>
+<p>非正浮点数：^((-\d+(.\d+)?)|(0+(.0+)?))$ 或 ^(-([1-9]\d*.\d*|0.\d*[1-9]\d*))|0?.0+|0$</p>
+</li>
+<li>
+<p>正浮点数：^[1-9]\d*.\d*|0.\d*[1-9]\d*$ 或 ^(([0-9]+.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*.[0-9]+)|([0-9]*[1-9][0-9]*))$</p>
+</li>
+<li>
+<p>负浮点数：^-([1-9]\d*.\d*|0.\d*[1-9]\d*)$ 或 ^(-(([0-9]+.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*.[0-9]+)|([0-9]*[1-9][0-9]*)))$</p>
+</li>
+<li>
+<p>浮点数：^(-?\d+)(.\d+)?$ 或 ^-?([1-9]\d*.\d*|0.\d*[1-9]\d*|0?.0+|0)$</p>
+</li>
+</ol>
+<h3 id="校验字符的表达式">校验字符的表达式</h3>
+<ol>
+<li>
+<p>汉字：^[\u4e00-\u9fa5]{0,}$</p>
+</li>
+<li>
+<p>英文和数字：^[A-Za-z0-9]+$ 或 ^[A-Za-z0-9]{4,40}$</p>
+</li>
+<li>
+<p>长度为3-20的所有字符：^.{3,20}$</p>
+</li>
+<li>
+<p>由26个英文字母组成的字符串：^[A-Za-z]+$</p>
+</li>
+<li>
+<p>由26个大写英文字母组成的字符串：^[A-Z]+$</p>
+</li>
+<li>
+<p>由26个小写英文字母组成的字符串：^[a-z]+$</p>
+</li>
+<li>
+<p>由数字和26个英文字母组成的字符串：^[A-Za-z0-9]+$</p>
+</li>
+<li>
+<p>由数字、26个英文字母或者下划线组成的字符串：^\w+$ 或 ^\w{3,20}$</p>
+</li>
+<li>
+<p>中文、英文、数字包括下划线：^[\u4E00-\u9FA5A-Za-z0-9_]+$</p>
+</li>
+<li>
+<p>中文、英文、数字但不包括下划线等符号：^[\u4E00-\u9FA5A-Za-z0-9]+$ 或 ^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$</p>
+</li>
+<li>
+<p>可以输入含有^%&amp;&rsquo;,;=?$&quot;等字符：[^%&amp;&rsquo;,;=?$\x22]+</p>
+</li>
+<li>
+<p>禁止输入含有~的字符：[^~\x22]+</p>
+</li>
+</ol>
+<h3 id="特殊需求表达式">特殊需求表达式</h3>
+<ol>
+<li>
+<p>Email地址：^\w+([-+.]\w+)<em>@\w+([-.]\w+)</em>.\w+([-.]\w+)*$</p>
+</li>
+<li>
+<p>域名：[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(/.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+/.?</p>
+</li>
+<li>
+<p>InternetURL：[a-zA-z]+://[^\s]* 或 ^http://([\w-]+.)+[\w-]+(/[\w-./?%&amp;=]*)?$</p>
+</li>
+<li>
+<p>手机号码：^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$</p>
+</li>
+<li>
+<p>电话号码(&ldquo;XXX-XXXXXXX&rdquo;、&ldquo;XXXX-XXXXXXXX&rdquo;、&ldquo;XXX-XXXXXXX&rdquo;、&ldquo;XXX-XXXXXXXX&rdquo;、&ldquo;XXXXXXX&quot;和&quot;XXXXXXXX)：^((\d{3,4}-)|
+\d{3.4}-)?\d{7,8}$</p>
+</li>
+<li>
+<p>国内电话号码(0511-4405222、021-87888822)：\d{3}-\d{8}|\d{4}-\d{7}</p>
+</li>
+<li>
+<p>身份证号(15位、18位数字)：^\d{15}|\d{18}$</p>
+</li>
+<li>
+<p>短身份证号码(数字、字母x结尾)：^([0-9]){7,18}(x|X)?$ 或 ^\d{8,18}|[0-9x]{8,18}|[0-9X]{8,18}?$</p>
+</li>
+<li>
+<p>帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$</p>
+</li>
+<li>
+<p>密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：^[a-zA-Z]\w{5,17}$</p>
+</li>
+<li>
+<p>强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间)：^(?=.<em>\d)(?=.</em>[a-z])(?=.*[A-Z]).{8,10}$</p>
+</li>
+<li>
+<p>日期格式：^\d{4}-\d{1,2}-\d{1,2}</p>
+</li>
+<li>
+<p>一年的12个月(01～09和1～12)：^(0?[1-9]|1[0-2])$</p>
+</li>
+<li>
+<p>一个月的31天(01～09和1～31)：^((0?[1-9])|((1|2)[0-9])|30|31)$</p>
+</li>
+<li>
+<p>钱的输入格式：</p>
+</li>
+<li>
+<p>1.有四种钱的表示形式我们可以接受:&ldquo;10000.00&rdquo; 和 &ldquo;10,000.00&rdquo;, 和没有 &ldquo;分&rdquo; 的 &ldquo;10000&rdquo; 和 &ldquo;10,000&rdquo;：^[1-9][0-9]*$</p>
+</li>
+<li>
+<p>2.这表示任意一个不以0开头的数字,但是,这也意味着一个字符&quot;0&quot;不通过,所以我们采用下面的形式：^(0|[1-9][0-9]*)$</p>
+</li>
+<li>
+<p>3.一个0或者一个不以0开头的数字.我们还可以允许开头有一个负号：^(0|-?[1-9][0-9]*)$</p>
+</li>
+<li>
+<p>4.这表示一个0或者一个可能为负的开头不为0的数字.让用户以0开头好了.把负号的也去掉,因为钱总不能是负的吧.下面我们要加的是说明可能的小数部分：^[0-9]+(.[0-9]+)?$</p>
+</li>
+<li>
+<p>5.必须说明的是,小数点后面至少应该有1位数,所以&quot;10.&ldquo;是不通过的,但是 &ldquo;10&rdquo; 和 &ldquo;10.2&rdquo; 是通过的：^[0-9]+(.[0-9]{2})?$</p>
+</li>
+<li>
+<p>6.这样我们规定小数点后面必须有两位,如果你认为太苛刻了,可以这样：^[0-9]+(.[0-9]{1,2})?$</p>
+</li>
+<li>
+<p>7.这样就允许用户只写一位小数.下面我们该考虑数字中的逗号了,我们可以这样：^[0-9]{1,3}(,[0-9]{3})*(.[0-9]{1,2})?$</p>
+</li>
+<li>
+<p>8.1到3个数字,后面跟着任意个 逗号+3个数字,逗号成为可选,而不是必须：^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$</p>
+</li>
+<li>
+<p>备注：这就是最终结果了,别忘了&quot;+&quot;可以用&rdquo;*&ldquo;替代如果你觉得空字符串也可以接受的话(奇怪,为什么?)最后,别忘了在用函数时去掉
+去掉那个反斜杠,一般的错误都在这里</p>
+</li>
+<li>
+<p>xml文件：^([a-zA-Z]+-?)+[a-zA-Z0-9]+\.[x|X][m|M][l|L]$</p>
+</li>
+<li>
+<p>中文字符的正则表达式：[\u4e00-\u9fa5]</p>
+</li>
+<li>
+<p>双字节字符：[^\x00-\xff] (包括汉字在内，可以用来计算字符串的长度(一个双字节字符长度计2，ASCII字符计1))</p>
+</li>
+<li>
+<p>空白行的正则表达式：\n\s*\r (可以用来删除空白行)</p>
+</li>
+<li>
+<p>HTML标记的正则表达式：&lt;(\S*?)[^&gt;]*&gt;.*?&lt;/\1&gt;|&lt;.*? /&gt; (网上流传的版本太糟糕，上面这个也仅仅能部分，对于复杂的嵌套标记依旧无能为力)</p>
+</li>
+<li>
+<p>首尾空白字符的正则表达式：^\s<em>|\s</em>$或(^\s*)|(\s*$) (可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，
+非常有用的表达式)</p>
+</li>
+<li>
+<p>腾讯QQ号：[1-9][0-9]{4,} (腾讯QQ号从10000开始)</p>
+</li>
+<li>
+<p>中国邮政编码：[1-9]\d{5}(?!\d) (中国邮政编码为6位数字)</p>
+</li>
+<li>
+<p>IP地址：\d+.\d+.\d+.\d+ (提取IP地址时有用)</p>
+</li>
+<li>
+<p>IP地址：((?:(?:25[0-5]|2[0-4]\d|[01]?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d?\d))</p>
+</li>
+</ol>
+<p>原作者：<a href="https://www.cnblogs.com/yanmuxiao/p/8674241.html">https://www.cnblogs.com/yanmuxiao/p/8674241.html</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/re/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Re笔记</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/beautifulsoup/">
+            <span class="next-text nav-default">BeautifulSoup笔记</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">未经作者授权请勿转载</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

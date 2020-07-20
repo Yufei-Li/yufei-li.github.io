@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>李雨菲的博客 Leah&#39;s Blog</title>
+    <link>https://yufei-li.github.io/</link>
+    <description>Recent content on 李雨菲的博客 Leah&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>未经作者授权请勿转载</copyright>
+    <lastBuildDate>Mon, 20 Jul 2020 23:02:31 +0800</lastBuildDate>
+    
+	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Matplotlib学习笔记</title>
+      <link>https://yufei-li.github.io/post/matplotlib/</link>
+      <pubDate>Mon, 20 Jul 2020 23:02:31 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/matplotlib/</guid>
+      <description>matplotlib是基于Python语言的开源项目，旨在为Python提供一个数据绘图包,一般用于数据可视化 折线图 基础绘图 1 2 3 4 5 6 7 8</description>
+    </item>
+    
+    <item>
+      <title>Re笔记</title>
+      <link>https://yufei-li.github.io/post/re/</link>
+      <pubDate>Mon, 13 Jul 2020 13:37:51 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/re/</guid>
+      <description>在python爬虫中主要使用search、findall和sub方法 正则表达式的表示类型： raw string类型（原生字符串类型）：re库采用r</description>
+    </item>
+    
+    <item>
+      <title>正则表达式</title>
+      <link>https://yufei-li.github.io/post/regular_expression/</link>
+      <pubDate>Mon, 13 Jul 2020 10:30:55 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/regular_expression/</guid>
+      <description>元字符 常用正则表达式 校验数字的表达式 数字：^[0-9]*$ n位的数字：^\d{n}$ 至少n位的数字：^\d{n,}$ m-n位的数字：^\d{</description>
+    </item>
+    
+    <item>
+      <title>BeautifulSoup笔记</title>
+      <link>https://yufei-li.github.io/post/beautifulsoup/</link>
+      <pubDate>Sun, 12 Jul 2020 19:23:19 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/beautifulsoup/</guid>
+      <description>BeautifulSoup将复杂的文档转换成一个树形结构,所有的对象可以归为四种类型：Tag, NavigableString, BeautifulSoup, Comment。对于爬虫来说，主要使用其中</description>
+    </item>
+    
+    <item>
+      <title>Urllib笔记</title>
+      <link>https://yufei-li.github.io/post/urllib/</link>
+      <pubDate>Sun, 12 Jul 2020 16:06:35 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/urllib/</guid>
+      <description>urllib包含四个模块： request，是最基本的http请求模块，可以用来模拟发送请求 error，异常处理模块，如果出现请求错误，可以进</description>
+    </item>
+    
+    <item>
+      <title>python爬虫入门笔记</title>
+      <link>https://yufei-li.github.io/post/web_spider/</link>
+      <pubDate>Fri, 10 Jul 2020 18:59:04 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/web_spider/</guid>
+      <description>准备工作 寻找url规律 在网页进入开发者模式，左上角有一个小箭头，点击之后移动鼠标，右边就会自动显示鼠标指向的信息在源代码中的位置 编码规范： p</description>
+    </item>
+    
+    <item>
+      <title>git学习笔记</title>
+      <link>https://yufei-li.github.io/post/git_note/</link>
+      <pubDate>Fri, 10 Jul 2020 14:50:29 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/git_note/</guid>
+      <description>git结构 git命令行操作 本地库初始化 初始化：git init 在文件夹下面单击右键，选择git Bash here,再使用git init建造仓库。建立了一个名</description>
+    </item>
+    
+    <item>
+      <title>《黑天鹅》</title>
+      <link>https://yufei-li.github.io/post/the-black-swan/</link>
+      <pubDate>Thu, 09 Jul 2020 11:12:48 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/the-black-swan/</guid>
+      <description>摘抄 黑天鹅的逻辑是，你不知道的事比你知道的事更有意义，因为许多黑天鹅事件正是在不可预知的情况下发生和加剧的 我们的世界是由极端、未知和非常不可</description>
+    </item>
+    
+  </channel>
+</rss>

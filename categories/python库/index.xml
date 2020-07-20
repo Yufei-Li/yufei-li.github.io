@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python库 on 李雨菲的博客 Leah&#39;s Blog</title>
+    <link>https://yufei-li.github.io/categories/python%E5%BA%93/</link>
+    <description>Recent content in python库 on 李雨菲的博客 Leah&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>未经作者授权请勿转载</copyright>
+    <lastBuildDate>Mon, 20 Jul 2020 23:02:31 +0800</lastBuildDate>
+    
+	<atom:link href="https://yufei-li.github.io/categories/python%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Matplotlib学习笔记</title>
+      <link>https://yufei-li.github.io/post/matplotlib/</link>
+      <pubDate>Mon, 20 Jul 2020 23:02:31 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/matplotlib/</guid>
+      <description>matplotlib是基于Python语言的开源项目，旨在为Python提供一个数据绘图包,一般用于数据可视化 折线图 基础绘图 1 2 3 4 5 6 7 8</description>
+    </item>
+    
+    <item>
+      <title>Re笔记</title>
+      <link>https://yufei-li.github.io/post/re/</link>
+      <pubDate>Mon, 13 Jul 2020 13:37:51 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/re/</guid>
+      <description>在python爬虫中主要使用search、findall和sub方法 正则表达式的表示类型： raw string类型（原生字符串类型）：re库采用r</description>
+    </item>
+    
+    <item>
+      <title>BeautifulSoup笔记</title>
+      <link>https://yufei-li.github.io/post/beautifulsoup/</link>
+      <pubDate>Sun, 12 Jul 2020 19:23:19 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/beautifulsoup/</guid>
+      <description>BeautifulSoup将复杂的文档转换成一个树形结构,所有的对象可以归为四种类型：Tag, NavigableString, BeautifulSoup, Comment。对于爬虫来说，主要使用其中</description>
+    </item>
+    
+    <item>
+      <title>Urllib笔记</title>
+      <link>https://yufei-li.github.io/post/urllib/</link>
+      <pubDate>Sun, 12 Jul 2020 16:06:35 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/urllib/</guid>
+      <description>urllib包含四个模块： request，是最基本的http请求模块，可以用来模拟发送请求 error，异常处理模块，如果出现请求错误，可以进</description>
+    </item>
+    
+  </channel>
+</rss>

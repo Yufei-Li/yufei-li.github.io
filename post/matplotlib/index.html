@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Matplotlib学习笔记 - 李雨菲的博客 Leah&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲" /><meta name="description" content="matplotlib是基于Python语言的开源项目，旨在为Python提供一个数据绘图包,一般用于数据可视化 折线图 基础绘图 1 2 3 4 5 6 7 8" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/matplotlib/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Matplotlib学习笔记" />
+<meta property="og:description" content="matplotlib是基于Python语言的开源项目，旨在为Python提供一个数据绘图包,一般用于数据可视化 折线图 基础绘图 1 2 3 4 5 6 7 8" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/matplotlib/" />
+<meta property="article:published_time" content="2020-07-20T23:02:31+08:00" />
+<meta property="article:modified_time" content="2020-07-20T23:02:31+08:00" />
+<meta itemprop="name" content="Matplotlib学习笔记">
+<meta itemprop="description" content="matplotlib是基于Python语言的开源项目，旨在为Python提供一个数据绘图包,一般用于数据可视化 折线图 基础绘图 1 2 3 4 5 6 7 8">
+<meta itemprop="datePublished" content="2020-07-20T23:02:31&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-20T23:02:31&#43;08:00" />
+<meta itemprop="wordCount" content="3844">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Matplotlib学习笔记"/>
+<meta name="twitter:description" content="matplotlib是基于Python语言的开源项目，旨在为Python提供一个数据绘图包,一般用于数据可视化 折线图 基础绘图 1 2 3 4 5 6 7 8"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leah</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leah</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Matplotlib学习笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-20 </span>
+        <div class="post-category">
+            <a href="/categories/python%E5%BA%93/"> python库 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础绘图">基础绘图</a>
+      <ul>
+        <li><a href="#折线图的略微进阶">折线图的略微进阶</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#绘制竖向条形图">绘制竖向条形图</a></li>
+    <li><a href="#绘制横向条形图">绘制横向条形图</a></li>
+    <li><a href="#绘制多次条形图">绘制多次条形图</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>matplotlib是基于Python语言的开源项目，旨在为Python提供一个数据绘图包,一般用于数据可视化</p>
+<h1 id="折线图">折线图</h1>
+<h2 id="基础绘图">基础绘图</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#最后一个2的意思是步长，没有参数的话默认1</span>
+<span class="c1">#matplotlib会自动生成坐标轴，开始数值不一定是2</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mf">14.5</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">15</span><span class="p">]</span>
+
+
+<span class="c1">#设置图片大小，figsize第一个数值是宽，第二个是高。dpi越大，图像越清晰</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="c1">#绘制图像</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1">#设置x轴,一定要在绘制图像之后,注意这里的设置包含前面的x</span>
+<span class="c1">#如果步长想要取步长位小数，可以使用[i/2 for i in range(2,50)]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="c1">#或者plt.xticks(x)</span>
+
+<span class="c1">#设置y轴</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1">#保存,注意要先绘图后保存</span>
+<span class="c1">#也可以保存为svg矢量图格式，放大不会有锯齿</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./test1.png&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="折线图的略微进阶">折线图的略微进阶</h3>
+<ul>
+<li>
+<p>给坐标轴标记</p>
+</li>
+<li>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">120</span><span class="p">)</span>
+    
+<span class="c1">#调整x轴的刻度</span>
+<span class="n">_xtick_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;10点{}分&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">60</span><span class="p">)]</span>
+<span class="n">_xtick_labels</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&#34;11点{}分&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">60</span><span class="p">)]</span>
+    
+<span class="c1">#取步长，数字和字符串一一对应，数据的长度一样</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)[::</span><span class="mi">3</span><span class="p">],</span><span class="n">_xtick_labels</span><span class="p">[::</span><span class="mi">3</span><span class="p">],</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span> <span class="c1">#rotaion旋转的度数</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>&quot;10点{}分&quot;.format(i) for i in range(60)</code>format里的i会显示在花括号中</p>
+</li>
+<li>
+<p><code>list(x)[::3],_xtick_labels[::3]</code>x和label的步长要对应，否则会对应不上。只有当x是list时，才能够使用[::3]来调整步长</p>
+</li>
+<li>
+<p>如果label还是太密集，可以使用旋转来避免</p>
+</li>
+</ul>
+</li>
+<li>
+<p>显示中文</p>
+</li>
+<li>
+<ul>
+<li>
+<p>通过font manager解决</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">from matplotlib import font_manager
+    
+my_font = font_manager.FontProperties(fname=&#34;/System/Library/Fonts/PingFang.ttc&#34;)
+#复制字体集里面的路径
+plt.xticks(list(x)[::3],_xtick_labels[::3],rotation=45,fontproperties=my_font) 
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>添加描述信息</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#添加描述信息</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&#34;时间&#34;</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&#34;温度 单位(℃)&#34;</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;10点到12点每分钟的气温变化情况&#34;</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>只要显示中文，就必须要有fontproperties参数</li>
+</ul>
+</li>
+<li>
+<p>绘制网格</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">#绘制网格
+plt.grid(alpha=0.1)
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>alpha参数用来设置透明度</li>
+</ul>
+</li>
+<li>
+<p>绘制两个图像来对比</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># coding=utf-8</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
+  
+<span class="n">my_font</span> <span class="o">=</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s2">&#34;/System/Library/Fonts/PingFang.ttc&#34;</span><span class="p">)</span>
+  
+<span class="n">y_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span> <span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+  
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
+  
+<span class="c1">#设置图形大小</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+  
+<span class="c1">#分别绘制两个图像</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y_1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;自己&#34;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;#F08080&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y_2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;同桌&#34;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;#DB7093&#34;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&#34;--&#34;</span><span class="p">)</span>
+  
+<span class="c1">#设置x轴刻度</span>
+<span class="n">_xtick_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;{}岁&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">_xtick_labels</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+<span class="c1">#plt.yticks(range(0,9))</span>
+  
+<span class="c1">#绘制网格</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+  
+<span class="c1">#添加图例来解释不同的图像并且设置位置</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">prop</span><span class="o">=</span><span class="n">my_font</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s2">&#34;upper left&#34;</span><span class="p">)</span>
+  
+<span class="c1">#展示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<ul>
+<li>
+<p>在legend里添加中文参数是prop而不是fontproperties</p>
+</li>
+<li>
+<p>在plot方法里可以添加多个参数：</p>
+<p>color='r&rsquo;. #线条颜色，也可以用颜色的16进制代码表示</p>
+<p>linestyle=&rsquo;&ndash;&rsquo;  #线条风格</p>
+<p>linewidth=5. #线条粗细</p>
+<p>alpha=0.5 #透明度</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="散点图">散点图</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="c1"># coding=utf-8</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
+
+<span class="n">my_font</span> <span class="o">=</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s2">&#34;/System/Library/Fonts/Hiragino Sans GB.ttc&#34;</span><span class="p">)</span>
+<span class="n">y_3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">23</span><span class="p">]</span>
+<span class="n">y_10</span> <span class="o">=</span> <span class="p">[</span><span class="mi">26</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+
+<span class="c1">#为了让x轴不重叠，x_10需要往右移</span>
+<span class="n">x_3</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">x_10</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">51</span><span class="p">,</span><span class="mi">82</span><span class="p">)</span>
+
+<span class="c1">#设置图形大小</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="c1">#使用scatter方法绘制散点图,和之前绘制折线图的唯一区别</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_3</span><span class="p">,</span><span class="n">y_3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;3月份&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_10</span><span class="p">,</span><span class="n">y_10</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;10月份&#34;</span><span class="p">)</span>
+
+<span class="c1">#调整x轴的刻度</span>
+<span class="n">_x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_3</span><span class="p">)</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">x_10</span><span class="p">)</span>    <span class="c1">#相加后为62个点，不可以直接list(range(1,82))</span>
+<span class="c1">#设置对应的字符串</span>
+<span class="n">_xtick_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;3月{}日&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_3</span><span class="p">]</span>
+<span class="n">_xtick_labels</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&#34;10月{}日&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_10</span><span class="p">]</span>
+<span class="c1">#传入两个参数，x和对应的字符串</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">_x</span><span class="p">[::</span><span class="mi">3</span><span class="p">],</span><span class="n">_xtick_labels</span><span class="p">[::</span><span class="mi">3</span><span class="p">],</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="c1">#添加图例</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&#34;upper left&#34;</span><span class="p">,</span><span class="n">prop</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+
+<span class="c1">#添加描述信息</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&#34;时间&#34;</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&#34;温度&#34;</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;标题&#34;</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+<span class="c1">#展示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>散点图和折线图的唯一区别是绘制散点图需要用<code>plt.scatter(x_3,y_3)</code></p>
+<h1 id="条形图">条形图</h1>
+<h2 id="绘制竖向条形图">绘制竖向条形图</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># coding=utf-8</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
+<span class="n">my_font</span> <span class="o">=</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s2">&#34;/System/Library/Fonts/Hiragino Sans GB.ttc&#34;</span><span class="p">)</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;战狼2&#34;</span><span class="p">,</span><span class="s2">&#34;速度与激情8&#34;</span><span class="p">,</span><span class="s2">&#34;功夫瑜伽&#34;</span><span class="p">,</span><span class="s2">&#34;西游伏妖篇&#34;</span><span class="p">,</span><span class="s2">&#34;变形金刚5：最后的骑士&#34;</span><span class="p">,</span><span class="s2">&#34;摔跤吧！爸爸&#34;</span><span class="p">,</span><span class="s2">&#34;加勒比海盗5：死无对证&#34;</span><span class="p">,</span><span class="s2">&#34;金刚：骷髅岛&#34;</span><span class="p">,</span><span class="s2">&#34;极限特工：终极回归&#34;</span><span class="p">,</span><span class="s2">&#34;生化危机6：终章&#34;</span><span class="p">,</span><span class="s2">&#34;乘风破浪&#34;</span><span class="p">,</span><span class="s2">&#34;神偷奶爸3&#34;</span><span class="p">,</span><span class="s2">&#34;智取威虎山&#34;</span><span class="p">,</span><span class="s2">&#34;大闹天竺&#34;</span><span class="p">,</span><span class="s2">&#34;金刚狼3：殊死一战&#34;</span><span class="p">,</span><span class="s2">&#34;蜘蛛侠：英雄归来&#34;</span><span class="p">,</span><span class="s2">&#34;悟空传&#34;</span><span class="p">,</span><span class="s2">&#34;银河护卫队2&#34;</span><span class="p">,</span><span class="s2">&#34;情圣&#34;</span><span class="p">,</span><span class="s2">&#34;新木乃伊&#34;</span><span class="p">,]</span>
+
+<span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mf">56.01</span><span class="p">,</span><span class="mf">26.94</span><span class="p">,</span><span class="mf">17.53</span><span class="p">,</span><span class="mf">16.49</span><span class="p">,</span><span class="mf">15.45</span><span class="p">,</span><span class="mf">12.96</span><span class="p">,</span><span class="mf">11.8</span><span class="p">,</span><span class="mf">11.61</span><span class="p">,</span><span class="mf">11.28</span><span class="p">,</span><span class="mf">11.12</span><span class="p">,</span><span class="mf">10.49</span><span class="p">,</span><span class="mf">10.3</span><span class="p">,</span><span class="mf">8.75</span><span class="p">,</span><span class="mf">7.55</span><span class="p">,</span><span class="mf">7.32</span><span class="p">,</span><span class="mf">6.99</span><span class="p">,</span><span class="mf">6.88</span><span class="p">,</span><span class="mf">6.86</span><span class="p">,</span><span class="mf">6.58</span><span class="p">,</span><span class="mf">6.23</span><span class="p">]</span>
+
+
+<span class="c1">#设置图形大小</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="c1">#绘制条形图</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span><span class="n">b</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="c1">#设置字符串到x轴</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span><span class="n">a</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&#34;./movie.png&#34;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>绘制条形图使用<code>plt.bar(range(len(a)),b,width=0.3)</code>,参数应该是list或者tuple，list a可以直接传入<code>plt.bar(a,(len(a)),b,width=0.3)</code>，也可以转换为元组<code>plt.bar(range(len(a)),b,width=0.3)</code></li>
+<li>如果x轴的label太长，可以使用\n来换行，<code>&quot;变形金刚5：\n最后的骑士&quot;</code></li>
+</ul>
+<h2 id="绘制横向条形图">绘制横向条形图</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">#设置图形大小
+plt.figure(figsize=(20,8),dpi=80)
+#绘制横向条形图,注意b在这里为width，可以查看源码看每个参数的作用
+plt.barh(range(len(a)),b,height=0.3,color=&#34;orange&#34;)
+#设置字符串到y轴，注意不是x轴
+plt.yticks(range(len(a)),a,fontproperties=my_font)
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>横向条形图时，使用<code>plt.barh</code>,使用height控制宽度</li>
+</ul>
+<h2 id="绘制多次条形图">绘制多次条形图</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># coding=utf-8</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
+<span class="n">my_font</span> <span class="o">=</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s2">&#34;/System/Library/Fonts/Hiragino Sans GB.ttc&#34;</span><span class="p">)</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;猩球崛起3：终极之战&#34;</span><span class="p">,</span><span class="s2">&#34;敦刻尔克&#34;</span><span class="p">,</span><span class="s2">&#34;蜘蛛侠：英雄归来&#34;</span><span class="p">,</span><span class="s2">&#34;战狼2&#34;</span><span class="p">]</span>
+<span class="n">b_16</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15746</span><span class="p">,</span><span class="mi">312</span><span class="p">,</span><span class="mi">4497</span><span class="p">,</span><span class="mi">319</span><span class="p">]</span>
+<span class="n">b_15</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12357</span><span class="p">,</span><span class="mi">156</span><span class="p">,</span><span class="mi">2045</span><span class="p">,</span><span class="mi">168</span><span class="p">]</span>
+<span class="n">b_14</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2358</span><span class="p">,</span><span class="mi">399</span><span class="p">,</span><span class="mi">2358</span><span class="p">,</span><span class="mi">362</span><span class="p">]</span>
+
+<span class="n">bar_width</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">x_14</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+<span class="n">x_15</span> <span class="o">=</span>  <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">bar_width</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_14</span><span class="p">]</span>
+<span class="n">x_16</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">bar_width</span><span class="o">*</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_14</span><span class="p">]</span>
+
+<span class="c1">#设置图形大小</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span><span class="n">b_14</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="n">bar_width</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;9月14日&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_15</span><span class="p">,</span><span class="n">b_15</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="n">bar_width</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;9月15日&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_16</span><span class="p">,</span><span class="n">b_16</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="n">bar_width</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;9月16日&#34;</span><span class="p">)</span>
+
+<span class="c1">#设置图例</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">prop</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+
+<span class="c1">#设置x轴的刻度,注意要和中间的x_15对应</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x_15</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">my_font</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="直方图">直方图</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># coding=utf-8</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
+
+<span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">131</span><span class="p">,</span>  <span class="mi">98</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">142</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span>  <span class="mi">99</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span>  <span class="mi">95</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span>  <span class="mi">86</span><span class="p">,</span>  <span class="mi">95</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span><span class="mi">126</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span>  <span class="mi">86</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span>  <span class="mi">99</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">129</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span><span class="mi">156</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span>  <span class="mi">83</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">107</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span><span class="mi">112</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span>  <span class="mi">83</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span><span class="mi">136</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">129</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">141</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">149</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span><span class="mi">114</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">141</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span>  <span class="mi">92</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span>  <span class="mi">97</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span>  <span class="mi">98</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span>  <span class="mi">81</span><span class="p">,</span>  <span class="mi">97</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span><span class="mi">134</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span> <span class="mi">129</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span>  <span class="mi">83</span><span class="p">,</span>  <span class="mi">94</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span><span class="mi">131</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span>  <span class="mi">84</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">150</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1">#组距</span>
+<span class="c1">#计算组数</span>
+<span class="n">num_bins</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">//</span><span class="n">d</span>   <span class="c1">#必须要确保d可以被整除</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">num_bins</span><span class="p">)</span>
+
+
+<span class="c1">#设置图形的大小</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">num_bins</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1">#设置x轴的刻度</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">))</span> <span class="c1">#max(a)+d确保在最大值处绘制</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>只有没有进行过统计过的数据可以用来绘制直方图</li>
+<li>绘制直方图时，使用<code>plt.hist(a,num_bins,density=True)</code>,第一个参数是数据，第二个参数是有几个竖列，density参数表示y轴表示的是出现的概率，如果density=False,那么y轴会是出现的次数</li>
+<li>python的除法：除法：/;  取整：//;   取余：%</li>
+</ul>
+<h1 id="其他图形">其他图形</h1>
+<ol>
+<li>通过matplotlib官网，<a href="https://matplotlib.org/gallery/index.html">https://matplotlib.org/gallery/index.html</a>,可以找到matplotlib支持的所有图像，点击想要绘制的图像，找到代码并修改参数</li>
+<li>通过echats官网，<a href="https://echarts.apache.org/examples/zh/index.html">https://echarts.apache.org/examples/zh/index.html</a>，可以找到更多模版，同样是修改参数即可</li>
+<li>seaborn，<a href="http://seaborn.pydata.org/examples/index.html">http://seaborn.pydata.org/examples/index.html</a></li>
+</ol>
+<h1 id="总结">总结</h1>
+<ol>
+<li>
+<p>选择合适的图像来呈现数据</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">plt.plot(x,y_2,label=&#34;同桌&#34;,color=&#34;#DB7093&#34;,linestyle=&#34;--&#34;) #折线图
+plt.scatter(x_3,y_3,label=&#34;3月份&#34;) #散点图
+plt.bar(range(len(a)),b,width=0.3) #条形图
+plt.barh(range(len(a)),b,height=0.3,color=&#34;orange&#34;) #横向条形图
+plt.hist(a,num_bins,density=True) #直方图
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>xticks和yticks的设置</p>
+</li>
+<li>
+<p>label和grid的设置</p>
+</li>
+<li>
+<p>图片的大小和显示</p>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/re/">
+            <span class="next-text nav-default">Re笔记</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">未经作者授权请勿转载</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

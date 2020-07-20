@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on 李雨菲的博客 Leah&#39;s Blog</title>
+    <link>https://yufei-li.github.io/categories/python/</link>
+    <description>Recent content in python on 李雨菲的博客 Leah&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>未经作者授权请勿转载</copyright>
+    <lastBuildDate>Fri, 10 Jul 2020 18:59:04 +0800</lastBuildDate>
+    
+	<atom:link href="https://yufei-li.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python爬虫入门笔记</title>
+      <link>https://yufei-li.github.io/post/web_spider/</link>
+      <pubDate>Fri, 10 Jul 2020 18:59:04 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/web_spider/</guid>
+      <description>准备工作 寻找url规律 在网页进入开发者模式，左上角有一个小箭头，点击之后移动鼠标，右边就会自动显示鼠标指向的信息在源代码中的位置 编码规范： p</description>
+    </item>
+    
+  </channel>
+</rss>
