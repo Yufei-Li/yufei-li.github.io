@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>未经作者授权请勿转载</copyright>
-    <lastBuildDate>Mon, 20 Jul 2020 23:02:31 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jul 2020 13:24:02 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/python%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Numpy</title>
+      <link>https://yufei-li.github.io/post/numpy/</link>
+      <pubDate>Wed, 22 Jul 2020 13:24:02 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/numpy/</guid>
+      <description>numpy是一个在python中做科学运算的基础库，重在数值运算，也是大部分python科学计算库的基础库，多用于在大型、多维数组上执行数值</description>
+    </item>
     
     <item>
       <title>Matplotlib学习笔记</title>

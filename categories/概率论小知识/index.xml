@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>概率论小知识 on 李雨菲的博客 Leah&#39;s Blog</title>
+    <link>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86/</link>
+    <description>Recent content in 概率论小知识 on 李雨菲的博客 Leah&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>未经作者授权请勿转载</copyright>
+    <lastBuildDate>Sun, 02 Aug 2020 23:38:34 +0800</lastBuildDate>
+    
+	<atom:link href="https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>贝叶斯定理（Bayes&#39; Theorem）</title>
+      <link>https://yufei-li.github.io/post/bayes_theorem/</link>
+      <pubDate>Sun, 02 Aug 2020 23:38:34 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/bayes_theorem/</guid>
+      <description>贝叶斯定理公式 公式的详细解释 P(H|E)是后验概率，P(H)是先验概率，P(E|H)/P(E)是可能性函数 我们先根据以往的经验预估一个&amp;qu</description>
+    </item>
+    
+  </channel>
+</rss>

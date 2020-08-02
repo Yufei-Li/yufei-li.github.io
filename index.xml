@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>未经作者授权请勿转载</copyright>
-    <lastBuildDate>Mon, 20 Jul 2020 23:02:31 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2020 23:38:34 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>贝叶斯定理（Bayes&#39; Theorem）</title>
+      <link>https://yufei-li.github.io/post/bayes_theorem/</link>
+      <pubDate>Sun, 02 Aug 2020 23:38:34 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/bayes_theorem/</guid>
+      <description>贝叶斯定理公式 公式的详细解释 P(H|E)是后验概率，P(H)是先验概率，P(E|H)/P(E)是可能性函数 我们先根据以往的经验预估一个&amp;qu</description>
+    </item>
+    
+    <item>
+      <title>Numpy</title>
+      <link>https://yufei-li.github.io/post/numpy/</link>
+      <pubDate>Wed, 22 Jul 2020 13:24:02 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/numpy/</guid>
+      <description>numpy是一个在python中做科学运算的基础库，重在数值运算，也是大部分python科学计算库的基础库，多用于在大型、多维数组上执行数值</description>
+    </item>
     
     <item>
       <title>Matplotlib学习笔记</title>

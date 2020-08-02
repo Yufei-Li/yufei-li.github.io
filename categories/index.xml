@@ -7,15 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>未经作者授权请勿转载</copyright>
-    <lastBuildDate>Mon, 20 Jul 2020 23:02:31 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2020 23:38:34 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>概率论小知识</title>
+      <link>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Sun, 02 Aug 2020 23:38:34 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>python库</title>
       <link>https://yufei-li.github.io/categories/python%E5%BA%93/</link>
-      <pubDate>Mon, 20 Jul 2020 23:02:31 +0800</pubDate>
+      <pubDate>Wed, 22 Jul 2020 13:24:02 +0800</pubDate>
       
       <guid>https://yufei-li.github.io/categories/python%E5%BA%93/</guid>
       <description></description>
