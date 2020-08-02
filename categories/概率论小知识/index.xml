@@ -6,11 +6,20 @@
     <description>Recent content in 概率论小知识 on 李雨菲的博客 Leah&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <copyright>未经作者授权请勿转载</copyright>
-    <lastBuildDate>Sun, 02 Aug 2020 23:38:34 +0800</lastBuildDate>
+    <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
+    <lastBuildDate>Mon, 03 Aug 2020 00:42:48 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>最大似然估计(MLE)和最大后验概率估计(MAP)</title>
+      <link>https://yufei-li.github.io/post/mlemap/</link>
+      <pubDate>Mon, 03 Aug 2020 00:42:48 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/mlemap/</guid>
+      <description>似然函数 对于这个函数： P(x|θ) 输入有两个：x表示某一个具体的数据；θ表示模型的参数。 如果θ是已知确定的，x是变量，这个函数叫做概率函数(</description>
+    </item>
     
     <item>
       <title>贝叶斯定理（Bayes&#39; Theorem）</title>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>最大似然估计(MLE)和最大后验概率估计(MAP) - 李雨菲的博客 Leah&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲" /><meta name="description" content="似然函数 对于这个函数： P(x|θ) 输入有两个：x表示某一个具体的数据；θ表示模型的参数。 如果θ是已知确定的，x是变量，这个函数叫做概率函数(" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/mlemap/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="最大似然估计(MLE)和最大后验概率估计(MAP)" />
+<meta property="og:description" content="似然函数 对于这个函数： P(x|θ) 输入有两个：x表示某一个具体的数据；θ表示模型的参数。 如果θ是已知确定的，x是变量，这个函数叫做概率函数(" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/mlemap/" />
+<meta property="article:published_time" content="2020-08-03T00:42:48+08:00" />
+<meta property="article:modified_time" content="2020-08-03T00:42:48+08:00" />
+<meta itemprop="name" content="最大似然估计(MLE)和最大后验概率估计(MAP)">
+<meta itemprop="description" content="似然函数 对于这个函数： P(x|θ) 输入有两个：x表示某一个具体的数据；θ表示模型的参数。 如果θ是已知确定的，x是变量，这个函数叫做概率函数(">
+<meta itemprop="datePublished" content="2020-08-03T00:42:48&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-03T00:42:48&#43;08:00" />
+<meta itemprop="wordCount" content="2102">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="最大似然估计(MLE)和最大后验概率估计(MAP)"/>
+<meta name="twitter:description" content="似然函数 对于这个函数： P(x|θ) 输入有两个：x表示某一个具体的数据；θ表示模型的参数。 如果θ是已知确定的，x是变量，这个函数叫做概率函数("/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leah</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leah</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">最大似然估计(MLE)和最大后验概率估计(MAP)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-03 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86/"> 概率论小知识 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#似然函数">似然函数</a></li>
+    <li><a href="#最大似然估计mle">最大似然估计（MLE）</a>
+      <ul>
+        <li><a href="#为什么要最大化似然函数pxθ">为什么要最大化似然函数P(x|θ)</a></li>
+      </ul>
+    </li>
+    <li><a href="#最大后验概率估计map">最大后验概率估计（MAP）</a></li>
+    <li><a href="#对比极大似然估计与最大后验概率估计">对比极大似然估计与最大后验概率估计</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="似然函数">似然函数</h2>
+<p>对于这个函数：</p>
+<p>P(x|θ)</p>
+<p>输入有两个：x表示某一个具体的数据；θ表示模型的参数。</p>
+<p>如果θ是已知确定的，x是变量，这个函数叫做概率函数(probability function)，它描述对于不同的样本点x，其出现概率是多少。</p>
+<p>如果x是已知确定的，θ是变量，这个函数叫做似然函数(likelihood function), 它描述对于不同的模型参数，出现x这个样本点的概率是多少。</p>
+<p>这有点像“一菜两吃”的意思。其实这样的形式我们以前也不是没遇到过。例如，f(x,y)=xy, 即x的y次方。如果x是已知确定的(例如x=2)，这就是f(y)=2y, 这是指数函数。 如果y是已知确定的(例如y=2)，这就是f(x)=x2，这是二次函数。同一个数学形式，从不同的变量角度观察，可以有不同的名字。</p>
+<h2 id="最大似然估计mle">最大似然估计（MLE）</h2>
+<p>假设有一个造币厂生产某种硬币，现在我们拿到了一枚这种硬币，想试试这硬币是不是均匀的。即想知道抛这枚硬币，正反面出现的概率（记为θ）各是多少？</p>
+<p>这是一个统计问题，回想一下，解决统计问题需要什么？ 数据！</p>
+<p>于是我们拿这枚硬币抛了10次，得到的数据（x）是：反正正正反反正正正反。我们想求的正面概率θ是模型参数，而抛硬币模型我们可以假设是二项分布。</p>
+<p>那么，出现实验结果x（即反正正正反反正正正反）的似然函数是多少呢？</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghczhzourbj30if04q3yq.jpg" alt=""></p>
+<p>注意，这是个只关于θ的函数。而最大似然估计，顾名思义，就是要最大化这个函数。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghczhzljvgj30i20b43yi.jpg" alt=""></p>
+<p>可以看出，在θ=0.6时，似然函数取得最大值。</p>
+<h3 id="为什么要最大化似然函数pxθ">为什么要最大化似然函数P(x|θ)</h3>
+<p>因为要根据数据来确定θ，而数据是已经发生的事实，所以我们要改变θ，让P(x|θ)对于这个数据能给出最大的概率（因为数据已经发生，概率是1）</p>
+<p>比如七天当中有一天是晴天，通过这个数据修改P(x|θ)，最大似然估计应该是1/7，因为这最符合天气情况，这个θ让我们最有可能在七天中得到只有一天晴天的结果，这最接近现实数据</p>
+<h2 id="最大后验概率估计map">最大后验概率估计（MAP）</h2>
+<p>最大后验概率估计，英文为Maximum A Posteriori Estimation，简写为MAP。回到抛硬币的问题，最大似然估计认为使似然函数<img src="https://math.jianshu.com/math?formula=P(X%7C%5Ctheta)" alt="P(X|\theta)">最大的参数<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">即为最好的<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">，此时最大似然估计是将<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">看作固定的值，只是其值未知；最大后验概率分布认为<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">是一个随机变量，即<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">具有某种概率分布，称为先验分布，求解时除了要考虑似然函数<img src="https://math.jianshu.com/math?formula=P(X%7C%5Ctheta)" alt="P(X|\theta)">之外，还要考虑<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的先验分布<img src="https://math.jianshu.com/math?formula=P(%5Ctheta)" alt="P(\theta)">，因此其认为使<img src="https://math.jianshu.com/math?formula=P(X%7C%5Ctheta)P(%5Ctheta)" alt="P(X|\theta)P(\theta)">取最大值的<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">就是最好的<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">。此时要最大化的函数变为<img src="https://math.jianshu.com/math?formula=P(X%7C%5Ctheta)P(%5Ctheta)" alt="P(X|\theta)P(\theta)">，由于<img src="https://math.jianshu.com/math?formula=X" alt="X">的先验分布<img src="https://math.jianshu.com/math?formula=P(X)" alt="P(X)">是固定的（可通过分析数据获得，其实我们也不关心<img src="https://math.jianshu.com/math?formula=X" alt="X">的分布，我们关心的是<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">），因此最大化函数可变为<img src="https://math.jianshu.com/math?formula=%5Cfrac%20%7BP(X%7C%5Ctheta)P(%5Ctheta)%7D%20%7BP(X)%7D" alt="\frac {P(X|\theta)P(\theta)} {P(X)}">，根据贝叶斯法则，要最大化的函数<img src="https://math.jianshu.com/math?formula=%5Cfrac%20%7BP(X%7C%5Ctheta)P(%5Ctheta)%7D%20%7BP(X)%7D%3DP(%5Ctheta%7CX)" alt="\frac {P(X|\theta)P(\theta)} {P(X)}=P(\theta|X)">，因此要最大化的函数是<img src="https://math.jianshu.com/math?formula=P(%5Ctheta%7CX)" alt="P(\theta|X)">，而<img src="https://math.jianshu.com/math?formula=P(%5Ctheta%7CX)" alt="P(\theta|X)">是<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的后验概率。</p>
+<p>在抛硬币的例子中，通常认为<img src="https://math.jianshu.com/math?formula=%5Ctheta%3D0.5" alt="\theta=0.5">的可能性最大，因此我们用均值为<img src="https://math.jianshu.com/math?formula=0.5" alt="0.5">，方差为<img src="https://math.jianshu.com/math?formula=0.1" alt="0.1">的高斯分布来描述<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的先验分布，当然也可以使用其它的分布来描述<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的先验分布。<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的先验分布为：</p>
+<p><img src="https://math.jianshu.com/math?formula=%5Cfrac%20%7B1%7D%20%7B%5Csqrt%7B2%5Cpi%7D%5Csigma%7De%5E%7B-%5Cfrac%20%7B(%5Ctheta-%5Cmu)%5E2%7D%20%7B2%5Csigma%5E2%7D%7D%20%3D%20%5Cfrac%20%7B1%7D%20%7B10%5Csqrt%7B2%5Cpi%7D%7De%5E%7B-50(%5Ctheta-0.5)%5E2%7D" alt="\frac {1} {\sqrt{2\pi}\sigma}e^{-\frac {(\theta-\mu)^2} {2\sigma^2}} = \frac {1} {10\sqrt{2\pi}}e^{-50(\theta-0.5)^2}"></p>
+<p>在抛硬币的例子中，通常认为<img src="https://math.jianshu.com/math?formula=%5Ctheta%3D0.5" alt="\theta=0.5">的可能性最大，因此我们用均值为<img src="https://math.jianshu.com/math?formula=0.5" alt="0.5">，方差为<img src="https://math.jianshu.com/math?formula=0.1" alt="0.1">的高斯分布来描述<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的先验分布，当然也可以使用其它的分布来描述<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的先验分布。<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的先验分布为：<img src="https://math.jianshu.com/math?formula=%5Cfrac%20%7B1%7D%20%7B%5Csqrt%7B2%5Cpi%7D%5Csigma%7De%5E%7B-%5Cfrac%20%7B(%5Ctheta-%5Cmu)%5E2%7D%20%7B2%5Csigma%5E2%7D%7D%20%3D%20%5Cfrac%20%7B1%7D%20%7B10%5Csqrt%7B2%5Cpi%7D%7De%5E%7B-50(%5Ctheta-0.5)%5E2%7D" alt="\frac {1} {\sqrt{2\pi}\sigma}e^{-\frac {(\theta-\mu)^2} {2\sigma^2}} = \frac {1} {10\sqrt{2\pi}}e^{-50(\theta-0.5)^2}">先验分布的函数图如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghd06tor2gj31870nwwgq.jpg" alt=""></p>
+<p>在最大似然估计中，已知似然函数为<img src="https://math.jianshu.com/math?formula=P(X%7C%5Ctheta)%3D%5Ctheta%5E6(1-%5Ctheta)%5E4" alt="P(X|\theta)=\theta^6(1-\theta)^4">，因此：<img src="https://math.jianshu.com/math?formula=P(X%7C%5Ctheta)P(%5Ctheta)%3D%5Ctheta%5E6%5Ctimes%20(1-%5Ctheta)%5E4%5Ctimes%20%5Cfrac%20%7B1%7D%20%7B10%5Csqrt%7B2%5Cpi%7D%7D%5Ctimes%20e%5E%7B-50(%5Ctheta-0.5)%5E2%7D" alt="P(X|\theta)P(\theta)=\theta^6\times (1-\theta)^4\times \frac {1} {10\sqrt{2\pi}}\times e^{-50(\theta-0.5)^2}">转换为对数函数：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghczrq1jv9j311o041dgf.jpg" alt=""></p>
+<p>令上面的式子的微分等于0，可得：<img src="https://math.jianshu.com/math?formula=100%5Ctheta%5E3-150%5Ctheta%5E2%2B40%5Ctheta%2B6%3D0" alt="100\theta^3-150\theta^2+40\theta+6=0">由于<img src="https://math.jianshu.com/math?formula=0%5Cle%5Ctheta%5Cle1" alt="0\le\theta\le1">，解得：<img src="https://math.jianshu.com/math?formula=%5Chat%7B%5Ctheta%7D%5Capprox0.529" alt="\hat{\theta}\approx0.529">。<img src="https://math.jianshu.com/math?formula=P(X%7C%5Ctheta)P(%5Ctheta)" alt="P(X|\theta)P(\theta)">的函数图像如下，基本符合<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的估计值<img src="https://math.jianshu.com/math?formula=%5Chat%7B%5Ctheta%7D" alt="\hat{\theta}">：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghd06ta58oj31500n00v6.jpg" alt=""></p>
+<p>如果我们用均值为<img src="https://math.jianshu.com/math?formula=0.6" alt="0.6">，方差为<img src="https://math.jianshu.com/math?formula=0.1" alt="0.1">的高斯分布来描述<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的先验分布，则<img src="https://math.jianshu.com/math?formula=%5Chat%7B%5Ctheta%7D%3D0.6" alt="\hat{\theta}=0.6">。由此可见，在最大后验概率估计中，<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的估计值与<img src="https://math.jianshu.com/math?formula=%5Ctheta" alt="\theta">的先验分布有很大的关系。这也说明一个合理的先验概率假设是非常重要的。如果先验分布假设错误，则会导致估计的参数值偏离实际的参数值。</p>
+<p>和贝叶斯定理相似，最大后验概率估计根据新的数据来调整之前的先验概率，最大后验概率同时最大似有然估计和贝叶斯定理的影子，既根据新的数据最大化了接近现实数据的概率，又包括了根据之前数据经验得到的先验概率。</p>
+<h2 id="对比极大似然估计与最大后验概率估计">对比极大似然估计与最大后验概率估计</h2>
+<p>MAP就是多个作为因子的先验概率P(θ)。或者，也可以反过来，认为MLE是把先验概率P(θ)认为等于1，即认为θ是均匀分布。</p>
+<p><strong>① 频率学派</strong></p>
+<p>他们认为世界是确定的。他们直接为事件本身建模，也就是说事件在多次重复实验中趋于一个稳定的值p，那么这个值就是该事件的概率。</p>
+<p>他们认为模型参数是个定值，希望通过类似解方程组的方式从数据中求得该未知数。这就是频率学派使用的参数估计方法-<strong>极大似然估计（MLE）</strong>，这种方法往往在大数据量的情况下可以很好的还原模型的真实情况。</p>
+<p><strong>② 贝叶斯派</strong></p>
+<p>他们认为世界是不确定的，因获取的信息不同而异。假设对世界先有一个预先的估计，然后通过获取的信息来不断调整之前的预估计。 他们不试图对事件本身进行建模，而是从旁观者的角度来说。因此对于同一个事件，不同的人掌握的先验不同的话，那么他们所认为的事件状态也会不同。</p>
+<p>他们认为模型参数源自某种潜在分布，希望从数据中推知该分布。对于数据的观测方式不同或者假设不同，那么推知的该参数也会因此而存在差异。这就是贝叶斯派视角下用来估计参数的常用方法-<strong>最大后验概率估计（MAP）</strong>，这种方法在先验假设比较靠谱的情况下效果显著，随着数据量的增加，先验假设对于模型参数的主导作用会逐渐削弱，相反真实的数据样例会大大占据有利地位。极端情况下，比如把先验假设去掉，或者假设先验满足均匀分布的话，那它和极大似然估计就如出一辙了。</p>
+<p>参考文档：</p>
+<p><a href="https://blog.csdn.net/youhuakongzhi/article/details/83537856">https://blog.csdn.net/youhuakongzhi/article/details/83537856</a></p>
+<p><a href="https://blog.csdn.net/u011508640/article/details/72815981">https://blog.csdn.net/u011508640/article/details/72815981</a></p>
+<p><a href="https://www.bilibili.com/video/BV134411u7AS?from=search&amp;seid=4766319208714498415">https://www.bilibili.com/video/BV134411u7AS?from=search&amp;seid=4766319208714498415</a></p>
+<p><a href="https://www.jianshu.com/p/9c153d82ba2d">https://www.jianshu.com/p/9c153d82ba2d</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/40024110">https://zhuanlan.zhihu.com/p/40024110</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-03
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/bayes_theorem/">
+            <span class="next-text nav-default">贝叶斯定理（Bayes&#39; Theorem）</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
