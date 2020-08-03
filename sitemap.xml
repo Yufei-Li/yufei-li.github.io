@@ -3,27 +3,41 @@
   
   <url>
     <loc>https://yufei-li.github.io/categories/</loc>
-    <lastmod>2020-08-03T00:42:48+08:00</lastmod>
+    <lastmod>2020-08-03T08:51:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://yufei-li.github.io/post/</loc>
-    <lastmod>2020-08-03T00:42:48+08:00</lastmod>
+    <lastmod>2020-08-03T08:51:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://yufei-li.github.io/post/mlemap/</loc>
-    <lastmod>2020-08-03T00:42:48+08:00</lastmod>
+    <loc>https://yufei-li.github.io/post/pytorch_basic/</loc>
+    <lastmod>2020-08-03T08:51:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2020-08-03T08:51:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://yufei-li.github.io/</loc>
+    <lastmod>2020-08-03T08:51:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/mlemap/</loc>
     <lastmod>2020-08-03T00:42:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

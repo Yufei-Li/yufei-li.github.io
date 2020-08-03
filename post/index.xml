@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Mon, 03 Aug 2020 00:42:48 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 03 Aug 2020 08:51:09 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Pytorch基础</title>
+      <link>https://yufei-li.github.io/post/pytorch_basic/</link>
+      <pubDate>Mon, 03 Aug 2020 08:51:09 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/pytorch_basic/</guid>
+      <description>PyTorch是一个开源的python机器学习库，基于Torch，用于自然语言处理等应用程序。PyTorch的前身是Torch，其底层和To</description>
+    </item>
     
     <item>
       <title>最大似然估计(MLE)和最大后验概率估计(MAP)</title>
