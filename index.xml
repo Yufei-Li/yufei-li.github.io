@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Mon, 03 Aug 2020 08:51:09 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2020 11:33:51 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>github上传</title>
+      <link>https://yufei-li.github.io/post/github_upload/</link>
+      <pubDate>Wed, 19 Aug 2020 11:33:51 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/github_upload/</guid>
+      <description>在github上建立相应的repository 在终端进入想要上传的文件夹，git init 配置 ssh , 输入：ssh-keygen -t rsa -C &amp;ldquo;yufeili_cloris@163.com&amp;rdquo; (登录githu</description>
+    </item>
     
     <item>
       <title>Pytorch基础</title>

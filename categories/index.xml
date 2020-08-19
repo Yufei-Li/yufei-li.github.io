@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Mon, 03 Aug 2020 08:51:09 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2020 11:33:51 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>cs必备小技能</title>
+      <link>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD/</link>
+      <pubDate>Wed, 19 Aug 2020 11:33:51 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>机器学习</title>
@@ -54,15 +63,6 @@
       <pubDate>Fri, 10 Jul 2020 18:59:04 +0800</pubDate>
       
       <guid>https://yufei-li.github.io/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cs必备小技能</title>
-      <link>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD/</link>
-      <pubDate>Fri, 10 Jul 2020 14:50:29 +0800</pubDate>
-      
-      <guid>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD/</guid>
       <description></description>
     </item>
     
