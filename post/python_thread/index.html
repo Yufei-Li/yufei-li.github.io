@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>python多线程笔记 - 李雨菲的博客 Leah&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲" /><meta name="description" content="多线程介绍 多线程类似于同时执行多个不同程序，多线程运行有如下优点： 使用线程可以把占据长时间的程序中的任务放到后台去处理 用户界面可以更加吸引人" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/python_thread/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="python多线程笔记" />
+<meta property="og:description" content="多线程介绍 多线程类似于同时执行多个不同程序，多线程运行有如下优点： 使用线程可以把占据长时间的程序中的任务放到后台去处理 用户界面可以更加吸引人" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/python_thread/" />
+<meta property="article:published_time" content="2020-08-20T15:54:22+08:00" />
+<meta property="article:modified_time" content="2020-08-20T15:54:22+08:00" />
+<meta itemprop="name" content="python多线程笔记">
+<meta itemprop="description" content="多线程介绍 多线程类似于同时执行多个不同程序，多线程运行有如下优点： 使用线程可以把占据长时间的程序中的任务放到后台去处理 用户界面可以更加吸引人">
+<meta itemprop="datePublished" content="2020-08-20T15:54:22&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-20T15:54:22&#43;08:00" />
+<meta itemprop="wordCount" content="3952">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python多线程笔记"/>
+<meta name="twitter:description" content="多线程介绍 多线程类似于同时执行多个不同程序，多线程运行有如下优点： 使用线程可以把占据长时间的程序中的任务放到后台去处理 用户界面可以更加吸引人"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leah</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leah</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">python多线程笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-20 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#多线程介绍">多线程介绍</a></li>
+    <li><a href="#thread-和threading">thread 和threading</a>
+      <ul>
+        <li><a href="#添加线程">添加线程</a></li>
+        <li><a href="#join">join</a></li>
+        <li><a href="#queue">queue</a></li>
+        <li><a href="#gil">GIL</a></li>
+      </ul>
+    </li>
+    <li><a href="#同步与异步">同步与异步</a></li>
+    <li><a href="#并行和并发">并行和并发</a></li>
+    <li><a href="#线程安全">线程安全</a>
+      <ul>
+        <li><a href="#lock--rlock">Lock &amp; RLock</a></li>
+      </ul>
+    </li>
+    <li><a href="#线程队列">线程队列</a>
+      <ul>
+        <li><a href="#queue模块">queue模块</a></li>
+        <li><a href="#queue--threading">queue + threading</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="多线程介绍">多线程介绍</h2>
+<p>多线程类似于同时执行多个不同程序，多线程运行有如下优点：</p>
+<ul>
+<li>使用线程可以把占据长时间的程序中的任务放到后台去处理</li>
+<li>用户界面可以更加吸引人，比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度</li>
+<li>程序的运行速度可能加快</li>
+</ul>
+<h2 id="thread-和threading">thread 和threading</h2>
+<p><strong>thread类</strong></p>
+<ul>
+<li>target：线程调用的对象，就是目标函数</li>
+<li>name: 为线程起个名字</li>
+<li>args ：为目标函数传递实参，元组</li>
+<li>kwargs: 为目标函数关键字传参，字典</li>
+</ul>
+<p><code>thread = threading.Thread(target=add, name='add', args=(5,),kwargs={'y':4})</code></p>
+<p><strong>Thread实例的属性和方法</strong></p>
+<ul>
+<li>name：只是一个名字，只是个标识符，名称可以重名</li>
+<li>ident : 线程ID，它是非0整数，线程启动后才会有ID，否则为None，线程退出，此ID依旧可以，ID可以重复使用， ID必须唯一，但可以在线程退出后再利用</li>
+<li>is_alive(): 返回线程是否活着</li>
+</ul>
+<p><strong>threading的属性和方法</strong></p>
+<ul>
+<li>current_thread():返回当前线程对象</li>
+<li>main_thread() : 返回主线程对象</li>
+<li>activ_count() : 当前处于alive状态的线程个数</li>
+<li>enumerate() : 返回所有活着的线程的列表，不包括已经终止的线程和未开始的线程</li>
+<li>get_ident() : 返回当前线程的ID，非0整数</li>
+<li>activ_count,enumerate方法返回的值还包括主线程</li>
+</ul>
+<h3 id="添加线程">添加线程</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="c1">#define线程的工作，thread_job就是python中的一个功能</span>
+<span class="k">def</span> <span class="nf">thread_job</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;this is a added thread, number is </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">added_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">thread_job</span><span class="p">)</span>
+    <span class="c1">#定义一个线程,给线程添加功能</span>
+    <span class="n">added_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="c1">#开始线程</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">active_count</span><span class="p">())</span>
+    <span class="c1">#打印有多少已经激活的线程</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">enumerate</span><span class="p">())</span>
+    <span class="c1">#显示正在被激活的threading，返回一个包含正在运行的线程的list。正在运行指线程启动后、结束前，不包括启动前和终止后的线程。</span>
+    <span class="c1">#  [&lt;_MainThread(MainThread, started 4588289472)&gt;]</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">())</span>
+    <span class="c1">#显示正在运行程序时候的线程，返回当前的线程变量</span>
+    <span class="c1">#&lt;_MainThread(MainThread, started 4550102464)&gt;</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="join">join</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1">#define线程的工作，thread_job就是python中的一个功能</span>
+<span class="k">def</span> <span class="nf">thread_job</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;T1 start&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;T1 finish&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">added_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">thread_job</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">)</span>
+    <span class="c1">#定义一个线程,给线程添加功能</span>
+
+    <span class="n">added_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="c1">#开始线程T1</span>
+
+    <span class="n">added_thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="c1">#等待added_thread运行完后才能继续往下运行</span>
+ 
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;all done&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+<span class="c1">#如果没有.join()</span>
+<span class="c1"># T1 start  开始执行T1</span>
+<span class="c1"># all done   一边执行T1一边执行main（），所以print all done</span>
+<span class="c1"># T1 finish   完成T1</span>
+
+<span class="c1">#添加.join()后</span>
+<span class="c1"># T1 start  </span>
+<span class="c1"># T1 finish  </span>
+<span class="c1"># all done  </span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="queue">queue</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span>   <span class="c1">#从queue模块import Queue object</span>
+
+<span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+        <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  <span class="c1">#将想return的结果放入q中</span>
+
+<span class="k">def</span> <span class="nf">multithreading</span><span class="p">():</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1">#保存全部线程</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span><span class="c1">#定义四个线程</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">job</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">q</span><span class="p">))</span>   <span class="c1">#加载进data中的一个列表,前面的job只是索引，具体参数要在后面传入</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>  <span class="c1">#添加到全部线程的list中</span>
+
+    <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>    <span class="c1">#等到所有线程都运行完,如果放在上面，每次都等一个线程运行完，就失去了线程的意义</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>  <span class="c1">#从q里依次拿出一个值</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">multithreading</span><span class="p">()</span>
+    <span class="c1">#[[1, 4, 9], [4, 9, 16], [16, 16, 16], [25, 25, 25]]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="gil">GIL</h3>
+<p>GIL(Global Interpreter Lock)并不是python的特性，而是Python解释器<strong>Cpython引入的一个概念</strong>。而python的解释器不仅仅只有Cpython，若解释器为Jpython，那么python就没有GIL</p>
+<p>GIL是一把全局排他锁，毫无疑问全局锁的存在会对多线程的效率有不小影响，甚至就几乎等于Python是个单线程的程序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">multithreading</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">job</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="n">q</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;T</span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">]</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">))</span>
+    <span class="n">s_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1">#不使用多线程，处理4l长的数据</span>
+    <span class="n">normal</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;normal: &#39;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s_t</span><span class="p">)</span>   <span class="c1">#0.05444693565368652</span>
+    <span class="n">s_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1">#使用多线程，4个线程同时处理l</span>
+    <span class="n">multithreading</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;multithreading: &#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s_t</span><span class="p">)</span>   <span class="c1">#0.04488706588745117</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>因为读写时间的存在，所以在python中多线程还是会比单线程快一点点，但基本可以忽略</p>
+<h2 id="同步与异步">同步与异步</h2>
+<ul>
+<li>
+<p>同步：进程之间存在依赖关系，<strong>一个进程结束的输出作为另一个进程的输入</strong>。具有同步关系的一组并发进程之间发送的信息称为消息或者事件</p>
+</li>
+<li>
+<p>异步：和同步相对，同步是顺序执行，而异步是彼此独立，在等待某个事件的过程中继续做自己的事，不要等待这一事件完成后再工作。<strong>线程是实现异步的一个方式</strong>，异步是让调用方法的主线程不需要同步等待另一个线程的完成，从而让主线程干其他事情</p>
+</li>
+</ul>
+<h2 id="并行和并发">并行和并发</h2>
+<ul>
+<li>并行：同时做某些事，可以互不干扰的同一个时刻做几件事，例如高速公路的车道；车与车之间互不干扰进程</li>
+<li>并发：同时做某些事，但是强调同一个时段做了几件事，比如很多人在食堂抢饭，人与人之间干扰进程</li>
+</ul>
+<h2 id="线程安全">线程安全</h2>
+<p>多线程很容易突然出现“错误情况”，这是由系统的线程调度具有一定的随机性造成的。不过，即使程序偶然出现问题，那也是由于编程不当引起的。当使用多个线程来访问同一个数据时，很容易“偶然”出现线程安全问题。</p>
+<ul>
+<li>比如甲、乙两个人在两个线程同时取钱，那么有可能ATM机中剩余的钱为负数</li>
+</ul>
+<h3 id="lock--rlock">Lock &amp; RLock</h3>
+<p>Lock 和 RLock 的区别如下：</p>
+<ul>
+<li>
+<p>threading.Lock：它是一个基本的锁对象，每次只能锁定一次，其余的锁请求，需等待锁释放后才能获取。</p>
+</li>
+<li>
+<p>threading.RLock：它代表可重入锁（Reentrant Lock）。对于可重入锁，在同一个线程中可以对它进行多次锁定，也可以多次释放。如果使用 RLock，那么 acquire() 和 release() 方法必须成对出现。如果调用了 n 次 acquire() 加锁，则必须调用 n 次 release() 才能释放锁。</p>
+</li>
+<li>
+<p>Lock</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">def</span> <span class="nf">job1</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">A</span><span class="p">,</span> <span class="n">lock</span>  <span class="c1">#全局变量</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>  <span class="c1">#开始lock</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>      <span class="c1">#在lock内，job2不会影响job1的程序</span>
+        <span class="n">A</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;job1&#39;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>  <span class="c1">#结束lock</span>
+
+<span class="k">def</span> <span class="nf">job2</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">A</span><span class="p">,</span> <span class="n">lock</span>  <span class="c1">#全局变量</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">A</span> <span class="o">+=</span> <span class="mi">10</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;job2&#39;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#共享内存，全局变量</span>
+    <span class="c1">#定义两个线程分别做两个job</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">job1</span><span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">job2</span><span class="p">)</span>
+    <span class="n">t1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">t2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="n">t2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>RLock</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">class</span> <span class="nc">Account</span><span class="p">:</span>
+    <span class="c1"># 定义构造器</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_no</span><span class="p">,</span> <span class="n">balance</span><span class="p">):</span>
+        <span class="c1"># 封装账户编号、账户余额的两个成员变量</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_no</span> <span class="o">=</span> <span class="n">account_no</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="n">balance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
+
+    <span class="c1"># 因为账户余额不允许随便修改，所以只为self._balance提供getter方法</span>
+    <span class="k">def</span> <span class="nf">getBalance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span>
+    <span class="c1"># 提供一个线程安全的draw()方法来完成取钱操作</span>
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">draw_amount</span><span class="p">):</span>
+        <span class="c1"># 加锁</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># 账户余额大于取钱数目</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">&gt;=</span> <span class="n">draw_amount</span><span class="p">:</span>
+                <span class="c1"># 吐出钞票</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>\
+                    <span class="o">+</span> <span class="s2">&#34;取钱成功！吐出钞票:&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">draw_amount</span><span class="p">))</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+                <span class="c1"># 修改余额</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">-=</span> <span class="n">draw_amount</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\t</span><span class="s2">余额为: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>\
+                    <span class="o">+</span> <span class="s2">&#34;取钱失败！余额不足！&#34;</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># 修改完成，释放锁</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+         
+   <span class="c1">#try...finally...指无论是否报错，都要执行finally之后的内容</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="线程队列">线程队列</h2>
+<h3 id="queue模块">queue模块</h3>
+<ul>
+<li>队列类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">queue</span>
+
+<span class="c1">#先进先出队列</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="c1">#最多存在5个元素，超出会堵塞，不赋值时默认无穷大，但要保证不会溢出</span>
+
+<span class="c1">#先进后出队列</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">LifoQueue</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1">#优先级队列</span>
+<span class="n">q3</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">PriorityQueue</span><span class="p">()</span>   <span class="c1">#优先级用数字表示,数字越小优先级越高，优先级高会先打印出来</span>
+<span class="n">q3</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">10</span> <span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>
+<span class="n">q3</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span> <span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">))</span>
+<span class="n">q3</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">100</span> <span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">q3</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">q3</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">q3</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+<span class="c1"># (-1, &#39;b&#39;)</span>
+<span class="c1"># (10, &#39;a&#39;)</span>
+<span class="c1"># (100, &#39;c&#39;)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>队列常用方法
+<ul>
+<li>Queue.qsize()　　返回队列大小</li>
+<li>Queue.empty()　　判断队列是否为空</li>
+<li>Queue.full()　　判断队列是否满了</li>
+<li>Queue.get([block[,timeout]])　　
+<ul>
+<li>从队列头删除并返回一个item，block默认为True，表示当队列为空却去get的时候会阻塞线程，等待直到有有item出现为止来get出这个item。如果是False的话表明当队列为空你却去get的时候，会引发异常。在block为True的情况下可以再设置timeout参数。表示当队列为空，get阻塞timeout指定的秒数之后还没有get到的话就引发Full异常、</li>
+</ul>
+</li>
+<li>Queue.put(&hellip;[,block[,timeout]])　　
+<ul>
+<li>向队尾插入一个item，同样若block=True的话队列满时就阻塞等待有空位出来再put，block=False时引发异常。同get的timeout，put的timeout是在block为True的时候进行超时设置的参数。</li>
+</ul>
+</li>
+<li>Queue.task_done()　　
+<ul>
+<li>从场景上来说，处理完一个get出来的item之后，调用task_done将向队列发出一个信号，表示本任务已经完成</li>
+<li>没有执行task_done()，则join无法判断队列到底有没有结束。每task_done一次 就从队列里删掉一个元素，这样在最后join的时候根据队列长度是否为零来判断队列是否结束，从而执行主线程。</li>
+</ul>
+</li>
+<li>Queue.join()　　
+<ul>
+<li>监视所有item并阻塞主线程，直到所有item都调用了task_done之后主线程才继续向下执行。这么做的好处在于，假如一个线程开始处理最后一个任务，它从任务队列中拿走最后一个任务，此时任务队列就空了但最后那个线程还没处理完。当调用了join之后，主线程就不会因为队列空了而擅自结束，而是等待最后那个线程处理完成了。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="queue--threading">queue + threading</h3>
+<p>Queue用于建立和操作队列，常和threading类一起用来建立一个简单的线程队列。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">queue</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">class</span> <span class="nc">worker</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue</span><span class="p">):</span>   <span class="c1">#创建worker时会传入一个queue，代表这个worker需要做的工作</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">queue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread_stop</span> <span class="o">=</span> <span class="bp">False</span>   <span class="c1">#默认worker有剩余工作没有做完</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">thread_stop</span><span class="p">:</span>   <span class="c1">#当worker还有任务的时候</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;thread</span><span class="si">%d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">: waiting for task&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ident</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">task</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># 从q中拿取一个thread作为task</span>
+            <span class="k">except</span> <span class="n">queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>  <span class="c1">#如果没有task</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Nothing to do!i will go home!&#34;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">thread_stop</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="k">break</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;task recv:</span><span class="si">%s</span><span class="s2"> ,task No:</span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">task</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;i am working&#34;</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>   <span class="c1">#假装worker需要三秒完成任务</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;work finished!&#34;</span><span class="p">)</span>
+            <span class="n">q</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>  <span class="c1"># 完成一个任务</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">qsize</span><span class="p">()</span>  <span class="c1"># 判断消息队列大小</span>
+            <span class="k">if</span> <span class="n">res</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&#34;fuck!There are still </span><span class="si">%d</span><span class="s2"> tasks to do&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread_stop</span> <span class="o">=</span> <span class="bp">True</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">worker</span> <span class="o">=</span> <span class="n">worker</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">worker</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="c1">#向q中加入worker应该做的task</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">([</span><span class="s2">&#34;produce one cup!&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>  
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">([</span><span class="s2">&#34;produce one desk!&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">([</span><span class="s2">&#34;produce one apple!&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">([</span><span class="s2">&#34;produce one banana!&#34;</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">([</span><span class="s2">&#34;produce one bag!&#34;</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;***************leader:wait for finish!&#34;</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>  <span class="c1"># 等待所有任务完成</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;***************leader:all task finished!&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">thread123145380110336 Thread-1: waiting for tast
+task recv:produce one cup! ,task No:1
+i am working
+work finished!
+fuck!There are still 3 tasks to do
+thread123145380110336 Thread-1: waiting for tast
+task recv:produce one desk! ,task No:2
+i am working
+***************leader:wait for finish!
+work finished!
+fuck!There are still 3 tasks to do
+thread123145380110336 Thread-1: waiting for tast
+task recv:produce one apple! ,task No:3
+i am working
+work finished!
+fuck!There are still 2 tasks to do
+thread123145380110336 Thread-1: waiting for tast
+task recv:produce one banana! ,task No:4
+i am working
+work finished!
+fuck!There are still 1 tasks to do
+thread123145380110336 Thread-1: waiting for tast
+task recv:produce one bag! ,task No:5
+i am working
+work finished!
+thread123145380110336 Thread-1: waiting for tast
+***************leader:all task finished!
+Nothing to do!i will go home!
+</code></pre></td></tr></table>
+</div>
+</div><p>参考文档：</p>
+<p><a href="https://www.runoob.com/python3/python3-multithreading.html">https://www.runoob.com/python3/python3-multithreading.html</a></p>
+<p><a href="https://www.bilibili.com/video/BV1jW411Y7Wj">https://www.bilibili.com/video/BV1jW411Y7Wj</a></p>
+<p><a href="http://c.biancheng.net/view/2617.html">http://c.biancheng.net/view/2617.html</a></p>
+<p><a href="https://www.cnblogs.com/franknihao/p/6627857.html">https://www.cnblogs.com/franknihao/p/6627857.html</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/github_upload/">
+            <span class="next-text nav-default">github上传</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
