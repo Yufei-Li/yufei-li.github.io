@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Thu, 20 Aug 2020 15:54:22 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2020 15:40:21 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>c语言笔记(1)</title>
+      <link>https://yufei-li.github.io/post/c1/</link>
+      <pubDate>Sun, 30 Aug 2020 15:40:21 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/c1/</guid>
+      <description>变量 变量名不能以数字开头，否则会报错 error:invalid suffix &amp;quot;_abc&amp;quot; on integer constant 常量 转义字符\n占一个字节的空间 “abc”由&amp;rsquo;a&amp;rsquo;,&amp;lsquo;b</description>
+    </item>
     
     <item>
       <title>python多线程笔记</title>

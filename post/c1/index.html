@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>c语言笔记(1) - 李雨菲的博客 Leah&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲" /><meta name="description" content="变量 变量名不能以数字开头，否则会报错 error:invalid suffix &amp;quot;_abc&amp;quot; on integer constant 常量 转义字符\n占一个字节的空间 “abc”由&amp;rsquo;a&amp;rsquo;,&amp;lsquo;b" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/c1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="c语言笔记(1)" />
+<meta property="og:description" content="变量 变量名不能以数字开头，否则会报错 error:invalid suffix &quot;_abc&quot; on integer constant 常量 转义字符\n占一个字节的空间 “abc”由&rsquo;a&rsquo;,&lsquo;b" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/c1/" />
+<meta property="article:published_time" content="2020-08-30T15:40:21+08:00" />
+<meta property="article:modified_time" content="2020-08-30T15:40:21+08:00" />
+<meta itemprop="name" content="c语言笔记(1)">
+<meta itemprop="description" content="变量 变量名不能以数字开头，否则会报错 error:invalid suffix &quot;_abc&quot; on integer constant 常量 转义字符\n占一个字节的空间 “abc”由&rsquo;a&rsquo;,&lsquo;b">
+<meta itemprop="datePublished" content="2020-08-30T15:40:21&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-30T15:40:21&#43;08:00" />
+<meta itemprop="wordCount" content="1460">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="c语言笔记(1)"/>
+<meta name="twitter:description" content="变量 变量名不能以数字开头，否则会报错 error:invalid suffix &quot;_abc&quot; on integer constant 常量 转义字符\n占一个字节的空间 “abc”由&rsquo;a&rsquo;,&lsquo;b"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leah</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leah</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">c语言笔记(1)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-30 </span>
+        <div class="post-category">
+            <a href="/categories/c%E8%AF%AD%E8%A8%80/"> c语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#变量">变量</a></li>
+    <li><a href="#常量">常量</a></li>
+    <li><a href="#宏定义">宏定义</a></li>
+    <li><a href="#数据类型">数据类型</a></li>
+    <li><a href="#取值范围">取值范围</a>
+      <ul>
+        <li><a href="#进制转换">进制转换</a></li>
+      </ul>
+    </li>
+    <li><a href="#运算符">运算符</a>
+      <ul>
+        <li><a href="#算数运算符">算数运算符</a></li>
+        <li><a href="#关系运算符">关系运算符</a></li>
+        <li><a href="#逻辑运算符">逻辑运算符</a></li>
+        <li><a href="#运算顺序">运算顺序</a></li>
+        <li><a href="#确保除数不为0">确保除数不为0</a></li>
+      </ul>
+    </li>
+    <li><a href="#if">if</a>
+      <ul>
+        <li><a href="#制作流程图">制作流程图</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="变量">变量</h2>
+<ul>
+<li>变量名不能以数字开头，否则会报错 <code>error:invalid suffix &quot;_abc&quot; on integer constant</code></li>
+</ul>
+<h2 id="常量">常量</h2>
+<ul>
+<li>转义字符\n占一个字节的空间</li>
+<li>“abc”由&rsquo;a&rsquo;,&lsquo;b&rsquo;,&lsquo;c&rsquo;,还有一个代表结束标志的&rsquo;\0&rsquo;</li>
+</ul>
+<h2 id="宏定义">宏定义</h2>
+<ul>
+<li>
+<p>如果有宏定义定义：<code>#define F(n) 2*n</code>, 那么代码中 F(3+2) 的值为F(3+2) == 2 * 3+2 == 8，注意，宏定义是在程序编译时先进行的预处理，做法是直接将标识符替换为常量，并不会进行相关运算。因此，直接将 F(3+2) 替换为 2 * 3+2</p>
+</li>
+<li>
+<p>宏定义和全局变量的区别：</p>
+<ol>
+<li>宏会在预处理阶段被替换，而全局变量是在运行时</li>
+<li>宏定义不分配内存，全局变量定义需要分配内存</li>
+<li>宏不区分数据类型，它本质上是一段字符，在预处理的时候被替换到引用的位置，而全局变量区分数据类型</li>
+<li>宏定义之后值是不能改变的，全局变量的值是可以改变的</li>
+<li>宏定义只有在定义所在文件，或引用所在文件的其它文件中使用。 而全局变量可以在工程所有文件中使用，只需在使用前加一个声明</li>
+</ol>
+</li>
+</ul>
+<h2 id="数据类型">数据类型</h2>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi98o0r165j31au0m7775.jpg" alt=""></p>
+<ul>
+<li>注意各种类型的存储大小与系统位数有关，但目前通用的以64位系统为主</li>
+<li>为了得到某个类型或某个变量在特定平台上的准确大小，可以使用 <strong>sizeof</strong> 运算符（注意sizeof不是函数！），表达式 <em>sizeof(type)</em> 得到对象或类型的存储字节大小</li>
+<li>在目前学到的所有数据类型中，C 标准规范存储空间最小的是_Bool，因为它只要求足够容纳 0 和 1 两个数即可</li>
+<li>一个字节约定等于八个比特位（事实上 C 语言没有规定一个字节等于八个比特位，这只是约定俗成）</li>
+</ul>
+<h2 id="取值范围">取值范围</h2>
+<ul>
+<li>
+<p>CPU 能读懂的最小单位是比特位</p>
+</li>
+<li>
+<p>一个字节可以表示的最大二进制数是1111 1111（一个字节约定俗成为八个比特位），由于左边第一位是符号位，不能用于表示值的大小，因此一个字节可以表示的最大带符号整数是：0111 1111，转换成十进制数就是 127</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+  
+        <span class="n">b</span> <span class="o">=</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span>
+  
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;a = %u</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+  
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么a打印出来是144？</p>
+<ul>
+<li>200(10) == 128(10) + 64(10) + 8(10) == 1000 0000(2) + 100 0000(2) + 1000(2) == 1100 1000(2)
+1100 1000(2) + 1100 1000(2) == 1 1001 0000(2)
+由于 char 类型占一个字节（8 位），因此舍弃掉最前边的进位，结果为 1001 0000(2) == 144</li>
+<li>因为a的数据类型是unsigned char，值范围是最大是255，所以不可能显示为400， 如果想显示400，需要用int</li>
+</ul>
+</li>
+</ul>
+<h3 id="进制转换">进制转换</h3>
+<p>两条重要规律：</p>
+<ol>
+<li>
+<ul>
+<li>
+<p>11（2）== 2^2 - 1（10）；111（2）== 2^3 - 1（10）；1111（2）== 2^4 - 1（10）</p>
+</li>
+<li>
+<p>在二进制中，n个1对应十进制中的2^n - 1</p>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<p>1111（2）== F（16），1111 1111（2）== FF（16）</p>
+</li>
+<li>
+<p>在二进制中，每四个1对应一个十六进制中的F</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>进制转换拓展阅读：<a href="https://fishc.com.cn/thread-67123-1-1.html">https://fishc.com.cn/thread-67123-1-1.html</a></p>
+<h2 id="运算符">运算符</h2>
+<h3 id="算数运算符">算数运算符</h3>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi99qbdox5j31b90hv413.jpg" alt=""></p>
+<h3 id="关系运算符">关系运算符</h3>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi99qavm8cj31ap0fddiz.jpg" alt=""></p>
+<h3 id="逻辑运算符">逻辑运算符</h3>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi99qabsdmj31av0a3q4x.jpg" alt=""></p>
+<h3 id="运算顺序">运算顺序</h3>
+<ol>
+<li>
+<p>a + b &amp;&amp; c / d  &mdash;-&gt;  (a + b)1 &amp;&amp; (c / d)2</p>
+</li>
+<li>
+<p>a = b &amp;&amp; c - d  &mdash;-&gt;  a = (b &amp;&amp; (c – d)1)2</p>
+<p>赋值运算符‘=’ 永远是最后</p>
+</li>
+<li>
+<p>‘a&rsquo; + &lsquo;b&rsquo; &lt;= &lsquo;c&rsquo; || a / b + d % c &mdash;-&gt; ((&lsquo;a&rsquo; + &lsquo;b&rsquo;)1 &lt;= &lsquo;c&rsquo;)2 || ((a / b)3 + (d % c)4)5</p>
+</li>
+<li>
+<p>!!a + !b + c – a – c &mdash;-&gt; ((((!(!a)1)2 + (!b)3)4 + c)5 – a)6 – c</p>
+</li>
+<li>
+<p>a = b - c || a % b &amp;&amp; c / d &mdash;-&gt; a = ((b – c)4 || ((a % b)1 &amp;&amp; (c / d)2)3)5</p>
+</li>
+</ol>
+<h3 id="确保除数不为0">确保除数不为0</h3>
+<p><code>count != 0 &amp;&amp; sum/count</code>,因为当 count 为 0 时，并不会导致 sum/0，因为根据短路求值的原则，&amp;&amp; 运算符在左侧为假的情况下，并不会计算右侧的表达式</p>
+<h2 id="if">if</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">if</span><span class="p">(</span><span class="n">boolean_expression</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="cm">/* 当布尔表达式 1 为真时执行 */</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="n">boolean_expression</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="cm">/* 当布尔表达式 2 为真时执行 */</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="n">boolean_expression</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="cm">/* 当布尔表达式 3 为真时执行 */</span>
+<span class="p">}</span>
+<span class="k">else</span> 
+<span class="p">{</span>
+   <span class="cm">/* 当上面条件都不为真时执行 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="制作流程图">制作流程图</h3>
+<p>一个免费的流程图制作网站：<a href="https://www.processon.com">https://www.processon.com</a></p>
+<p>参考文档：</p>
+<p><a href="http://zhidao.baidu.com/link?url=e0AgK3IuoChxC9Cv7vl3D0OacTUdj4DRf60XHTFti5goaquEzwZWR_G_22jWQO8BJ8zs30lA37_Ry-lZdBtTsK">http://zhidao.baidu.com/link?url=e0AgK3IuoChxC9Cv7vl3D0OacTUdj4DRf60XHTFti5goaquEzwZWR_G_22jWQO8BJ8zs30lA37_Ry-lZdBtTsK</a></p>
+<p><a href="https://www.runoob.com/cprogramming/c-tutorial.html">https://www.runoob.com/cprogramming/c-tutorial.html</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python_thread/">
+            <span class="next-text nav-default">python多线程笔记</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
