@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>李雨菲的博客 Leah&#39;s Blog</title>
+    <title>李雨菲的博客 Li Yufei&#39;s Blog</title>
     <link>https://yufei-li.github.io/</link>
-    <description>Recent content on 李雨菲的博客 Leah&#39;s Blog</description>
+    <description>Recent content on 李雨菲的博客 Li Yufei&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Sat, 05 Sep 2020 15:05:15 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2020 15:27:14 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>c语言笔记(3)</title>
+      <link>https://yufei-li.github.io/post/c3/</link>
+      <pubDate>Sat, 05 Sep 2020 15:27:14 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/c3/</guid>
+      <description>左值和右值 左值：标识的应该是个存储位置，内存中的位置，左值可以是个变量名，或者是个表达式，但表达式必须表示的是个内存位置 右值：就是个值，变量</description>
+    </item>
     
     <item>
       <title>c语言笔记(2)</title>
