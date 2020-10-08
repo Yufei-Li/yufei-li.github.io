@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>python note(1) - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="unit test function 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  def gcd(a, b): # a b must be positive if not ( a&amp;gt;0 and b&amp;gt;0 ): raise ArithmeticError(&amp;#34;%s, %smust be positive integer&amp;#34;%(a, b)) while not a == b: if a &amp;gt; b: a = a - b else: b = b - a return a def test_gcd(): ax = -42 bx = 30 result = gcd(ax, bx) assert (result == 6) test_gcd()   a unit test for gcd function" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/python_note_1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="python note(1)" />
+<meta property="og:description" content="unit test function 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  def gcd(a, b): # a b must be positive if not ( a&gt;0 and b&gt;0 ): raise ArithmeticError(&#34;%s, %smust be positive integer&#34;%(a, b)) while not a == b: if a &gt; b: a = a - b else: b = b - a return a def test_gcd(): ax = -42 bx = 30 result = gcd(ax, bx) assert (result == 6) test_gcd()   a unit test for gcd function" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/python_note_1/" />
+<meta property="article:published_time" content="2020-10-08T13:58:15+08:00" />
+<meta property="article:modified_time" content="2020-10-08T13:58:15+08:00" />
+<meta itemprop="name" content="python note(1)">
+<meta itemprop="description" content="unit test function 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  def gcd(a, b): # a b must be positive if not ( a&gt;0 and b&gt;0 ): raise ArithmeticError(&#34;%s, %smust be positive integer&#34;%(a, b)) while not a == b: if a &gt; b: a = a - b else: b = b - a return a def test_gcd(): ax = -42 bx = 30 result = gcd(ax, bx) assert (result == 6) test_gcd()   a unit test for gcd function">
+<meta itemprop="datePublished" content="2020-10-08T13:58:15&#43;08:00" />
+<meta itemprop="dateModified" content="2020-10-08T13:58:15&#43;08:00" />
+<meta itemprop="wordCount" content="438">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python note(1)"/>
+<meta name="twitter:description" content="unit test function 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  def gcd(a, b): # a b must be positive if not ( a&gt;0 and b&gt;0 ): raise ArithmeticError(&#34;%s, %smust be positive integer&#34;%(a, b)) while not a == b: if a &gt; b: a = a - b else: b = b - a return a def test_gcd(): ax = -42 bx = 30 result = gcd(ax, bx) assert (result == 6) test_gcd()   a unit test for gcd function"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">python note(1)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-10-08 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#unit-test-function">unit test function</a></li>
+    <li><a href="#try-except-block">try-except block</a></li>
+    <li><a href="#get-preciserounded-division-result">get precise/rounded division result</a>
+      <ul>
+        <li><a href="#get-precise-division-result">get precise division result</a></li>
+        <li><a href="#get-rounded-division-result">get rounded division result</a></li>
+      </ul>
+    </li>
+    <li><a href="#ord-and-chr">ord() and chr()</a></li>
+    <li><a href="#join-each-item-in-the-list-and-form-a-string">join each item in the list and form a string</a></li>
+    <li><a href="#check-whether-a-word-is-valid-english-word">check whether a word is valid English word</a></li>
+    <li><a href="#get-the-first-letter-of-a-string">get the first letter of a string</a></li>
+    <li><a href="#use--in-print">use % in print</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="unit-test-function">unit test function</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1"># a b must be positive</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span> <span class="n">a</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span><span class="o">&gt;</span><span class="mi">0</span> <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ArithmeticError</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2"> must be positive integer&#34;</span><span class="o">%</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
+    <span class="k">return</span> <span class="n">a</span>
+
+<span class="k">def</span> <span class="nf">test_gcd</span><span class="p">():</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="o">-</span><span class="mi">42</span>
+    <span class="n">bx</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">bx</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="n">test_gcd</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>a unit test for gcd function</p>
+<h2 id="try-except-block">try-except block</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">try:
+	block that may raise exceptions
+
+except ExceptionName as Variable:
+	block that handles the exception
+	
+fiannly:
+	block that is always executed
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>may have more than one exception block</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1">#a b must be positive</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span> <span class="n">a</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span><span class="o">&gt;</span><span class="mi">0</span> <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ArithmeticError</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2"> must be positive integer&#34;</span><span class="o">%</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
+    <span class="k">return</span> <span class="n">a</span>
+
+<span class="k">def</span> <span class="nf">test_gcd3</span><span class="p">():</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="mi">42</span>
+    <span class="n">bx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">30</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">bx</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ArithmeticError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1">#get there</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="s2">&#34;Must be positive int.&#34;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1">#then get there</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">test_gcd3</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="get-preciserounded-division-result">get precise/rounded division result</h2>
+<h3 id="get-precise-division-result">get precise division result</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">/</span> <span class="mi">2</span> <span class="c1">#3.5</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="get-rounded-division-result">get rounded division result</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>   <span class="c1">#3.1316</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="ord-and-chr">ord() and chr()</h2>
+<p>The <code>ord()</code> function returns an integer representing the Unicode character.</p>
+<p>The <code>chr()</code> function returns a character (a string) from an integer (represents unicode code point of the character)</p>
+<h2 id="join-each-item-in-the-list-and-form-a-string">join each item in the list and form a string</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">]</span>
+<span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="check-whether-a-word-is-valid-english-word">check whether a word is valid English word</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;english_words.txt&#34;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&#34;ISO-8859-1&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">word_file</span><span class="p">:</span>
+    <span class="n">english_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_file</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">is_english_word</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">english_words</span>
+
+<span class="k">print</span> <span class="n">is_english_word</span><span class="p">(</span><span class="s2">&#34;ham&#34;</span><span class="p">)</span>  <span class="c1"># should be true if you have a good english_words.txt</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Google &lsquo;English word list&rsquo;, also could Google for British or American English</p>
+<h2 id="get-the-first-letter-of-a-string">get the first letter of a string</h2>
+<p><code>string[0]</code>means the first letter of a string</p>
+<h2 id="use--in-print">use % in print</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="mf">3.14</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># 3</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%g</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># 3.14</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%f</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># 3.140000</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;pi&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;This is </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;The value of </span><span class="si">%s</span><span class="s2"> is </span><span class="si">%g</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjhxybjf0ij314m0m043o.jpg" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-10-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/c3/">
+            <span class="next-text nav-default">c语言笔记(3)</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

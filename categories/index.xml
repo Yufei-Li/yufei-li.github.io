@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Sat, 05 Sep 2020 15:27:14 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2020 13:58:15 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>python</title>
+      <link>https://yufei-li.github.io/categories/python/</link>
+      <pubDate>Thu, 08 Oct 2020 13:58:15 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/categories/python/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>c语言</title>
@@ -22,38 +31,29 @@
     </item>
     
     <item>
-      <title>python</title>
-      <link>https://yufei-li.github.io/categories/python/</link>
-      <pubDate>Thu, 20 Aug 2020 15:54:22 +0800</pubDate>
-      
-      <guid>https://yufei-li.github.io/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cs必备小技能</title>
-      <link>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD/</link>
+      <title>cs必备小技能 cs skills</title>
+      <link>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD-cs-skills/</link>
       <pubDate>Wed, 19 Aug 2020 11:33:51 +0800</pubDate>
       
-      <guid>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD/</guid>
+      <guid>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD-cs-skills/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>机器学习</title>
-      <link>https://yufei-li.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+      <title>机器学习machine learning</title>
+      <link>https://yufei-li.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0machine-learning/</link>
       <pubDate>Mon, 03 Aug 2020 08:51:09 +0800</pubDate>
       
-      <guid>https://yufei-li.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</guid>
+      <guid>https://yufei-li.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>概率论小知识</title>
-      <link>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86/</link>
+      <title>概率论小知识probability theory</title>
+      <link>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86probability-theory/</link>
       <pubDate>Mon, 03 Aug 2020 00:42:48 +0800</pubDate>
       
-      <guid>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86/</guid>
+      <guid>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86probability-theory/</guid>
       <description></description>
     </item>
     
@@ -67,20 +67,11 @@
     </item>
     
     <item>
-      <title>cs必备知识点</title>
-      <link>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
-      <pubDate>Mon, 13 Jul 2020 10:30:55 +0800</pubDate>
-      
-      <guid>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>读书笔记</title>
-      <link>https://yufei-li.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <title>读书笔记reading notes</title>
+      <link>https://yufei-li.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0reading-notes/</link>
       <pubDate>Thu, 09 Jul 2020 11:12:48 +0800</pubDate>
       
-      <guid>https://yufei-li.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://yufei-li.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0reading-notes/</guid>
       <description></description>
     </item>
     

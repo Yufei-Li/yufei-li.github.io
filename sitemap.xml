@@ -3,7 +3,35 @@
   
   <url>
     <loc>https://yufei-li.github.io/categories/</loc>
-    <lastmod>2020-09-05T15:27:14+08:00</lastmod>
+    <lastmod>2020-10-08T13:58:15+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/</loc>
+    <lastmod>2020-10-08T13:58:15+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/categories/python/</loc>
+    <lastmod>2020-10-08T13:58:15+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/python_note_1/</loc>
+    <lastmod>2020-10-08T13:58:15+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/</loc>
+    <lastmod>2020-10-08T13:58:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -17,20 +45,6 @@
   
   <url>
     <loc>https://yufei-li.github.io/post/c3/</loc>
-    <lastmod>2020-09-05T15:27:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/post/</loc>
-    <lastmod>2020-09-05T15:27:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/</loc>
     <lastmod>2020-09-05T15:27:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -51,13 +65,6 @@
   </url>
   
   <url>
-    <loc>https://yufei-li.github.io/categories/python/</loc>
-    <lastmod>2020-08-20T15:54:22+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://yufei-li.github.io/post/python_thread/</loc>
     <lastmod>2020-08-20T15:54:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -65,7 +72,7 @@
   </url>
   
   <url>
-    <loc>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD/</loc>
+    <loc>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD-cs-skills/</loc>
     <lastmod>2020-08-19T11:33:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -86,7 +93,7 @@
   </url>
   
   <url>
-    <loc>https://yufei-li.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://yufei-li.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0machine-learning/</loc>
     <lastmod>2020-08-03T08:51:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -100,7 +107,7 @@
   </url>
   
   <url>
-    <loc>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86/</loc>
+    <loc>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86probability-theory/</loc>
     <lastmod>2020-08-03T00:42:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -137,13 +144,6 @@
   <url>
     <loc>https://yufei-li.github.io/post/re/</loc>
     <lastmod>2020-07-13T13:37:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/categories/cs%E5%BF%85%E5%A4%87%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
-    <lastmod>2020-07-13T10:30:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -191,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://yufei-li.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://yufei-li.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0reading-notes/</loc>
     <lastmod>2020-07-09T11:12:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
