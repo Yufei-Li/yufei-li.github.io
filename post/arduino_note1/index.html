@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Arduino笔记(1) - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="blink 1 2 3 4 5 6 7 8 9 10 11 12 13 // the setup function runs once when you press reset or power the board void setup() { // initialize digital pin LED_BUILTIN as an output. pinMode(LED_BUILTIN, OUTPUT); } // the loop function runs over and over again forever void loop() { digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level) delay(3000); // wait" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/arduino_note1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Arduino笔记(1)" />
+<meta property="og:description" content="blink 1 2 3 4 5 6 7 8 9 10 11 12 13 // the setup function runs once when you press reset or power the board void setup() { // initialize digital pin LED_BUILTIN as an output. pinMode(LED_BUILTIN, OUTPUT); } // the loop function runs over and over again forever void loop() { digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level) delay(3000); // wait" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/arduino_note1/" />
+<meta property="article:published_time" content="2020-10-19T15:43:14+08:00" />
+<meta property="article:modified_time" content="2020-10-19T15:43:14+08:00" />
+<meta itemprop="name" content="Arduino笔记(1)">
+<meta itemprop="description" content="blink 1 2 3 4 5 6 7 8 9 10 11 12 13 // the setup function runs once when you press reset or power the board void setup() { // initialize digital pin LED_BUILTIN as an output. pinMode(LED_BUILTIN, OUTPUT); } // the loop function runs over and over again forever void loop() { digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level) delay(3000); // wait">
+<meta itemprop="datePublished" content="2020-10-19T15:43:14&#43;08:00" />
+<meta itemprop="dateModified" content="2020-10-19T15:43:14&#43;08:00" />
+<meta itemprop="wordCount" content="370">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Arduino笔记(1)"/>
+<meta name="twitter:description" content="blink 1 2 3 4 5 6 7 8 9 10 11 12 13 // the setup function runs once when you press reset or power the board void setup() { // initialize digital pin LED_BUILTIN as an output. pinMode(LED_BUILTIN, OUTPUT); } // the loop function runs over and over again forever void loop() { digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level) delay(3000); // wait"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Arduino笔记(1)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-10-19 </span>
+        <div class="post-category">
+            <a href="/categories/arduino/"> Arduino </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#blink">blink</a>
+      <ul>
+        <li><a href="#pinmode">pinMode()</a></li>
+        <li><a href="#digitalwrite">digitalWrite()</a></li>
+        <li><a href="#digitalread">digitalRead()</a></li>
+      </ul>
+    </li>
+    <li><a href="#ledlight-emitting-diode">LED(<strong>light-emitting diode</strong>)</a>
+      <ul>
+        <li><a href="#1-digit-7-segment-led-display">1 digit 7 segment LED display</a></li>
+      </ul>
+    </li>
+    <li><a href="#analog-io">Analog I/O</a>
+      <ul>
+        <li><a href="#analogread">analogRead()</a></li>
+        <li><a href="#analogwrite">analogWrite()</a></li>
+      </ul>
+    </li>
+    <li><a href="#map">map()</a>
+      <ul>
+        <li><a href="#map-1">map()</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="blink">blink</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">// the setup function runs once when you press reset or power the board
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// initialize digital pin LED_BUILTIN as an output.
+</span><span class="c1"></span>  <span class="n">pinMode</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// the loop function runs over and over again forever
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>   <span class="c1">// turn the LED on (HIGH is the voltage level)
+</span><span class="c1"></span>  <span class="n">delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>                       <span class="c1">// wait for a second
+</span><span class="c1"></span>  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>    <span class="c1">// turn the LED off by making the voltage LOW
+</span><span class="c1"></span>  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>                       <span class="c1">// wait for a second
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="pinmode">pinMode()</h3>
+<ul>
+<li>Configures the specified pin to behave either as an input or an output</li>
+<li><code>pinMode(pin, mode)</code></li>
+<li><code>mode</code>: <code>INPUT</code>, <code>OUTPUT</code>, or <code>INPUT_PULLUP</code>.</li>
+<li><code>INPUT_PULLUP</code> will use pullup resistance inside the Arduino, instead of additional pullup resistance</li>
+</ul>
+<h3 id="digitalwrite">digitalWrite()</h3>
+<ul>
+<li>Write a <code>HIGH</code> or a <code>LOW</code> value to a digital pin.</li>
+<li>digitalWrite(pin, value)</li>
+<li><code>value</code>: <code>HIGH</code> or <code>LOW</code>.</li>
+</ul>
+<h3 id="digitalread">digitalRead()</h3>
+<ul>
+<li>Reads the value from a specified digital pin, either <code>HIGH</code> or <code>LOW</code>.</li>
+<li><code>digitalRead(pin)</code></li>
+</ul>
+<h2 id="ledlight-emitting-diode">LED(<strong>light-emitting diode</strong>)</h2>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjsnuz65laj30u00ya7dp.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjti2w08y0j31q60tqha0.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjti3fw7smj31t00nsate.jpg" alt=""></p>
+<h3 id="1-digit-7-segment-led-display">1 digit 7 segment LED display</h3>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjtjv0nq8fj30w80luq8l.jpg" alt=""></p>
+<h2 id="analog-io">Analog I/O</h2>
+<h3 id="analogread">analogRead()</h3>
+<ul>
+<li>
+<p>Reads the value from the specified analog pin. Arduino boards contain a multichannel, 10-bit analog to digital converter. This means that it will map input voltages between 0 and the operating voltage(5V or 3.3V) into integer values between 0 and 1023.</p>
+</li>
+<li>
+<p><code>analogRead(pin)</code></p>
+</li>
+<li>
+<p>Return: The analog reading on the pin. Although it is limited to the resolution of the analog to digital converter (0-1023 for 10 bits or 0-4095 for 12 bits). Data type: <code>int</code>.</p>
+</li>
+</ul>
+<h3 id="analogwrite">analogWrite()</h3>
+<ul>
+<li>Writes an analog value (PWM wave) to a pin. Can be used to light a LED at varying brightnesses or drive a motor at various speeds.</li>
+<li><code>analogWrite(pin, value)</code></li>
+<li><code>value</code>: the duty cycle: between 0 (always off) and 255 (always on). Allowed data types: <code>int</code>.</li>
+</ul>
+<h2 id="map">map()</h2>
+<h3 id="map-1">map()</h3>
+<ul>
+<li>Re-maps a number from one range to another.</li>
+<li><code>map(value, fromLow, fromHigh, toLow, toHigh)</code></li>
+<li><code>value</code>: the number to map.
+<code>fromLow</code>: the lower bound of the value’s current range.
+<code>fromHigh</code>: the upper bound of the value’s current range.
+<code>toLow</code>: the lower bound of the value’s target range.
+<code>toHigh</code>: the upper bound of the value’s target range.</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p><a href="https://www.arduino.cc/reference/en/">https://www.arduino.cc/reference/en/</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-10-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python_note_1/">
+            <span class="next-text nav-default">python note(1)</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
