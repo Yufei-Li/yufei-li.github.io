@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yufei-li.github.io/categories/</loc>
+    <lastmod>2020-10-20T12:55:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/mergesort/</loc>
+    <lastmod>2020-10-20T12:55:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/</loc>
+    <lastmod>2020-10-20T12:55:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/</loc>
+    <lastmod>2020-10-20T12:55:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/categories/%E7%AE%97%E6%B3%95algorithm/</loc>
+    <lastmod>2020-10-20T12:55:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://yufei-li.github.io/categories/arduino/</loc>
     <lastmod>2020-10-19T15:43:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -10,27 +45,6 @@
   
   <url>
     <loc>https://yufei-li.github.io/post/arduino_note1/</loc>
-    <lastmod>2020-10-19T15:43:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/categories/</loc>
-    <lastmod>2020-10-19T15:43:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/post/</loc>
-    <lastmod>2020-10-19T15:43:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/</loc>
     <lastmod>2020-10-19T15:43:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
