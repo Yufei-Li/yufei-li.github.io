@@ -2,28 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yufei-li.github.io/categories/</loc>
-    <lastmod>2020-10-20T12:55:33+08:00</lastmod>
+    <loc>https://yufei-li.github.io/post/c_exercise1/</loc>
+    <lastmod>2020-10-21T20:09:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://yufei-li.github.io/post/mergesort/</loc>
-    <lastmod>2020-10-20T12:55:33+08:00</lastmod>
+    <loc>https://yufei-li.github.io/categories/</loc>
+    <lastmod>2020-10-21T20:09:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://yufei-li.github.io/post/</loc>
-    <lastmod>2020-10-20T12:55:33+08:00</lastmod>
+    <lastmod>2020-10-21T20:09:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://yufei-li.github.io/</loc>
+    <lastmod>2020-10-21T20:09:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86probability-theory/</loc>
+    <lastmod>2020-10-21T20:09:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/mergesort/</loc>
     <lastmod>2020-10-20T12:55:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -129,13 +143,6 @@
   
   <url>
     <loc>https://yufei-li.github.io/post/mlemap/</loc>
-    <lastmod>2020-08-03T00:42:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86probability-theory/</loc>
     <lastmod>2020-08-03T00:42:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
