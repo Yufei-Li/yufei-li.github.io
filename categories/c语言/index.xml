@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Sat, 05 Sep 2020 15:27:14 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2020 20:09:57 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/c%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>c exercise c语言练习笔记</title>
+      <link>https://yufei-li.github.io/post/c_exercise1/</link>
+      <pubDate>Wed, 21 Oct 2020 20:09:57 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/c_exercise1/</guid>
+      <description>verbalize a number; combine two string; reverse a integer; check a valid integer and determine if it is a prime number; check if a integer is prime; clear keyboard buffer; verbalize a number Write a program that reads an integer between 0 and 999 and &amp;ldquo;verbalises it&amp;rdquo;. For example, if the program is given 123 it would display &amp;ldquo;one hundred and twenty three&amp;rdquo;. 1 2 3 4 5 6 7</description>
+    </item>
     
     <item>
       <title>c语言笔记(3)</title>

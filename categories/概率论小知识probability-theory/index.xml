@@ -7,19 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Wed, 21 Oct 2020 20:09:57 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 03 Aug 2020 00:42:48 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86probability-theory/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>c exercise c语言练习笔记</title>
-      <link>https://yufei-li.github.io/post/c_exercise1/</link>
-      <pubDate>Wed, 21 Oct 2020 20:09:57 +0800</pubDate>
-      
-      <guid>https://yufei-li.github.io/post/c_exercise1/</guid>
-      <description>Write a program that reads an integer between 0 and 999 and &amp;ldquo;verbalises it&amp;rdquo;. For example, if the program is given 123 it would display &amp;ldquo;one hundred and twenty three&amp;rdquo;. 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40</description>
-    </item>
     
     <item>
       <title>最大似然估计(MLE)和最大后验概率估计(MAP)</title>
