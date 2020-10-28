@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Wed, 21 Oct 2020 20:09:57 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2020 14:29:38 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>tree</title>
+      <link>https://yufei-li.github.io/post/tree/</link>
+      <pubDate>Mon, 26 Oct 2020 14:29:38 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/tree/</guid>
+      <description>tree A tree whose elements have at most 2 children is called a binary tree. Since each element in a binary tree can have only 2 children, we typically name them the left and right child. insert and find 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31</description>
+    </item>
+    
+    <item>
+      <title>queue</title>
+      <link>https://yufei-li.github.io/post/queue/</link>
+      <pubDate>Thu, 22 Oct 2020 18:52:46 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/queue/</guid>
+      <description>node use node to make a linked list 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 class Node(): def __init__(self, value): self.value = value self.next = None def append(self, node): if self.next is not None: raise (ValueError(&amp;#34;next node is not None&amp;#34;)) self.next = node</description>
+    </item>
     
     <item>
       <title>c exercise c语言练习笔记</title>
