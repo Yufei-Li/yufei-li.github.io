@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>c语言笔记(4) - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="global variable &amp;amp; local variable Local variable : Variables that are declared inside a function or block are called local variables. They can be used only by statements that are inside that function or block of code. global variable:Global variables are defined outside a function, usually on top of the program. Global variables hold their values throughout the lifetime of your program and they can be accessed inside any of" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/c4/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="c语言笔记(4)" />
+<meta property="og:description" content="global variable &amp; local variable Local variable : Variables that are declared inside a function or block are called local variables. They can be used only by statements that are inside that function or block of code. global variable:Global variables are defined outside a function, usually on top of the program. Global variables hold their values throughout the lifetime of your program and they can be accessed inside any of" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/c4/" />
+<meta property="article:published_time" content="2020-10-28T13:12:10+08:00" />
+<meta property="article:modified_time" content="2020-10-28T13:12:10+08:00" />
+<meta itemprop="name" content="c语言笔记(4)">
+<meta itemprop="description" content="global variable &amp; local variable Local variable : Variables that are declared inside a function or block are called local variables. They can be used only by statements that are inside that function or block of code. global variable:Global variables are defined outside a function, usually on top of the program. Global variables hold their values throughout the lifetime of your program and they can be accessed inside any of">
+<meta itemprop="datePublished" content="2020-10-28T13:12:10&#43;08:00" />
+<meta itemprop="dateModified" content="2020-10-28T13:12:10&#43;08:00" />
+<meta itemprop="wordCount" content="2050">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="c语言笔记(4)"/>
+<meta name="twitter:description" content="global variable &amp; local variable Local variable : Variables that are declared inside a function or block are called local variables. They can be used only by statements that are inside that function or block of code. global variable:Global variables are defined outside a function, usually on top of the program. Global variables hold their values throughout the lifetime of your program and they can be accessed inside any of"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">c语言笔记(4)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-10-28 </span>
+        <div class="post-category">
+            <a href="/categories/c%E8%AF%AD%E8%A8%80/"> c语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#global-variable--local-variable">global variable &amp; local variable</a>
+      <ul>
+        <li><a href="#drawbacks-of-global-variables">drawbacks of global variables</a></li>
+        <li><a href="#extern">extern</a></li>
+      </ul>
+    </li>
+    <li><a href="#scope">scope</a>
+      <ul>
+        <li><a href="#block-scope">block scope</a></li>
+        <li><a href="#file-scope">file scope</a></li>
+      </ul>
+    </li>
+    <li><a href="#link-attribute">link attribute</a>
+      <ul>
+        <li><a href="#external">external</a></li>
+        <li><a href="#internal">internal</a></li>
+      </ul>
+    </li>
+    <li><a href="#lifetime">Lifetime</a>
+      <ul>
+        <li><a href="#static-storage-duration">static storage duration</a></li>
+        <li><a href="#automatic-storage-duration">automatic storage duration</a></li>
+      </ul>
+    </li>
+    <li><a href="#storage-class">storage class</a>
+      <ul>
+        <li><a href="#auto">auto</a></li>
+        <li><a href="#register">register</a></li>
+        <li><a href="#static">static</a></li>
+      </ul>
+    </li>
+    <li><a href="#dynamic-memory-allocation">Dynamic Memory Allocation</a>
+      <ul>
+        <li><a href="#malloc">malloc()</a></li>
+        <li><a href="#free">free()</a></li>
+        <li><a href="#calloc">calloc()</a></li>
+        <li><a href="#realloc">realloc()</a></li>
+      </ul>
+    </li>
+    <li><a href="#functions-in-stringh">functions in &lt;string.h&gt;</a>
+      <ul>
+        <li><a href="#memset">memset()</a></li>
+        <li><a href="#memcpy">memcpy()</a></li>
+      </ul>
+    </li>
+    <li><a href="#memory-layout-in-c">memory layout in c</a>
+      <ul>
+        <li><a href="#text-segment">text segment</a></li>
+        <li><a href="#initialized-data-segment">initialized data segment</a></li>
+        <li><a href="#uninitialized-data-segment">uninitialized data segment</a></li>
+        <li><a href="#stack">stack</a></li>
+        <li><a href="#heap">heap</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="global-variable--local-variable">global variable &amp; local variable</h2>
+<ul>
+<li>
+<p><strong>Local variable</strong> : Variables that are declared inside a function or block are called local variables. They can be used only by statements that are inside that function or block of code.</p>
+</li>
+<li>
+<p><strong>global variable</strong>:Global variables are defined outside a function, usually on top of the program. Global variables hold their values throughout the lifetime of your program and they can be accessed inside any of the functions defined for the program.</p>
+</li>
+<li>
+<p>in the function, b that be changed is local variable, a is global variable</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">void</span> <span class="nf">func</span><span class="p">();</span>
+
+<span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">func</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">880</span><span class="p">;</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">120</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;in func, a = %d, b = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span> <span class="c1">//in func, a = 880, b = 120
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;a = %d, b = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span> <span class="c1">//a = 0, b = 123  a didn&#39;t be initialized
+</span><span class="c1"></span>    <span class="n">func</span><span class="p">();</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;a = %d, b = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span><span class="c1">// a = 880, b = 123
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="drawbacks-of-global-variables">drawbacks of global variables</h3>
+<ul>
+<li>Too many variables declared as global, then they remain in the memory till program execution is completed. This can cause of Out of Memory issue.</li>
+<li>Data can be modified by any function. Any statement written in the program can change the value of the global variable. This may give unpredictable results in multi-tasking environments.</li>
+<li>If global variables are discontinued due to code refactoring, you will need to change all the modules where they are called.</li>
+</ul>
+<h3 id="extern">extern</h3>
+<ul>
+<li>
+<p><code>extern</code> tells the program the variable will be defined later</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">void</span> <span class="nf">func</span><span class="p">();</span>
+  
+<span class="kt">void</span> <span class="nf">func</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">extern</span> <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
+    <span class="n">count</span> <span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+  
+<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">func</span><span class="p">();</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;count = %d&#34;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="scope">scope</h2>
+<p>The <em><strong>scope</strong></em> of a variable is the part of the program within which the variable can be used. So, the scope describes the <em><strong>visibility</strong></em> of an identifier within the program.</p>
+<h3 id="block-scope">block scope</h3>
+<ul>
+<li>if a function doesn&rsquo;t have any parameter(eg. Main function), better write a <code>void</code> in the bracks</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="c1">//i1
+</span><span class="c1"></span>    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">110</span><span class="p">;</span> <span class="c1">// i2
+</span><span class="c1"></span>        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">120</span><span class="p">;</span> <span class="c1">// i3
+</span><span class="c1"></span>            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;i = %d&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// i = 120
+</span><span class="c1"></span>
+        <span class="p">}</span>
+        <span class="c1">// i = 110
+</span><span class="c1"></span>        <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;i = %d&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// i = 110
+</span><span class="c1"></span>            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">130</span><span class="p">;</span> <span class="c1">// i4
+</span><span class="c1"></span>            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;i = %d&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// i = 130
+</span><span class="c1"></span>        <span class="p">}</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;i = %d&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// i = 110
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;i = %d&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="c1">//i = 100
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="file-scope">file scope</h3>
+<ul>
+<li>A variable with file scope can be accessed by any function or block within a single file.</li>
+<li>eg. Global variable; function with declaration</li>
+</ul>
+<h2 id="link-attribute">link attribute</h2>
+<h3 id="external">external</h3>
+<ul>
+<li>
+<p>in the main file</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">void</span> <span class="nf">a</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">b</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">c</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+  
+<span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">a</span><span class="p">();</span>
+    <span class="n">b</span><span class="p">();</span>
+    <span class="n">c</span><span class="p">();</span>
+    <span class="n">b</span><span class="p">();</span>
+  
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;count = %d&#34;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>in the other file:</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">extern</span> <span class="kt">int</span> <span class="n">count</span><span class="p">;</span> <span class="c1">// the count is defined in another file
+</span><span class="c1"></span>  
+<span class="kt">void</span> <span class="nf">a</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+  
+<span class="kt">void</span> <span class="nf">b</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+  
+<span class="kt">void</span> <span class="nf">c</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>to compile two files in the CLion, add the location of file in <code>add_executable(C_exercises week1/main.c week1/a.c)</code> in CMakeLists.txt</p>
+</li>
+</ul>
+<h3 id="internal">internal</h3>
+<ul>
+<li><code>static int count</code></li>
+<li>the link attribute can only change once, if it has changed to internal, it cannot be changed back to external</li>
+</ul>
+<h2 id="lifetime">Lifetime</h2>
+<p>The <em><strong>lifetime</strong></em> of a variable or function is the time duration for which memory is allocated to store it, and when that memory is released. It also refered as <em><strong>extent</strong></em> of a variable.</p>
+<h3 id="static-storage-duration">static storage duration</h3>
+<p>A static variable is stored in the data segment of the &ldquo;object file&rdquo; of a program. Its lifetime is the entire duration of the program&rsquo;s execution.</p>
+<h3 id="automatic-storage-duration">automatic storage duration</h3>
+<p>An automatic variable has a lifetime that begins when program execution enters the function or statement block or compound and ends when execution leaves the block. Automatic variables are stored in a &ldquo;function call stack&rdquo;.</p>
+<h2 id="storage-class">storage class</h2>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk53jf8n25j31a00dwmz0.jpg" alt=""></p>
+<h3 id="auto">auto</h3>
+<p>The variables defined using auto storage class are called as local variables. Auto stands for automatic storage class. A variable is in auto storage class by default if it is not explicitly specified.</p>
+<ul>
+<li>Because auto storage class is default, so it is ok if you don&rsquo;t wirte auto. But in this case, auto remaids you local variable i covers global variable i</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">auto</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="register">register</h3>
+<p>You can use the register storage class when you want to store local variables within functions or blocks in CPU registers instead of RAM to have quick access to these variables</p>
+<ul>
+<li>cannot get the address of register storage class variables by <code>&amp;</code></li>
+</ul>
+<h3 id="static">static</h3>
+<ul>
+<li>
+<p>Static local variable is a local variable that retains and stores its value between function calls or block and remains visible only to the function or block in which it is defined.</p>
+</li>
+<li>
+<p>the lifetime of variable is changed but the scope isn&rsquo;t</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+  
+<span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">static</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;count = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+  
+    <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">func</span><span class="p">();</span>
+        <span class="c1">//count = 0
+</span><span class="c1"></span>        <span class="c1">//count = 1
+</span><span class="c1"></span>        <span class="c1">//count = 2
+</span><span class="c1"></span>        <span class="c1">//count = 3
+</span><span class="c1"></span>        <span class="c1">//count = 4
+</span><span class="c1"></span>        <span class="c1">//count = 5
+</span><span class="c1"></span>        <span class="c1">//count = 6
+</span><span class="c1"></span>        <span class="c1">//count = 7
+</span><span class="c1"></span>        <span class="c1">//count = 8
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Static global variables are global variables visible <strong>only to the file in which it is declared.</strong></p>
+</li>
+</ul>
+<h2 id="dynamic-memory-allocation">Dynamic Memory Allocation</h2>
+<h3 id="malloc">malloc()</h3>
+<p><strong>“malloc”</strong> or <strong>“memory allocation”</strong> method in C is used to dynamically allocate a single large block of memory with the specified size. It returns <strong>a pointer of type void which can be cast into a pointer of any form</strong>. It initializes each block with default garbage value.</p>
+<ul>
+<li><code>ptr = (cast-type*) malloc(byte-size)</code></li>
+</ul>
+<h3 id="free">free()</h3>
+<p><strong>“free”</strong> method in C is used to dynamically <strong>de-allocate</strong> the memory. The memory allocated using functions malloc() and calloc() is not de-allocated on their own. Hence the free() method is used, whenever the dynamic memory allocation takes place. It helps to reduce wastage of memory by freeing it.</p>
+<ul>
+<li>
+<p><code>free(ptr);</code></p>
+</li>
+<li>
+<p>Free() will only release the memory, it won&rsquo;t change the position that pointer point at. So after free(), the pointer will be invalid</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+
+    <span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;allocation is failed&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please enter an integer:&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="n">ptr</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;the number is:%d&#34;</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+
+<span class="c1">//    please enter an integer:123
+</span><span class="c1">//    the number is:123
+</span><span class="c1"></span>
+    <span class="n">free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>Memory leak</p>
+<p>Memory leak occurs when programmers create a memory in heap and forget to delete it. To avoid memory leaks, memory allocated on heap should always be freed when no longer needed.</p>
+</li>
+</ul>
+<h3 id="calloc">calloc()</h3>
+<p><strong>“calloc”</strong> or <strong>“contiguous allocation”</strong> method in C is used to dynamically allocate the specified number of blocks of memory of the specified type. It initializes each block with a default value ‘0’.</p>
+<h3 id="realloc">realloc()</h3>
+<p><strong>“realloc”</strong> or <strong>“re-allocation”</strong> method in C is used to dynamically change the memory allocation of a previously allocated memory. In other words, if the memory previously allocated with the help of malloc or calloc is insufficient, realloc can be used to <strong>dynamically re-allocate memory</strong>. re-allocation of memory maintains the already present value and new blocks will be initialized with default garbage value.</p>
+<h2 id="functions-in-stringh">functions in &lt;string.h&gt;</h2>
+<h3 id="memset">memset()</h3>
+<ul>
+<li><code>#include &lt;string.h&gt;</code> is needed to use <code>memset()</code></li>
+<li>In <code>&lt;string.h&gt;</code> ,there are a lot of functions to edit string and memory.</li>
+<li>intialize the memory to anything you want</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp"># define N 10
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="n">N</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">memset</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="n">ptr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span>
+    
+    <span class="n">free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="memcpy">memcpy()</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr1</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">ptr2</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="c1">// allocate memory for the first time
+</span><span class="c1"></span>    <span class="n">ptr1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+
+    <span class="c1">// found the memory of ptr1 is not enough
+</span><span class="c1"></span>
+    <span class="c1">// allocate memory for the second time
+</span><span class="c1"></span>    <span class="n">ptr2</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+
+    <span class="c1">// copy the data in ptr1 to ptr2
+</span><span class="c1"></span>    <span class="n">memcpy</span><span class="p">(</span><span class="n">ptr2</span><span class="p">,</span> <span class="n">ptr1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">ptr1</span><span class="p">);</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">ptr2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="memory-layout-in-c">memory layout in c</h2>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gk5fdhvwb5j30tg0moqc2.jpg" alt=""></p>
+<h3 id="text-segment">text segment</h3>
+<p>A text segment , also known as a code segment or simply as text, is one of the sections of a program in an object file or in memory, which contains executable instructions.</p>
+<p>As a memory region, a text segment may be placed below the heap or stack in order to prevent heaps and stack overflows from overwriting it.</p>
+<p>Usually, the text segment is sharable so that only a single copy needs to be in memory for frequently executed programs, such as text editors, the C compiler, the shells, and so on. Also, the text segment is often read-only, to prevent a program from accidentally modifying its instructions.</p>
+<h3 id="initialized-data-segment">initialized data segment</h3>
+<p>Initialized data segment, usually called simply the Data Segment. A data segment is a portion of virtual address space of a program, which contains the global variables and static variables that are initialized by the programmer.</p>
+<h3 id="uninitialized-data-segment">uninitialized data segment</h3>
+<p>Uninitialized data segment, often called the “bss” segment, named after an ancient assembler operator that stood for “block started by symbol.” Data in this segment is initialized by the kernel to arithmetic 0 before the program starts executing</p>
+<h3 id="stack">stack</h3>
+<p>Stack, where automatic variables are stored, along with information that is saved each time a function is called. Each time a function is called, the address of where to return to and certain information about the caller’s environment, such as some of the machine registers, are saved on the stack. The newly called function then allocates room on the stack for its automatic and temporary variables. This is how recursive functions in C can work. Each time a recursive function calls itself, a new stack frame is used, so one set of variables doesn’t interfere with the variables from another instance of the function.</p>
+<h3 id="heap">heap</h3>
+<p>Heap is the segment where dynamic memory allocation usually takes place.</p>
+<p>The heap area begins at the end of the BSS segment and grows to larger addresses from there.The Heap area is managed by malloc, realloc, and free, which may use the brk and sbrk system calls to adjust its size (note that the use of brk/sbrk and a single “heap area” is not required to fulfill the contract of malloc/realloc/free; they may also be implemented using mmap to reserve potentially non-contiguous regions of virtual memory into the process’ virtual address space). The Heap area is shared by all shared libraries and dynamically loaded modules in a process.</p>
+<h2 id="reference">reference</h2>
+<p><a href="https://www.tutorialspoint.com/cprogramming/c_scope_rules.htm">https://www.tutorialspoint.com/cprogramming/c_scope_rules.htm</a></p>
+<p><a href="https://www.guru99.com/local-vs-global-variable.html">https://www.guru99.com/local-vs-global-variable.html</a></p>
+<p><a href="https://www.guru99.com/c-storage-classes.html">https://www.guru99.com/c-storage-classes.html</a></p>
+<p><a href="https://www.geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/">https://www.geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/</a></p>
+<p><a href="https://www.geeksforgeeks.org/what-is-memory-leak-how-can-we-avoid/">https://www.geeksforgeeks.org/what-is-memory-leak-how-can-we-avoid/</a></p>
+<p><a href="https://www.geeksforgeeks.org/memory-layout-of-c-program/">https://www.geeksforgeeks.org/memory-layout-of-c-program/</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-10-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/tree/">
+            <span class="next-text nav-default">tree</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
