@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>c语言笔记(5) - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="structures Arrays allow to define type of variables that can hold several data items of the same kind. Similarly structure is another user defined data type available in C that allows to combine data items of different kinds. the element in the structure can be another structure Usually, the first letter of the name of the stucture is capital letter 1 2 3 4 5 6 7 struct [structure tag]" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/c5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="c语言笔记(5)" />
+<meta property="og:description" content="structures Arrays allow to define type of variables that can hold several data items of the same kind. Similarly structure is another user defined data type available in C that allows to combine data items of different kinds. the element in the structure can be another structure Usually, the first letter of the name of the stucture is capital letter 1 2 3 4 5 6 7 struct [structure tag]" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/c5/" />
+<meta property="article:published_time" content="2020-11-11T21:36:24+08:00" />
+<meta property="article:modified_time" content="2020-11-11T21:36:24+08:00" />
+<meta itemprop="name" content="c语言笔记(5)">
+<meta itemprop="description" content="structures Arrays allow to define type of variables that can hold several data items of the same kind. Similarly structure is another user defined data type available in C that allows to combine data items of different kinds. the element in the structure can be another structure Usually, the first letter of the name of the stucture is capital letter 1 2 3 4 5 6 7 struct [structure tag]">
+<meta itemprop="datePublished" content="2020-11-11T21:36:24&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-11T21:36:24&#43;08:00" />
+<meta itemprop="wordCount" content="3078">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="c语言笔记(5)"/>
+<meta name="twitter:description" content="structures Arrays allow to define type of variables that can hold several data items of the same kind. Similarly structure is another user defined data type available in C that allows to combine data items of different kinds. the element in the structure can be another structure Usually, the first letter of the name of the stucture is capital letter 1 2 3 4 5 6 7 struct [structure tag]"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">c语言笔记(5)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-11 </span>
+        <div class="post-category">
+            <a href="/categories/c%E8%AF%AD%E8%A8%80/"> c语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#structures">structures</a>
+      <ul>
+        <li><a href="#structure-as-element-in-structure">structure as element in structure</a></li>
+        <li><a href="#structure-array">structure array</a></li>
+        <li><a href="#pointer-to-the-structure">pointer to the structure</a></li>
+        <li><a href="#assign-one-structure-to-another">assign one structure to another</a></li>
+      </ul>
+    </li>
+    <li><a href="#pass-structure-to-a-function">pass structure to a function</a>
+      <ul>
+        <li><a href="#passing-structure-to-function-directly">passing structure to function directly</a></li>
+        <li><a href="#pass-a-pointer-point-to-structure">pass a pointer point to structure</a></li>
+      </ul>
+    </li>
+    <li><a href="#allocate-dynamic-memory-to-structure">allocate dynamic memory to structure</a></li>
+    <li><a href="#linked-list">linked list</a>
+      <ul>
+        <li><a href="#insert-new-node">insert new node</a></li>
+        <li><a href="#delete-a-node">delete a node</a></li>
+        <li><a href="#search-a-node">search a node</a></li>
+        <li><a href="#singly-linked-list">singly linked list</a></li>
+      </ul>
+    </li>
+    <li><a href="#typedef">typedef</a>
+      <ul>
+        <li><a href="#use-typedef-with-structure">use typedef with structure</a></li>
+        <li><a href="#use-typedef-to-declare">use typedef to declare</a></li>
+      </ul>
+    </li>
+    <li><a href="#union">union</a>
+      <ul>
+        <li><a href="#initialise-a-union">initialise a union</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="structures">structures</h2>
+<ul>
+<li>Arrays allow to define type of variables that can hold several data items of the same kind. Similarly <strong>structure</strong> is another user defined data type available in C that allows to combine data items of different kinds.</li>
+<li>the element in the structure can be another structure</li>
+<li>Usually, the first letter of the name of the stucture is capital letter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="p">[</span><span class="n">structure</span> <span class="n">tag</span><span class="p">]</span> <span class="p">{</span>
+
+   <span class="n">member</span> <span class="n">definition</span><span class="p">;</span>
+   <span class="n">member</span> <span class="n">definition</span><span class="p">;</span>
+   <span class="p">...</span>
+   <span class="n">member</span> <span class="n">definition</span><span class="p">;</span>
+<span class="p">}</span> <span class="p">[</span><span class="n">one</span> <span class="n">or</span> <span class="n">more</span> <span class="n">structure</span> <span class="n">variables</span><span class="p">];</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>create a stucture: <code>struct structure_name name</code></li>
+<li>get element in the structure: <code>structure.element</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">struct</span> <span class="n">Book</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">title</span><span class="p">[</span><span class="mi">120</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">author</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+    <span class="kt">float</span> <span class="n">price</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="n">book1</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input the title:&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">book1</span><span class="p">.</span><span class="n">title</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input the author:&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">book1</span><span class="p">.</span><span class="n">author</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input the price:&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%f&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">book1</span><span class="p">.</span><span class="n">price</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;title: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book1</span><span class="p">.</span><span class="n">title</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;author: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book1</span><span class="p">.</span><span class="n">author</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;price: %f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book1</span><span class="p">.</span><span class="n">price</span><span class="p">);</span>
+
+    <span class="k">struct</span> <span class="n">Book</span> <span class="n">book2</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#34;hello&#34;</span><span class="p">,</span>
+            <span class="s">&#34;yufei&#34;</span><span class="p">,</span>
+            <span class="mi">100</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="n">Book</span> <span class="n">book3</span> <span class="o">=</span> <span class="p">{.</span><span class="n">price</span> <span class="o">=</span> <span class="mi">150</span><span class="p">};</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="structure-as-element-in-structure">structure as element in structure</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">struct</span> <span class="n">Date</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">Book</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">title</span><span class="p">[</span><span class="mi">120</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">author</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+    <span class="kt">float</span> <span class="n">price</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Date</span> <span class="n">date</span><span class="p">;</span>
+<span class="p">}</span><span class="n">book</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#34;hello&#34;</span><span class="p">,</span>
+        <span class="s">&#34;yufei&#34;</span><span class="p">,</span>
+        <span class="mi">100</span><span class="p">,</span>
+        <span class="p">{</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;title: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">title</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;author: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">author</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;price: %f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">price</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;date:%d-%d-%d&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">year</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">month</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">day</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="structure-array">structure array</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">struct</span> <span class="n">Date</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">Book</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">title</span><span class="p">[</span><span class="mi">120</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">author</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+    <span class="kt">float</span> <span class="n">price</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Date</span> <span class="n">date</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="n">book</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="p">{</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="s">&#34;world&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">{</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">}},</span>
+             <span class="p">{</span><span class="s">&#34;yufei&#34;</span><span class="p">,</span> <span class="s">&#34;li&#34;</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="p">{</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">26</span><span class="p">}</span>
+            <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="pointer-to-the-structure">pointer to the structure</h3>
+<ul>
+<li>
+<p>get element in the structure by the pointer: <code>(*structure_pointer).element</code> or <code>structure_pointer -&gt; element</code></p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="k">struct</span> <span class="n">Date</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>
+<span class="p">};</span>
+  
+<span class="k">struct</span> <span class="n">Book</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">title</span><span class="p">[</span><span class="mi">120</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">author</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+    <span class="kt">float</span> <span class="n">price</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Date</span> <span class="n">date</span><span class="p">;</span>
+<span class="p">}</span><span class="n">book</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#34;hello&#34;</span><span class="p">,</span>
+        <span class="s">&#34;yufei&#34;</span><span class="p">,</span>
+        <span class="mi">100</span><span class="p">,</span>
+        <span class="p">{</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">}</span>
+<span class="p">};</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">book</span><span class="p">;</span>
+  
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;title:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">).</span><span class="n">title</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;auther:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">author</span><span class="p">);</span>
+      
+<span class="c1">//    title:hello
+</span><span class="c1">//    auther:yufei
+</span><span class="c1"></span>      
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="assign-one-structure-to-another">assign one structure to another</h3>
+<ul>
+<li>the values in one structure can be assigned to another structure if they are of same type.</li>
+<li>the pointers of both structs point to the same block of memory - the compiler does not copy the pointed to data</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">Test</span><span class="p">{</span>
+        <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">;</span>
+
+    <span class="n">t1</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">t1</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">t1</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;t2.x = %d, t2.y = %d&#34;</span><span class="p">,</span> <span class="n">t2</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">t2</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="c1">//t2.x = 3, t2.y = 4
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="pass-structure-to-a-function">pass structure to a function</h2>
+<h3 id="passing-structure-to-function-directly">passing structure to function directly</h3>
+<ul>
+<li>the type of structure is <code>struct structure-name</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">struct</span> <span class="n">Book</span> <span class="nf">getInput</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="n">book</span><span class="p">);</span>
+
+<span class="k">struct</span> <span class="n">Date</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">Book</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">title</span><span class="p">[</span><span class="mi">120</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">author</span><span class="p">[</span><span class="mi">40</span><span class="p">];</span>
+    <span class="kt">float</span> <span class="n">price</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Date</span> <span class="n">date</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">Book</span> <span class="nf">getInput</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="n">book</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the title</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">title</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the author</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">author</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the price&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%f&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">book</span><span class="p">.</span><span class="n">price</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the date&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d %d %d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">book</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">year</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">book</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">month</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">book</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">day</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">book</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">printBook</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="n">book</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;name:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">title</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;author:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">author</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;price:%f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">price</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;date:%d-%d-%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">year</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">month</span><span class="p">,</span> <span class="n">book</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">day</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">struct</span> <span class="n">Book</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input the information of first book</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">getInput</span><span class="p">(</span><span class="n">b1</span><span class="p">);</span>
+    <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input the information of second book</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">getInput</span><span class="p">(</span><span class="n">b2</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n\n</span><span class="s"> the information of two books:&#34;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;the info of first book:&#34;</span><span class="p">);</span>
+    <span class="n">printBook</span><span class="p">(</span><span class="n">b1</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;the info of second book:&#34;</span><span class="p">);</span>
+    <span class="n">printBook</span><span class="p">(</span><span class="n">b2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="pass-a-pointer-point-to-structure">pass a pointer point to structure</h3>
+<ul>
+<li>the declaration of function must after the definition of the structure</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">struct</span> <span class="n">Date</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">Book</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">title</span><span class="p">[</span><span class="mi">120</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">author</span><span class="p">[</span><span class="mi">40</span><span class="p">];</span>
+    <span class="kt">float</span> <span class="n">price</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Date</span> <span class="n">date</span><span class="p">;</span>
+<span class="p">};</span>
+
+
+<span class="kt">void</span> <span class="nf">getInput</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">book</span><span class="p">);</span>
+<span class="c1">// edit the structure by pointer, no need return value anymore
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">getInput</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">book</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the title</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the author</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">author</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the price&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%f&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">book</span><span class="o">-&gt;</span><span class="n">price</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the date&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d %d %d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">book</span><span class="o">-&gt;</span><span class="n">date</span><span class="p">.</span><span class="n">year</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">book</span><span class="o">-&gt;</span><span class="n">date</span><span class="p">.</span><span class="n">month</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">book</span><span class="o">-&gt;</span><span class="n">date</span><span class="p">.</span><span class="n">day</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">printBook</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">book</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;name:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;author:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">author</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;price:%f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">price</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;date:%d-%d-%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">date</span><span class="p">.</span><span class="n">year</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">date</span><span class="p">.</span><span class="n">month</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">date</span><span class="p">.</span><span class="n">day</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">struct</span> <span class="n">Book</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input the information of first book</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">getInput</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b1</span><span class="p">);</span>
+    <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input the information of second book</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">getInput</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b2</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n\n</span><span class="s"> the information of two books:&#34;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;the info of first book:&#34;</span><span class="p">);</span>
+    <span class="n">printBook</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b1</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;the info of second book:&#34;</span><span class="p">);</span>
+    <span class="n">printBook</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="allocate-dynamic-memory-to-structure">allocate dynamic memory to structure</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">b1</span><span class="p">,</span> <span class="o">*</span><span class="n">b2</span><span class="p">;</span>
+
+    <span class="n">b1</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span><span class="p">));</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span><span class="p">));</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">b1</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">b2</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to allocate dynamic memory&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input the information of first book</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">getInput</span><span class="p">(</span><span class="n">b1</span><span class="p">);</span>
+    <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input the information of second book</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">getInput</span><span class="p">(</span><span class="n">b2</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n\n</span><span class="s"> the information of two books:&#34;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;the info of first book:&#34;</span><span class="p">);</span>
+    <span class="n">printBook</span><span class="p">(</span><span class="n">b1</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;the info of second book:&#34;</span><span class="p">);</span>
+    <span class="n">printBook</span><span class="p">(</span><span class="n">b2</span><span class="p">);</span>
+    
+    <span class="n">free</span><span class="p">(</span><span class="n">b1</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">b2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="linked-list">linked list</h2>
+<p>A structure contains type of itself:</p>
+<p>the first program will raise error but the second one will not, because the second one use a pointer to represent a structure</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">Test</span><span class="p">{</span>
+        <span class="k">struct</span> <span class="n">Test</span> <span class="n">test</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">Test</span><span class="p">{</span>
+        <span class="k">struct</span> <span class="n">Test</span> <span class="o">*</span><span class="n">test</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>a linked list requires a structure contains itself</p>
+</li>
+<li>
+<p>Like arrays, Linked List is a linear data structure. Unlike arrays, linked list elements are not stored at a contiguous location; the elements are linked using pointers.</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gkk3t3n3lgj30tw0700tb.jpg" alt=""></p>
+</li>
+<li>
+<p>compare linked list with arrays:</p>
+<ul>
+<li>
+<p><strong>Advantages over arrays</strong></p>
+<p><strong>1)</strong> Dynamic size</p>
+<p><strong>2)</strong> Ease of insertion/deletion</p>
+</li>
+<li>
+<p><strong>Drawbacks:</strong></p>
+<p><strong>1)</strong> Random access is not allowed. We have to access elements sequentially starting from the first node. So we cannot do binary search with linked lists efficiently with its default implementation.</p>
+<p><strong>2)</strong> Extra memory space for a pointer is required with each element of the list.</p>
+<p><strong>3)</strong> Not cache friendly. Since array elements are contiguous locations, there is locality of reference which is not there in case of linked lists.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="insert-new-node">insert new node</h3>
+<ul>
+<li>
+<p><strong>insert at the front of the linked list</strong> :</p>
+<ul>
+<li>Time complexity of push() is O(1) as it does constant amount of work.</li>
+<li><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gkk5eb0jilj313i0e8q4t.jpg" alt=""></li>
+<li>An example of linked list of book:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="k">struct</span> <span class="n">Book</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">title</span><span class="p">[</span><span class="mi">120</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">author</span><span class="p">[</span><span class="mi">40</span><span class="p">];</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+  
+<span class="kt">void</span> <span class="nf">getInput</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">book</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the title&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the author&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">author</span><span class="p">);</span>
+<span class="p">}</span>
+  
+<span class="kt">void</span> <span class="nf">addBook</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">**</span><span class="n">library</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">book</span><span class="p">,</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+  
+    <span class="n">book</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">book</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to allocate dynamic memory&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+  
+    <span class="n">getInput</span><span class="p">(</span><span class="n">book</span><span class="p">);</span>
+  
+    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">library</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span> <span class="c1">// there exist books in library
+</span><span class="c1"></span>        <span class="n">temp</span> <span class="o">=</span> <span class="o">*</span><span class="n">library</span><span class="p">;</span>
+        <span class="o">*</span><span class="n">library</span> <span class="o">=</span> <span class="n">book</span><span class="p">;</span>
+        <span class="n">book</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+        <span class="o">*</span><span class="n">library</span> <span class="o">=</span> <span class="n">book</span><span class="p">;</span>
+        <span class="n">book</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+  
+<span class="kt">void</span> <span class="nf">printLibrary</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">library</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">book</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">book</span> <span class="o">=</span> <span class="n">library</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">book</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;book%d:</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;title:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;author:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">author</span><span class="p">);</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+  
+<span class="kt">void</span> <span class="nf">release</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">**</span><span class="n">library</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">library</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="o">*</span><span class="n">library</span><span class="p">;</span>
+        <span class="o">*</span><span class="n">library</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">library</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="n">free</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">library</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">ch</span><span class="p">;</span>
+  
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;whether in put book info(y/n)?&#34;</span><span class="p">);</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+        <span class="p">}</span><span class="k">while</span> <span class="p">(</span><span class="n">ch</span> <span class="o">!=</span> <span class="sc">&#39;y&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">!=</span> <span class="sc">&#39;n&#39;</span><span class="p">);</span>
+  
+        <span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">&#39;y&#39;</span><span class="p">){</span>
+            <span class="n">addBook</span><span class="p">(</span><span class="o">&amp;</span><span class="n">library</span><span class="p">);</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;whether print book info(y/n)?&#34;</span><span class="p">);</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="p">}</span><span class="k">while</span> <span class="p">(</span><span class="n">ch</span> <span class="o">!=</span> <span class="sc">&#39;y&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">!=</span> <span class="sc">&#39;n&#39;</span><span class="p">);</span>
+  
+    <span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">&#39;y&#39;</span><span class="p">){</span>
+        <span class="n">printLibrary</span><span class="p">(</span><span class="n">library</span><span class="p">);</span>
+    <span class="p">}</span>
+  
+    <span class="n">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">library</span><span class="p">);</span>
+  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>insert at the end of linked list</strong></p>
+<ul>
+<li>
+<p>the new node is added after the last node of the given linked list</p>
+</li>
+<li>
+<p>Time complexity of append is O(n) where n is the number of nodes in linked list. Since there is a loop from head to end, the function does O(n) work.</p>
+</li>
+<li>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gkk5xnt6dij313k0cmabp.jpg" alt=""></p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">addBook</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">**</span><span class="n">library</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">book</span><span class="p">,</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+    
+    <span class="n">book</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">book</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to allocate dynamic memory&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">getInput</span><span class="p">(</span><span class="n">book</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">library</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span> <span class="c1">// there exist books in library
+</span><span class="c1"></span>        <span class="n">temp</span> <span class="o">=</span> <span class="o">*</span><span class="n">library</span><span class="p">;</span>
+        <span class="c1">// locate the last node of linked list
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// insert the new node
+</span><span class="c1"></span>        <span class="n">temp</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">book</span><span class="p">;</span>
+        <span class="n">book</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+        <span class="o">*</span><span class="n">library</span> <span class="o">=</span> <span class="n">book</span><span class="p">;</span>
+        <span class="n">book</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>insert at the end of the linked list with higher efficiency</strong></p>
+<ul>
+<li>
+<p>by adding a pointer that always point to the last node in the linked list</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">addBook</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">**</span><span class="n">library</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">book</span><span class="p">,</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">tail</span><span class="p">;</span>
+    <span class="c1">// the static pointer won&#39;t be released until the end of the program, so the tail pointer won&#39;t be redefined when addBook() is called
+</span><span class="c1"></span>    
+    <span class="n">book</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">book</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to allocate dynamic memory&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">getInput</span><span class="p">(</span><span class="n">book</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">library</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span> <span class="c1">// there exist books in library
+</span><span class="c1"></span>        <span class="n">tail</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">book</span><span class="p">;</span>
+        <span class="n">book</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+        <span class="o">*</span><span class="n">library</span> <span class="o">=</span> <span class="n">book</span><span class="p">;</span>
+        <span class="n">book</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">tail</span> <span class="o">=</span> <span class="n">book</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>**insert node to a certain position **</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="k">struct</span> <span class="n">Node</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+  
+<span class="kt">void</span> <span class="nf">insertNode</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span> <span class="o">**</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">value</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">previous</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">current</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">new</span><span class="p">;</span>
+  
+    <span class="n">current</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+    <span class="n">previous</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  
+    <span class="k">while</span> <span class="p">(</span><span class="n">current</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">){</span>
+        <span class="c1">// previous always point at the node before the current
+</span><span class="c1"></span>        <span class="n">previous</span> <span class="o">=</span> <span class="n">current</span><span class="p">;</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+  
+    <span class="n">new</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">new</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to allocate&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">new</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+    <span class="n">new</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">current</span><span class="p">;</span>
+  
+    <span class="k">if</span> <span class="p">(</span><span class="n">previous</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="c1">// when the head point to a empty linked list
+</span><span class="c1"></span>        <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="n">new</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">previous</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">new</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+  
+<span class="kt">void</span> <span class="nf">printNode</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">head</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">current</span><span class="p">;</span>
+  
+    <span class="n">current</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">current</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d &#34;</span><span class="p">,</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">input</span><span class="p">;</span>
+  
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input an integer(-1 means end the program)&#34;</span><span class="p">);</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">input</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">insertNode</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
+        <span class="n">printNode</span><span class="p">(</span><span class="n">head</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="delete-a-node">delete a node</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">deleteNode</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span> <span class="o">**</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">value</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">previous</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span><span class="n">current</span><span class="p">;</span>
+
+    <span class="n">current</span> <span class="o">=</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+    <span class="n">previous</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">current</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">!=</span> <span class="n">value</span><span class="p">){</span>
+        <span class="n">previous</span> <span class="o">=</span> <span class="n">current</span><span class="p">;</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="c1">// head point to a empty list or there is no element matched value
+</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;cannot find this element in list&#34;</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">previous</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+            <span class="c1">// at the first element of the list
+</span><span class="c1"></span>            <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">previous</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">free</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="search-a-node">search a node</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="nf">searchBook</span><span class="p">(</span><span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">library</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">target</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Book</span> <span class="o">*</span><span class="n">book</span><span class="p">;</span>
+
+    <span class="n">book</span> <span class="o">=</span> <span class="n">library</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">book</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="k">if</span>  <span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">book</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="o">||</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">book</span><span class="o">-&gt;</span><span class="n">author</span><span class="p">,</span> <span class="n">target</span><span class="p">)){</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="n">book</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">book</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="singly-linked-list">singly linked list</h3>
+<p>The singly linked list is the most common. Each node has data and a pointer to the next node.</p>
+<h2 id="typedef">typedef</h2>
+<ul>
+<li>
+<p><code>typedef</code> is a keyword used in C language to assign alternative names to existing datatypes. Its mostly used with user defined datatypes, when names of the datatypes become slightly complicated to use in programs.</p>
+</li>
+<li>
+<p><code>typedef existing_name alias_name</code></p>
+</li>
+<li>
+<p><code>typedef existing_name alias_name1 *alias_name2</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="c1">//#define integer int
+</span><span class="c1"></span><span class="k">typedef</span> <span class="kt">int</span> <span class="n">integer</span><span class="p">;</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">integer</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2020</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+  
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;size of a = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;size of b = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
+<span class="c1">//    size of a = 4
+</span><span class="c1">//    size of b = 4
+</span><span class="c1"></span>  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>Although macro definition can achieve same function, but macro definition and typedef are different. Like the example below:</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="c1">//#define integer int
+</span><span class="c1"></span><span class="k">typedef</span> <span class="kt">int</span> <span class="n">integer</span><span class="p">;</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">unsigned</span> <span class="n">integer</span> <span class="n">a</span><span class="p">;</span>
+  
+    <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;a = %u</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="c1">// a = 4294967295 with macro define
+</span><span class="c1"></span>    <span class="c1">// raise error with typeof
+</span><span class="c1"></span>      
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="use-typedef-with-structure">use typedef with structure</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">Date</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>
+<span class="p">}</span><span class="n">DATE</span><span class="p">,</span> <span class="o">*</span><span class="n">PDATE</span><span class="p">;</span><span class="c1">//PDATE means a pointer point to struct Date
+</span><span class="c1"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">DATE</span> <span class="o">*</span><span class="n">date</span><span class="p">;</span> <span class="c1">// instead of `struct Date`
+</span><span class="c1"></span>    
+    <span class="n">date</span> <span class="o">=</span> <span class="p">(</span><span class="n">PDATE</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">DATE</span><span class="p">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="use-typedef-to-declare">use typedef to declare</h3>
+<ul>
+<li>
+<p><strong>declare an array</strong></p>
+</li>
+<li>
+<p><code>typedef int (*PTR_TO_ARRAY)[3];</code> = <code>int (*PTR_TO_ARRAY)[3]</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="k">typedef</span> <span class="nf">int</span> <span class="p">(</span><span class="o">*</span><span class="n">PTR_TO_ARRAY</span><span class="p">)[</span><span class="mi">3</span><span class="p">];</span> <span class="c1">// a pointer point to an array that contains three integers
+</span><span class="c1"></span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  
+    <span class="kt">int</span> <span class="n">array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+    <span class="n">PTR_TO_ARRAY</span> <span class="n">ptr_to_array</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">array</span><span class="p">;</span>
+  
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="n">ptr_to_array</span><span class="p">)[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>declare a pointer to function 1</strong></p>
+</li>
+<li>
+<p><code>int (*func)(void)</code> is a pointer to a function, the parameter of function is void, the return value is a integer.</p>
+</li>
+<li>
+<p><code>int (*func)(void)</code> = <code>typedef int (*PTR_TO_FUNC)(void)</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="k">typedef</span> <span class="nf">int</span> <span class="p">(</span><span class="o">*</span><span class="n">PTR_TO_FUNC</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+  
+<span class="kt">int</span> <span class="nf">func</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">return</span> <span class="mi">100</span><span class="p">;</span>
+<span class="p">}</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  
+    <span class="n">PTR_TO_FUNC</span> <span class="n">ptr_to_func</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">func</span><span class="p">;</span>
+  
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="n">ptr_to_func</span><span class="p">)());</span> <span class="c1">// 100
+</span><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>declare a pointer to function 2</strong></p>
+</li>
+<li>
+<p><code>int *(*array[3])(int)</code> , <code>(*array[3])</code> is a pointer array, the priority of [] is greater than *, so it is an array, then it is a pointer. Thus, we can change it to form of <code>int *A(int)</code>, it is a pointer point to a function A, which has integer parameter and return an integer pointer.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">typedef</span> <span class="kt">int</span> <span class="o">*</span><span class="p">(</span><span class="n">PTR_TO_FUNC</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>
+<span class="n">PTR_TO_FUNC</span> <span class="n">array</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="k">typedef</span> <span class="nf">int</span> <span class="p">(</span><span class="o">*</span><span class="n">PTR_TO_FUNC</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>
+  
+<span class="kt">int</span> <span class="o">*</span><span class="nf">func1</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+  
+<span class="kt">int</span> <span class="o">*</span><span class="nf">func2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+  
+<span class="kt">int</span> <span class="o">*</span><span class="nf">func3</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  
+    <span class="n">PTR_TO_FUNC</span> <span class="n">array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="o">&amp;</span><span class="n">func1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">func2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">func3</span><span class="p">};</span>
+  
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;address of num:%p</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">])(</span><span class="n">i</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="c1">//    0
+</span><span class="c1">//    address of num:0xe1d248ec
+</span><span class="c1">//    1
+</span><span class="c1">//    address of num:0xe1d248ec
+</span><span class="c1">//    2
+</span><span class="c1">//    address of num:0xe1d248ec
+</span><span class="c1"></span>  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>more difficult declaration</strong></p>
+</li>
+<li>
+<p><code>void (*funcA(int, void (*funcB)(int)))(int)</code> , a function, return value is a function with int parameter and void return value. parameter is a pointer that point to funcA, a function with two parameter, one integer and one function.</p>
+</li>
+<li>
+<p>the type of return value is same as funcB, so we can use typedef to define this type.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">PTR_TO_FUNC</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="n">PTR_TO_FUNC</span> <span class="nf">funcA</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">PTR_TO_FUNC</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="union">union</h2>
+<p>A <strong>union</strong> is a special data type available in C that allows to store different data types in the <strong>same</strong> memory location. You can define a union with many members, but only one member can contain a value at any given time. Unions provide an efficient way of using the same memory location for multiple-purpose.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">union</span> <span class="p">[</span><span class="k">union</span> <span class="n">tag</span><span class="p">]</span> <span class="p">{</span>
+   <span class="n">member</span> <span class="n">definition</span><span class="p">;</span>
+   <span class="n">member</span> <span class="n">definition</span><span class="p">;</span>
+   <span class="p">...</span>
+   <span class="n">member</span> <span class="n">definition</span><span class="p">;</span>
+<span class="p">}</span> <span class="p">[</span><span class="n">one</span> <span class="n">or</span> <span class="n">more</span> <span class="k">union</span> <span class="n">variables</span><span class="p">];</span> 
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="k">union</span> <span class="n">Test</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">pi</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">string</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">union</span> <span class="n">Test</span> <span class="n">test</span><span class="p">;</span>
+
+    <span class="n">test</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="n">test</span><span class="p">.</span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="p">;</span>
+    <span class="n">stpcpy</span><span class="p">(</span><span class="n">test</span><span class="p">.</span><span class="n">string</span><span class="p">,</span> <span class="s">&#34;hello&#34;</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;address of test.i:%p</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">test</span><span class="p">.</span><span class="n">i</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;address of test.pi:%p</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">test</span><span class="p">.</span><span class="n">pi</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;address of test.string:%p</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">test</span><span class="p">.</span><span class="n">string</span><span class="p">);</span>
+<span class="c1">//    address of test.i:0x7ffee4b97918
+</span><span class="c1">//    address of test.pi:0x7ffee4b97918
+</span><span class="c1">//    address of test.string:0x7ffee4b97918
+</span><span class="c1"></span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;test.i:%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">i</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;test.pi:%f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">pi</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;test.string:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">string</span><span class="p">);</span>
+<span class="c1">//    test.i:1819043176
+</span><span class="c1">//    test.pi:3.125213
+</span><span class="c1">//    test.string:hello
+</span><span class="c1">// only the last element that be assigned can be printed successfully
+</span><span class="c1"></span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;size of test:%d&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">test</span><span class="p">));</span> <span class="c1">//size of test:16
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="initialise-a-union">initialise a union</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">union</span> <span class="n">Test</span> <span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">100</span><span class="p">};</span> <span class="c1">// initialize the first element
+</span><span class="c1"></span>    <span class="k">union</span> <span class="n">Test</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// initialize the union by assigned by another union
+</span><span class="c1"></span>    <span class="k">union</span> <span class="n">Test</span> <span class="n">c</span> <span class="o">=</span> <span class="p">{.</span><span class="n">string</span> <span class="o">=</span> <span class="s">&#34;world&#34;</span><span class="p">};</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="reference">reference</h2>
+<p><a href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">https://www.tutorialspoint.com/cprogramming/c_structures.htm</a></p>
+<p><a href="https://www.geeksforgeeks.org/linked-list-set-1-introduction/">https://www.geeksforgeeks.org/linked-list-set-1-introduction/</a></p>
+<p><a href="https://www.programiz.com/dsa/linked-list-types">https://www.programiz.com/dsa/linked-list-types</a></p>
+<p><a href="https://www.tutorialspoint.com/cprogramming/c_unions.htm">https://www.tutorialspoint.com/cprogramming/c_unions.htm</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/hash_tables/">
+            <span class="next-text nav-default">hash tables</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

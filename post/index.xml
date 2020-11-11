@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Sat, 31 Oct 2020 14:42:29 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Nov 2020 21:36:24 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>c语言笔记(5)</title>
+      <link>https://yufei-li.github.io/post/c5/</link>
+      <pubDate>Wed, 11 Nov 2020 21:36:24 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/c5/</guid>
+      <description>structures Arrays allow to define type of variables that can hold several data items of the same kind. Similarly structure is another user defined data type available in C that allows to combine data items of different kinds. the element in the structure can be another structure Usually, the first letter of the name of the stucture is capital letter 1 2 3 4 5 6 7 struct [structure tag]</description>
+    </item>
     
     <item>
       <title>hash tables</title>
