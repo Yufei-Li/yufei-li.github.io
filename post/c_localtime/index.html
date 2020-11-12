@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>localtime function - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="tm structure in c 1 2 3 4 5 6 7 8 9 10 11 struct tm { int tm_sec; /* seconds, range 0 to 59 */ int tm_min; /* minutes, range 0 to 59 */ int tm_hour; /* hours, range 0 to 23 */ int tm_mday; /* day of the month, range 1 to 31 */ int tm_mon; /* month, range 0 to 11 */ int tm_year; /* The" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/c_localtime/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="localtime function" />
+<meta property="og:description" content="tm structure in c 1 2 3 4 5 6 7 8 9 10 11 struct tm { int tm_sec; /* seconds, range 0 to 59 */ int tm_min; /* minutes, range 0 to 59 */ int tm_hour; /* hours, range 0 to 23 */ int tm_mday; /* day of the month, range 1 to 31 */ int tm_mon; /* month, range 0 to 11 */ int tm_year; /* The" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/c_localtime/" />
+<meta property="article:published_time" content="2020-11-12T22:47:44+08:00" />
+<meta property="article:modified_time" content="2020-11-12T22:47:44+08:00" />
+<meta itemprop="name" content="localtime function">
+<meta itemprop="description" content="tm structure in c 1 2 3 4 5 6 7 8 9 10 11 struct tm { int tm_sec; /* seconds, range 0 to 59 */ int tm_min; /* minutes, range 0 to 59 */ int tm_hour; /* hours, range 0 to 23 */ int tm_mday; /* day of the month, range 1 to 31 */ int tm_mon; /* month, range 0 to 11 */ int tm_year; /* The">
+<meta itemprop="datePublished" content="2020-11-12T22:47:44&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-12T22:47:44&#43;08:00" />
+<meta itemprop="wordCount" content="285">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="localtime function"/>
+<meta name="twitter:description" content="tm structure in c 1 2 3 4 5 6 7 8 9 10 11 struct tm { int tm_sec; /* seconds, range 0 to 59 */ int tm_min; /* minutes, range 0 to 59 */ int tm_hour; /* hours, range 0 to 23 */ int tm_mday; /* day of the month, range 1 to 31 */ int tm_mon; /* month, range 0 to 11 */ int tm_year; /* The"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">localtime function</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-12 </span>
+        <div class="post-category">
+            <a href="/categories/c%E8%AF%AD%E8%A8%80/"> c语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tm-structure-in-c">tm structure in c</a></li>
+    <li><a href="#localtime-function">localtime function</a></li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="tm-structure-in-c">tm structure in c</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">tm</span> <span class="p">{</span>
+   <span class="kt">int</span> <span class="n">tm_sec</span><span class="p">;</span>         <span class="cm">/* seconds,  range 0 to 59          */</span>
+   <span class="kt">int</span> <span class="n">tm_min</span><span class="p">;</span>         <span class="cm">/* minutes, range 0 to 59           */</span>
+   <span class="kt">int</span> <span class="n">tm_hour</span><span class="p">;</span>        <span class="cm">/* hours, range 0 to 23             */</span>
+   <span class="kt">int</span> <span class="n">tm_mday</span><span class="p">;</span>        <span class="cm">/* day of the month, range 1 to 31  */</span>
+   <span class="kt">int</span> <span class="n">tm_mon</span><span class="p">;</span>         <span class="cm">/* month, range 0 to 11             */</span>
+   <span class="kt">int</span> <span class="n">tm_year</span><span class="p">;</span>        <span class="cm">/* The number of years since 1900   */</span>
+   <span class="kt">int</span> <span class="n">tm_wday</span><span class="p">;</span>        <span class="cm">/* day of the week, range 0 to 6    */</span>
+   <span class="kt">int</span> <span class="n">tm_yday</span><span class="p">;</span>        <span class="cm">/* day in the year, range 0 to 365  */</span>
+   <span class="kt">int</span> <span class="n">tm_isdst</span><span class="p">;</span>       <span class="cm">/* daylight saving time             */</span>	
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="localtime-function">localtime function</h2>
+<ul>
+<li>
+<p>The C library function <strong>struct tm *localtime(const time_t *timer)</strong> uses the time pointed by <strong>timer</strong> to fill a <strong>tm</strong> structure with the values that represent the <strong>corresponding local time</strong>. The value of <strong>timer</strong> is broken up into the structure <strong>tm</strong> and expressed in the local time zone.</p>
+</li>
+<li>
+<p><code>struct tm *localtime(const time_t *timer)</code></p>
+</li>
+<li>
+<p>example</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+   <span class="n">time_t</span> <span class="n">rawtime</span><span class="p">;</span> <span class="c1">// define a variable of time_t type, name rawtime
+</span><span class="c1"></span>   <span class="k">struct</span> <span class="n">tm</span> <span class="o">*</span><span class="n">info</span><span class="p">;</span> <span class="c1">// a pointer *info, point to tm structure
+</span><span class="c1"></span>   <span class="n">time</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">rawtime</span> <span class="p">);</span> <span class="c1">// assign UTC time infomation to rawtime
+</span><span class="c1"></span>    
+   <span class="n">info</span> <span class="o">=</span> <span class="n">localtime</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">rawtime</span> <span class="p">);</span> 
+   <span class="c1">// info is a pointer point to tm structure, with local time infomation in it.
+</span><span class="c1"></span>    
+   <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Current local time and date: %s&#34;</span><span class="p">,</span> <span class="n">asctime</span><span class="p">(</span><span class="n">info</span><span class="p">));</span>
+  <span class="c1">//Current local time and date: Thu Nov 12 23:09:00 2020
+</span><span class="c1"></span>   <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><code>char *asctime(const struct tm *);</code>  is a funtion in <code>&lt;time.h&gt;</code>, it prints the local time in word</p>
+</li>
+<li>
+<p>you can also get the information in  <code>*info</code>  by <code>info-&gt;element_name</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p><a href="https://www.tutorialspoint.com/c_standard_library/c_function_localtime.htm">https://www.tutorialspoint.com/c_standard_library/c_function_localtime.htm</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-12
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/c5/">
+            <span class="next-text nav-default">c语言笔记(5)</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
