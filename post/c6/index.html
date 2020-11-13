@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>c语言笔记(6) - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="Function-like macros define macros that work in a similar way like a function call. This is known as function-like macros. in SQUARE(x), there must be no gap between SQUARE and (x) the function-like macros simply do replacement, so in the macro definition, ((x) * (x)) the brackets are needed, otherwise (x * x) = (5 &#43; 1 * 5 &#43; 1) = (5 &#43; 5 &#43; 1) = 11 1" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/c6/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="c语言笔记(6)" />
+<meta property="og:description" content="Function-like macros define macros that work in a similar way like a function call. This is known as function-like macros. in SQUARE(x), there must be no gap between SQUARE and (x) the function-like macros simply do replacement, so in the macro definition, ((x) * (x)) the brackets are needed, otherwise (x * x) = (5 &#43; 1 * 5 &#43; 1) = (5 &#43; 5 &#43; 1) = 11 1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/c6/" />
+<meta property="article:published_time" content="2020-11-13T14:54:26+08:00" />
+<meta property="article:modified_time" content="2020-11-13T14:54:26+08:00" />
+<meta itemprop="name" content="c语言笔记(6)">
+<meta itemprop="description" content="Function-like macros define macros that work in a similar way like a function call. This is known as function-like macros. in SQUARE(x), there must be no gap between SQUARE and (x) the function-like macros simply do replacement, so in the macro definition, ((x) * (x)) the brackets are needed, otherwise (x * x) = (5 &#43; 1 * 5 &#43; 1) = (5 &#43; 5 &#43; 1) = 11 1">
+<meta itemprop="datePublished" content="2020-11-13T14:54:26&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-13T14:54:26&#43;08:00" />
+<meta itemprop="wordCount" content="2843">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="c语言笔记(6)"/>
+<meta name="twitter:description" content="Function-like macros define macros that work in a similar way like a function call. This is known as function-like macros. in SQUARE(x), there must be no gap between SQUARE and (x) the function-like macros simply do replacement, so in the macro definition, ((x) * (x)) the brackets are needed, otherwise (x * x) = (5 &#43; 1 * 5 &#43; 1) = (5 &#43; 5 &#43; 1) = 11 1"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">c语言笔记(6)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-13 </span>
+        <div class="post-category">
+            <a href="/categories/c%E8%AF%AD%E8%A8%80/"> c语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#function-like-macros">Function-like macros</a>
+      <ul>
+        <li><a href="#-and--operators"># and ## operators</a></li>
+      </ul>
+    </li>
+    <li><a href="#enumeration">enumeration</a></li>
+    <li><a href="#bit-fileds">bit fileds</a>
+      <ul>
+        <li><a href="#bitwise-operators">bitwise operators</a></li>
+      </ul>
+    </li>
+    <li><a href="#lift-shift-and-right-shift">Lift shift and right shift</a></li>
+    <li><a href="#file-operation">file operation</a>
+      <ul>
+        <li><a href="#open-the-file">open the file</a></li>
+        <li><a href="#close-the-file">close the file</a></li>
+        <li><a href="#read--write-the-file">read &amp; write the file</a></li>
+        <li><a href="#read-file-randomly">read file randomly</a></li>
+      </ul>
+    </li>
+    <li><a href="#standard-stream">standard stream</a></li>
+    <li><a href="#error-handling">error handling</a>
+      <ul>
+        <li></li>
+        <li><a href="#io-buffer">I/O buffer</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="function-like-macros">Function-like macros</h2>
+<ul>
+<li>define macros that work in a similar way like a function call. This is known as function-like macros.</li>
+<li>in <code>SQUARE(x)</code>, there must be no gap between SQUARE and (x)</li>
+<li>the function-like macros simply do replacement, so in the macro definition, <code>((x) * (x))</code> the brackets are needed, otherwise <code>(x * x)</code> = (5 + 1 * 5 + 1) = (5 + 5 + 1) = 11</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp"># define SQUARE(x) ((x) * (x))
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;please input an integer:&#34;</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;the square of %d is %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">SQUARE</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;the square of %d is %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">SQUARE</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+    
+<span class="c1">//    please input an integer:5
+</span><span class="c1">//    the square of 5 is 25
+</span><span class="c1">//    the square of 6 is 36
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="-and--operators"># and ## operators</h3>
+<ul>
+<li>
+<p>#</p>
+</li>
+<li>
+<p>The # operator, which is generally called the <em>stringize</em> operator, turns the argument it precedes into a quoted string.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="cp"># define STR(s) # s
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="n">STR</span><span class="p">(</span><span class="n">Hello</span> <span class="n">World</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">the phone num of %s is %d&#34;</span><span class="p">,</span> <span class="n">STR</span><span class="p">(</span><span class="n">yufei</span> <span class="n">li</span><span class="p">),</span> <span class="mi">123</span><span class="p">);</span>
+  
+<span class="c1">//    Hello World
+</span><span class="c1">//    the phone num of yufei li is 123
+</span><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>##</p>
+</li>
+<li>
+<p>It is often useful to merge two tokens into one while expanding macros. This is called token pasting or token concatenation.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="cp"># define TOGETHER(x, y) x ## y
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span> <span class="p">,</span> <span class="n">TOGETHER</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">));</span> <span class="c1">//250
+</span><span class="c1"></span>  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="enumeration">enumeration</h2>
+<ul>
+<li>Enumeration (or enum) is a user defined data type in C. It is mainly used to assign names to integral constants, the names make a program easy to read and maintain.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="c1">// constant1 = 0, constant2 = 1, constant3 = 2 and so on.
+</span><span class="c1"></span><span class="k">enum</span> <span class="n">flag</span><span class="p">{</span><span class="n">constant1</span><span class="p">,</span> <span class="n">constant2</span><span class="p">,</span> <span class="n">constant3</span><span class="p">,</span> <span class="p">.......</span> <span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>define a enumeration</p>
+</li>
+<li>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">enum</span> <span class="n">week</span><span class="p">{</span><span class="n">Mon</span><span class="p">,</span> <span class="n">Tue</span><span class="p">,</span> <span class="n">Wed</span><span class="p">};</span>
+<span class="k">enum</span> <span class="n">week</span> <span class="n">day</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">enum</span> <span class="n">week</span><span class="p">{</span><span class="n">Mon</span><span class="p">,</span> <span class="n">Tue</span><span class="p">,</span> <span class="n">Wed</span><span class="p">}</span><span class="n">day</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">enum</span> <span class="n">Color</span> <span class="p">{</span><span class="n">red</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">};</span>
+    <span class="k">enum</span> <span class="n">Color</span> <span class="n">rgb</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">rgb</span> <span class="o">=</span> <span class="n">red</span><span class="p">;</span> <span class="n">rgb</span> <span class="o">&lt;=</span> <span class="n">blue</span><span class="p">;</span> <span class="n">rgb</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;rgb = %u</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">rgb</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="c1">//    rgb = 10
+</span><span class="c1">//    rgb = 11
+</span><span class="c1">//    rgb = 12
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>if the value doesn&rsquo;t define from the first element, the value will begin from 0</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">enum</span> <span class="n">Color</span> <span class="p">{</span><span class="n">red</span><span class="p">,</span> <span class="n">yellow</span><span class="p">,</span> <span class="n">green</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">blue</span><span class="p">};</span>
+    <span class="k">enum</span> <span class="n">Color</span> <span class="n">rygb</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;red = %u &#34;</span><span class="p">,</span> <span class="n">red</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;yellow = %u &#34;</span><span class="p">,</span> <span class="n">yellow</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;green = %u &#34;</span><span class="p">,</span> <span class="n">green</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;blue = %u &#34;</span><span class="p">,</span> <span class="n">blue</span><span class="p">);</span>
+<span class="c1">//    red = 0 yellow = 1 green = 10 blue = 11
+</span><span class="c1"></span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">enum</span> <span class="n">Week</span> <span class="p">{</span><span class="n">sun</span><span class="p">,</span> <span class="n">mon</span><span class="p">,</span> <span class="n">tue</span><span class="p">,</span> <span class="n">wed</span><span class="p">,</span> <span class="n">thu</span><span class="p">,</span> <span class="n">fri</span><span class="p">,</span> <span class="n">sat</span><span class="p">};</span>
+    <span class="k">enum</span> <span class="n">Week</span> <span class="n">today</span><span class="p">;</span> <span class="c1">// define a enum variable, today can be any value in enumeration
+</span><span class="c1"></span>    <span class="k">struct</span> <span class="n">tm</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+    <span class="n">time_t</span> <span class="n">t</span><span class="p">;</span>
+
+    <span class="n">time</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">localtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+
+    <span class="n">today</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">tm_wday</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%u</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">today</span><span class="p">);</span> <span class="c1">//4
+</span><span class="c1"></span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">today</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nl">mon</span><span class="p">:</span>
+        <span class="k">case</span> <span class="nl">tue</span><span class="p">:</span>
+        <span class="k">case</span> <span class="nl">wed</span><span class="p">:</span>
+        <span class="k">case</span> <span class="nl">thu</span><span class="p">:</span>
+        <span class="k">case</span> <span class="nl">fri</span><span class="p">:</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;working!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="nl">sat</span><span class="p">:</span>
+        <span class="k">case</span> <span class="nl">sun</span><span class="p">:</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;take a break</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;error&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="bit-fileds">bit fileds</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="p">{</span>
+   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">widthValidated</span><span class="p">;</span>
+   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">heightValidated</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">status</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>This structure requires 8 bytes of memory space but in actual, we are going to store either 0 or 1 in each of the variables. The C programming language offers a better way to utilize the memory space in such situations.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="k">struct</span> <span class="n">Test</span><span class="p">{</span>
+        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">a</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// both 0 and 1 need 1 bit only
+</span><span class="c1"></span>        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">b</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nl">c</span><span class="p">:</span><span class="mi">2</span><span class="p">;</span>
+        <span class="c1">// 2 is 10, it needs 2 bits to store
+</span><span class="c1"></span>        <span class="c1">// otherwise it will raise warning: Implicit truncation from &#39;int&#39; to bit-field changes value from 2 to 0
+</span><span class="c1"></span>        <span class="c1">// and fail to store c = 2
+</span><span class="c1"></span>    <span class="p">};</span>
+  
+    <span class="k">struct</span> <span class="n">Test</span> <span class="n">test</span><span class="p">;</span>
+    <span class="n">test</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">test</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">test</span><span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;a = %u, b = %u, c = %u</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">a</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">b</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">c</span><span class="p">);</span>
+    <span class="c1">//a = 0, b = 1, c = 2
+</span><span class="c1"></span>    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;size of test = %lu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">test</span><span class="p">));</span>
+    <span class="c1">//size of test = 4
+</span><span class="c1"></span>  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="bitwise-operators">bitwise operators</h3>
+<p>bitwise operators work on the every bit in the character</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gkncsq2somj316i0u0thn.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gkncsry4gcj31po0gmabf.jpg" alt=""></p>
+<h2 id="lift-shift-and-right-shift">Lift shift and right shift</h2>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gknd04q28qj30ro07y117.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gknd2tps6kj30p606yq8m.jpg" alt=""></p>
+<p>for one integer, left shift n bits means times 2 to power of n; right shift n bits means divides 2 to power of n</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">){</span>
+        <span class="n">value</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// combine left shift with assignment sign, equal to `value = value &lt;&lt; 1;`
+</span><span class="c1"></span>        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;value = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;------------</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="n">value</span> <span class="o">&gt;&gt;=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;value = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="c1">//    value = 2
+</span><span class="c1">//    value = 4
+</span><span class="c1">//    value = 8
+</span><span class="c1">//    value = 16
+</span><span class="c1">//    value = 32
+</span><span class="c1">//    value = 64
+</span><span class="c1">//    value = 128
+</span><span class="c1">//    value = 256
+</span><span class="c1">//    value = 512
+</span><span class="c1">//    value = 1024
+</span><span class="c1">//            ------------
+</span><span class="c1">//    value = 256
+</span><span class="c1">//    value = 64
+</span><span class="c1">//    value = 16
+</span><span class="c1">//    value = 4
+</span><span class="c1">//    value = 1
+</span><span class="c1">//    value = 0
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="file-operation">file operation</h2>
+<h3 id="open-the-file">open the file</h3>
+<ul>
+<li>
+<p><code>FILE *fp</code> to create a pointer that point at a file</p>
+</li>
+<li>
+<p><code>fopen(const char *filename, const char *mode)</code></p>
+</li>
+<li>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gk6gmmeh8yj31070u0gpx.jpg" alt=""></p>
+</li>
+<li>
+<p>This function returns a FILE pointer. Otherwise, NULL is returned and the global variable errno is set to indicate the error.</p>
+</li>
+</ul>
+<h3 id="close-the-file">close the file</h3>
+<ul>
+<li>
+<p><code>fclose(fp);</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  
+    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ch</span><span class="p">;</span>
+  
+    <span class="k">if</span> <span class="p">((</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;hello.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to open</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span> <span class="c1">// fail to run this program
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">ch</span> <span class="o">=</span> <span class="n">getc</span><span class="p">(</span><span class="n">fp</span><span class="p">))</span> <span class="o">!=</span> <span class="n">EOF</span><span class="p">){</span>
+        <span class="n">putchar</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span>
+    <span class="p">}</span>
+  
+    <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="read--write-the-file">read &amp; write the file</h3>
+<h4 id="fgetc">fgetc()</h4>
+<ul>
+<li>The C library function <strong>int fgetc(FILE *stream)</strong> gets the next character (an unsigned char) from the specified stream and advances the position indicator for the stream.</li>
+<li><code>int fgetc(FILE *stream)</code></li>
+</ul>
+<h4 id="fputc">fputc()</h4>
+<ul>
+<li>Writes a <em>character</em> to the <em>stream</em> and advances the position indicator.</li>
+<li><code>int fputc ( int character, FILE * stream );</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+
+    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp1</span><span class="p">;</span>
+    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ch</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">fp1</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to open</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span> <span class="c1">// fail to run this program
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">fp2</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;world&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to open</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span> <span class="c1">// fail to run this program
+</span><span class="c1"></span>    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="p">((</span><span class="n">ch</span> <span class="o">=</span> <span class="n">getc</span><span class="p">(</span><span class="n">fp1</span><span class="p">))</span> <span class="o">!=</span> <span class="n">EOF</span><span class="p">){</span>
+        <span class="n">fputc</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">fp2</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">fclose</span><span class="p">(</span><span class="n">fp1</span><span class="p">);</span>
+    <span class="n">fclose</span><span class="p">(</span><span class="n">fp2</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Reads characters from <em>stream</em> and stores them as a C string into <em>str</em> until (<em>num</em>-1) characters have been read or either a newline or the <em>end-of-file</em> is reached, whichever happens first.</li>
+<li><code>char * fgets ( char * str, int num, FILE * stream );</code></li>
+<li>parameters
+<ul>
+<li>str : Pointer to an array of chars where the string read is copied.</li>
+<li>num : Maximum number of characters to be copied into <em>str</em> (including the terminating null-character ' \0&rsquo;).</li>
+<li>Stream : a file pointer</li>
+</ul>
+</li>
+<li>return value
+<ul>
+<li>On success, the function returns <em>str</em>.
+If the <em>end-of-file</em> is encountered while attempting to read a character, the <em>eof indicator</em> is set (<a href="http://www.cplusplus.com/feof">feof</a>). If this happens before any characters could be read, the pointer returned is a null pointer (and the contents of <em>str</em> remain unchanged).
+If a read error occurs, the <em>error indicator</em> (<a href="http://www.cplusplus.com/ferror">ferror</a>) is set and a null pointer is also returned (but the contents pointed by <em>str</em> may have changed).</li>
+</ul>
+</li>
+</ul>
+<h4 id="fputs">fputs()</h4>
+<ul>
+<li><code>int fputs ( const char * str, FILE * stream );</code></li>
+<li>The function begins copying from the address specified (<em>str</em>) until it reaches the terminating null character (<code>'\0'</code>). This terminating null-character is not copied to the stream.</li>
+</ul>
+<h4 id="feof">feof()</h4>
+<ul>
+<li>
+<p>The C library function <strong>int feof(FILE *stream)</strong> tests the end-of-file indicator for the given stream.</p>
+</li>
+<li>
+<p><code>int feof(FILE *stream)</code></p>
+</li>
+<li>
+<p>return</p>
+<ul>
+<li>This function returns a non-zero value when End-of-File indicator associated with the stream is set, else zero is returned.</li>
+</ul>
+</li>
+</ul>
+<h3 id="read-file-randomly">read file randomly</h3>
+<h4 id="ftell">ftell()</h4>
+<ul>
+<li>
+<p>The C library function <strong>long int ftell(FILE *stream)</strong> returns the current file position of the given stream.</p>
+</li>
+<li>
+<p><code>long int ftell(FILE *stream)</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;n</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to open</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+  
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ftell</span><span class="p">(</span><span class="n">fp</span><span class="p">));</span> <span class="c1">// 0
+</span><span class="c1"></span>    <span class="n">fputc</span><span class="p">(</span><span class="sc">&#39;w&#39;</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ftell</span><span class="p">(</span><span class="n">fp</span><span class="p">));</span> <span class="c1">// 1
+</span><span class="c1"></span>    <span class="n">fputs</span><span class="p">(</span><span class="s">&#34;orld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ftell</span><span class="p">(</span><span class="n">fp</span><span class="p">));</span> <span class="c1">// 6
+</span><span class="c1"></span>  
+    <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="rewind">rewind()</h4>
+<ul>
+<li>
+<p>The C library function <strong>void rewind(FILE *stream)</strong> sets the file position to the beginning of the file of the given <strong>stream</strong>.</p>
+</li>
+<li>
+<p>after using rewind(), the word put in will replace the original text in the file</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;n</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to open</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+  
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ftell</span><span class="p">(</span><span class="n">fp</span><span class="p">));</span> <span class="c1">// 0
+</span><span class="c1"></span>    <span class="n">fputc</span><span class="p">(</span><span class="sc">&#39;w&#39;</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ftell</span><span class="p">(</span><span class="n">fp</span><span class="p">));</span> <span class="c1">// 1
+</span><span class="c1"></span>    <span class="n">fputs</span><span class="p">(</span><span class="s">&#34;orld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ftell</span><span class="p">(</span><span class="n">fp</span><span class="p">));</span> <span class="c1">// 6
+</span><span class="c1"></span>  
+    <span class="n">rewind</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+    <span class="n">fputs</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span> <span class="c1">// test: hello
+</span><span class="c1"></span>  
+    <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="fseek">fseek()</h4>
+<ul>
+<li>
+<p>The C library function <strong>int fseek(FILE *stream, long int offset, int whence)</strong> sets the file position of the <strong>stream</strong> to the given <strong>offset</strong>.</p>
+</li>
+<li>
+<p><code>int fseek(FILE *stream, long int offset, int whence)</code></p>
+</li>
+<li>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gknfssgms5j31480hkjt2.jpg" alt=""></p>
+</li>
+<li>
+<p><strong>example</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+   <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+  
+   <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">,</span><span class="s">&#34;w+&#34;</span><span class="p">);</span>
+   <span class="n">fputs</span><span class="p">(</span><span class="s">&#34;This is tutorialspoint.com&#34;</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+    
+   <span class="n">fseek</span><span class="p">(</span> <span class="n">fp</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">SEEK_SET</span> <span class="p">);</span>
+   <span class="n">fputs</span><span class="p">(</span><span class="s">&#34; C Programming Language&#34;</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+   <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+     
+   <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><em>This is tutorialspoint.com</em> but later we had reset the write pointer at 7th position from the beginning and used puts() statement which over-write the file with the following content <code>This is C Programming Language</code></p>
+</li>
+</ul>
+<h4 id="fread">fread()</h4>
+<ul>
+<li>
+<p>The C library function <strong>size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream)</strong> reads data from the given <strong>stream</strong> into the array pointed to, by <strong>ptr</strong>.</p>
+</li>
+<li>
+<p><code>size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream)</code></p>
+</li>
+<li>
+<p><strong>parameters</strong></p>
+<ul>
+<li><strong>ptr</strong> − This is the pointer to a block of memory with a minimum size of <em>size*nmemb</em> bytes.</li>
+<li><strong>size</strong> − This is the size in bytes of each element to be read.</li>
+<li><strong>nmemb</strong> − This is the number of elements, each one with a size of <strong>size</strong> bytes.</li>
+<li><strong>stream</strong> − This is the pointer to a FILE object that specifies an input stream.</li>
+</ul>
+</li>
+<li>
+<p><strong>example</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+   <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+   <span class="kt">char</span> <span class="n">c</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;this is tutorialspoint&#34;</span><span class="p">;</span>
+   <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+  
+   <span class="cm">/* Open file for both reading and writing */</span>
+   <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">,</span> <span class="s">&#34;w+&#34;</span><span class="p">);</span>
+  
+   <span class="cm">/* Write data to the file */</span>
+   <span class="n">fwrite</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+  
+   <span class="cm">/* Seek to the beginning of the file */</span>
+   <span class="n">fseek</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">SEEK_SET</span><span class="p">);</span>
+  
+   <span class="cm">/* Read and display data */</span>
+   <span class="n">fread</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+   <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+   <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+     
+   <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="fwrite">fwrite()</h4>
+<ul>
+<li>
+<p>The C library function **size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream)**writes data from the array pointed to, by <strong>ptr</strong> to the given <strong>stream</strong>.</p>
+</li>
+<li>
+<p><code>size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream)</code></p>
+</li>
+<li>
+<p><strong>parameters</strong></p>
+<ul>
+<li><strong>ptr</strong> − This is the pointer to the array of elements to be written.</li>
+<li><strong>size</strong> − This is the size in bytes of each element to be written.</li>
+<li><strong>nmemb</strong> − This is the number of elements, each one with a size of <strong>size</strong> bytes.</li>
+<li><strong>stream</strong> − This is the pointer to a FILE object that specifies an output stream.</li>
+</ul>
+</li>
+<li>
+<p>After fwrite(), the content in file cannot read proporly since we input in binary</p>
+</li>
+<li>
+<p><strong>examples</strong></p>
+<ul>
+<li>
+<p>writing a string</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>    
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+   <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+   <span class="kt">char</span> <span class="n">str</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;This is tutorialspoint.com&#34;</span><span class="p">;</span>
+    
+   <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span> <span class="s">&#34;file.txt&#34;</span> <span class="p">,</span> <span class="s">&#34;w&#34;</span> <span class="p">);</span>
+   <span class="n">fwrite</span><span class="p">(</span><span class="n">str</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="p">,</span> <span class="n">fp</span> <span class="p">);</span>
+    
+   <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+      
+   <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<p>writing a array</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>    
+<span class="cp">#define N 4
+</span><span class="cp"></span>    
+<span class="k">struct</span> <span class="n">Students</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">num</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">score</span><span class="p">;</span>
+<span class="p">}</span><span class="n">stu</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">students</span><span class="p">;</span>
+    
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to open</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;input the grade(name num score):</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&#34;%s %d %f&#34;</span><span class="p">,</span> <span class="n">stu</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stu</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">num</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stu</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">score</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">fwrite</span><span class="p">(</span><span class="n">stu</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Students</span><span class="p">),</span> <span class="n">N</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+    <span class="n">fread</span><span class="p">(</span><span class="o">&amp;</span><span class="n">students</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Students</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s(%d)&#39;s score is %f&#34;</span><span class="p">,</span> <span class="n">students</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">students</span><span class="p">.</span><span class="n">num</span><span class="p">,</span> <span class="n">students</span><span class="p">.</span><span class="n">score</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h2 id="standard-stream">standard stream</h2>
+<p>The <strong>standard streams</strong> are three predefined streams between the program and the host environment open and available for use by every C program when the <code>main</code> function of the program is invoked. The three standard streams are the <strong>standard input</strong>, <strong>standard output</strong>, and the <strong>standard error</strong> streams.</p>
+<ul>
+<li><strong>stdin</strong></li>
+</ul>
+<p>The <strong>stdin</strong> extern variable which is of type <code>FILE *</code> is the standard input stream which is usually the normal source of input for the program such as the keyboard. On some environments, the host environment can also redirect files and other types of streams to the standard input.</p>
+<ul>
+<li><strong>stdout</strong></li>
+</ul>
+<p>The <strong>stdout</strong> extern variable which is of type <code>FILE *</code> is the standard output stream which is used for normal output from the program. Typically this stream is connected to a terminal.</p>
+<ul>
+<li><strong>stderr</strong></li>
+</ul>
+<p>The <strong>stderr</strong> extern variable which is of type <code>FILE *</code> is the standard error stream. This stream is used for error messages and reporting diagnostics issued by the program.</p>
+<p>To print the error message, we print it in <code>stderr</code> instead of <code>stdout</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;no_this_file&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">fputs</span><span class="p">(</span><span class="s">&#34;fail to open</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">stderr</span><span class="p">);</span> 
+      	<span class="c1">//fail to open, in CLion, the sentence will be printed in red
+</span><span class="c1"></span>        <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="error-handling">error handling</h2>
+<h4 id="ferror">ferror()</h4>
+<ul>
+<li>
+<p>The C library function <strong>int ferror(FILE *stream)</strong> tests the error indicator for the given stream.</p>
+</li>
+<li>
+<p><code>int ferror(FILE *stream)</code></p>
+</li>
+<li>
+<p><strong>return value</strong>: If the error indicator associated with the stream was set, the function returns a non-zero value else, it returns a zero value.</p>
+</li>
+</ul>
+<h4 id="clearerr">clearerr()</h4>
+<ul>
+<li>The clearerr() function clears the end-of file and error indicators for the given stream</li>
+</ul>
+<p><strong>example</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+   <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+   <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+
+   <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;file.txt&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">);</span>
+
+   <span class="n">c</span> <span class="o">=</span> <span class="n">fgetc</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+   <span class="k">if</span><span class="p">(</span> <span class="n">ferror</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error in reading from file : file.txt</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+      <span class="c1">// print successfully
+</span><span class="c1"></span>   <span class="p">}</span>
+   <span class="n">clearerr</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+   
+   <span class="k">if</span><span class="p">(</span> <span class="n">ferror</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error in reading from file : file.txt</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+      <span class="c1">// didn&#39;t print
+</span><span class="c1"></span>   <span class="p">}</span>
+   <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+
+   <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="errno-perror-and-strerror">errno, perror(). and strerror()</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+   <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+   <span class="k">if</span> <span class="p">((</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;no_this_file&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+
+       <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fail to open, the reason is %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">errno</span><span class="p">);</span>
+       <span class="c1">// fail to open, the reason is 2
+</span><span class="c1"></span>
+       <span class="n">perror</span><span class="p">(</span><span class="s">&#34;fail to open, the reason is&#34;</span><span class="p">);</span>
+       <span class="c1">// fail to open, the reason is: No such file or directory
+</span><span class="c1"></span>
+       <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;fail to open, the reason is %s!!!&#34;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+       <span class="c1">// fail to open, the reason is No such file or directory!!!
+</span><span class="c1"></span>
+       <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+   <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="io-buffer">I/O buffer</h3>
+<h4 id="fflush">fflush()</h4>
+<ul>
+<li>The C library function <strong>int fflush(FILE *stream)</strong> flushes the output buffer of a stream.</li>
+<li><code>int fflush(FILE *stream)</code> , <code>FILE *stream</code> can be <code>stdin</code>, <code>stdout</code>,  <code>stderr</code></li>
+</ul>
+<h4 id="setvbuf">setvbuf()</h4>
+<ul>
+<li>
+<p>The C library function <strong>int setvbuf(FILE *stream, char *buffer, int mode, size_t size)</strong> defines how a stream should be buffered.</p>
+</li>
+<li>
+<p><code>int setvbuf(FILE *stream, char *buffer, int mode, size_t size)</code></p>
+</li>
+<li>
+<p><strong>parameters</strong></p>
+<ul>
+<li><strong>stream</strong> − This is the pointer to a FILE object that identifies an open stream.</li>
+<li><strong>buffer</strong> − This is the user allocated buffer. If set to NULL, the function automatically allocates a buffer of the specified size.</li>
+<li><strong>mode</strong> − This specifies a mode for file buffering</li>
+</ul>
+</li>
+<li>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gknj4uvll0j314g0niae2.jpg" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp"></span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">char</span> <span class="n">buff</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+  
+    <span class="n">memset</span><span class="p">(</span><span class="n">buff</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buff</span><span class="p">));</span> <span class="c1">// all the character in buff is &#39;\0&#39;, so there is no character in buff
+</span><span class="c1"></span>  
+    <span class="n">setvbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="n">buff</span><span class="p">,</span> <span class="n">_IOFBF</span><span class="p">,</span> <span class="mi">1024</span><span class="p">);</span>
+  
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&#34;hello world</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+  
+    <span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&#34;hello world again</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">getchar</span><span class="p">();</span>
+  
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="reference">reference</h2>
+<p><a href="https://www.geeksforgeeks.org/and-operators-in-c/">https://www.geeksforgeeks.org/and-operators-in-c/</a></p>
+<p><a href="https://www.tutorialspoint.com/c_standard_library/c_function_fgetc.htm">https://www.tutorialspoint.com/c_standard_library/c_function_fgetc.htm</a></p>
+<p><a href="http://www.cplusplus.com/reference/cstdio/fgets/">http://www.cplusplus.com/reference/cstdio/fgets/</a></p>
+<p><a href="http://www.cplusplus.com/reference/cstdio/fputc/">http://www.cplusplus.com/reference/cstdio/fputc/</a></p>
+<p><a href="http://www.cplusplus.com/reference/cstdio/fputs/">http://www.cplusplus.com/reference/cstdio/fputs/</a></p>
+<p><a href="https://www.geeksforgeeks.org/enumeration-enum-c/">https://www.geeksforgeeks.org/enumeration-enum-c/</a></p>
+<p><a href="https://www.tutorialspoint.com/cprogramming/c_bit_fields.htm">https://www.tutorialspoint.com/cprogramming/c_bit_fields.htm</a></p>
+<p><a href="https://www.bilibili.com/video/BV17s411N78s?p=55">https://www.bilibili.com/video/BV17s411N78s?p=55</a></p>
+<p><a href="https://www.tutorialspoint.com/c_standard_library/c_function_ftell.htm">https://www.tutorialspoint.com/c_standard_library/c_function_ftell.htm</a></p>
+<p><a href="https://www.tutorialspoint.com/c_standard_library/c_function_rewind.htm">https://www.tutorialspoint.com/c_standard_library/c_function_rewind.htm</a></p>
+<p><a href="https://www.tutorialspoint.com/c_standard_library/c_function_fwrite.htm">https://www.tutorialspoint.com/c_standard_library/c_function_fwrite.htm</a></p>
+<p><a href="https://www.tutorialspoint.com/c_standard_library/c_function_fread.htm">https://www.tutorialspoint.com/c_standard_library/c_function_fread.htm</a></p>
+<p><a href="https://en.wikichip.org/wiki/c/standard_streams#stdin">https://en.wikichip.org/wiki/c/standard_streams#stdin</a></p>
+<p><a href="https://www.tutorialspoint.com/c_standard_library/c_function_ferror.htm">https://www.tutorialspoint.com/c_standard_library/c_function_ferror.htm</a></p>
+<p><a href="https://www.tutorialspoint.com/c_standard_library/c_function_setvbuf.htm">https://www.tutorialspoint.com/c_standard_library/c_function_setvbuf.htm</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/c_localtime/">
+            <span class="next-text nav-default">localtime function</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
