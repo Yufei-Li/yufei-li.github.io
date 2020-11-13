@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Function-like macros define macros that work in a similar way like a function call. This is known as function-like macros. in SQUARE(x), there must be no gap between SQUARE and (x) the function-like macros simply do replacement, so in the macro definition, ((x) * (x)) the brackets are needed, otherwise (x * x) = (5 &#43; 1 * 5 &#43; 1) = (5 &#43; 5 &#43; 1) = 11 1">
 <meta itemprop="datePublished" content="2020-11-13T14:54:26&#43;08:00" />
 <meta itemprop="dateModified" content="2020-11-13T14:54:26&#43;08:00" />
-<meta itemprop="wordCount" content="2843">
+<meta itemprop="wordCount" content="2845">
 
 
 
@@ -153,8 +153,12 @@
     <li><a href="#standard-stream">standard stream</a></li>
     <li><a href="#error-handling">error handling</a>
       <ul>
-        <li></li>
-        <li><a href="#io-buffer">I/O buffer</a></li>
+        <li><a href="#functions">functions</a></li>
+      </ul>
+    </li>
+    <li><a href="#io-buffer">I/O buffer</a>
+      <ul>
+        <li><a href="#functions-1">functions</a></li>
       </ul>
     </li>
     <li><a href="#reference">reference</a></li>
@@ -1231,6 +1235,7 @@ If a read error occurs, the <em>error indicator</em> (<a href="http://www.cplusp
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="error-handling">error handling</h2>
+<h3 id="functions">functions</h3>
 <h4 id="ferror">ferror()</h4>
 <ul>
 <li>
@@ -1353,7 +1358,8 @@ If a read error occurs, the <em>error indicator</em> (<a href="http://www.cplusp
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="io-buffer">I/O buffer</h3>
+</div><h2 id="io-buffer">I/O buffer</h2>
+<h3 id="functions-1">functions</h3>
 <h4 id="fflush">fflush()</h4>
 <ul>
 <li>The C library function <strong>int fflush(FILE *stream)</strong> flushes the output buffer of a stream.</li>
