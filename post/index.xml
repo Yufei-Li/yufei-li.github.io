@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Mon, 16 Nov 2020 19:32:02 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2020 23:50:10 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>python file operation(1)</title>
+      <link>https://yufei-li.github.io/post/python_file_operation1/</link>
+      <pubDate>Tue, 17 Nov 2020 23:50:10 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/python_file_operation1/</guid>
+      <description>read as text mode 1 2 3 4 5 6 7 8 9  def test_write(): file = open(&amp;#34;store.txt&amp;#34;, &amp;#34;wt&amp;#34;) file.write(&amp;#34;Hello\n&amp;#34;) file.write(&amp;#34;World\n&amp;#34;) file.close() with open(&amp;#34;store.txt&amp;#34;, &amp;#34;rt&amp;#34;) as file2: # no need for file.close() for line in file2: print(line)   read as byte mode 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20  def test_nums_texts(): file = open(&amp;#34;nums.txt&amp;#34;, &amp;#34;wt&amp;#34;) # write as text 1000000 1000001 1000002 1000003 1000004 .</description>
+    </item>
     
     <item>
       <title>Haskell笔记(1)</title>

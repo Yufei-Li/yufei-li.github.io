@@ -3,7 +3,35 @@
   
   <url>
     <loc>https://yufei-li.github.io/categories/</loc>
-    <lastmod>2020-11-16T19:32:02+08:00</lastmod>
+    <lastmod>2020-11-17T23:50:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/</loc>
+    <lastmod>2020-11-17T23:50:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/categories/python/</loc>
+    <lastmod>2020-11-17T23:50:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/python_file_operation1/</loc>
+    <lastmod>2020-11-17T23:50:10+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/</loc>
+    <lastmod>2020-11-17T23:50:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -17,20 +45,6 @@
   
   <url>
     <loc>https://yufei-li.github.io/post/haskell1/</loc>
-    <lastmod>2020-11-16T19:32:02+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/post/</loc>
-    <lastmod>2020-11-16T19:32:02+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/</loc>
     <lastmod>2020-11-16T19:32:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -130,13 +144,6 @@
   <url>
     <loc>https://yufei-li.github.io/post/arduino_note1/</loc>
     <lastmod>2020-10-19T15:43:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/categories/python/</loc>
-    <lastmod>2020-10-08T13:58:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
