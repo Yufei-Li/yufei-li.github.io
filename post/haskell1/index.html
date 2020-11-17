@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Haskell笔记(1) - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="Boolean Algebra &amp;amp; Equality 1 2 3 4 5 6 7 8 True &amp;amp;&amp;amp; False --False True || False --True not True --False 21 == 21 --True &amp;#34;Hello&amp;#34; == &amp;#34;Hello&amp;#34; --True &amp;#34;Hello&amp;#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &amp;#39;a&amp;#39; --b succ 60 * 3 --183 -&amp;gt; 61 * 3 succ" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/haskell1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Haskell笔记(1)" />
+<meta property="og:description" content="Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8 True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/haskell1/" />
+<meta property="article:published_time" content="2020-11-16T19:32:02+08:00" />
+<meta property="article:modified_time" content="2020-11-16T19:32:02+08:00" />
+<meta itemprop="name" content="Haskell笔记(1)">
+<meta itemprop="description" content="Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8 True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ">
+<meta itemprop="datePublished" content="2020-11-16T19:32:02&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-16T19:32:02&#43;08:00" />
+<meta itemprop="wordCount" content="1059">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Haskell笔记(1)"/>
+<meta name="twitter:description" content="Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8 True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Haskell笔记(1)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-16 </span>
+        <div class="post-category">
+            <a href="/categories/haskell/"> Haskell </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#boolean-algebra--equality">Boolean Algebra &amp; Equality</a></li>
+    <li><a href="#functions">functions</a>
+      <ul>
+        <li><a href="#succ">succ</a></li>
+        <li><a href="#div">div</a></li>
+        <li><a href="#write-functions">write functions</a></li>
+      </ul>
+    </li>
+    <li><a href="#list">list</a>
+      <ul>
+        <li><a href="#define-a-list">define a list</a></li>
+        <li><a href="#operation">operation</a></li>
+        <li><a href="#list-comprehension">list comprehension</a></li>
+      </ul>
+    </li>
+    <li><a href="#tuples">tuples</a>
+      <ul>
+        <li><a href="#define-a-tuple">define a tuple</a></li>
+        <li><a href="#fucntions">fucntions</a></li>
+        <li><a href="#tuple-comprehension">tuple comprehension</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="boolean-algebra--equality">Boolean Algebra &amp; Equality</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kt">True</span> <span class="o">&amp;&amp;</span> <span class="kt">False</span> <span class="c1">--False</span>
+<span class="kt">True</span> <span class="o">||</span> <span class="kt">False</span> <span class="c1">--True</span>
+<span class="nf">not</span> <span class="kt">True</span> <span class="c1">--False</span>
+
+<span class="mi">21</span> <span class="o">==</span> <span class="mi">21</span> <span class="c1">--True</span>
+<span class="s">&#34;Hello&#34;</span> <span class="o">==</span> <span class="s">&#34;Hello&#34;</span> <span class="c1">--True</span>
+<span class="s">&#34;Hello&#34;</span> <span class="o">==</span> <span class="mi">123</span> <span class="c1">--Error</span>
+<span class="mi">5</span> <span class="o">/=</span> <span class="mi">7</span> <span class="c1">--True, not equal to</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="functions">functions</h2>
+<h3 id="succ">succ</h3>
+<ul>
+<li>returns following item in an enumeration</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">succ</span> <span class="mi">5</span> <span class="c1">--6</span>
+<span class="nf">succ</span> <span class="sc">&#39;a&#39;</span> <span class="c1">--b</span>
+<span class="nf">succ</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">3</span> <span class="c1">--183 -&gt; 61 * 3</span>
+<span class="nf">succ</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="c1">--181 -&gt; 180 + 1</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="div">div</h3>
+<ul>
+<li>returns how many times the first number can be divided by the second one</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">div</span> <span class="mi">92</span> <span class="mi">7</span>
+<span class="mi">97</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">7</span>
+<span class="c1">-- 13</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="write-functions">write functions</h3>
+<ul>
+<li>The string before :: is function name, after :: is parameter list, including parameter and return value, connected by -&gt;, the last value is return value.</li>
+<li>In the defining part of function, x means there is only one parameter, logic part of the function is after equal sign</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">doubleMe</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
+<span class="nf">doubleMe</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span>
+
+<span class="nf">doubleUs</span> <span class="n">x</span> <span class="n">y</span> <span class="ow">=</span> <span class="n">doubleMe</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="nf">doublesmallNum</span> <span class="n">x</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">100</span> 
+<span class="kr">then</span> <span class="n">x</span>
+<span class="kr">else</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="nf">doublesmallNum&#39;</span> <span class="n">x</span> <span class="ow">=</span> <span class="p">(</span><span class="kr">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="kr">then</span> <span class="n">x</span> <span class="kr">else</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="list">list</h2>
+<ul>
+<li>
+<p>Haskell lists are homogeneous data structures</p>
+</li>
+<li>
+<p>all the elements of the list must be the same type</p>
+</li>
+<li>
+<p>a list is surrounded by square brackets and the elements are separated by commas</p>
+</li>
+</ul>
+<h3 id="define-a-list">define a list</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">let</span> <span class="n">list</span> <span class="ow">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="kr">let</span> <span class="n">empty</span> <span class="ow">=</span> <span class="kt">[]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="operation">operation</h3>
+<ul>
+<li><strong>++</strong></li>
+<li>In Haskell strings are lists of characters and we can use list functions on strings</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">++</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span> <span class="c1">--[1, 2, 3, 4, 7, 8, 9]</span>
+
+<span class="s">&#34;Hello&#34;</span> <span class="o">++</span> <span class="s">&#34; &#34;</span> <span class="o">++</span> <span class="s">&#34;World&#34;</span> <span class="c1">-- &#34;Hello World&#34;</span>
+
+<span class="p">[</span><span class="sc">&#39;H&#39;</span><span class="p">,</span> <span class="sc">&#39;e&#39;</span><span class="p">,</span> <span class="sc">&#39;l&#39;</span><span class="p">]</span> <span class="o">++</span> <span class="p">[</span><span class="sc">&#39;l&#39;</span><span class="p">,</span> <span class="sc">&#39;o&#39;</span><span class="p">]</span> <span class="c1">--&#34;Hello&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>:</strong></li>
+<li>: adds an element to the <strong>head</strong> of a list</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="sc">&#39;A&#39;</span> <span class="kt">:</span> <span class="s">&#34; BIG MESS&#34;</span> <span class="c1">--&#34;A BIG MESS&#34;</span>
+
+<span class="mi">54</span> <span class="kt">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">27</span><span class="p">]</span> <span class="c1">--[54, 45, 69, 27]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>compare ++ and :</strong></p>
+</li>
+<li>
+<ul>
+<li>
+<p>++ takes a pair of lists of the same type and : takes an element and then a list of that type of element</p>
+</li>
+<li>
+<p>++ can do both prepending and appending, but : can only do prepending</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="mi">54</span> <span class="kt">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">27</span><span class="p">]</span> <span class="c1">-- [54, 45, 69, 27]</span>
+<span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">27</span><span class="p">]</span> <span class="kt">:</span> <span class="mi">54</span> <span class="c1">-- error</span>
+<span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">27</span><span class="p">]</span> <span class="o">++</span> <span class="p">[</span><span class="mi">54</span><span class="p">]</span> <span class="c1">--[45, 69, 27, 54]</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>!!</strong></p>
+</li>
+<li>
+<p>use the !! operator to get a list member by index number; indices start from 0</p>
+</li>
+<li>
+<p>raise error if index is out of the range</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="s">&#34;Hello&#34;</span> <span class="o">!!</span> <span class="mi">1</span> <span class="c1">--&#39;e&#39;</span>
+<span class="p">[</span><span class="mf">3.4</span><span class="p">,</span> <span class="mf">7.89</span><span class="p">,</span> <span class="mf">9.4</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">]</span> <span class="o">!!</span> <span class="mi">3</span> <span class="c1">--12.0</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>list inside list</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">let</span> <span class="n">list</span> <span class="ow">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span> 
+<span class="nf">list</span> <span class="o">++</span> <span class="p">[[</span><span class="mi">99</span><span class="p">]]</span> <span class="c1">--[[1,2, 3, 4], [1, 2, 3], [1, 2], [99]]</span>
+<span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span> <span class="kt">:</span> <span class="n">list</span> <span class="c1">--[[10, 11], [1, 2, 3, 4], [1, 2, 3], [1, 2]]</span>
+<span class="mi">10</span> <span class="kt">:</span> <span class="n">list</span> <span class="c1">-- raise error</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>compare lists</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span> <span class="c1">--False</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span> <span class="c1">--True</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>functions for lists</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">head</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- 1</span>
+<span class="nf">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">--[2, 3]</span>
+<span class="nf">last</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- 3</span>
+<span class="nf">init</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- [1, 2]</span>
+
+<span class="nf">length</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- 3</span>
+<span class="nf">null</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- False, whether the list is null</span>
+<span class="nf">null</span><span class="kt">[]</span> <span class="c1">-- True</span>
+<span class="nf">reverse</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- [3, 2, 1]</span>
+<span class="nf">drop</span> <span class="mi">1</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- [2, 3], drop the first element in the list</span>
+
+<span class="nf">maximum</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- 3</span>
+<span class="nf">minimum</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- 1</span>
+<span class="nf">sum</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- 6</span>
+<span class="nf">product</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- 6</span>
+<span class="mi">1</span> <span class="p">`</span><span class="n">elem</span><span class="p">`</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- True, whether the element is in the list</span>
+<span class="nf">elem</span> <span class="mi">1</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- True</span>
+<span class="nf">elem</span> <span class="mi">4</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- False</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>steps and ranges</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="p">[</span><span class="mi">1</span> <span class="o">..</span> <span class="mi">5</span><span class="p">]</span> <span class="c1">--[1, 2, 3, 4, 5]</span>
+<span class="p">[</span><span class="sc">&#39;a&#39;</span><span class="o">..</span><span class="sc">&#39;c&#39;</span><span class="p">]</span> <span class="c1">--&#34;abc&#34;</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span> <span class="o">..</span> <span class="mi">10</span><span class="p">]</span> <span class="c1">--[2, 4, 6, 8, 10]</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span> <span class="o">..</span> <span class="mi">15</span><span class="p">]</span> <span class="c1">--[3, 6, 9, 12, 15]</span>
+<span class="p">[</span><span class="mi">5</span> <span class="o">..</span> <span class="mi">1</span><span class="p">]</span> <span class="c1">--[]</span>
+<span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span> <span class="o">..</span> <span class="mi">1</span><span class="p">]</span> <span class="c1">--[5, 4, 3, 2, 1]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>laziness and infinite lists</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="c1">-- take 5 elements in a infinite lists</span>
+<span class="nf">take</span> <span class="mi">5</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="o">..</span><span class="p">]</span>
+<span class="nf">take</span> <span class="mi">5</span> <span class="p">(</span><span class="n">cycle</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nf">take</span> <span class="mi">3</span> <span class="p">(</span><span class="n">repeat</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="nf">replicate</span> <span class="mi">5</span> <span class="sc">&#39;a&#39;</span> <span class="c1">--&#34;aaaaa&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="list-comprehension">list comprehension</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span> <span class="o">..</span> <span class="mi">5</span><span class="p">]]</span> <span class="c1">--[2, 4, 6, 8, 10]</span>
+<span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span> <span class="o">..</span> <span class="mi">6</span><span class="p">],</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">]</span> <span class="c1">--[12]</span>
+<span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span> <span class="o">..</span> <span class="mi">20</span><span class="p">],</span> <span class="n">x</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="c1">--[7, 14]</span>
+<span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">],</span> <span class="n">x</span> <span class="o">/=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">x</span> <span class="o">/=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">odd</span> <span class="n">x</span><span class="p">]</span> <span class="c1">--[1, 5, 7]</span>
+<span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span> <span class="c1">--[2, 3, 4]</span>
+<span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">y</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">]</span> <span class="c1">--[55, 80, 100, 110]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>_ means doesn&rsquo;t care about the type, thus xs can be whether list or string</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">length&#39;</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">sum</span><span class="p">[</span> <span class="mi">1</span> <span class="o">|</span> <span class="kr">_</span> <span class="ow">&lt;-</span> <span class="n">xs</span><span class="p">]</span>
+<span class="nf">length&#39;</span> <span class="s">&#34;Hello&#34;</span> <span class="c1">--5, sum[ 1 | _ &lt;- &#34;Hello&#34;] == [1, 1, 1, 1, 1]</span>
+
+<span class="nf">keepLowerCase</span> <span class="n">st</span> <span class="ow">=</span> <span class="p">[</span><span class="n">c</span> <span class="o">|</span> <span class="n">c</span> <span class="ow">&lt;-</span> <span class="n">st</span><span class="p">,</span> <span class="n">c</span> <span class="p">`</span><span class="n">elem</span><span class="p">`</span> <span class="p">[</span><span class="sc">&#39;a&#39;</span> <span class="o">..</span><span class="sc">&#39;z&#39;</span><span class="p">]]</span>
+<span class="nf">keepLowerCase</span> <span class="s">&#34;Hello&#34;</span> <span class="c1">--&#34;ello&#34;</span>
+<span class="nf">keepLowerCase</span> <span class="s">&#34;Hello World&#34;</span> <span class="c1">--&#34;elloorld&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="tuples">tuples</h2>
+<p><strong>compare lists and tuples:</strong></p>
+<ul>
+<li>
+<ul>
+<li>lists only have homogeneous elements</li>
+<li>tuples can have heterogeneous elements</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>lists have flexible size: grow, shrink</li>
+<li>tuples have a fixed size</li>
+</ul>
+</li>
+</ul>
+<h3 id="define-a-tuple">define a tuple</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="sc">&#39;a&#39;</span><span class="p">)]</span>
+<span class="p">(</span><span class="s">&#34;Hi!&#34;</span><span class="p">,</span> <span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">)</span> <span class="c1">-- raise error</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="fucntions">fucntions</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">fst</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">-- only two elements are available</span>
+<span class="nf">snd</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nf">zip</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="sc">&#39;c&#39;</span><span class="p">]</span> <span class="c1">-- [(1,&#39;a&#39;),(3,&#39;b&#39;),(5,&#39;c&#39;)]</span>
+<span class="nf">zip</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span> <span class="c1">-- [(5,5),(3,6),(4,7)]</span>
+<span class="nf">zip</span> <span class="p">[</span><span class="mi">10</span><span class="o">..</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span> <span class="c1">--[(10,5),(11,6),(12,7)]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="tuple-comprehension">tuple comprehension</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="p">[(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span> <span class="o">|</span> <span class="n">c</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">],</span> <span class="n">a</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">],</span> <span class="n">b</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">]</span> <span class="p">]</span>
+<span class="c1">-- [(1,1,1),(1,2,1),(2,1,1),(2,2,1),(3,1,1),(3,2,1)]</span>
+<span class="p">[(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span> <span class="o">|</span> <span class="n">c</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">],</span> <span class="n">a</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">c</span><span class="p">],</span> <span class="n">b</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">a</span><span class="p">],</span> <span class="n">a</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">^</span><span class="mi">2</span> <span class="o">==</span> <span class="n">c</span><span class="o">^</span><span class="mi">2</span> <span class="p">]</span>
+<span class="c1">-- [(4,3,5),(8,6,10)]</span>
+<span class="kr">let</span> <span class="n">rightTriangles&#39;</span> <span class="ow">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span> <span class="o">|</span> <span class="n">c</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">],</span> <span class="n">a</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">c</span><span class="p">],</span> <span class="n">b</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">a</span><span class="p">],</span> <span class="n">a</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">^</span><span class="mi">2</span> <span class="o">==</span> <span class="n">c</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">+</span><span class="n">c</span> <span class="o">==</span> <span class="mi">24</span> <span class="p">]</span> <span class="c1">-- the longest side is &lt;= 10, right triangle</span>
+<span class="nf">rightTriangles&#39;</span> <span class="c1">--[(8,6,10)]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="reference">reference</h2>
+<p><a href="http://zvon.org/other/haskell/Outputprelude/">http://zvon.org/other/haskell/Outputprelude/</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/c6/">
+            <span class="next-text nav-default">c语言笔记(6)</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

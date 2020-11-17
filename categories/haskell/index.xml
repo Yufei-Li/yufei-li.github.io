@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Haskell on 李雨菲的博客 Li Yufei&#39;s Blog</title>
+    <link>https://yufei-li.github.io/categories/haskell/</link>
+    <description>Recent content in Haskell on 李雨菲的博客 Li Yufei&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
+    <lastBuildDate>Mon, 16 Nov 2020 19:32:02 +0800</lastBuildDate>
+    
+	<atom:link href="https://yufei-li.github.io/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Haskell笔记(1)</title>
+      <link>https://yufei-li.github.io/post/haskell1/</link>
+      <pubDate>Mon, 16 Nov 2020 19:32:02 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/haskell1/</guid>
+      <description>Boolean Algebra &amp;amp; Equality 1 2 3 4 5 6 7 8 True &amp;amp;&amp;amp; False --False True || False --True not True --False 21 == 21 --True &amp;#34;Hello&amp;#34; == &amp;#34;Hello&amp;#34; --True &amp;#34;Hello&amp;#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &amp;#39;a&amp;#39; --b succ 60 * 3 --183 -&amp;gt; 61 * 3 succ</description>
+    </item>
+    
+  </channel>
+</rss>
