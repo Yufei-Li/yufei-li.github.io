@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Syntax in Functions - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="pattern matching 1 2 3 4 5 6 7 8 9 10  lucky7 :: (Integral a) =&amp;gt; a -&amp;gt; String lucky7 7 = &amp;#34;lucky 7&amp;#34; lucky7 x = &amp;#34;not 7&amp;#34; lucky7 7 --&amp;#34;lucy 7&amp;#34; -- if lucky7 x at front of lucky7 7 lucky7 x = &amp;#34;not 7&amp;#34; lucky7 :: (Integral a) =&amp;gt; a -&amp;gt; String lucky7 7 = &amp;#34;lucky 7&amp;#34; lucky7 7 --&amp;#34;not 7&amp;#34;   because lucky7 x will match with lucky7 7 and lucky7 7 = &amp;quot;lucky 7&amp;quot; won&amp;rsquo;t be checked." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/haskell3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Syntax in Functions" />
+<meta property="og:description" content="pattern matching 1 2 3 4 5 6 7 8 9 10  lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 x = &#34;not 7&#34; lucky7 7 --&#34;lucy 7&#34; -- if lucky7 x at front of lucky7 7 lucky7 x = &#34;not 7&#34; lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 7 --&#34;not 7&#34;   because lucky7 x will match with lucky7 7 and lucky7 7 = &quot;lucky 7&quot; won&rsquo;t be checked." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/haskell3/" />
+<meta property="article:published_time" content="2020-11-18T17:19:53+08:00" />
+<meta property="article:modified_time" content="2020-11-18T17:19:53+08:00" />
+<meta itemprop="name" content="Syntax in Functions">
+<meta itemprop="description" content="pattern matching 1 2 3 4 5 6 7 8 9 10  lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 x = &#34;not 7&#34; lucky7 7 --&#34;lucy 7&#34; -- if lucky7 x at front of lucky7 7 lucky7 x = &#34;not 7&#34; lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 7 --&#34;not 7&#34;   because lucky7 x will match with lucky7 7 and lucky7 7 = &quot;lucky 7&quot; won&rsquo;t be checked.">
+<meta itemprop="datePublished" content="2020-11-18T17:19:53&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-18T17:19:53&#43;08:00" />
+<meta itemprop="wordCount" content="1420">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Syntax in Functions"/>
+<meta name="twitter:description" content="pattern matching 1 2 3 4 5 6 7 8 9 10  lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 x = &#34;not 7&#34; lucky7 7 --&#34;lucy 7&#34; -- if lucky7 x at front of lucky7 7 lucky7 x = &#34;not 7&#34; lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 7 --&#34;not 7&#34;   because lucky7 x will match with lucky7 7 and lucky7 7 = &quot;lucky 7&quot; won&rsquo;t be checked."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Syntax in Functions</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-18 </span>
+        <div class="post-category">
+            <a href="/categories/haskell/"> Haskell </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pattern-matching">pattern matching</a></li>
+    <li><a href="#guards">guards</a></li>
+    <li><a href="#where">where</a></li>
+    <li><a href="#let">let</a></li>
+    <li><a href="#case">case</a></li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="pattern-matching">pattern matching</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">lucky7</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+<span class="nf">lucky7</span> <span class="mi">7</span> <span class="ow">=</span> <span class="s">&#34;lucky 7&#34;</span>
+<span class="nf">lucky7</span> <span class="n">x</span> <span class="ow">=</span> <span class="s">&#34;not 7&#34;</span>
+<span class="nf">lucky7</span> <span class="mi">7</span> <span class="c1">--&#34;lucy 7&#34;</span>
+
+<span class="c1">-- if lucky7 x at front of lucky7 7</span>
+<span class="nf">lucky7</span> <span class="n">x</span> <span class="ow">=</span> <span class="s">&#34;not 7&#34;</span>
+<span class="nf">lucky7</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+<span class="nf">lucky7</span> <span class="mi">7</span> <span class="ow">=</span> <span class="s">&#34;lucky 7&#34;</span>
+<span class="nf">lucky7</span> <span class="mi">7</span> <span class="c1">--&#34;not 7&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>because <code>lucky7 x</code> will match with <code>lucky7 7</code> and <code>lucky7 7 = &quot;lucky 7&quot;</code> won&rsquo;t be checked. This is another form of if-else</p>
+<p>if we use function with a input that does not expected, it will raise error, so we must have a catch-all pattern</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">charName</span> <span class="ow">::</span> <span class="kt">Char</span> <span class="ow">-&gt;</span> <span class="kt">String</span>  
+<span class="nf">charName</span> <span class="sc">&#39;a&#39;</span> <span class="ow">=</span> <span class="s">&#34;Albert&#34;</span>  
+<span class="nf">charName</span> <span class="sc">&#39;b&#39;</span> <span class="ow">=</span> <span class="s">&#34;Broseph&#34;</span>  
+<span class="nf">charName</span> <span class="sc">&#39;c&#39;</span> <span class="ow">=</span> <span class="s">&#34;Cecil&#34;</span>  
+
+<span class="nf">charName</span> <span class="sc">&#39;h&#39;</span> <span class="c1">-- raise error</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>example</strong>: adding two vectors in a 2D space together</p>
+</li>
+<li>
+<ul>
+<li>
+<p>Without pattern matching:</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">addVectors</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>  
+<span class="nf">addVectors</span> <span class="n">a</span> <span class="n">b</span> <span class="ow">=</span> <span class="p">(</span><span class="n">fst</span> <span class="n">a</span> <span class="o">+</span> <span class="n">fst</span> <span class="n">b</span><span class="p">,</span> <span class="n">snd</span> <span class="n">a</span> <span class="o">+</span> <span class="n">snd</span> <span class="n">b</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>With pattern matching:</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">addVectors</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>  
+<span class="nf">addVectors</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">y2</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>example</strong>: get first element in a tuple</p>
+</li>
+<li>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">first</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">a</span>  
+<span class="nf">first</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="kr">_</span><span class="p">,</span> <span class="kr">_</span><span class="p">)</span> <span class="ow">=</span> <span class="n">x</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>_</code> means that we really don&rsquo;t care what that part is, so we just write a <code>_</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>example</strong>: pattern matching in list comprehesion</p>
+</li>
+<li>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">let</span> <span class="n">xs</span> <span class="ow">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>  
+<span class="p">[</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">|</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="ow">&lt;-</span> <span class="n">xs</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>Lists themselves can also be used in pattern matching. You can match with the empty list [] or any pattern that involves <code>:</code> and the empty list. But since <strong>[1,2,3] is just syntactic sugar for 1:2:3:[]</strong>, you can also use the former pattern. A pattern like <code>x:xs</code> will <strong>bind the head of the list to x and the rest of it to xs</strong>, even if there&rsquo;s only one element so xs ends up being an empty list.</p>
+<p>The <code>x:xs</code> pattern is used a lot, especially with recursive functions. But patterns that have <code>:</code> in them <strong>only match against lists of length 1 or more</strong>.</p>
+<p>If you want to bind the <strong>first three elements to variables</strong> and the rest of the list to another variable, you can use something like <code>x:y:z:zs</code> It will only match against lists that have three elements or more.</p>
+</li>
+<li>
+<p><strong>example</strong>: achieve <code>head</code> function</p>
+</li>
+<li>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">head&#39;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">=</span> <span class="n">a</span>
+<span class="nf">head&#39;</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="ne">error</span> <span class="s">&#34;this is a empty list!&#34;</span>
+<span class="nf">head&#39;</span> <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="kr">_</span><span class="p">)</span> <span class="ow">=</span> <span class="n">x</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Notice that if you want to bind to several variables (even if one of them is just <strong>_</strong> and doesn&rsquo;t actually bind at all), we have to <strong>surround them in parentheses</strong>.</p>
+</li>
+<li>
+<p>the <strong>error</strong> function that we used. It takes a string and generates a runtime error, using that string as information about what kind of error occurred. It causes the program to crash, so it&rsquo;s not good to use it too much.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>example</strong>: achieve <code>length</code> function by pattern matching and recursion</p>
+</li>
+<li>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">length&#39;</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">b</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="n">b</span>
+<span class="nf">length&#39;</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="mi">0</span> <span class="c1">-- define edge condition</span>
+<span class="nf">length&#39;</span> <span class="p">(</span><span class="kr">_</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span> <span class="ow">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">length&#39;</span> <span class="n">xs</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">capital</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>  
+<span class="nf">capital</span> <span class="s">&#34;&#34;</span> <span class="ow">=</span> <span class="s">&#34;Empty string, whoops!&#34;</span>  
+<span class="nf">capital</span> <span class="n">all</span><span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span> <span class="ow">=</span> <span class="s">&#34;The first letter of &#34;</span> <span class="o">++</span> <span class="n">all</span> <span class="o">++</span> <span class="s">&#34; is &#34;</span> <span class="o">++</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<ul>
+<li>You do that by putting a name and an <code>@</code> in front of a pattern. For instance, the pattern <code>xs@(x:y:ys)</code>. This pattern will match exactly the same thing as <code>x:y:ys</code> but you can easily get the whole list via <code>xs</code> instead of repeating yourself by typing out <code>x:y:ys**</code> in the function body again.</li>
+</ul>
+</li>
+</ul>
+<h2 id="guards">guards</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">bmiTell</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">RealFloat</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">String</span>  
+<span class="nf">bmiTell</span> <span class="n">weight</span> <span class="n">height</span>  
+    <span class="o">|</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span> <span class="o">^</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="mf">18.5</span> <span class="ow">=</span> <span class="s">&#34;You&#39;re underweight, you emo, you!&#34;</span>  
+    <span class="o">|</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span> <span class="o">^</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="mf">25.0</span> <span class="ow">=</span> <span class="s">&#34;You&#39;re supposedly normal. Pffft, I bet you&#39;re ugly!&#34;</span>  
+    <span class="o">|</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span> <span class="o">^</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="mf">30.0</span> <span class="ow">=</span> <span class="s">&#34;You&#39;re fat! Lose some weight, fatty!&#34;</span>  
+    <span class="o">|</span> <span class="n">otherwise</span>                 <span class="ow">=</span> <span class="s">&#34;You&#39;re a whale, congratulations!&#34;</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>A guard is basically a <strong>boolean expression</strong>. If it evaluates to True, then the corresponding function body is used. If it evaluates to False, checking drops through to the next guard and so on. The check is carried out with the second guard and because 24.3 is less than 25.0, the second string is returned.</p>
+<p>Many times, the last guard is <code>otherwise</code>. <code>otherwise</code> is defined simply as <code>otherwise = True</code> and catches everything. This is very similar to patterns, only they check if the input satisfies a pattern (<code>==</code>) but guards check for boolean conditions.</p>
+<h2 id="where">where</h2>
+<p>In the bmiTell function, we repeat calculating bmi, to avoid that, we can write function like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">bmiTell</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">RealFloat</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">String</span>  
+<span class="nf">bmiTell</span> <span class="n">weight</span> <span class="n">height</span>  
+    <span class="o">|</span> <span class="n">bmi</span> <span class="o">&lt;=</span> <span class="n">skinny</span> <span class="ow">=</span> <span class="s">&#34;You&#39;re underweight, you emo, you!&#34;</span>  
+    <span class="o">|</span> <span class="n">bmi</span> <span class="o">&lt;=</span> <span class="n">normal</span> <span class="ow">=</span> <span class="s">&#34;You&#39;re supposedly normal. Pffft, I bet you&#39;re ugly!&#34;</span>  
+    <span class="o">|</span> <span class="n">bmi</span> <span class="o">&lt;=</span> <span class="n">fat</span>    <span class="ow">=</span> <span class="s">&#34;You&#39;re fat! Lose some weight, fatty!&#34;</span>  
+    <span class="o">|</span> <span class="n">otherwise</span>     <span class="ow">=</span> <span class="s">&#34;You&#39;re a whale, congratulations!&#34;</span>  
+    <span class="kr">where</span> <span class="n">bmi</span> <span class="ow">=</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span> <span class="o">^</span> <span class="mi">2</span>  
+          <span class="n">skinny</span> <span class="ow">=</span> <span class="mf">18.5</span>  
+          <span class="n">normal</span> <span class="ow">=</span> <span class="mf">25.0</span>  
+          <span class="n">fat</span> <span class="ow">=</span> <span class="mf">30.0</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>where bindings aren&rsquo;t shared across function bodies of different patterns. If you want several patterns of one function to access some shared name, you have to define it globally.</p>
+<p>You can also use where bindings to <strong>pattern match</strong>! We could have rewritten the where section of our previous function as:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">where</span> <span class="n">bmi</span> <span class="ow">=</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span> <span class="o">^</span> <span class="mi">2</span>  
+      <span class="p">(</span><span class="n">skinny</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">fat</span><span class="p">)</span> <span class="ow">=</span> <span class="p">(</span><span class="mf">18.5</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>Example</strong>: a function to get first letter of the name</p>
+</li>
+<li>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">initials</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>  
+<span class="nf">initials</span> <span class="n">firstname</span> <span class="n">lastname</span> <span class="ow">=</span> <span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">++</span> <span class="s">&#34;. &#34;</span> <span class="o">++</span> <span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">++</span> <span class="s">&#34;.&#34;</span>  
+    <span class="kr">where</span> <span class="p">(</span><span class="n">f</span><span class="kt">:</span><span class="kr">_</span><span class="p">)</span> <span class="ow">=</span> <span class="n">firstname</span>  
+          <span class="p">(</span><span class="n">l</span><span class="kt">:</span><span class="kr">_</span><span class="p">)</span> <span class="ow">=</span> <span class="n">lastname</span>   
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<p>Just like we&rsquo;ve defined constants in where blocks, you can also define functions:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">calcBmis</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">RealFloat</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>  
+<span class="nf">calcBmis</span> <span class="n">xs</span> <span class="ow">=</span> <span class="p">[</span><span class="n">bmi</span> <span class="n">w</span> <span class="n">h</span> <span class="o">|</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">xs</span><span class="p">]</span>  
+    <span class="kr">where</span> <span class="n">bmi</span> <span class="n">weight</span> <span class="n">height</span> <span class="ow">=</span> <span class="n">weight</span> <span class="o">/</span> <span class="n">height</span> <span class="o">^</span> <span class="mi">2</span>   <span class="c1">-- define bmi function in where</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="let">let</h2>
+<p>Very <strong>similar to where bindings</strong> are let bindings. Where bindings are a syntactic construct that let you bind to variables at the end of a function and the whole function can see them, including all the guards. Let bindings let you bind to variables anywhere and are expressions themselves, but are very local, so they <strong>don&rsquo;t span across guards.</strong></p>
+<p>The form is <code>let &lt;bindings&gt; in &lt;expression&gt;</code>. The names that you define in the <em>let</em>part are accessible to the expression after the in part.</p>
+<ul>
+<li>
+<p>The difference between let and where:</p>
+</li>
+<li>
+<p>The difference is that <code>let</code> bindings are <strong>expressions</strong> themselves. <code>where</code> bindings are just <strong>syntactic constructs.</strong></p>
+</li>
+<li>
+<ul>
+<li>
+<p>expressions means it can be putted in anywhere. For example, <code>if</code> is a expression, thus <code>4 * (if 10 &gt; 5 then 10 else 0) + 2 </code></p>
+</li>
+<li>
+<p>Similarly, <code>let</code> can be used when：</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="kr">let</span> <span class="n">a</span> <span class="ow">=</span> <span class="mi">9</span> <span class="kr">in</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="p">[</span><span class="kr">let</span> <span class="n">square</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="kr">in</span> <span class="p">(</span><span class="n">square</span> <span class="mi">5</span><span class="p">,</span> <span class="n">square</span> <span class="mi">3</span><span class="p">,</span> <span class="n">square</span> <span class="mi">2</span><span class="p">)]</span>  
+<span class="p">(</span><span class="kr">let</span> <span class="n">a</span> <span class="ow">=</span> <span class="mi">100</span><span class="p">;</span> <span class="n">b</span> <span class="ow">=</span> <span class="mi">200</span><span class="p">;</span> <span class="n">c</span> <span class="ow">=</span> <span class="mi">300</span> <span class="kr">in</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="kr">let</span> <span class="n">foo</span><span class="ow">=</span><span class="s">&#34;Hey &#34;</span><span class="p">;</span> <span class="n">bar</span> <span class="ow">=</span> <span class="s">&#34;there!&#34;</span> <span class="kr">in</span> <span class="n">foo</span> <span class="o">++</span> <span class="n">bar</span><span class="p">)</span> <span class="c1">-- use ; to separation definitions </span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h2 id="case">case</h2>
+<p>the following two programs are equal:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="c1">-- program 1</span>
+<span class="nf">head&#39;</span> <span class="ow">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="n">a</span>  
+<span class="nf">head&#39;</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="ne">error</span> <span class="s">&#34;No head for empty lists!&#34;</span>  
+<span class="nf">head&#39;</span> <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="kr">_</span><span class="p">)</span> <span class="ow">=</span> <span class="n">x</span>  
+<span class="c1">-- program 2</span>
+<span class="nf">head&#39;</span> <span class="ow">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="n">a</span>  
+<span class="nf">head&#39;</span> <span class="n">xs</span> <span class="ow">=</span> <span class="kr">case</span> <span class="n">xs</span> <span class="kr">of</span> <span class="kt">[]</span> <span class="ow">-&gt;</span> <span class="ne">error</span> <span class="s">&#34;No head for empty lists!&#34;</span>  
+                      <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="kr">_</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>the syntax of case expression:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">case</span> <span class="n">expression</span> <span class="kr">of</span> <span class="n">pattern</span> <span class="ow">-&gt;</span> <span class="n">result</span>  
+                   <span class="n">pattern</span> <span class="ow">-&gt;</span> <span class="n">result</span>  
+                   <span class="n">pattern</span> <span class="ow">-&gt;</span> <span class="n">result</span>  
+                   <span class="o">...</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>example</strong>: the following two programs are equal:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="c1">-- program 1</span>
+<span class="nf">describeList</span> <span class="ow">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">String</span>  
+<span class="nf">describeList</span> <span class="n">xs</span> <span class="ow">=</span> <span class="s">&#34;The list is &#34;</span> <span class="o">++</span> <span class="kr">case</span> <span class="n">xs</span> <span class="kr">of</span> <span class="kt">[]</span> <span class="ow">-&gt;</span> <span class="s">&#34;empty.&#34;</span>  
+                                               <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="s">&#34;a singleton list.&#34;</span>   
+                                               <span class="n">xs</span> <span class="ow">-&gt;</span> <span class="s">&#34;a longer list.&#34;</span>  
+<span class="c1">-- program 2</span>
+<span class="nf">describeList</span> <span class="ow">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">String</span>  
+<span class="nf">describeList</span> <span class="n">xs</span> <span class="ow">=</span> <span class="s">&#34;The list is &#34;</span> <span class="o">++</span> <span class="n">what</span> <span class="n">xs</span>  
+    <span class="kr">where</span> <span class="n">what</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="s">&#34;empty.&#34;</span>  
+          <span class="n">what</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="ow">=</span> <span class="s">&#34;a singleton list.&#34;</span>  
+          <span class="n">what</span> <span class="n">xs</span> <span class="ow">=</span> <span class="s">&#34;a longer list.&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="reference">reference</h2>
+<p><a href="http://learnyouahaskell.com/syntax-in-functions">http://learnyouahaskell.com/syntax-in-functions</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/haskell2/">
+            <span class="next-text nav-default">Type &amp; Typeclasses</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
