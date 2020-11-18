@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Tue, 17 Nov 2020 23:50:10 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2020 16:03:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Haskell笔记(2)</title>
+      <link>https://yufei-li.github.io/post/haskell2/</link>
+      <pubDate>Wed, 18 Nov 2020 16:03:56 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/haskell2/</guid>
+      <description>types in haskell :t can tell us the type of some expressions 1 2 3 4 5 :t &amp;#39;a&amp;#39; -- &amp;#39;a&amp;#39; :: Char :t True -- True :: Bool :t &amp;#34;Haskell&amp;#34; -- &amp;#34;Haskell&amp;#34; :: [Char] :t (True, 4) -- (True, 4) :: (Bool, Int) :t 4 == 5 -- 4 == 5 :: Bool :: means &amp;ldquo;has type of&amp;rdquo; . [Char] means a list of characters, [Char] is equal to</description>
+    </item>
     
     <item>
       <title>python file operation(1)</title>
