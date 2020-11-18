@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Haskell笔记(1) - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <title>Haskell Basic Knowledge - 李雨菲的博客 Li Yufei&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="Boolean Algebra &amp;amp; Equality 1 2 3 4 5 6 7 8 True &amp;amp;&amp;amp; False --False True || False --True not True --False 21 == 21 --True &amp;#34;Hello&amp;#34; == &amp;#34;Hello&amp;#34; --True &amp;#34;Hello&amp;#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &amp;#39;a&amp;#39; --b succ 60 * 3 --183 -&amp;gt; 61 * 3 succ" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="Boolean Algebra &amp;amp; Equality 1 2 3 4 5 6 7 8  True &amp;amp;&amp;amp; False --False True || False --True not True --False 21 == 21 --True &amp;#34;Hello&amp;#34; == &amp;#34;Hello&amp;#34; --True &amp;#34;Hello&amp;#34; == 123 --Error 5 /= 7 --True, not equal to   functions succ  returns following item in an enumeration  1 2 3 4  succ 5 --6 succ &amp;#39;a&amp;#39; --b succ 60 * 3 --183 -&amp;gt; 61 * 3 succ (60 * 3) --181 -&amp;gt; 180 &#43; 1   div  returns how many times the first number can be divided by the second one  1 2 3  div 92 7 97 `div` 7 -- 13   write functions  The string before :: is function name, after :: is parameter list, including parameter and return value, connected by -&amp;gt;, the last value is return value." /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,14 +39,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Haskell笔记(1)" />
-<meta property="og:description" content="Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8 True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ" />
+<meta property="og:title" content="Haskell Basic Knowledge" />
+<meta property="og:description" content="Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8  True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to   functions succ  returns following item in an enumeration  1 2 3 4  succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ (60 * 3) --181 -&gt; 180 &#43; 1   div  returns how many times the first number can be divided by the second one  1 2 3  div 92 7 97 `div` 7 -- 13   write functions  The string before :: is function name, after :: is parameter list, including parameter and return value, connected by -&gt;, the last value is return value." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yufei-li.github.io/post/haskell1/" />
 <meta property="article:published_time" content="2020-11-16T19:32:02+08:00" />
 <meta property="article:modified_time" content="2020-11-16T19:32:02+08:00" />
-<meta itemprop="name" content="Haskell笔记(1)">
-<meta itemprop="description" content="Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8 True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ">
+<meta itemprop="name" content="Haskell Basic Knowledge">
+<meta itemprop="description" content="Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8  True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to   functions succ  returns following item in an enumeration  1 2 3 4  succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ (60 * 3) --181 -&gt; 180 &#43; 1   div  returns how many times the first number can be divided by the second one  1 2 3  div 92 7 97 `div` 7 -- 13   write functions  The string before :: is function name, after :: is parameter list, including parameter and return value, connected by -&gt;, the last value is return value.">
 <meta itemprop="datePublished" content="2020-11-16T19:32:02&#43;08:00" />
 <meta itemprop="dateModified" content="2020-11-16T19:32:02&#43;08:00" />
 <meta itemprop="wordCount" content="1133">
@@ -54,8 +54,8 @@
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Haskell笔记(1)"/>
-<meta name="twitter:description" content="Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8 True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ"/>
+<meta name="twitter:title" content="Haskell Basic Knowledge"/>
+<meta name="twitter:description" content="Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8  True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to   functions succ  returns following item in an enumeration  1 2 3 4  succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ (60 * 3) --181 -&gt; 180 &#43; 1   div  returns how many times the first number can be divided by the second one  1 2 3  div 92 7 97 `div` 7 -- 13   write functions  The string before :: is function name, after :: is parameter list, including parameter and return value, connected by -&gt;, the last value is return value."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -114,7 +114,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Haskell笔记(1)</h1>
+      <h1 class="post-title">Haskell Basic Knowledge</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-11-16 </span>

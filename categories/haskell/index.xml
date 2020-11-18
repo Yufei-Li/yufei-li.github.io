@@ -13,21 +13,22 @@
     
     
     <item>
-      <title>Haskell笔记(2)</title>
+      <title>Type &amp; Typeclasses</title>
       <link>https://yufei-li.github.io/post/haskell2/</link>
       <pubDate>Wed, 18 Nov 2020 16:03:56 +0800</pubDate>
       
       <guid>https://yufei-li.github.io/post/haskell2/</guid>
-      <description>types in haskell :t can tell us the type of some expressions 1 2 3 4 5 :t &amp;#39;a&amp;#39; -- &amp;#39;a&amp;#39; :: Char :t True -- True :: Bool :t &amp;#34;Haskell&amp;#34; -- &amp;#34;Haskell&amp;#34; :: [Char] :t (True, 4) -- (True, 4) :: (Bool, Int) :t 4 == 5 -- 4 == 5 :: Bool :: means &amp;ldquo;has type of&amp;rdquo; . [Char] means a list of characters, [Char] is equal to</description>
+      <description>types in haskell :t can tell us the type of some expressions
+1 2 3 4 5  :t &amp;#39;a&amp;#39; -- &amp;#39;a&amp;#39; :: Char :t True -- True :: Bool  :t &amp;#34;Haskell&amp;#34; -- &amp;#34;Haskell&amp;#34; :: [Char]  :t (True, 4) -- (True, 4) :: (Bool, Int)  :t 4 == 5 -- 4 == 5 :: Bool    :: means &amp;ldquo;has type of&amp;rdquo; . [Char] means a list of characters, [Char] is equal to String, using String is more clear and easy to read.</description>
     </item>
     
     <item>
-      <title>Haskell笔记(1)</title>
+      <title>Haskell Basic Knowledge</title>
       <link>https://yufei-li.github.io/post/haskell1/</link>
       <pubDate>Mon, 16 Nov 2020 19:32:02 +0800</pubDate>
       
       <guid>https://yufei-li.github.io/post/haskell1/</guid>
-      <description>Boolean Algebra &amp;amp; Equality 1 2 3 4 5 6 7 8 True &amp;amp;&amp;amp; False --False True || False --True not True --False 21 == 21 --True &amp;#34;Hello&amp;#34; == &amp;#34;Hello&amp;#34; --True &amp;#34;Hello&amp;#34; == 123 --Error 5 /= 7 --True, not equal to functions succ returns following item in an enumeration 1 2 3 4 succ 5 --6 succ &amp;#39;a&amp;#39; --b succ 60 * 3 --183 -&amp;gt; 61 * 3 succ</description>
+      <description>Boolean Algebra &amp;amp; Equality 1 2 3 4 5 6 7 8  True &amp;amp;&amp;amp; False --False True || False --True not True --False 21 == 21 --True &amp;#34;Hello&amp;#34; == &amp;#34;Hello&amp;#34; --True &amp;#34;Hello&amp;#34; == 123 --Error 5 /= 7 --True, not equal to   functions succ  returns following item in an enumeration  1 2 3 4  succ 5 --6 succ &amp;#39;a&amp;#39; --b succ 60 * 3 --183 -&amp;gt; 61 * 3 succ (60 * 3) --181 -&amp;gt; 180 + 1   div  returns how many times the first number can be divided by the second one  1 2 3  div 92 7 97 `div` 7 -- 13   write functions  The string before :: is function name, after :: is parameter list, including parameter and return value, connected by -&amp;gt;, the last value is return value.</description>
     </item>
     
   </channel>
