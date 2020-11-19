@@ -7,10 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Wed, 18 Nov 2020 17:19:53 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2020 14:01:45 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>High Order Functions</title>
+      <link>https://yufei-li.github.io/post/haskell5/</link>
+      <pubDate>Thu, 19 Nov 2020 14:01:45 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/haskell5/</guid>
+      <description>Haskell functions can take functions as parameters and return functions as return values. A function that does either of those is called a higher order function.
+curried functions Every function in Haskell officially only takes one parameter. All the functions that accepted several parameters so far have been curried functions. For example, max function. Doing max 4 5 first creates a function that takes a parameter and returns either 4 or that parameter, depending on which is bigger.</description>
+    </item>
+    
+    <item>
+      <title>Recursion</title>
+      <link>https://yufei-li.github.io/post/haskell4/</link>
+      <pubDate>Wed, 18 Nov 2020 22:46:50 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/haskell4/</guid>
+      <description>Recursion is important to Haskell because unlike imperative languages, you do computations in Haskell by declaring what something is instead of declaring how you get it. That&amp;rsquo;s why there are no while loops or for loops in Haskell and instead we many times have to use recursion to declare what something is.
+maximum 1 2 3 4 5  maximum&amp;#39; :: (Ord a) =&amp;gt; [a] -&amp;gt; a maximum&amp;#39; [] = error &amp;#34;empty list&amp;#34; -- crash condition maximum&amp;#39; [x] = x -- edge condition maximum&amp;#39; (x:xs) = max x maxnum where maxnum = maximum&amp;#39; xs   replicate 1 2 3 4 5  replicate&amp;#39; :: (Integral a) =&amp;gt; a -&amp;gt; b -&amp;gt; [b] replicate&amp;#39; a b | a &amp;lt; 0 = error &amp;#34;error:negative int&amp;#34; | a == 0 = [] | a &amp;gt; 0 = b : replicate&amp;#39; (a-1) b   Num is not a subclass of Ord.</description>
+    </item>
     
     <item>
       <title>Syntax in Functions</title>

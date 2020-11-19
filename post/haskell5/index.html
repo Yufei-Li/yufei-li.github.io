@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>High Order Functions - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="Haskell functions can take functions as parameters and return functions as return values. A function that does either of those is called a higher order function.
+curried functions Every function in Haskell officially only takes one parameter. All the functions that accepted several parameters so far have been curried functions. For example, max function. Doing max 4 5 first creates a function that takes a parameter and returns either 4 or that parameter, depending on which is bigger." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/haskell5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="High Order Functions" />
+<meta property="og:description" content="Haskell functions can take functions as parameters and return functions as return values. A function that does either of those is called a higher order function.
+curried functions Every function in Haskell officially only takes one parameter. All the functions that accepted several parameters so far have been curried functions. For example, max function. Doing max 4 5 first creates a function that takes a parameter and returns either 4 or that parameter, depending on which is bigger." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/haskell5/" />
+<meta property="article:published_time" content="2020-11-19T14:01:45+08:00" />
+<meta property="article:modified_time" content="2020-11-19T14:01:45+08:00" />
+<meta itemprop="name" content="High Order Functions">
+<meta itemprop="description" content="Haskell functions can take functions as parameters and return functions as return values. A function that does either of those is called a higher order function.
+curried functions Every function in Haskell officially only takes one parameter. All the functions that accepted several parameters so far have been curried functions. For example, max function. Doing max 4 5 first creates a function that takes a parameter and returns either 4 or that parameter, depending on which is bigger.">
+<meta itemprop="datePublished" content="2020-11-19T14:01:45&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-19T14:01:45&#43;08:00" />
+<meta itemprop="wordCount" content="1959">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="High Order Functions"/>
+<meta name="twitter:description" content="Haskell functions can take functions as parameters and return functions as return values. A function that does either of those is called a higher order function.
+curried functions Every function in Haskell officially only takes one parameter. All the functions that accepted several parameters so far have been curried functions. For example, max function. Doing max 4 5 first creates a function that takes a parameter and returns either 4 or that parameter, depending on which is bigger."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">High Order Functions</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-19 </span>
+        <div class="post-category">
+            <a href="/categories/haskell/"> Haskell </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#curried-functions">curried functions</a></li>
+    <li><a href="#higher-orderism">higher-orderism</a>
+      <ul>
+        <li><a href="#implement-zipwith">implement zipWith</a></li>
+        <li><a href="#implement-flip">implement flip</a></li>
+        <li><a href="#map--filter">map &amp; filter</a></li>
+      </ul>
+    </li>
+    <li><a href="#lambdas">Lambdas</a></li>
+    <li><a href="#fold">fold</a></li>
+    <li><a href="#function-application-with-">Function application with $</a></li>
+    <li><a href="#function-composition">Function composition</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Haskell functions can take functions as parameters and return functions as return values. A function that does either of those is called a <strong>higher order function</strong>.</p>
+<h2 id="curried-functions">curried functions</h2>
+<p>Every function in Haskell officially only takes one parameter. All the functions that accepted <em>several parameters</em> so far have been <strong>curried functions</strong>. For example, <code>max</code> function. Doing <code>max 4 5</code> first <strong>creates a function that takes a parameter</strong> and returns either 4 or that parameter, depending on which is bigger. Then, 5 is applied to that function and that function produces our desired result. Thus, <code>max 4 5</code> is equal to <code>(max 4) 5</code></p>
+<p>Putting a space between two things is simply <strong>function application</strong>. Let&rsquo;s examine the type of <code>max</code>. It&rsquo;s <code>max :: (Ord a) =&gt; a -&gt; a -&gt; a</code>, which is equal to  <code>max :: (Ord a) =&gt; a -&gt; (a -&gt; a)</code>. That could be read as: <code>max</code> takes an <code>a</code> and returns (that&rsquo;s the <strong>-&gt;</strong>) <strong>a function that takes an a and returns an a</strong>. That&rsquo;s why the return type and the parameters of functions are all simply separated with arrows.</p>
+<p>The advantage of this is if we call a function with too few parameters, we get back a <strong>partially applied function</strong>, for example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="c1">-- example 1</span>
+<span class="nf">compareWithHundred</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="err">，</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Ordering</span> 
+<span class="nf">compareWithHundred</span> <span class="ow">=</span> <span class="n">compare</span> <span class="mi">100</span> 
+<span class="c1">-- is equal to compareWithHundred x = compare 100 x</span>
+
+<span class="c1">-- example 2</span>
+<span class="kr">let</span> <span class="n">multTwoWithNine</span> <span class="ow">=</span> <span class="n">multThree</span> <span class="mi">9</span> 
+<span class="nf">multTwoWithNine</span> <span class="mi">2</span> <span class="mi">3</span> <span class="c1">-- 54</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The type declaration stays the same, because <code>compare 100</code> returns a function. Compare has a type of <code>(Ord a) =&gt; a -&gt; (a -&gt; Ordering)</code> and calling it with 100 returns a <code>(Num a, Ord a) =&gt; a -&gt; Ordering</code>. The additional class constraint sneaks up there because 100 is also part of the <code>Num</code> typeclass.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">divideByTen</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Floating</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> 
+<span class="nf">divideByTen</span> <span class="ow">=</span> <span class="p">(</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Calling, say, <code>divideByTen 200</code> is equivalent to doing <code>200 / 10</code>, as is doing <code>(/10) 200</code>.</p>
+<p><strong>The only special thing about sections is using -</strong>. If you want to make a function that subtracts 4 from the number it gets as a parameter, partially apply the <code>subtract</code> function like so: <code>(subtract 4).</code></p>
+<p>if we try to just do <code>multThree 3 4</code> in GHCI :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">multThree</span> <span class="mi">3</span> <span class="mi">4</span>  
+<span class="o">&lt;</span><span class="n">interactive</span><span class="o">&gt;:</span><span class="mi">1</span><span class="kt">:</span><span class="mi">0</span><span class="kt">:</span>  
+    <span class="kt">No</span> <span class="kr">instance</span> <span class="n">for</span> <span class="p">(</span><span class="kt">Show</span> <span class="p">(</span><span class="n">t</span> <span class="ow">-&gt;</span> <span class="n">t</span><span class="p">))</span>  
+      <span class="n">arising</span> <span class="n">from</span> <span class="n">a</span> <span class="n">use</span> <span class="kr">of</span> <span class="p">`</span><span class="n">print&#39;</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">interactive</span><span class="o">&gt;:</span><span class="mi">1</span><span class="kt">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">12</span>  
+    <span class="kt">Possible</span> <span class="n">fix</span><span class="kt">:</span> <span class="n">add</span> <span class="n">an</span> <span class="kr">instance</span> <span class="n">declaration</span> <span class="n">for</span> <span class="p">(</span><span class="kt">Show</span> <span class="p">(</span><span class="n">t</span> <span class="ow">-&gt;</span> <span class="n">t</span><span class="p">))</span>  
+    <span class="kt">In</span> <span class="n">the</span> <span class="n">expression</span><span class="kt">:</span> <span class="n">print</span> <span class="n">it</span>  
+    <span class="kt">In</span> <span class="n">a</span> <span class="n">&#39;do&#39;</span> <span class="n">expression</span><span class="kt">:</span> <span class="n">print</span> <span class="n">it</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>GHCI is telling us that the expression produced a function of type <code>a -&gt; a</code> but <strong>it doesn&rsquo;t know how to print it to the screen</strong>.</p>
+<h2 id="higher-orderism">higher-orderism</h2>
+<p>Functions can take functions as parameters and also return functions. For example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">applyTwice</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span>  
+<span class="nf">applyTwice</span> <span class="n">f</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>
+<p><strong>type declaration</strong></p>
+<p>Before, we didn&rsquo;t need parentheses because <code>-&gt;</code> is naturally <strong>right-associative</strong>. However, here, they&rsquo;re <strong>compulsory</strong>. They <strong>indicate that the first parameter is a function</strong> that takes something and returns that same thing.</p>
+<p>The second parameter is something of that type also and the return value is also of the same type. The first parameter is a function (of type <code>a -&gt; a)</code> and the second is that same <code>a</code>.</p>
+<p>The function can also be <code>Int -&gt; Int</code> or <code>String -&gt; String</code> or whatever. But then, the second parameter to also has to be of that type.</p>
+</li>
+<li>
+<p>The body of the function is pretty simple. We just use the parameter <code>f</code> as a function, applying <code>x</code> to it by separating them with a space and then applying the result to <code>f</code> again.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">applyTwice</span> <span class="p">(</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="mi">10</span>  
+<span class="mi">16</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">applyTwice</span> <span class="p">(</span><span class="o">++</span> <span class="s">&#34; HAHA&#34;</span><span class="p">)</span> <span class="s">&#34;HEY&#34;</span>  
+<span class="s">&#34;HEY HAHA HAHA&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">applyTwice</span> <span class="p">(</span><span class="s">&#34;HAHA &#34;</span> <span class="o">++</span><span class="p">)</span> <span class="s">&#34;HEY&#34;</span>  
+<span class="s">&#34;HAHA HAHA HEY&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">applyTwice</span> <span class="p">(</span><span class="n">multThree</span> <span class="mi">2</span> <span class="mi">2</span><span class="p">)</span> <span class="mi">9</span>  
+<span class="mi">144</span>  <span class="c1">-- 9 * 2 * 2 * 2 * 2</span>
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">applyTwice</span> <span class="p">(</span><span class="mi">3</span><span class="kt">:</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h3 id="implement-zipwith">implement zipWith</h3>
+<p><code>zipWith</code> takes a function and two lists as parameters and then joins the two lists by applying the function between corresponding elements.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">zipWith&#39;</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span><span class="p">)</span><span class="ow">-&gt;</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="nf">zipWith&#39;</span> <span class="kr">_</span> <span class="kt">[]</span> <span class="kr">_</span> <span class="ow">=</span> <span class="kt">[]</span>
+<span class="nf">zipWith&#39;</span> <span class="kr">_</span> <span class="kr">_</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="kt">[]</span>
+<span class="nf">zipWith&#39;</span> <span class="n">f</span> <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span><span class="kt">:</span><span class="n">ys</span><span class="p">)</span> <span class="ow">=</span> <span class="p">[</span><span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="p">]</span> <span class="o">++</span> <span class="n">zipWith&#39;</span> <span class="n">f</span> <span class="n">xs</span> <span class="n">ys</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="implement-flip">implement flip</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">flip&#39;</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">c</span>   
+<span class="nf">flip&#39;</span> <span class="n">f</span> <span class="n">y</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span>
+
+<span class="nf">flip&#39;</span> <span class="n">zip</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="s">&#34;hello&#34;</span>   
+<span class="p">[(</span><span class="sc">&#39;h&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="sc">&#39;l&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="sc">&#39;l&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="map--filter">map &amp; filter</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">map</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">b</span><span class="p">]</span>   
+<span class="nf">map</span> <span class="kr">_</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="kt">[]</span>   
+<span class="nf">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span> <span class="ow">=</span> <span class="n">f</span> <span class="n">x</span> <span class="kt">:</span> <span class="n">map</span> <span class="n">f</span> <span class="n">xs</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>map (+3) [1,5,3,1,6]</code> is equal to <code>[x+3 | x &lt;- [1,5,3,1,6]</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">filter</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>   
+<span class="nf">filter</span> <span class="kr">_</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="kt">[]</span>   
+<span class="nf">filter</span> <span class="n">p</span> <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span>    
+    <span class="o">|</span> <span class="n">p</span> <span class="n">x</span>       <span class="ow">=</span> <span class="n">x</span> <span class="kt">:</span> <span class="n">filter</span> <span class="n">p</span> <span class="n">xs</span>   
+    <span class="o">|</span> <span class="n">otherwise</span> <span class="ow">=</span> <span class="n">filter</span> <span class="n">p</span> <span class="n">xs</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>If <code>p x</code> evaluates to True, the element gets included in the new list. If it doesn&rsquo;t, ignore it and continue with <code>xs</code>.</li>
+<li><strong>example</strong>: Collatz sequences</li>
+</ul>
+<p>We take a natural number. If that number is even, we divide it by two. If it&rsquo;s odd, we multiply it by 3 and then add 1 to that.  It is thought that for all starting numbers, the chains finish at the number 1. For all starting numbers between 1 and 100, how many chains have a length greater than 15?</p>
+<ol>
+<li>a function produce Collatz sequence:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">chain</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>  
+<span class="nf">chain</span> <span class="mi">1</span> <span class="ow">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>  
+<span class="nf">chain</span> <span class="n">n</span>  
+    <span class="o">|</span> <span class="n">even</span> <span class="n">n</span> <span class="ow">=</span>  <span class="n">n</span><span class="kt">:</span><span class="n">chain</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>  
+    <span class="o">|</span> <span class="n">odd</span> <span class="n">n</span>  <span class="ow">=</span>  <span class="n">n</span><span class="kt">:</span><span class="n">chain</span> <span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>a fuction to answer question:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">numLongChains</span> <span class="ow">::</span> <span class="kt">Int</span>  
+<span class="nf">numLongChains</span> <span class="ow">=</span> <span class="n">length</span> <span class="p">(</span><span class="n">filter</span> <span class="n">isLong</span> <span class="p">(</span><span class="n">map</span> <span class="n">chain</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">100</span><span class="p">]))</span>  
+    <span class="kr">where</span> <span class="n">isLong</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">length</span> <span class="n">xs</span> <span class="o">&gt;</span> <span class="mi">15</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>We map the <code>chain</code> function to <code>[1..100]</code> to get a list of chains, which are themselves represented as lists. Then, we filter them by a predicate that just checks whether a list&rsquo;s length is longer than 15</p>
+<h2 id="lambdas">Lambdas</h2>
+<p>Lambdas are basically anonymous functions that are used because we need some functions only once.</p>
+<p>To make a lambda, we write a <code>\</code> and then we write the parameters, separated by spaces. After that comes a <code>-&gt;</code> and then the function body.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">numLongChains</span> <span class="ow">::</span> <span class="kt">Int</span>  
+<span class="nf">numLongChains</span> <span class="ow">=</span> <span class="n">length</span> <span class="p">(</span><span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="n">xs</span> <span class="ow">-&gt;</span> <span class="n">length</span> <span class="n">xs</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">)</span> <span class="p">(</span><span class="n">map</span> <span class="n">chain</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">100</span><span class="p">]))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>the expressions <code>map (+3) [1,6,3,2]</code> and <code>map (\x -&gt; x + 3) [1,6,3,2]</code> are equivalent since both <code>(+3)</code> and <code>(\x -&gt; x + 3)</code> are functions that take a number and add 3 to i</p>
+<h2 id="fold">fold</h2>
+<ul>
+<li><strong>Foldl</strong></li>
+</ul>
+<p>First let&rsquo;s take a look at the <code>foldl</code> function, also called the left fold. It folds the list up from the left side.</p>
+<ul>
+<li><strong>example</strong>: sum</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">sum&#39;</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="n">a</span>  
+<span class="nf">sum&#39;</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="mi">0</span> <span class="n">xs</span>
+<span class="nf">sum&#39;</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  <span class="c1">-- 11</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>\acc x -&gt; acc + x</code> is the binary function. <strong>0</strong> is the starting value and <strong>xs</strong> is the list to be folded up. Now first, <strong>0</strong> is used as the <code>acc</code> parameter to the binary function and <strong>3</strong> is used as the <strong>x</strong> (or the current element) parameter. <strong>0 + 3</strong> produces a <strong>3</strong> and it becomes the new accumulator value, so to speak. Next up, <strong>3</strong> is used as the accumulator value and <strong>5</strong> as the current element and <strong>8</strong> becomes the new accumulator value. Moving forward, <strong>8</strong> is the accumulator value, <strong>2</strong> is the current element, the new accumulator value is <strong>10</strong>. Finally, that <strong>10</strong> is used as the accumulator value and <strong>1</strong> as the current element, producing an <strong>11</strong>.</p>
+<ul>
+<li><strong>example</strong>: elem</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">elem&#39;</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>  
+<span class="nf">elem&#39;</span> <span class="n">y</span> <span class="n">ys</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">x</span> <span class="ow">-&gt;</span> <span class="kr">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span> <span class="kr">then</span> <span class="kt">True</span> <span class="kr">else</span> <span class="n">acc</span><span class="p">)</span> <span class="kt">False</span> <span class="n">ys</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>Foldr</strong></p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">map&#39;</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">b</span><span class="p">]</span>  
+<span class="nf">map&#39;</span> <span class="n">f</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">foldr</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">acc</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="kt">:</span> <span class="n">acc</span><span class="p">)</span> <span class="kt">[]</span> <span class="n">xs</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>the <code>++</code> function is much more expensive than <code>:</code>, so we usually use <strong>right folds when we&rsquo;re building up new lists from a list</strong>.</p>
+<p>The <code>foldl1</code> and <code>foldr1</code> functions work much like <code>foldl</code> and <code>foldr</code>, only you don&rsquo;t need to provide them with an explicit starting value. They <strong>assume the first (or last) element of the list to be the starting value</strong> and then start the fold with the element next to it. They fold up having <strong>at least one element</strong>.</p>
+<ul>
+<li><strong>scanl and scanr</strong></li>
+</ul>
+<p><code>scanl</code> and scanr are like <code>foldl</code> and <code>foldr</code>, only they <strong>report all the intermediate accumulator states</strong> in the form of a list. There are also <code>scanl1</code> and <code>scanr1</code>, which are analogous to <code>foldl1</code> and <code>foldr1</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">scanl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+<span class="c1">-- [0,3,8,10,11]  </span>
+<span class="nf">scanr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+<span class="c1">-- [11,8,3,1,0]  </span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Let&rsquo;s answer us this question: <em>How many elements does it take for the sum of the roots of all natural numbers to exceed 1000?</em></p>
+<p>To get the squares of all natural numbers, we just do <code>map sqrt [1..]</code>. Now, to get the sum, we could do a fold, but because we&rsquo;re interested in how the sum progresses, we&rsquo;re going to do a scan. Once we&rsquo;ve done the scan, we just see <strong>how many sums are under 1000.</strong> Then it takes X+1 elements for the sum to exceed 1000.</p>
+<h2 id="function-application-with-">Function application with $</h2>
+<p><code>$</code> function, also called function application</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="p">(</span><span class="o">$</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span>  
+<span class="nf">f</span> <span class="o">$</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">f</span> <span class="n">x</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>Most of the time, it&rsquo;s a convenience function so that we don&rsquo;t have to write so many parentheses.</p>
+<p><code>sum (map sqrt [1..130])</code> is equal to <code>sum $ map sqrt [1..130]</code></p>
+<p><code>sqrt (3 + 4 + 9)</code> is equal to <code>sqrt $ 3 + 4 + 9</code></p>
+<p>But apart from getting rid of parentheses, <code>$</code> means that function application can be treated just like another function. That way, we can, for instance, map function application over a list of functions.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">map</span> <span class="p">(</span><span class="o">$</span> <span class="mi">3</span><span class="p">)</span> <span class="p">[(</span><span class="mi">4</span><span class="o">+</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="p">),</span> <span class="p">(</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span> <span class="n">sqrt</span><span class="p">]</span>  
+<span class="c1">-- [7.0,30.0,9.0,1.7320508075688772]  </span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="function-composition">Function composition</h2>
+<p>In mathematics, function composition is defined like this: <img src="http://s3.amazonaws.com/lyah/composition.png" alt=" (f . g)(x) = f(g(x))">, meaning that composing two functions produces a new function that, when called with a parameter, say, <em>x</em> is the equivalent of calling <em>g</em> with the parameter <em>x</em> and then calling the <em>f</em> with that result.</p>
+<p>In Haskell:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="p">(</span><span class="o">.</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">c</span>  
+<span class="nf">f</span> <span class="o">.</span> <span class="n">g</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="p">(</span><span class="n">g</span> <span class="n">x</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p><code>f</code> must take as its <strong>parameter a value that has the same type as g&rsquo;s return value.</strong></p>
+<ul>
+<li>one of the function of  <code> .</code> Is to generate new function and pass it to another function</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">map</span> <span class="p">(</span><span class="n">negate</span> <span class="o">.</span> <span class="n">abs</span><span class="p">)</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">19</span><span class="p">,</span><span class="mi">24</span><span class="p">]</span>  
+<span class="c1">-- firstly abs, then negate</span>
+<span class="c1">-- [-5,-3,-6,-7,-3,-2,-19,-24]  </span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>For function with several parameters:</li>
+</ul>
+<p>they have same output:</p>
+<p><code>sum (replicate 5 (max 6.7 8.9))</code></p>
+<p><code>(sum . replicate 5 . max 6.7) 8.9</code></p>
+<p><code>sum . replicate 5 . max 6.7 $ 8.9</code> , $ is used when there are too many functions (more than 3)</p>
+<ul>
+<li>Another common use of function composition is defining functions in the so-called <strong>point free style</strong></li>
+</ul>
+<p><code>sum' xs = foldl (+) 0 xs </code> , xs is on both side, so this function is equal to <code>sum' = foldl (+) 0</code></p>
+<p>But in <code>fn x = ceiling (negate (tan (cos (max 50 x))))</code>, we cannot simply delete <code>x</code> on both side, but we can write in this form: <code>fn = ceiling . negate . tan . cos . max 50  </code></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/haskell4/">
+            <span class="next-text nav-default">Recursion</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
