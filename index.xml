@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Thu, 19 Nov 2020 14:01:45 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2020 17:12:47 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Module</title>
+      <link>https://yufei-li.github.io/post/haskell6/</link>
+      <pubDate>Thu, 19 Nov 2020 17:12:47 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/haskell6/</guid>
+      <description>Loading modules All the functions, types and typeclasses that we&amp;rsquo;ve dealt with so far were part of the Prelude module, which is imported by default.
+The syntax for importing modules in a Haskell script is import &amp;lt;module name&amp;gt;
+nub is a function defined in Data.List that takes a list and remove duplicate elements from the list
+1 2 3 4  import Data.List numUniques :: (Eq a) =&amp;gt; [a] -&amp;gt; Int numUniques = length .</description>
+    </item>
     
     <item>
       <title>High Order Functions</title>

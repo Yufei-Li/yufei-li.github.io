@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Module - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="Loading modules All the functions, types and typeclasses that we&amp;rsquo;ve dealt with so far were part of the Prelude module, which is imported by default.
+The syntax for importing modules in a Haskell script is import &amp;lt;module name&amp;gt;
+nub is a function defined in Data.List that takes a list and remove duplicate elements from the list
+1 2 3 4  import Data.List numUniques :: (Eq a) =&amp;gt; [a] -&amp;gt; Int numUniques = length ." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/haskell6/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Module" />
+<meta property="og:description" content="Loading modules All the functions, types and typeclasses that we&rsquo;ve dealt with so far were part of the Prelude module, which is imported by default.
+The syntax for importing modules in a Haskell script is import &lt;module name&gt;
+nub is a function defined in Data.List that takes a list and remove duplicate elements from the list
+1 2 3 4  import Data.List numUniques :: (Eq a) =&gt; [a] -&gt; Int numUniques = length ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/haskell6/" />
+<meta property="article:published_time" content="2020-11-19T17:12:47+08:00" />
+<meta property="article:modified_time" content="2020-11-19T17:12:47+08:00" />
+<meta itemprop="name" content="Module">
+<meta itemprop="description" content="Loading modules All the functions, types and typeclasses that we&rsquo;ve dealt with so far were part of the Prelude module, which is imported by default.
+The syntax for importing modules in a Haskell script is import &lt;module name&gt;
+nub is a function defined in Data.List that takes a list and remove duplicate elements from the list
+1 2 3 4  import Data.List numUniques :: (Eq a) =&gt; [a] -&gt; Int numUniques = length .">
+<meta itemprop="datePublished" content="2020-11-19T17:12:47&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-19T17:12:47&#43;08:00" />
+<meta itemprop="wordCount" content="2258">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Module"/>
+<meta name="twitter:description" content="Loading modules All the functions, types and typeclasses that we&rsquo;ve dealt with so far were part of the Prelude module, which is imported by default.
+The syntax for importing modules in a Haskell script is import &lt;module name&gt;
+nub is a function defined in Data.List that takes a list and remove duplicate elements from the list
+1 2 3 4  import Data.List numUniques :: (Eq a) =&gt; [a] -&gt; Int numUniques = length ."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Module</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-19 </span>
+        <div class="post-category">
+            <a href="/categories/haskell/"> Haskell </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#loading-modules">Loading modules</a></li>
+    <li><a href="#making-our-own-modules">Making our own modules</a></li>
+    <li><a href="#datalist">Data.List</a></li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="loading-modules">Loading modules</h2>
+<p>All the functions, types and typeclasses that we&rsquo;ve dealt with so far were part of the <code>Prelude</code> module, which is imported by default.</p>
+<p>The syntax for importing modules in a Haskell script is <code>import &lt;module name&gt;</code></p>
+<p><code>nub</code> is a function defined in <code>Data.List</code> that takes a list and remove duplicate elements from the list</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.List</span>  
+  
+<span class="nf">numUniques</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>  
+<span class="nf">numUniques</span> <span class="ow">=</span> <span class="n">length</span> <span class="o">.</span> <span class="n">nub</span>  
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.List</span> <span class="p">(</span><span class="nf">nub</span><span class="p">,</span> <span class="nf">sort</span><span class="p">)</span>  <span class="c1">-- import nub and sort only</span>
+<span class="kr">import</span> <span class="nn">Data.List</span> <span class="k">hiding</span> <span class="p">(</span><span class="nf">nub</span><span class="p">)</span>  <span class="c1">-- import all the functions in Data.List except nub</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>import module in ghci</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kt">:</span><span class="n">m</span> <span class="o">+</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">List</span>  
+<span class="kt">:</span><span class="n">m</span> <span class="o">+</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">List</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Map</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Set</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>The <code>Data.Map</code> module, which offers a data structure for looking up values by key, exports a bunch of functions with <strong>the same name as <code>Prelude</code> functions</strong>, like <code>filter</code> or <code>null</code>. So when we import <code>Data.Map</code> and then call <code>filter</code>, Haskell won&rsquo;t know which function to use. Here&rsquo;s how we solve this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Data.Map</span> 
+<span class="c1">-- Data.Map.filter to use filter function in Data.Map module</span>
+<span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Data.Map</span> <span class="k">as</span> <span class="n">M</span> <span class="c1">-- M.filter</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="making-our-own-modules">Making our own modules</h2>
+<ol>
+<li>
+<p>We&rsquo;ll make a folder called <strong>Geometry</strong>. Mind the capital G. In it, we&rsquo;ll place two files: <strong>Sphere.hs</strong>, and <strong>Cuboid.hs</strong></p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">module</span> <span class="nn">Geometry.Sphere</span>  
+<span class="p">(</span> <span class="nf">volume</span>  
+<span class="p">,</span> <span class="nf">area</span>  
+<span class="p">)</span> <span class="kr">where</span>  
+     
+<span class="nf">volume</span> <span class="ow">::</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span>  
+<span class="nf">volume</span> <span class="n">radius</span> <span class="ow">=</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">radius</span> <span class="o">^</span> <span class="mi">3</span><span class="p">)</span>  
+     
+<span class="nf">area</span> <span class="ow">::</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span>  
+<span class="nf">area</span> <span class="n">radius</span> <span class="ow">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">radius</span> <span class="o">^</span> <span class="mi">2</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">module</span> <span class="nn">Geometry.Cuboid</span>  
+<span class="p">(</span> <span class="nf">volume</span>  
+<span class="p">,</span> <span class="nf">area</span>  
+<span class="p">)</span> <span class="kr">where</span>  
+     
+<span class="nf">volume</span> <span class="ow">::</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span>  
+<span class="nf">volume</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="ow">=</span> <span class="n">rectangleArea</span> <span class="n">a</span> <span class="n">b</span> <span class="o">*</span> <span class="n">c</span>  
+     
+<span class="nf">area</span> <span class="ow">::</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span>  
+<span class="nf">area</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="ow">=</span> <span class="n">rectangleArea</span> <span class="n">a</span> <span class="n">b</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">rectangleArea</span> <span class="n">a</span> <span class="n">c</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">rectangleArea</span> <span class="n">c</span> <span class="n">b</span> <span class="o">*</span> <span class="mi">2</span>  
+     
+<span class="nf">rectangleArea</span> <span class="ow">::</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span> <span class="ow">-&gt;</span> <span class="kt">Float</span>  
+<span class="nf">rectangleArea</span> <span class="n">a</span> <span class="n">b</span> <span class="ow">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>if we&rsquo;re in a file that&rsquo;s on the same level as the <strong>Geometry</strong> folder, we could import these functions by:</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Geometry.Sphere</span> <span class="k">as</span> <span class="n">Sphere</span>  
+<span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Geometry.Cuboid</span> <span class="k">as</span> <span class="n">Cuboid</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="datalist">Data.List</h2>
+<ul>
+<li>
+<p><strong>intersperse</strong></p>
+</li>
+<li>
+<ul>
+<li>takes an element and a list and then puts that element in between each pair of elements in the list.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">intersperse</span> <span class="sc">&#39;.&#39;</span> <span class="s">&#34;MONKEY&#34;</span>  
+<span class="s">&#34;M.O.N.K.E.Y&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">intersperse</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>intercalate</strong></li>
+<li>
+<ul>
+<li>takes a list of lists and a list. It then inserts that list in between all those lists and then flattens the result.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">intercalate</span> <span class="s">&#34; &#34;</span> <span class="p">[</span><span class="s">&#34;hey&#34;</span><span class="p">,</span><span class="s">&#34;there&#34;</span><span class="p">,</span><span class="s">&#34;guys&#34;</span><span class="p">]</span>  
+<span class="s">&#34;hey there guys&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">intercalate</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>  
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>transpose</strong></li>
+<li>
+<ul>
+<li>transposes a list of lists. If you look at a list of lists as a 2D matrix, the columns become the rows and vice versa.</li>
+<li>return transpose matrix</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">transpose</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>  
+<span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">transpose</span> <span class="p">[</span><span class="s">&#34;hey&#34;</span><span class="p">,</span><span class="s">&#34;there&#34;</span><span class="p">,</span><span class="s">&#34;guys&#34;</span><span class="p">]</span>  
+<span class="p">[</span><span class="s">&#34;htg&#34;</span><span class="p">,</span><span class="s">&#34;ehu&#34;</span><span class="p">,</span><span class="s">&#34;yey&#34;</span><span class="p">,</span><span class="s">&#34;rs&#34;</span><span class="p">,</span><span class="s">&#34;e&#34;</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>concat</strong></li>
+<li>
+<ul>
+<li>flattens a list of lists into just a list of elements.</li>
+<li>It will just <strong>remove one level of nesting</strong>. So if you want to completely flatten <code>[[[2,3],[3,4,5],[2]],[[2,3],[3,4]]]</code>, which is a list of lists of lists, you have to concatenate it twice.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">concat</span> <span class="p">[</span><span class="s">&#34;foo&#34;</span><span class="p">,</span><span class="s">&#34;bar&#34;</span><span class="p">,</span><span class="s">&#34;car&#34;</span><span class="p">]</span>  
+<span class="s">&#34;foobarcar&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">concat</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>  
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>and</strong></li>
+<li>
+<ul>
+<li>takes a list of boolean values and returns <strong>True</strong> only if all the values in the list are <strong>True</strong>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">and</span> <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>  
+<span class="kt">True</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">and</span> <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  
+<span class="kt">False</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>or</strong></li>
+<li>
+<ul>
+<li>is like <strong>and</strong>, only it returns <strong>True</strong> if any of the boolean values in a list is <strong>True</strong>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">or</span> <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+<span class="kt">True</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">or</span> <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>  
+<span class="kt">False</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>any &amp; all</strong></li>
+<li>
+<ul>
+<li><code>any</code> and <code>all</code> take a predicate and then check if any or all the elements in a list satisfy the predicate</li>
+<li>they are equal to <code>and(or) . map a list</code></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">any</span> <span class="p">(</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  
+<span class="kt">True</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">all</span> <span class="p">(</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>  
+<span class="kt">True</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">all</span> <span class="p">(`</span><span class="n">elem</span><span class="p">`</span> <span class="p">[</span><span class="sc">&#39;A&#39;</span><span class="o">..</span><span class="sc">&#39;Z&#39;</span><span class="p">])</span> <span class="s">&#34;HEYGUYSwhatsup&#34;</span>  
+<span class="kt">False</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">any</span> <span class="p">(`</span><span class="n">elem</span><span class="p">`</span> <span class="p">[</span><span class="sc">&#39;A&#39;</span><span class="o">..</span><span class="sc">&#39;Z&#39;</span><span class="p">])</span> <span class="s">&#34;HEYGUYSwhatsup&#34;</span>  
+<span class="kt">True</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>iterate</strong></li>
+<li>
+<ul>
+<li>takes a function and a starting value. It applies the function to the starting value, then it applies that function to the result, then it applies the function to that result again, etc. It returns all the results in the form of an infinite list.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">10</span> <span class="o">$</span> <span class="n">iterate</span> <span class="p">(</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span> <span class="mi">1</span>  
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">512</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">3</span> <span class="o">$</span> <span class="n">iterate</span> <span class="p">(</span><span class="o">++</span> <span class="s">&#34;haha&#34;</span><span class="p">)</span> <span class="s">&#34;haha&#34;</span>  
+<span class="p">[</span><span class="s">&#34;haha&#34;</span><span class="p">,</span><span class="s">&#34;hahahaha&#34;</span><span class="p">,</span><span class="s">&#34;hahahahahaha&#34;</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>splitAt</strong></li>
+<li>
+<ul>
+<li>takes a number and a list. It then splits the list at that many elements, returning the resulting two lists in a tuple.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">splitAt</span> <span class="mi">3</span> <span class="s">&#34;heyman&#34;</span>  
+<span class="p">(</span><span class="s">&#34;hey&#34;</span><span class="p">,</span><span class="s">&#34;man&#34;</span><span class="p">)</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">splitAt</span> <span class="mi">100</span> <span class="s">&#34;heyman&#34;</span>  
+<span class="p">(</span><span class="s">&#34;heyman&#34;</span><span class="p">,</span><span class="s">&#34;&#34;</span><span class="p">)</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">splitAt</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="s">&#34;heyman&#34;</span>  
+<span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="s">&#34;heyman&#34;</span><span class="p">)</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="ow">=</span> <span class="n">splitAt</span> <span class="mi">3</span> <span class="s">&#34;foobar&#34;</span> <span class="kr">in</span> <span class="n">b</span> <span class="o">++</span> <span class="n">a</span>  
+<span class="s">&#34;barfoo&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>takeWhile</strong></li>
+<li>
+<ul>
+<li>is a really useful little function. It takes elements from a list while the predicate holds and then when an element is encountered that doesn&rsquo;t satisfy the predicate, it&rsquo;s cut off. It turns out this is very useful</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">takeWhile</span> <span class="p">(</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">)</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">takeWhile</span> <span class="p">(</span><span class="o">/=</span><span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="s">&#34;This is a sentence&#34;</span>  
+<span class="s">&#34;This&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>dropWhile</strong></li>
+<li>
+<ul>
+<li>is similar, only it drops all the elements while the predicate is true. Once predicate equates to <strong>False</strong>, it returns the rest of the list.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">dropWhile</span> <span class="p">(</span><span class="o">/=</span><span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="s">&#34;This is a sentence&#34;</span>  
+<span class="s">&#34; is a sentence&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">dropWhile</span> <span class="p">(</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<ul>
+<li>
+<p><strong>example</strong>: The list is made of tuples whose first component is the stock value, the second is the year, the third is the month and the fourth is the date. We want to know when the stock value <strong>first exceeded</strong> one thousand dollars</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">let</span> <span class="n">stock</span> <span class="ow">=</span> <span class="p">[(</span><span class="mf">994.4</span><span class="p">,</span><span class="mi">2008</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mf">995.2</span><span class="p">,</span><span class="mi">2008</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mf">999.2</span><span class="p">,</span><span class="mi">2008</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mf">1001.4</span><span class="p">,</span><span class="mi">2008</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mf">998.3</span><span class="p">,</span><span class="mi">2008</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">head</span> <span class="p">(</span><span class="n">dropWhile</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">d</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="n">stock</span><span class="p">)</span>  
+<span class="p">(</span><span class="mf">1001.4</span><span class="p">,</span><span class="mi">2008</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>span</strong></p>
+</li>
+<li>
+<ul>
+<li>is kind of like <code>takeWhile</code>, only it returns a pair of lists. The first list contains everything the resulting list from <code>takeWhile</code> . The second list contains the rest of the list.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="p">(</span><span class="n">fw</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span> <span class="ow">=</span> <span class="n">span</span> <span class="p">(</span><span class="o">/=</span><span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="s">&#34;This is a sentence&#34;</span> <span class="kr">in</span> <span class="s">&#34;First word:&#34;</span> <span class="o">++</span> <span class="n">fw</span> <span class="o">++</span> <span class="s">&#34;, the rest:&#34;</span> <span class="o">++</span> <span class="n">rest</span>  
+<span class="s">&#34;First word: This, the rest: is a sentence&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>break</strong></li>
+<li>
+<ul>
+<li><code>break</code> breaks it when the predicate is first true. Doing <code>break p</code> is the equivalent of doing <code>span (not . p)</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">break</span> <span class="p">(</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>  
+<span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">span</span> <span class="p">(</span><span class="o">/=</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>  
+<span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>sort</strong></li>
+<li>
+<ul>
+<li>simply sorts a list</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">sort</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">sort</span> <span class="s">&#34;This will be sorted soon&#34;</span>  
+<span class="s">&#34;Tbdeehiillnooorssstw&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>group</strong></li>
+<li>
+<ul>
+<li>takes a list and groups adjacent elements into sublists if they are equal.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">group</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>  
+<span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">5</span><span class="p">],[</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">]]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>If we sort a list before grouping it, we can find out how many times each element appears in the list.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">l</span><span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">length</span> <span class="n">l</span><span class="p">))</span> <span class="o">.</span> <span class="n">group</span> <span class="o">.</span> <span class="n">sort</span> <span class="o">$</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>  
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>inits &amp; tails</strong></li>
+<li>
+<ul>
+<li>only they recursively apply that to a list until there&rsquo;s nothing left</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">inits</span> <span class="s">&#34;w00t&#34;</span>  
+<span class="p">[</span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="s">&#34;w&#34;</span><span class="p">,</span><span class="s">&#34;w0&#34;</span><span class="p">,</span><span class="s">&#34;w00&#34;</span><span class="p">,</span><span class="s">&#34;w00t&#34;</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">tails</span> <span class="s">&#34;w00t&#34;</span>  
+<span class="p">[</span><span class="s">&#34;w00t&#34;</span><span class="p">,</span><span class="s">&#34;00t&#34;</span><span class="p">,</span><span class="s">&#34;0t&#34;</span><span class="p">,</span><span class="s">&#34;t&#34;</span><span class="p">,</span><span class="s">&#34;&#34;</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">w</span> <span class="ow">=</span> <span class="s">&#34;w00t&#34;</span> <span class="kr">in</span> <span class="n">zip</span> <span class="p">(</span><span class="n">inits</span> <span class="n">w</span><span class="p">)</span> <span class="p">(</span><span class="n">tails</span> <span class="n">w</span><span class="p">)</span>  
+<span class="p">[(</span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="s">&#34;w00t&#34;</span><span class="p">),(</span><span class="s">&#34;w&#34;</span><span class="p">,</span><span class="s">&#34;00t&#34;</span><span class="p">),(</span><span class="s">&#34;w0&#34;</span><span class="p">,</span><span class="s">&#34;0t&#34;</span><span class="p">),(</span><span class="s">&#34;w00&#34;</span><span class="p">,</span><span class="s">&#34;t&#34;</span><span class="p">),(</span><span class="s">&#34;w00t&#34;</span><span class="p">,</span><span class="s">&#34;&#34;</span><span class="p">)]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<ul>
+<li><strong>example</strong>： implement searching a list for a sublist</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">search</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>  
+<span class="nf">search</span> <span class="n">needle</span> <span class="n">haystack</span> <span class="ow">=</span>   
+    <span class="kr">let</span> <span class="n">nlen</span> <span class="ow">=</span> <span class="n">length</span> <span class="n">needle</span>  
+    <span class="kr">in</span>  <span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">x</span> <span class="ow">-&gt;</span> <span class="kr">if</span> <span class="n">take</span> <span class="n">nlen</span> <span class="n">x</span> <span class="o">==</span> <span class="n">needle</span> <span class="kr">then</span> <span class="kt">True</span> <span class="kr">else</span> <span class="n">acc</span><span class="p">)</span> <span class="kt">False</span> <span class="p">(</span><span class="n">tails</span> <span class="n">haystack</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>isInfixOf</strong></li>
+<li>
+<ul>
+<li>searches for a sublist within a list and returns <strong>True</strong> if the sublist we&rsquo;re looking for is somewhere inside the target list.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="s">&#34;cat&#34;</span> <span class="p">`</span><span class="n">isInfixOf</span><span class="p">`</span> <span class="s">&#34;im a cat burglar&#34;</span>  
+<span class="kt">True</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="s">&#34;Cat&#34;</span> <span class="p">`</span><span class="n">isInfixOf</span><span class="p">`</span> <span class="s">&#34;im a cat burglar&#34;</span>  
+<span class="kt">False</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="s">&#34;cats&#34;</span> <span class="p">`</span><span class="n">isInfixOf</span><span class="p">`</span> <span class="s">&#34;im a cat burglar&#34;</span>  
+<span class="kt">False</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>isPrefixOf &amp; isSuffixOf</strong></li>
+<li>
+<ul>
+<li>search for a sublist at the beginning and at the end of a list, respectively.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="s">&#34;hey&#34;</span> <span class="p">`</span><span class="n">isPrefixOf</span><span class="p">`</span> <span class="s">&#34;hey there!&#34;</span>  
+<span class="kt">True</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="s">&#34;hey&#34;</span> <span class="p">`</span><span class="n">isPrefixOf</span><span class="p">`</span> <span class="s">&#34;oh hey there!&#34;</span>  
+<span class="kt">False</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="s">&#34;there!&#34;</span> <span class="p">`</span><span class="n">isSuffixOf</span><span class="p">`</span> <span class="s">&#34;oh hey there!&#34;</span>  
+<span class="kt">True</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="s">&#34;there!&#34;</span> <span class="p">`</span><span class="n">isSuffixOf</span><span class="p">`</span> <span class="s">&#34;oh hey there&#34;</span>  
+<span class="kt">False</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>elem &amp; notElem</strong></p>
+</li>
+<li>
+<ul>
+<li>check if an element is or isn&rsquo;t inside a list.</li>
+</ul>
+</li>
+<li>
+<p><strong>partition</strong></p>
+</li>
+<li>
+<ul>
+<li>takes a list and a predicate and returns a pair of lists. The first list in the result contains all the elements that satisfy the predicate, the second contains all the ones that don&rsquo;t.</li>
+<li>compare with <code>span</code> and <code>break</code>  :  <code>span</code> and <code>break</code> are done once they encounter <strong>the first element that doesn&rsquo;t and does satisfy</strong> the predicate, <code>partition</code> goes through the whole list and splits it up according to the predicate.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">partition</span> <span class="p">(`</span><span class="n">elem</span><span class="p">`</span> <span class="p">[</span><span class="sc">&#39;A&#39;</span><span class="o">..</span><span class="sc">&#39;Z&#39;</span><span class="p">])</span> <span class="s">&#34;BOBsidneyMORGANeddy&#34;</span>  
+<span class="p">(</span><span class="s">&#34;BOBMORGAN&#34;</span><span class="p">,</span><span class="s">&#34;sidneyeddy&#34;</span><span class="p">)</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">partition</span> <span class="p">(</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>  
+<span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>  
+<span class="c1">-- compare with span</span>
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">span</span> <span class="p">(`</span><span class="n">elem</span><span class="p">`</span> <span class="p">[</span><span class="sc">&#39;A&#39;</span><span class="o">..</span><span class="sc">&#39;Z&#39;</span><span class="p">])</span> <span class="s">&#34;BOBsidneyMORGANeddy&#34;</span>  
+<span class="p">(</span><span class="s">&#34;BOB&#34;</span><span class="p">,</span><span class="s">&#34;sidneyMORGANeddy&#34;</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>find</strong></li>
+<li>
+<ul>
+<li>takes a list and a predicate and returns the first element that satisfies the predicate. But it returns that element wrapped in a <strong>Maybe</strong> value</li>
+<li>a <strong>Maybe</strong> value can either be <strong>Just something</strong> or <strong>Nothing</strong>. Like list,  a <strong>Maybe</strong> value can be either no elements or a single element. The type of maybe having an integer is <strong>Maybe Int</strong></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">find</span> <span class="p">(</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>  
+<span class="kt">Just</span> <span class="mi">5</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">find</span> <span class="p">(</span><span class="o">&gt;</span><span class="mi">9</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>  
+<span class="kt">Nothing</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">find</span>  
+<span class="nf">find</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Maybe</span> <span class="n">a</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>example</strong>: In  <code>head (dropWhile (\(val,y,m,d) -&gt; val &lt; 1000) stock)</code> , <code>head</code> is not really safe, because it has nothing to return when the list is empty.  However, if we rewrote that as <code>find (\(val,y,m,d) -&gt; val &gt; 1000) stock</code>, we&rsquo;d be much safer. If our stock never went over $1000 (so if no element satisfied the predicate), we&rsquo;d get back a <code>Nothing</code>. But there was a valid answer in that list, we&rsquo;d get, say, <code>Just (1001.4,2008,9,4)</code>.</li>
+<li><strong>elemIndex &amp; elemIndices</strong></li>
+<li>
+<ul>
+<li><code>elemIndex</code> is kind of like <code>elem</code>, only it doesn&rsquo;t return a boolean value. It maybe returns the index of the element we&rsquo;re looking for. If that element isn&rsquo;t in our list, it returns a <code>Nothing</code>.</li>
+<li><code>elemIndices</code> returns a list of indices, in case the element we&rsquo;re looking for crops up in our list several times. If there is no elements that satisfy the requirements, a empty list will be returned.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">elemIndex</span>  
+<span class="nf">elemIndex</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Maybe</span> <span class="kt">Int</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="mi">4</span> <span class="p">`</span><span class="n">elemIndex</span><span class="p">`</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>  
+<span class="kt">Just</span> <span class="mi">3</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="mi">10</span> <span class="p">`</span><span class="n">elemIndex</span><span class="p">`</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>  
+<span class="kt">Nothing</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="sc">&#39; &#39;</span> <span class="p">`</span><span class="n">elemIndices</span><span class="p">`</span> <span class="s">&#34;Where are the spaces?&#34;</span>  
+<span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">13</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>findIndex &amp;  findIndices</strong></li>
+<li>
+<ul>
+<li><code>findIndex</code> is like find, but it maybe returns the index of the first element that satisfies the predicate.</li>
+<li><code>findIndices</code> returns the indices of all elements that satisfy the predicate in the form of a list.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">findIndex</span> <span class="p">(</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  
+<span class="kt">Just</span> <span class="mi">5</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">findIndex</span> <span class="p">(</span><span class="o">==</span><span class="mi">7</span><span class="p">)</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  
+<span class="kt">Nothing</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">findIndices</span> <span class="p">(`</span><span class="n">elem</span><span class="p">`</span> <span class="p">[</span><span class="sc">&#39;A&#39;</span><span class="o">..</span><span class="sc">&#39;Z&#39;</span><span class="p">])</span> <span class="s">&#34;Where Are The Caps?&#34;</span>  
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">14</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>zipWith n</strong></li>
+<li>
+<ul>
+<li>zipWith n can zip multiple lists together</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">zipWith3</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">zip4</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>  
+<span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>lines</strong></li>
+<li>
+<ul>
+<li>is a useful function when dealing with <strong>files or input from somewhere</strong>. It takes a string and returns every line of that string in a separate list.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">lines</span> <span class="s">&#34;first line</span><span class="se">\n</span><span class="s">second line</span><span class="se">\n</span><span class="s">third line&#34;</span>  
+<span class="p">[</span><span class="s">&#34;first line&#34;</span><span class="p">,</span><span class="s">&#34;second line&#34;</span><span class="p">,</span><span class="s">&#34;third line&#34;</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">unlines</span> <span class="p">[</span><span class="s">&#34;first line&#34;</span><span class="p">,</span> <span class="s">&#34;second line&#34;</span><span class="p">,</span> <span class="s">&#34;third line&#34;</span><span class="p">]</span>  
+<span class="s">&#34;first line</span><span class="se">\n</span><span class="s">second line</span><span class="se">\n</span><span class="s">third line</span><span class="se">\n</span><span class="s">&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>words &amp; unwords</strong></li>
+<li>
+<ul>
+<li><code>words</code> and <code>unwords</code> are for splitting a line of text into words or joining a list of words into a text.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">words</span> <span class="s">&#34;hey these are the words in this sentence&#34;</span>  
+<span class="p">[</span><span class="s">&#34;hey&#34;</span><span class="p">,</span><span class="s">&#34;these&#34;</span><span class="p">,</span><span class="s">&#34;are&#34;</span><span class="p">,</span><span class="s">&#34;the&#34;</span><span class="p">,</span><span class="s">&#34;words&#34;</span><span class="p">,</span><span class="s">&#34;in&#34;</span><span class="p">,</span><span class="s">&#34;this&#34;</span><span class="p">,</span><span class="s">&#34;sentence&#34;</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">words</span> <span class="s">&#34;hey these           are    the words in this</span><span class="se">\n</span><span class="s">sentence&#34;</span>  
+<span class="p">[</span><span class="s">&#34;hey&#34;</span><span class="p">,</span><span class="s">&#34;these&#34;</span><span class="p">,</span><span class="s">&#34;are&#34;</span><span class="p">,</span><span class="s">&#34;the&#34;</span><span class="p">,</span><span class="s">&#34;words&#34;</span><span class="p">,</span><span class="s">&#34;in&#34;</span><span class="p">,</span><span class="s">&#34;this&#34;</span><span class="p">,</span><span class="s">&#34;sentence&#34;</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">unwords</span> <span class="p">[</span><span class="s">&#34;hey&#34;</span><span class="p">,</span><span class="s">&#34;there&#34;</span><span class="p">,</span><span class="s">&#34;mate&#34;</span><span class="p">]</span>  
+<span class="s">&#34;hey there mate&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>nub</strong></li>
+<li>
+<ul>
+<li>It takes a list and weeds out the duplicate elements, returning a list with every element in the list</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">nub</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">nub</span> <span class="s">&#34;Lots of words and stuff&#34;</span>  
+<span class="s">&#34;Lots fwrdanu&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>delete</strong></li>
+<li>
+<ul>
+<li>takes an element and a list and deletes <strong>the first occurence</strong> of that element in the list.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">delete</span> <span class="sc">&#39;h&#39;</span> <span class="s">&#34;hey there ghang!&#34;</span>  
+<span class="s">&#34;ey there ghang!&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">delete</span> <span class="sc">&#39;h&#39;</span> <span class="o">.</span> <span class="n">delete</span> <span class="sc">&#39;h&#39;</span> <span class="o">$</span> <span class="s">&#34;hey there ghang!&#34;</span>  
+<span class="s">&#34;ey tere ghang!&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">delete</span> <span class="sc">&#39;h&#39;</span> <span class="o">.</span> <span class="n">delete</span> <span class="sc">&#39;h&#39;</span> <span class="o">.</span> <span class="n">delete</span> <span class="sc">&#39;h&#39;</span> <span class="o">$</span> <span class="s">&#34;hey there ghang!&#34;</span>  
+<span class="s">&#34;ey tere gang!&#34;</span>   
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>\\</strong></li>
+<li>
+<ul>
+<li>the list difference function. For every element in the right-hand list, it removes a matching element in the left one.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">]</span> <span class="o">\\</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>  
+<span class="c1">-- is like doing delete 2 . delete 5 . delete 9 $ [1..10]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="s">&#34;Im a big baby&#34;</span> <span class="o">\\</span> <span class="s">&#34;big&#34;</span>  
+<span class="s">&#34;Im a  baby&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>union</strong></li>
+<li>
+<ul>
+<li>returns the union of two lists. It goes over every element in the second list and <strong>appends it to the first one if it isn&rsquo;t already in yet</strong>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="s">&#34;hey man&#34;</span> <span class="p">`</span><span class="n">union</span><span class="p">`</span> <span class="s">&#34;man what&#39;s up&#34;</span>  
+<span class="s">&#34;hey manwt&#39;sup&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">7</span><span class="p">]</span> <span class="p">`</span><span class="n">union</span><span class="p">`</span> <span class="p">[</span><span class="mi">5</span><span class="o">..</span><span class="mi">10</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>intersect</strong></li>
+<li>
+<ul>
+<li>works like set intersection. It returns <strong>only the elements that are found in both lists.</strong></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">7</span><span class="p">]</span> <span class="p">`</span><span class="n">intersect</span><span class="p">`</span> <span class="p">[</span><span class="mi">5</span><span class="o">..</span><span class="mi">10</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>insert</strong></li>
+<li>
+<ul>
+<li><strong>insert</strong> will start at the beginning of the list and then keep going until it finds an element that&rsquo;s equal to or greater than the element that we&rsquo;re inserting and it will insert it just before the element.</li>
+<li>if the list is ordered, after insert, the list is still ordered</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">insert</span> <span class="mi">4</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">insert</span> <span class="sc">&#39;g&#39;</span> <span class="o">$</span> <span class="p">[</span><span class="sc">&#39;a&#39;</span><span class="o">..</span><span class="sc">&#39;f&#39;</span><span class="p">]</span> <span class="o">++</span> <span class="p">[</span><span class="sc">&#39;h&#39;</span><span class="o">..</span><span class="sc">&#39;z&#39;</span><span class="p">]</span>  
+<span class="s">&#34;abcdefghijklmnopqrstuvwxyz&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">insert</span> <span class="mi">3</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="reference">reference</h2>
+<p><a href="http://learnyouahaskell.com/modules">http://learnyouahaskell.com/modules</a></p>
+<p><a href="https://www.cntofu.com/book/140/zh-cn/ch07/module.md">https://www.cntofu.com/book/140/zh-cn/ch07/module.md</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/haskell5/">
+            <span class="next-text nav-default">High Order Functions</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
