@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Thu, 19 Nov 2020 17:12:47 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2020 01:34:54 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Making Own Types and Typeclasses</title>
+      <link>https://yufei-li.github.io/post/haskell7/</link>
+      <pubDate>Sat, 21 Nov 2020 01:34:54 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/haskell7/</guid>
+      <description>Algebraic data types intro One way to make type is to use the data keyword to define a type. Let&amp;rsquo;s see how the Bool type is defined in the standard library: data Bool = False|True. We can read as: the Bool type can have a value of True or False. Both the type name and the value constructors have to be capital cased.
+  example: build Shape type in Haskell:data Shape = Circle Float Float Float | Rectangle Float Float Float Float , The Circle value constructor has three fields, which take floats.</description>
+    </item>
     
     <item>
       <title>Module</title>

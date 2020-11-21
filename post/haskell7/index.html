@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Making Own Types and Typeclasses - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="Algebraic data types intro One way to make type is to use the data keyword to define a type. Let&amp;rsquo;s see how the Bool type is defined in the standard library: data Bool = False|True. We can read as: the Bool type can have a value of True or False. Both the type name and the value constructors have to be capital cased.
+  example: build Shape type in Haskell:data Shape = Circle Float Float Float | Rectangle Float Float Float Float , The Circle value constructor has three fields, which take floats." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/haskell7/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Making Own Types and Typeclasses" />
+<meta property="og:description" content="Algebraic data types intro One way to make type is to use the data keyword to define a type. Let&rsquo;s see how the Bool type is defined in the standard library: data Bool = False|True. We can read as: the Bool type can have a value of True or False. Both the type name and the value constructors have to be capital cased.
+  example: build Shape type in Haskell:data Shape = Circle Float Float Float | Rectangle Float Float Float Float , The Circle value constructor has three fields, which take floats." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/haskell7/" />
+<meta property="article:published_time" content="2020-11-21T01:34:54+08:00" />
+<meta property="article:modified_time" content="2020-11-21T01:34:54+08:00" />
+<meta itemprop="name" content="Making Own Types and Typeclasses">
+<meta itemprop="description" content="Algebraic data types intro One way to make type is to use the data keyword to define a type. Let&rsquo;s see how the Bool type is defined in the standard library: data Bool = False|True. We can read as: the Bool type can have a value of True or False. Both the type name and the value constructors have to be capital cased.
+  example: build Shape type in Haskell:data Shape = Circle Float Float Float | Rectangle Float Float Float Float , The Circle value constructor has three fields, which take floats.">
+<meta itemprop="datePublished" content="2020-11-21T01:34:54&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-21T01:34:54&#43;08:00" />
+<meta itemprop="wordCount" content="3346">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Making Own Types and Typeclasses"/>
+<meta name="twitter:description" content="Algebraic data types intro One way to make type is to use the data keyword to define a type. Let&rsquo;s see how the Bool type is defined in the standard library: data Bool = False|True. We can read as: the Bool type can have a value of True or False. Both the type name and the value constructors have to be capital cased.
+  example: build Shape type in Haskell:data Shape = Circle Float Float Float | Rectangle Float Float Float Float , The Circle value constructor has three fields, which take floats."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Making Own Types and Typeclasses</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-21 </span>
+        <div class="post-category">
+            <a href="/categories/haskell/"> Haskell </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#algebraic-data-types-intro">Algebraic data types intro</a></li>
+    <li><a href="#record-syntax">Record Syntax</a></li>
+    <li><a href="#type-parameters">Type parameters</a></li>
+    <li><a href="#derived-instances">Derived instances</a></li>
+    <li><a href="#type-synonyms">Type synonyms</a></li>
+    <li><a href="#recursive-data-structures">Recursive data structures</a></li>
+    <li><a href="#typeclasses">Typeclasses</a></li>
+    <li><a href="#yes-no-typeclass">yes-no typeclass</a></li>
+    <li><a href="#the-functor-typeclass">The Functor typeclass</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="algebraic-data-types-intro">Algebraic data types intro</h2>
+<p>One way to make type is to use the <code>data</code> keyword to define a type. Let&rsquo;s see how the <strong>Bool</strong> type is defined in the standard library: <code>data Bool = False|True</code>. We can read as: the <strong>Bool</strong> type can have a value of <strong>True</strong> or <strong>False</strong>. Both the <strong>type name and the value constructors have to be capital cased.</strong></p>
+<ul>
+<li>
+<p><strong>example</strong>: build <code>Shape</code> type in Haskell:<code>data Shape = Circle Float Float Float | Rectangle Float Float Float Float   </code>, The <strong>Circle</strong> value constructor has three fields, which take floats. The first two fields are the coordinates of its center, the third one its radius. The <strong>Rectangle</strong> value constructor has four fields which accept floats. The first two are the coordinates to its upper left corner and the second two are coordinates to its lower right one.</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">surface</span> <span class="ow">::</span> <span class="kt">Shape</span> <span class="ow">-&gt;</span> <span class="kt">Float</span>  
+<span class="nf">surface</span> <span class="p">(</span><span class="kt">Circle</span> <span class="kr">_</span> <span class="kr">_</span> <span class="n">r</span><span class="p">)</span> <span class="ow">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span> <span class="o">^</span> <span class="mi">2</span>  
+<span class="nf">surface</span> <span class="p">(</span><span class="kt">Rectangle</span> <span class="n">x1</span> <span class="n">y1</span> <span class="n">x2</span> <span class="n">y2</span><span class="p">)</span> <span class="ow">=</span> <span class="p">(</span><span class="n">abs</span> <span class="o">$</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">abs</span> <span class="o">$</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>It says that the function takes a shape and returns a float. We <strong>couldn&rsquo;t</strong> write a type declaration of <code>Circle -&gt; Float</code> because <strong>Circle</strong> is not a type, <strong>Shape</strong> is. Just like we can&rsquo;t write a function with a type declaration of <code>True -&gt; Int</code>. The next thing we notice here is that we can pattern match against constructors.</p>
+</li>
+<li>
+<p>To make our <strong>Shape</strong> type part of the <strong>Show</strong> typeclass, we modify it like this:<code>data Shape = Circle Float Float Float | Rectangle Float Float Float Float deriving (Show)  </code>. If we add <code>deriving (Show)</code> at the end of a data declaration, Haskell automagically makes that type part of the <strong>Show</strong> typeclass.</p>
+</li>
+<li>
+<p>Value constructors are functions, so we can map them and partially apply them and everything. If we want a list of concentric circles with different radii, we can do this.</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">map</span> <span class="p">(</span><span class="kt">Circle</span> <span class="mi">10</span> <span class="mi">20</span><span class="p">)</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>  
+<span class="p">[</span><span class="kt">Circle</span> <span class="mf">10.0</span> <span class="mf">20.0</span> <span class="mf">4.0</span><span class="p">,</span><span class="kt">Circle</span> <span class="mf">10.0</span> <span class="mf">20.0</span> <span class="mf">5.0</span><span class="p">,</span><span class="kt">Circle</span> <span class="mf">10.0</span> <span class="mf">20.0</span> <span class="mf">6.0</span><span class="p">,</span><span class="kt">Circle</span> <span class="mf">10.0</span> <span class="mf">20.0</span> <span class="mf">6.0</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Our data type is good, although it could be better. Let&rsquo;s make an intermediate data type that defines a point in two-dimensional space. Then we can use that to make our shapes more understandable.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Point</span> <span class="ow">=</span> <span class="kt">Point</span> <span class="kt">Float</span> <span class="kt">Float</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>  
+<span class="kr">data</span> <span class="kt">Shape</span> <span class="ow">=</span> <span class="kt">Circle</span> <span class="kt">Point</span> <span class="kt">Float</span> <span class="o">|</span> <span class="kt">Rectangle</span> <span class="kt">Point</span> <span class="kt">Point</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>  
+
+<span class="nf">surface</span> <span class="ow">::</span> <span class="kt">Shape</span> <span class="ow">-&gt;</span> <span class="kt">Float</span>  
+<span class="nf">surface</span> <span class="p">(</span><span class="kt">Circle</span> <span class="kr">_</span> <span class="n">r</span><span class="p">)</span> <span class="ow">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span> <span class="o">^</span> <span class="mi">2</span>  
+<span class="nf">surface</span> <span class="p">(</span><span class="kt">Rectangle</span> <span class="p">(</span><span class="kt">Point</span> <span class="n">x1</span> <span class="n">y1</span><span class="p">)</span> <span class="p">(</span><span class="kt">Point</span> <span class="n">x2</span> <span class="n">y2</span><span class="p">))</span> <span class="ow">=</span> <span class="p">(</span><span class="n">abs</span> <span class="o">$</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">abs</span> <span class="o">$</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="record-syntax">Record Syntax</h2>
+<p>creating a data type that describes a person:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Person</span> <span class="ow">=</span> <span class="kt">Person</span> <span class="p">{</span> <span class="n">firstName</span> <span class="ow">::</span> <span class="kt">String</span>
+                     <span class="p">,</span> <span class="n">lastName</span> <span class="ow">::</span> <span class="kt">String</span>
+                     <span class="p">,</span> <span class="n">age</span> <span class="ow">::</span> <span class="kt">Int</span>
+                     <span class="p">,</span> <span class="n">height</span> <span class="ow">::</span> <span class="kt">Float</span>
+                     <span class="p">,</span> <span class="n">phoneNumber</span> <span class="ow">::</span> <span class="kt">String</span>
+                     <span class="p">,</span> <span class="n">flavor</span> <span class="ow">::</span> <span class="kt">String</span>
+                     <span class="p">}</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>
+                     
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">flavor</span>
+<span class="nf">flavor</span> <span class="ow">::</span> <span class="kt">Person</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">firstName</span>
+<span class="nf">firstName</span> <span class="ow">::</span> <span class="kt">Person</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="type-parameters">Type parameters</h2>
+<p>A value constructor can take some values parameters and then produce a new value. For example:</p>
+<p><code>data Maybe a = Nothing | Just a  </code>. The <strong>a</strong> here is the type parameter. And because there&rsquo;s a type parameter involved, <strong>we call Maybe a type constructor</strong>. When it&rsquo;s not Nothing, this type constructor can end up producing a type of Maybe Int, Maybe Car, Maybe String, etc.</p>
+<p>Maybe is not a type, it&rsquo;s a type constructor. In order for this to be a real type that a value can be part of, it has to have all its type parameters filled up. So if we pass <strong>Char</strong> as the type parameter to <strong>Maybe</strong>, we get a type of <strong>Maybe Char</strong>. The value <strong>Just &lsquo;a&rsquo;</strong> has a type of <strong>Maybe Char</strong>, for example.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="s">&#34;Haha&#34;</span>  
+<span class="kt">Just</span> <span class="s">&#34;Haha&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="mi">84</span>  
+<span class="kt">Just</span> <span class="mi">84</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="kt">Just</span> <span class="s">&#34;Haha&#34;</span>  
+<span class="kt">Just</span> <span class="s">&#34;Haha&#34;</span> <span class="ow">::</span> <span class="kt">Maybe</span> <span class="p">[</span><span class="kt">Char</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="kt">Just</span> <span class="mi">84</span>  
+<span class="kt">Just</span> <span class="mi">84</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">t</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="kt">Maybe</span> <span class="n">t</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="kt">Nothing</span>  
+<span class="kt">Nothing</span> <span class="ow">::</span> <span class="kt">Maybe</span> <span class="n">a</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="mi">10</span> <span class="ow">::</span> <span class="kt">Maybe</span> <span class="kt">Double</span>  
+<span class="kt">Just</span> <span class="mf">10.0</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>don&rsquo;t put type constraints into data declarations</strong> even if it seems to make sense, because you&rsquo;ll have to put them into the function type declarations either way.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Vector</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Vector</span> <span class="n">a</span> <span class="n">a</span> <span class="n">a</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>  
+  
+<span class="nf">vplus</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">t</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="kt">Vector</span> <span class="n">t</span> <span class="ow">-&gt;</span> <span class="kt">Vector</span> <span class="n">t</span> <span class="ow">-&gt;</span> <span class="kt">Vector</span> <span class="n">t</span>  
+<span class="p">(</span><span class="kt">Vector</span> <span class="n">i</span> <span class="n">j</span> <span class="n">k</span><span class="p">)</span> <span class="p">`</span><span class="n">vplus</span><span class="p">`</span> <span class="p">(</span><span class="kt">Vector</span> <span class="n">l</span> <span class="n">m</span> <span class="n">n</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">Vector</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="p">)</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="n">m</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">n</span><span class="p">)</span>  
+  
+<span class="nf">vectMult</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">t</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="kt">Vector</span> <span class="n">t</span> <span class="ow">-&gt;</span> <span class="n">t</span> <span class="ow">-&gt;</span> <span class="kt">Vector</span> <span class="n">t</span>  
+<span class="p">(</span><span class="kt">Vector</span> <span class="n">i</span> <span class="n">j</span> <span class="n">k</span><span class="p">)</span> <span class="p">`</span><span class="n">vectMult</span><span class="p">`</span> <span class="n">m</span> <span class="ow">=</span> <span class="kt">Vector</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">m</span><span class="p">)</span> <span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="n">m</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>These functions can operate on types of <strong>Vector Int</strong>, <strong>Vector Integer</strong>, <strong>Vector Float</strong>, whatever, as long as the <strong>a</strong> from <strong>Vector a</strong> is from the **Num **typeclass. Notice that we didn&rsquo;t put a **Num **class constraint in the <em>data</em> declaration, because we&rsquo;d have to repeat it in the functions anyway.</p>
+</li>
+<li>
+<p>It&rsquo;s very important to distinguish between the type constructor and the value constructor. When declaring a data type, the part before the <strong>=</strong> is the type constructor and the constructors after it (possibly separated by <code>|</code> &rsquo;s) are value constructors.</p>
+</li>
+</ul>
+<h2 id="derived-instances">Derived instances</h2>
+<p>Because the <strong>False</strong> value constructor is specified first and the <strong>True</strong> value constructor is specified after it, we can consider <strong>True</strong> as greater than <strong>False</strong>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Bool</span> <span class="ow">=</span> <span class="kt">False</span> <span class="o">|</span> <span class="kt">True</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Ord</span><span class="p">)</span>  
+
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">True</span> <span class="p">`</span><span class="n">compare</span><span class="p">`</span> <span class="kt">False</span>  
+<span class="kt">GT</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">True</span> <span class="o">&gt;</span> <span class="kt">False</span>  
+<span class="kt">True</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">True</span> <span class="o">&lt;</span> <span class="kt">False</span>  
+<span class="kt">False</span>  
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Day</span> <span class="ow">=</span> <span class="kt">Monday</span> <span class="o">|</span> <span class="kt">Tuesday</span> <span class="o">|</span> <span class="kt">Wednesday</span> <span class="o">|</span> <span class="kt">Thursday</span> <span class="o">|</span> <span class="kt">Friday</span> <span class="o">|</span> <span class="kt">Saturday</span> <span class="o">|</span> <span class="kt">Sunday</span>
+           <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">,</span> <span class="kt">Ord</span><span class="p">,</span> <span class="kt">Show</span><span class="p">,</span> <span class="kt">Read</span><span class="p">,</span> <span class="kt">Bounded</span><span class="p">,</span> <span class="kt">Enum</span><span class="p">)</span>
+           
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">minBound</span> <span class="ow">::</span> <span class="kt">Day</span>  
+<span class="kt">Monday</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">maxBound</span> <span class="ow">::</span> <span class="kt">Day</span>  
+<span class="kt">Sunday</span>  
+
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Saturday</span> <span class="o">==</span> <span class="kt">Saturday</span>  
+<span class="kt">True</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Saturday</span> <span class="o">&gt;</span> <span class="kt">Friday</span>  
+<span class="kt">True</span>  
+
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">succ</span> <span class="kt">Monday</span>  
+<span class="kt">Tuesday</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">pred</span> <span class="kt">Saturday</span>  
+<span class="kt">Friday</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="p">[</span><span class="kt">Thursday</span> <span class="o">..</span> <span class="kt">Sunday</span><span class="p">]</span>  
+<span class="p">[</span><span class="kt">Thursday</span><span class="p">,</span><span class="kt">Friday</span><span class="p">,</span><span class="kt">Saturday</span><span class="p">,</span><span class="kt">Sunday</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">minBound</span> <span class="o">..</span> <span class="n">maxBound</span><span class="p">]</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">Day</span><span class="p">]</span>  
+<span class="p">[</span><span class="kt">Monday</span><span class="p">,</span><span class="kt">Tuesday</span><span class="p">,</span><span class="kt">Wednesday</span><span class="p">,</span><span class="kt">Thursday</span><span class="p">,</span><span class="kt">Friday</span><span class="p">,</span><span class="kt">Saturday</span><span class="p">,</span><span class="kt">Sunday</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="type-synonyms">Type synonyms</h2>
+<p>Previously, we mentioned that when writing types, the <strong>[Char]</strong> and <strong>String</strong> types are <strong>equivalent</strong> and interchangeable. That&rsquo;s implemented with <strong>type synonyms</strong>. The <code>type</code>  is used to make a synonym for an already existing type. <code>type String = [Char]  </code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">type</span> <span class="kt">PhoneNumber</span> <span class="ow">=</span> <span class="kt">String</span>
+<span class="kr">type</span> <span class="kt">Name</span> <span class="ow">=</span> <span class="kt">String</span>
+<span class="kr">type</span> <span class="kt">PhoneBook</span> <span class="ow">=</span> <span class="p">[(</span><span class="kt">Name</span><span class="p">,</span><span class="kt">PhoneNumber</span><span class="p">)]</span>
+
+<span class="nf">inPhoneBook</span> <span class="ow">::</span> <span class="kt">Name</span> <span class="ow">-&gt;</span> <span class="kt">PhoneNumber</span> <span class="ow">-&gt;</span> <span class="kt">PhoneBook</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
+<span class="nf">inPhoneBook</span> <span class="n">name</span> <span class="n">pnumber</span> <span class="n">pbook</span> <span class="ow">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">pnumber</span><span class="p">)</span> <span class="p">`</span><span class="n">elem</span><span class="p">`</span> <span class="n">pbook</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Another cool data type that takes two types as its parameters is the <strong>Either a b</strong> type. This is roughly how it&rsquo;s defined:<code>data Either a b = Left a | Right b deriving (Eq, Ord, Read, Show) </code>. It has two value constructors. If the <strong>Left</strong> is used, then its contents are of type <strong>a</strong> and if <strong>Right</strong> is used, then its contents are of type <strong>b</strong>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Right</span> <span class="mi">20</span>  
+<span class="kt">Right</span> <span class="mi">20</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Left</span> <span class="s">&#34;w00t&#34;</span>  
+<span class="kt">Left</span> <span class="s">&#34;w00t&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="kt">Right</span> <span class="sc">&#39;a&#39;</span>  
+<span class="kt">Right</span> <span class="sc">&#39;a&#39;</span> <span class="ow">::</span> <span class="kt">Either</span> <span class="n">a</span> <span class="kt">Char</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="kt">Left</span> <span class="kt">True</span>  
+<span class="kt">Left</span> <span class="kt">True</span> <span class="ow">::</span> <span class="kt">Either</span> <span class="kt">Bool</span> <span class="n">b</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>example</strong>: When a student wants a new locker, they  tell the locker supervisor which locker number they want and he gives them the code. However, if someone is already using that locker, he can&rsquo;t tell them the code for the locker and they have to pick a different one. We&rsquo;ll use a map from <code>Data.Map</code> to represent the lockers. It&rsquo;ll map from locker numbers to a pair of whether the locker is in use or not and the locker code.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Data.Map</span> <span class="k">as</span> <span class="n">Map</span>  
+  
+<span class="kr">data</span> <span class="kt">LockerState</span> <span class="ow">=</span> <span class="kt">Taken</span> <span class="o">|</span> <span class="kt">Free</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">,</span> <span class="kt">Eq</span><span class="p">)</span>  
+  
+<span class="kr">type</span> <span class="kt">Code</span> <span class="ow">=</span> <span class="kt">String</span>  
+  
+<span class="kr">type</span> <span class="kt">LockerMap</span> <span class="ow">=</span> <span class="kt">Map</span><span class="o">.</span><span class="kt">Map</span> <span class="kt">Int</span> <span class="p">(</span><span class="kt">LockerState</span><span class="p">,</span> <span class="kt">Code</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>We introduce a new data type to represent whether a locker is taken or free and we make a type synonym for the locker code. We also make a type synonym for the type that maps from integers to pairs of locker state and code.</p>
+<p>And now, we&rsquo;re going to <strong>make a function that searches for the code in a locker map</strong>. We&rsquo;re going to use an <code>Either String Code</code> type to represent our result, because our lookup can fail in two ways — the locker can be taken. If the lookup fails, we&rsquo;re just going to use a <strong>String</strong> to tell what&rsquo;s happened.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">lockerLookup</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">LockerMap</span> <span class="ow">-&gt;</span> <span class="kt">Either</span> <span class="kt">String</span> <span class="kt">Code</span>  
+<span class="nf">lockerLookup</span> <span class="n">lockerNumber</span> <span class="n">map</span> <span class="ow">=</span>   
+    <span class="kr">case</span> <span class="kt">Map</span><span class="o">.</span><span class="n">lookup</span> <span class="n">lockerNumber</span> <span class="n">map</span> <span class="kr">of</span>   
+        <span class="kt">Nothing</span> <span class="ow">-&gt;</span> <span class="kt">Left</span> <span class="o">$</span> <span class="s">&#34;Locker number &#34;</span> <span class="o">++</span> <span class="n">show</span> <span class="n">lockerNumber</span> <span class="o">++</span> <span class="s">&#34; doesn&#39;t exist!&#34;</span>  
+        <span class="kt">Just</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kr">if</span> <span class="n">state</span> <span class="o">/=</span> <span class="kt">Taken</span>   
+                                <span class="kr">then</span> <span class="kt">Right</span> <span class="n">code</span>  
+                                <span class="kr">else</span> <span class="kt">Left</span> <span class="o">$</span> <span class="s">&#34;Locker &#34;</span> <span class="o">++</span> <span class="n">show</span> <span class="n">lockerNumber</span> <span class="o">++</span> <span class="s">&#34; is already taken!&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>We could have used a <code>Maybe a</code>  to represent the result but then we wouldn&rsquo;t know why we couldn&rsquo;t get the code. But now, we have information about the failure in our result type.</p>
+<h2 id="recursive-data-structures">Recursive data structures</h2>
+<p>Think about this list: <code>[5]</code>. That&rsquo;s just syntactic sugar for <code>5:[]</code>. Same goes for a list like <code>3:(4:(5:6:[]))</code>, which could be written either like that or like <code>3:4:5:6:[]</code> (because <strong>:</strong> is right-associative) or <code>[3,4,5,6]</code>.</p>
+<p>We could say that a list can be an <strong>empty list</strong> or it can be <strong>an element joined together with a : with another list</strong> (that can be either the empty list or not).</p>
+<p><code>data List a = Empty | Cons a (List a) deriving (Show, Read, Eq, Ord)  </code></p>
+<p><code>cons</code> is another word for <code>:</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Empty</span>  
+<span class="kt">Empty</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="mi">5</span> <span class="p">`</span><span class="kt">Cons</span><span class="p">`</span> <span class="kt">Empty</span>  
+<span class="kt">Cons</span> <span class="mi">5</span> <span class="kt">Empty</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="mi">4</span> <span class="p">`</span><span class="kt">Cons</span><span class="p">`</span> <span class="p">(</span><span class="mi">5</span> <span class="p">`</span><span class="kt">Cons</span><span class="p">`</span> <span class="kt">Empty</span><span class="p">)</span>  
+<span class="kt">Cons</span> <span class="mi">4</span> <span class="p">(</span><span class="kt">Cons</span> <span class="mi">5</span> <span class="kt">Empty</span><span class="p">)</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="mi">3</span> <span class="p">`</span><span class="kt">Cons</span><span class="p">`</span> <span class="p">(</span><span class="mi">4</span> <span class="p">`</span><span class="kt">Cons</span><span class="p">`</span> <span class="p">(</span><span class="mi">5</span> <span class="p">`</span><span class="kt">Cons</span><span class="p">`</span> <span class="kt">Empty</span><span class="p">))</span>  
+<span class="kt">Cons</span> <span class="mi">3</span> <span class="p">(</span><span class="kt">Cons</span> <span class="mi">4</span> <span class="p">(</span><span class="kt">Cons</span> <span class="mi">5</span> <span class="kt">Empty</span><span class="p">))</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>We can define <strong>functions to be automatically infix by making them comprised of only special characters</strong>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">infixr</span> <span class="mi">5</span> <span class="kt">:-:</span>  
+<span class="kr">data</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Empty</span> <span class="o">|</span> <span class="n">a</span> <span class="kt">:-:</span> <span class="p">(</span><span class="kt">List</span> <span class="n">a</span><span class="p">)</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">,</span> <span class="kt">Read</span><span class="p">,</span> <span class="kt">Eq</span><span class="p">,</span> <span class="kt">Ord</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>fixity declarations</strong>:  When we define functions as operators, we can use that to give them a fixity (but we don&rsquo;t have to). <strong>A fixity states how tightly the operator binds and whether it&rsquo;s left-associative or right-associative.</strong> For instance, <code>*</code>'s fixity is <code>infixl 7</code> and <code>+</code>'s fixity is <code>infixl 6</code>. That means that they&rsquo;re both left-associative <code>(4 * 3 * 2</code> is <code>(4 * 3) * 2)</code> but ***** binds tighter than <strong>+</strong>, because it has a greater fixity, so <code>5 \* 4 + 3</code> is <code>(5 \* 4) + 3</code>.</li>
+</ul>
+<p>Otherwise, we just wrote <code>a :-: (List a)</code> instead of <code>Cons a (List a)</code>. Now, we can write out lists in our list type like so:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="mi">3</span> <span class="kt">:-:</span> <span class="mi">4</span> <span class="kt">:-:</span> <span class="mi">5</span> <span class="kt">:-:</span> <span class="kt">Empty</span>
+<span class="p">(</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">3</span> <span class="p">((</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">4</span> <span class="p">((</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">5</span> <span class="kt">Empty</span><span class="p">))</span>
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">a</span> <span class="ow">=</span> <span class="mi">3</span> <span class="kt">:-:</span> <span class="mi">4</span> <span class="kt">:-:</span> <span class="mi">5</span> <span class="kt">:-:</span> <span class="kt">Empty</span>
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="mi">100</span> <span class="kt">:-:</span> <span class="n">a</span>
+<span class="p">(</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">100</span> <span class="p">((</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">3</span> <span class="p">((</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">4</span> <span class="p">((</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">5</span> <span class="kt">Empty</span><span class="p">)))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>make a function that adds two of our lists together:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">infixr</span> <span class="mi">5</span>  <span class="o">.++</span>  
+<span class="p">(</span><span class="o">.++</span><span class="p">)</span> <span class="ow">::</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="n">a</span>   
+<span class="kt">Empty</span> <span class="o">.++</span> <span class="n">ys</span> <span class="ow">=</span> <span class="n">ys</span>  
+<span class="p">(</span><span class="n">x</span> <span class="kt">:-:</span> <span class="n">xs</span><span class="p">)</span> <span class="o">.++</span> <span class="n">ys</span> <span class="ow">=</span> <span class="n">x</span> <span class="kt">:-:</span> <span class="p">(</span><span class="n">xs</span> <span class="o">.++</span> <span class="n">ys</span><span class="p">)</span>  
+
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">a</span> <span class="ow">=</span> <span class="mi">3</span> <span class="kt">:-:</span> <span class="mi">4</span> <span class="kt">:-:</span> <span class="mi">5</span> <span class="kt">:-:</span> <span class="kt">Empty</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">b</span> <span class="ow">=</span> <span class="mi">6</span> <span class="kt">:-:</span> <span class="mi">7</span> <span class="kt">:-:</span> <span class="kt">Empty</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">.++</span> <span class="n">b</span>  
+<span class="p">(</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">3</span> <span class="p">((</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">4</span> <span class="p">((</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">5</span> <span class="p">((</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">6</span> <span class="p">((</span><span class="kt">:-:</span><span class="p">)</span> <span class="mi">7</span> <span class="kt">Empty</span><span class="p">))))</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>Notice how we pattern matched on <code>(x :-: xs)</code>. That works because <strong>pattern matching is actually about matching constructors.</strong> We can match on <code>:-:</code> because it is a constructor for our own list type and we can also match on <code>:</code> because it is a constructor for the built-in list type.</p>
+<ul>
+<li><strong>example</strong>: implement a binary search tree</li>
+</ul>
+<p>A tree is either an empty tree or it&rsquo;s an element that contains some value and two trees.</p>
+<p><code>data Tree a = EmptyTree | Node a (Tree a) (Tree a) deriving (Show, Read, Eq)  </code></p>
+<p>We&rsquo;re going to make a function that <strong>takes a tree and an element and inserts an element</strong>. We do this by comparing the value we want to insert to the root node and then if it&rsquo;s smaller, we go left, if it&rsquo;s larger, we go right. We do the same for every subsequent node until we reach an empty tree. Once we&rsquo;ve reached an empty tree, we just insert a node with that value instead of the empty tree.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">singleton</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Tree</span> <span class="n">a</span>
+<span class="nf">singleton</span> <span class="n">x</span> <span class="ow">=</span> <span class="kt">Node</span> <span class="n">x</span> <span class="kt">EmptyTree</span> <span class="kt">EmptyTree</span>
+
+<span class="nf">treeInsert</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Tree</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Tree</span> <span class="n">a</span>
+<span class="nf">treeInsert</span> <span class="n">x</span> <span class="kt">EmptyTree</span> <span class="ow">=</span> <span class="n">singleton</span> <span class="n">x</span>
+<span class="nf">treeInsert</span> <span class="n">x</span> <span class="p">(</span><span class="kt">Node</span> <span class="n">a</span> <span class="n">left</span> <span class="n">right</span><span class="p">)</span>
+      <span class="o">|</span> <span class="n">x</span> <span class="o">==</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">Node</span> <span class="n">x</span> <span class="n">left</span> <span class="n">right</span>
+      <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">a</span>  <span class="ow">=</span> <span class="kt">Node</span> <span class="n">a</span> <span class="p">(</span><span class="n">treeInsert</span> <span class="n">x</span> <span class="n">left</span><span class="p">)</span> <span class="n">right</span>
+      <span class="o">|</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">a</span>  <span class="ow">=</span> <span class="kt">Node</span> <span class="n">a</span> <span class="n">left</span> <span class="p">(</span><span class="n">treeInsert</span> <span class="n">x</span> <span class="n">right</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We&rsquo;re going to make a function that <strong>checks if some element is in the tree</strong>. First, let&rsquo;s define the edge condition.</p>
+<p>If we&rsquo;re looking for an element in an empty list, it&rsquo;s not there. Anyway, if we&rsquo;re not looking for an element in an empty tree, then we check some things.</p>
+<p>If the element we&rsquo;re looking for is smaller than the root node, check to see if it&rsquo;s in the left sub-tree. If it&rsquo;s bigger, check to see if it&rsquo;s in the right sub-tree.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">treeElem</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Tree</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>  
+<span class="nf">treeElem</span> <span class="n">x</span> <span class="kt">EmptyTree</span> <span class="ow">=</span> <span class="kt">False</span>  
+<span class="nf">treeElem</span> <span class="n">x</span> <span class="p">(</span><span class="kt">Node</span> <span class="n">a</span> <span class="n">left</span> <span class="n">right</span><span class="p">)</span>  
+    <span class="o">|</span> <span class="n">x</span> <span class="o">==</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">True</span>  
+    <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">a</span>  <span class="ow">=</span> <span class="n">treeElem</span> <span class="n">x</span> <span class="n">left</span>  
+    <span class="o">|</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">a</span>  <span class="ow">=</span> <span class="n">treeElem</span> <span class="n">x</span> <span class="n">right</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>use <code>fold</code> to create a tree from a list</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">nums</span> <span class="ow">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">numsTree</span> <span class="ow">=</span> <span class="n">foldr</span> <span class="n">treeInsert</span> <span class="kt">EmptyTree</span> <span class="n">nums</span>
+<span class="c1">-- treeInsert is the function that act on every element of the list</span>
+<span class="c1">-- from a EmptyTree </span>
+<span class="c1">-- the list is nums</span>
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">numsTree</span>
+<span class="kt">Node</span> <span class="mi">5</span> <span class="p">(</span><span class="kt">Node</span> <span class="mi">3</span> <span class="p">(</span><span class="kt">Node</span> <span class="mi">1</span> <span class="kt">EmptyTree</span> <span class="kt">EmptyTree</span><span class="p">)</span> <span class="p">(</span><span class="kt">Node</span> <span class="mi">4</span> <span class="kt">EmptyTree</span> <span class="kt">EmptyTree</span><span class="p">))</span> <span class="p">(</span><span class="kt">Node</span> <span class="mi">7</span> <span class="p">(</span><span class="kt">Node</span> <span class="mi">6</span> <span class="kt">EmptyTree</span> <span class="kt">EmptyTree</span><span class="p">)</span> <span class="p">(</span><span class="kt">Node</span> <span class="mi">8</span> <span class="kt">EmptyTree</span> <span class="kt">EmptyTree</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We see that the root node is 5 and then it has two sub-trees, one of which has the root node of 3 and the other a 7, etc.</p>
+<h2 id="typeclasses">Typeclasses</h2>
+<p>We&rsquo;re going to learn how to make our own typeclasses and how to make types instances of them by hand.</p>
+<p><strong>Typeclasses have pretty much nothing to do with classes in languages like Java or Python.</strong> This confuses many people, so I want you to forget everything you know about classes in imperative languages right now.</p>
+<p>This is how the <code>Eq</code> class is defined in the standard prelude:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">class</span> <span class="kt">Eq</span> <span class="n">a</span> <span class="kr">where</span>  
+    <span class="p">(</span><span class="o">==</span><span class="p">)</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>  
+    <span class="p">(</span><span class="o">/=</span><span class="p">)</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>  
+    <span class="n">x</span> <span class="o">==</span> <span class="n">y</span> <span class="ow">=</span> <span class="n">not</span> <span class="p">(</span><span class="n">x</span> <span class="o">/=</span> <span class="n">y</span><span class="p">)</span>  
+    <span class="n">x</span> <span class="o">/=</span> <span class="n">y</span> <span class="ow">=</span> <span class="n">not</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>When we write <code>class Eq a where</code> this means that we&rsquo;re defining a new typeclass and that&rsquo;s called <code>Eq</code>. The <strong>a</strong> is the type variable and it means that <strong>a</strong> will play the role of the type that we will soon be making an instance of <strong>Eq</strong>. It doesn&rsquo;t have to be called <strong>a</strong>, it doesn&rsquo;t even have to be one letter, it just has to be a lowercase word. Then, we define several functions. It&rsquo;s not mandatory to implement the function bodies themselves**, we just have to specify the type declarations for the functions.**</p>
+<p>Some people might understand this better if we wrote <code>class Eq equatable where</code> and then specified the type declarations like <code>(==) :: equatable -&gt; equatable -&gt; Bool</code>.</p>
+<ul>
+<li><strong>example</strong>: traffic lights</li>
+</ul>
+<p>We&rsquo;re going to write up some instances by hand, even though we could derive them for types like <code>Eq</code> and <code>Show</code>. Here&rsquo;s how we make it an instance of <code>Eq</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">TrafficLight</span> <span class="ow">=</span> <span class="kt">Red</span> <span class="o">|</span> <span class="kt">Yellow</span> <span class="o">|</span> <span class="kt">Green</span>  
+
+<span class="kr">instance</span> <span class="kt">Eq</span> <span class="kt">TrafficLight</span> <span class="kr">where</span>
+    <span class="kt">Red</span> <span class="o">==</span> <span class="kt">Red</span> <span class="ow">=</span> <span class="kt">True</span>
+    <span class="kt">Green</span> <span class="o">==</span> <span class="kt">Green</span> <span class="ow">=</span> <span class="kt">True</span>
+    <span class="kt">Yellow</span> <span class="o">==</span> <span class="kt">Yellow</span> <span class="ow">=</span> <span class="kt">True</span>
+    <span class="kr">_</span> <span class="o">==</span> <span class="kr">_</span> <span class="ow">=</span> <span class="kt">False</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We did it by using the <code>instance</code> keyword. So <code>class</code> is for defining new typeclasses and <code>instance</code> is for making our types instances of typeclasses.(<code>class</code> is for <code>Num</code>, <code>instance</code> is for <code>Int</code> ,which is a instance in Num typeclass)</p>
+<p>When we were defining <strong>Eq</strong>, we wrote <code>class Eq a where</code> and we said that <strong>a plays the role of whichever type will be made an instance later on.</strong> We can see that clearly here, because when we&rsquo;re making an instance, we write <code>instance Eq TrafficLight where</code>. We <strong>replace the a with the actual type.</strong></p>
+<p>Let&rsquo;s make this an instance of <strong>Show</strong> by hand, too. To satisfy the minimal complete definition for <strong>Show</strong>, we just have to implement its <strong>show</strong> function, which takes a value and turns it into a string.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Show</span> <span class="kt">TrafficLight</span> <span class="kr">where</span>  
+    <span class="n">show</span> <span class="kt">Red</span> <span class="ow">=</span> <span class="s">&#34;Red light&#34;</span>  
+    <span class="n">show</span> <span class="kt">Yellow</span> <span class="ow">=</span> <span class="s">&#34;Yellow light&#34;</span>  
+    <span class="n">show</span> <span class="kt">Green</span> <span class="ow">=</span> <span class="s">&#34;Green light&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We could have just derived <strong>Eq</strong> and it would have had the same effect. However, deriving <strong>Show</strong> would have just directly translated the value constructors to strings. But <strong>if we want lights to appear like &ldquo;Red light&rdquo;, then we have to make the instance declaration by hand.</strong></p>
+<p>If you want to see what the instances of a typeclass are, just do <code>:info YourTypeClass</code> in GHCI.</p>
+<h2 id="yes-no-typeclass">yes-no typeclass</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">class</span> <span class="kt">YesNo</span> <span class="n">a</span> <span class="kr">where</span>  
+<span class="c1">-- if the type belongs to YesNo typeclass, it can do yesno function</span>
+    <span class="n">yesno</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span> 
+    
+<span class="kr">instance</span> <span class="kt">YesNo</span> <span class="kt">Int</span> <span class="kr">where</span>  
+    <span class="n">yesno</span> <span class="mi">0</span> <span class="ow">=</span> <span class="kt">False</span>  
+    <span class="n">yesno</span> <span class="kr">_</span> <span class="ow">=</span> <span class="kt">True</span>  
+    
+<span class="kr">instance</span> <span class="kt">YesNo</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="kr">where</span>  
+    <span class="n">yesno</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="kt">False</span>  
+    <span class="n">yesno</span> <span class="kr">_</span> <span class="ow">=</span> <span class="kt">True</span>  
+    
+<span class="kr">instance</span> <span class="kt">YesNo</span> <span class="kt">Bool</span> <span class="kr">where</span>  
+    <span class="n">yesno</span> <span class="ow">=</span> <span class="n">id</span>     
+ 
+<span class="kr">instance</span> <span class="kt">YesNo</span> <span class="p">(</span><span class="kt">Maybe</span> <span class="n">a</span><span class="p">)</span> <span class="kr">where</span>  
+    <span class="n">yesno</span> <span class="p">(</span><span class="kt">Just</span> <span class="kr">_</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">True</span>  
+    <span class="n">yesno</span> <span class="kt">Nothing</span> <span class="ow">=</span> <span class="kt">False</span>  
+    
+<span class="kr">instance</span> <span class="kt">YesNo</span> <span class="p">(</span><span class="kt">Tree</span> <span class="n">a</span><span class="p">)</span> <span class="kr">where</span>  
+    <span class="n">yesno</span> <span class="kt">EmptyTree</span> <span class="ow">=</span> <span class="kt">False</span>  
+    <span class="n">yesno</span> <span class="kr">_</span> <span class="ow">=</span> <span class="kt">True</span>  
+  
+<span class="kr">instance</span> <span class="kt">YesNo</span> <span class="kt">TrafficLight</span> <span class="kr">where</span>  
+    <span class="n">yesno</span> <span class="kt">Red</span> <span class="ow">=</span> <span class="kt">False</span>  
+    <span class="n">yesno</span> <span class="kr">_</span> <span class="ow">=</span> <span class="kt">True</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>make a function that mimic if function:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">yesnoIf</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">YesNo</span> <span class="n">y</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">y</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span>  
+<span class="nf">yesnoIf</span> <span class="n">yesnoVal</span> <span class="n">yesResult</span> <span class="n">noResult</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">yesno</span> <span class="n">yesnoVal</span> <span class="kr">then</span> <span class="n">yesResult</span> <span class="kr">else</span> <span class="n">noResult</span>
+
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">yesnoIf</span> <span class="p">(</span><span class="kt">Just</span> <span class="mi">500</span><span class="p">)</span> <span class="s">&#34;YEAH!&#34;</span> <span class="s">&#34;NO!&#34;</span>  
+<span class="s">&#34;YEAH!&#34;</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">yesnoIf</span> <span class="kt">Nothing</span> <span class="s">&#34;YEAH!&#34;</span> <span class="s">&#34;NO!&#34;</span>  
+<span class="s">&#34;NO!&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="the-functor-typeclass">The Functor typeclass</h2>
+<p>We&rsquo;re going to take a look at the <code>Functor</code> typeclass, which is <strong>basically for things that can be mapped over.</strong> The list type is part of the <code>Functor</code> typeclass.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">class</span> <span class="kt">Functor</span> <span class="n">f</span> <span class="kr">where</span>  
+    <span class="n">fmap</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">b</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>The <code>f</code> is not a concrete type (like <strong>Int</strong>, <strong>Bool</strong> or <strong>Maybe String</strong>), but a type constructor that takes one type parameter. A quick refresher example: <code>Maybe Int</code> is a concrete type, but <code>Maybe</code> is a type constructor that takes one type as the parameter.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Functor</span> <span class="kt">[]</span> <span class="kr">where</span>  
+    <span class="n">fmap</span> <span class="ow">=</span> <span class="n">map</span>  
+    
+<span class="kr">instance</span> <span class="kt">Functor</span> <span class="kt">Maybe</span> <span class="kr">where</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="p">(</span><span class="kt">Just</span> <span class="n">x</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">Just</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span><span class="p">)</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="kt">Nothing</span> <span class="ow">=</span> <span class="kt">Nothing</span>  
+
+<span class="kr">instance</span> <span class="kt">Functor</span> <span class="kt">Tree</span> <span class="kr">where</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="kt">EmptyTree</span> <span class="ow">=</span> <span class="kt">EmptyTree</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="p">(</span><span class="kt">Node</span> <span class="n">x</span> <span class="n">leftsub</span> <span class="n">rightsub</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">Node</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">fmap</span> <span class="n">f</span> <span class="n">leftsub</span><span class="p">)</span> <span class="p">(</span><span class="n">fmap</span> <span class="n">f</span> <span class="n">rightsub</span><span class="p">)</span>  
+    
+<span class="kr">instance</span> <span class="kt">Functor</span> <span class="p">(</span><span class="kt">Either</span> <span class="n">a</span><span class="p">)</span> <span class="kr">where</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="p">(</span><span class="kt">Right</span> <span class="n">x</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">Right</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span><span class="p">)</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="p">(</span><span class="kt">Left</span> <span class="n">x</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">Left</span> <span class="n">x</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>Notice how we didn&rsquo;t write <code>instance Functor [a] where</code>, because from <code>fmap :: (a -&gt; b) -&gt; f a -&gt; f b</code>, we see that the <strong>f</strong> has to be a type constructor that takes one type. <strong>[a] is already a concrete type), while [] is a type constructor</strong> that takes one type and can produce types such as <code>[Int]</code>, <code>[String]</code> or even <code>[[String]]</code></p>
+<h2 id="reference">Reference</h2>
+<p><a href="http://learnyouahaskell.com/making-our-own-types-and-typeclasses">http://learnyouahaskell.com/making-our-own-types-and-typeclasses</a></p>
+<p><a href="https://www.cntofu.com/book/140/zh-cn/ch08/build-our-own-type-and-typeclass.md">https://www.cntofu.com/book/140/zh-cn/ch08/build-our-own-type-and-typeclass.md</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/haskell6/">
+            <span class="next-text nav-default">Module</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
