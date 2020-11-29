@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Thu, 26 Nov 2020 23:56:24 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Nov 2020 16:42:48 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Functionally Solving Problems</title>
+      <link>https://yufei-li.github.io/post/haskell9/</link>
+      <pubDate>Sun, 29 Nov 2020 16:42:48 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/haskell9/</guid>
+      <description>In this chapter, we probably won&amp;rsquo;t be introducing any new concepts, we&amp;rsquo;ll just be flexing our newly acquired Haskell muscles and practicing our coding skills.
+Reverse Polish notation calculator Usually when we write mathematical expressions in school, we write them in an infix manner. For instance, we write 10 - (4 + 3) * 2.Reverse Polish notation is another way of writing down mathematical expressions. Initially it looks a bit weird, but it&amp;rsquo;s actually pretty easy to understand and use because there&amp;rsquo;s no need for parentheses and it&amp;rsquo;s very easy to punch into a calculator.</description>
+    </item>
     
     <item>
       <title>Input and Output</title>

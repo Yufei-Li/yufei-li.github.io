@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Functionally Solving Problems - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="In this chapter, we probably won&amp;rsquo;t be introducing any new concepts, we&amp;rsquo;ll just be flexing our newly acquired Haskell muscles and practicing our coding skills.
+Reverse Polish notation calculator Usually when we write mathematical expressions in school, we write them in an infix manner. For instance, we write 10 - (4 &#43; 3) * 2.Reverse Polish notation is another way of writing down mathematical expressions. Initially it looks a bit weird, but it&amp;rsquo;s actually pretty easy to understand and use because there&amp;rsquo;s no need for parentheses and it&amp;rsquo;s very easy to punch into a calculator." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/haskell9/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Functionally Solving Problems" />
+<meta property="og:description" content="In this chapter, we probably won&rsquo;t be introducing any new concepts, we&rsquo;ll just be flexing our newly acquired Haskell muscles and practicing our coding skills.
+Reverse Polish notation calculator Usually when we write mathematical expressions in school, we write them in an infix manner. For instance, we write 10 - (4 &#43; 3) * 2.Reverse Polish notation is another way of writing down mathematical expressions. Initially it looks a bit weird, but it&rsquo;s actually pretty easy to understand and use because there&rsquo;s no need for parentheses and it&rsquo;s very easy to punch into a calculator." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/haskell9/" />
+<meta property="article:published_time" content="2020-11-29T16:42:48+08:00" />
+<meta property="article:modified_time" content="2020-11-29T16:42:48+08:00" />
+<meta itemprop="name" content="Functionally Solving Problems">
+<meta itemprop="description" content="In this chapter, we probably won&rsquo;t be introducing any new concepts, we&rsquo;ll just be flexing our newly acquired Haskell muscles and practicing our coding skills.
+Reverse Polish notation calculator Usually when we write mathematical expressions in school, we write them in an infix manner. For instance, we write 10 - (4 &#43; 3) * 2.Reverse Polish notation is another way of writing down mathematical expressions. Initially it looks a bit weird, but it&rsquo;s actually pretty easy to understand and use because there&rsquo;s no need for parentheses and it&rsquo;s very easy to punch into a calculator.">
+<meta itemprop="datePublished" content="2020-11-29T16:42:48&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-29T16:42:48&#43;08:00" />
+<meta itemprop="wordCount" content="2310">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Functionally Solving Problems"/>
+<meta name="twitter:description" content="In this chapter, we probably won&rsquo;t be introducing any new concepts, we&rsquo;ll just be flexing our newly acquired Haskell muscles and practicing our coding skills.
+Reverse Polish notation calculator Usually when we write mathematical expressions in school, we write them in an infix manner. For instance, we write 10 - (4 &#43; 3) * 2.Reverse Polish notation is another way of writing down mathematical expressions. Initially it looks a bit weird, but it&rsquo;s actually pretty easy to understand and use because there&rsquo;s no need for parentheses and it&rsquo;s very easy to punch into a calculator."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Functionally Solving Problems</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-29 </span>
+        <div class="post-category">
+            <a href="/categories/haskell/"> Haskell </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#reverse-polish-notation-calculator">Reverse Polish notation calculator</a></li>
+    <li><a href="#heathrow-to-london">Heathrow to London</a></li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>In this chapter, we probably won&rsquo;t be introducing any new concepts, we&rsquo;ll just be flexing our newly acquired Haskell muscles and practicing our coding skills.</p>
+<h2 id="reverse-polish-notation-calculator">Reverse Polish notation calculator</h2>
+<p>Usually when we write mathematical expressions in school, we write them in an infix manner. For instance, we write <code>10 - (4 + 3) * 2</code>.Reverse Polish notation is another way of writing down mathematical expressions. Initially it looks a bit weird, but it&rsquo;s actually pretty easy to understand and use because there&rsquo;s no need for parentheses and it&rsquo;s very easy to punch into a calculator. <code>10 4 3 + 2 * -</code></p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl68k4mbjzj31660eegt4.jpg" alt=""></p>
+<p>Now that we know how we&rsquo;d calculate any RPN expression by hand, let&rsquo;s think about how we could make a Haskell function that takes as its parameter a string that contains a RPN expression, like <code>10 4 3 + 2 \* -</code> and gives us back its result.</p>
+<p>What would the type of that function be? We want it to take a string as a parameter and produce a number as its result. So it will probably be something like <code>solveRPN :: (Num a) =&gt; String -&gt; a.</code></p>
+<p><strong>It really helps to first think what the type declaration of a function should be before concerning ourselves with the implementation and then write it down.</strong> In Haskell, a function&rsquo;s type declaration tells us a whole lot about the function, due to the very strong type system.</p>
+<p>We went over it from left to right and kept a stack as we did that.  In <code>fold</code> function, we said that pretty much any function where you traverse a list from left to right or right to left one element by element and build up (accumulate) some result (whether it&rsquo;s a number, a list, a stack, whatever) can be implemented with a fold.</p>
+<p>The head of the list should be the top of the stack since append a element to the head of list is more effecient than the end.</p>
+<p>So here&rsquo;s a sketch of that function:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.List</span>  
+  
+<span class="nf">solveRPN</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="n">a</span>  
+<span class="nf">solveRPN</span> <span class="n">expression</span> <span class="ow">=</span> <span class="n">head</span> <span class="p">(</span><span class="n">foldl</span> <span class="n">foldingFunction</span> <span class="kt">[]</span> <span class="p">(</span><span class="n">words</span> <span class="n">expression</span><span class="p">))</span>  
+    <span class="kr">where</span>   <span class="n">foldingFunction</span> <span class="n">stack</span> <span class="n">item</span> <span class="ow">=</span> <span class="o">...</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>Now we need a <code>foldingFunction</code> , like <code>[4,10]</code>, and an item, like <code>&quot;3&quot;</code> and return a new stack <code>[3,4,10].</code> If the stack is <code>[4,10]</code> and the item <code>&quot;*&quot;</code>, then it will have to return <code>[40]</code>.</p>
+<p>But before that, let&rsquo;s turn our function into point-free style because it has a lot of parentheses that are kind of freaking me out:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.List</span>  
+  
+<span class="nf">solveRPN</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="n">a</span>  
+<span class="nf">solveRPN</span> <span class="ow">=</span> <span class="n">head</span> <span class="o">.</span> <span class="n">foldl</span> <span class="n">foldingFunction</span> <span class="kt">[]</span> <span class="o">.</span> <span class="n">words</span>  
+    <span class="kr">where</span>   <span class="n">foldingFunction</span> <span class="n">stack</span> <span class="n">item</span> <span class="ow">=</span> <span class="o">...</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>The <code>foldingFunction</code> will receive a stack and a new element, and return a new stack. We can use pattern matching to get the top elements in the stack.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">solveRPN</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Read</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="n">a</span>
+<span class="nf">solveRPN</span> <span class="ow">=</span> <span class="n">head</span> <span class="o">.</span><span class="n">foldl</span> <span class="n">foldingFunction</span> <span class="kt">[]</span> <span class="o">.</span> <span class="n">words</span>
+  <span class="kr">where</span> <span class="n">foldingFunction</span> <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">y</span><span class="kt">:</span><span class="n">ys</span><span class="p">)</span> <span class="s">&#34;*&#34;</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span><span class="kt">:</span><span class="n">ys</span>
+        <span class="n">foldingFunction</span> <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">y</span><span class="kt">:</span><span class="n">ys</span><span class="p">)</span> <span class="s">&#34;+&#34;</span> <span class="ow">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span><span class="kt">:</span><span class="n">ys</span>
+        <span class="n">foldingFunction</span> <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">y</span><span class="kt">:</span><span class="n">ys</span><span class="p">)</span> <span class="s">&#34;-&#34;</span> <span class="ow">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="kt">:</span><span class="n">ys</span>
+        <span class="n">foldingFunction</span> <span class="n">xs</span> <span class="n">numberString</span> <span class="ow">=</span> <span class="n">read</span> <span class="n">numberString</span><span class="kt">:</span> <span class="n">xs</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>to use <code>read</code>, <code>Read a</code> class constraint must be added, otherwise error will be raised like: could not deduce (Read a) arising from a use of ‘foldingFunction’</li>
+</ul>
+<h2 id="heathrow-to-london">Heathrow to London</h2>
+<p>Our next problem is this: your plane has just landed in England and you rent a car. You have a meeting really soon and you have to get from Heathrow Airport to London as fast as you can</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl6asefmkfj31bw0e6qa0.jpg" alt=""></p>
+<p>As you can see in the picture, the shortest path from Heathrow to London in this case is to start on main road B, cross over, go forward on A, cross over again and then go forward twice on B. If we take this path, it takes us 75 minutes. Had we chosen any other path, it would take more than that.</p>
+<p>Our job is to make a program that takes input that represents a road system and print out what the shortest path across it is. Here&rsquo;s what the input would look like for this case:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="mi">50</span>  
+<span class="mi">10</span>  
+<span class="mi">30</span>  
+<span class="mi">5</span>  
+<span class="mi">90</span>  
+<span class="mi">20</span>  
+<span class="mi">40</span>  
+<span class="mi">2</span>  
+<span class="mi">25</span>  
+<span class="mi">10</span>  
+<span class="mi">8</span>  
+<span class="mi">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Just like we did when solving the RPN calculator problem, <strong>we&rsquo;re going to solve this problem in three steps</strong>:</p>
+<ul>
+<li>Forget Haskell for a minute and think about how we&rsquo;d solve the problem by hand</li>
+<li>Think about how we&rsquo;re going to represent our data in Haskell</li>
+<li>Figure out how to operate on that data in Haskell so that we produce at a solution</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl6avhkvbsj31700eawk8.jpg" alt=""></p>
+<p>To get the bast path from Heathrow to London, we do this: first we see what the best path to the next crossroads on main road A is. The two options are going directly forward or starting at the opposite road, going forward and then crossing over. We remember the cost and the path. We use the same method to see what the best path to the next crossroads on main road B is and remember that. Then, we see if the path to the next crossroads on A is cheaper if we go from the previous A crossroads or if we go from the previous B crossroads and then cross over. We remember the cheaper path and then we do the same for the crossroads opposite of it. We do this for every section until we reach the end. Once we&rsquo;ve reached the end, the cheapest of the two paths that we have is our optimal path!</p>
+<p>Next step! How do we represent this road system with Haskell&rsquo;s data types? One way is to think of the starting points and crossroads as nodes of a graph that point to other crossroads.</p>
+<ol>
+<li>
+<p>If we imagine that the starting points actually point to each other with a road that has a length of one, we see that every crossroads (or node) points to the node on the other side and also to the next one on its side. Except for the last nodes, they just point to the other side.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Node</span> <span class="ow">=</span> <span class="kt">Node</span> <span class="kt">Road</span> <span class="kt">Road</span> <span class="o">|</span> <span class="kt">EndNode</span> <span class="kt">Road</span>
+<span class="kr">data</span> <span class="kt">Road</span> <span class="ow">=</span> <span class="kt">Road</span> <span class="kt">Int</span> <span class="kt">Node</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>A node is either a normal node and has information about the road that leads to the other main road and the road that leads to the next node or an end node, which only has information about the road to the other main road</li>
+<li>A road keeps information about how long it is and which node it points to.</li>
+</ul>
+</li>
+<li>
+<p>Another way would be to use <code>Maybe</code> for the road parts that point forward. Each node has a road part that point to the opposite road, but only those nodes that aren&rsquo;t the end ones have road parts that point forward.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Node</span> <span class="ow">=</span> <span class="kt">Node</span> <span class="kt">Road</span> <span class="p">(</span><span class="kt">Maybe</span> <span class="kt">Road</span><span class="p">)</span>  
+<span class="kr">data</span> <span class="kt">Road</span> <span class="ow">=</span> <span class="kt">Road</span> <span class="kt">Int</span> <span class="kt">Node</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>If we think back to our solution by hand, we always just checked the lengths of three road parts at once: the road part on the A road, its opposite part on the B road and part C, which touches those two parts and connects them. When we were looking for the shortest path to <em>A1</em> and <em>B1</em>, we only had to deal with the lengths of the first three parts, which have lengths of 50, 10 and 30. We&rsquo;ll call that one section. So the road system that we use for this example can be easily represented as four sections: <code>50, 10, 30</code>, <code>5, 90, 20,</code> <code>40, 2, 25,</code> and <code>10, 8, 0.</code></p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Section</span> <span class="ow">=</span> <span class="kt">Section</span> <span class="p">{</span> <span class="n">getA</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">getB</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">getC</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="p">}</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>  
+<span class="kr">type</span> <span class="kt">RoadSystem</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Section</span><span class="p">]</span>  
+
+<span class="nf">heathrowToLondon</span> <span class="ow">::</span> <span class="kt">RoadSystem</span>  
+<span class="nf">heathrowToLondon</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Section</span> <span class="mi">50</span> <span class="mi">10</span> <span class="mi">30</span><span class="p">,</span> <span class="kt">Section</span> <span class="mi">5</span> <span class="mi">90</span> <span class="mi">20</span><span class="p">,</span> <span class="kt">Section</span> <span class="mi">40</span> <span class="mi">2</span> <span class="mi">25</span><span class="p">,</span> <span class="kt">Section</span> <span class="mi">10</span> <span class="mi">8</span> <span class="mi">0</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>Section is a simple algebraic data type that holds three integers for the lenghts of its three road parts. We introduce a type synonym as well, saying that <code>RoadSystem</code> is a list of sections.</p>
+<p>Next: implement the solution that we came up with previously in Haskell.The function should take a road system as a parameter and return a path. <code>optimalPath :: RoadSystem -&gt; Path</code>. If called with the road system <code>heathrowToLondon</code>, it should return the following path:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Label</span> <span class="ow">=</span> <span class="kt">A</span> <span class="o">|</span> <span class="kt">B</span> <span class="o">|</span> <span class="kt">C</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>  
+<span class="kr">type</span> <span class="kt">Path</span> <span class="ow">=</span> <span class="p">[(</span><span class="kt">Label</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>  
+
+<span class="p">[(</span><span class="kt">B</span><span class="p">,</span><span class="mi">10</span><span class="p">),(</span><span class="kt">C</span><span class="p">,</span><span class="mi">30</span><span class="p">),(</span><span class="kt">A</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="kt">C</span><span class="p">,</span><span class="mi">20</span><span class="p">),(</span><span class="kt">B</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="kt">B</span><span class="p">,</span><span class="mi">8</span><span class="p">)]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>We&rsquo;re going to have to walk over the list with the sections from left to right and keep the optimal path on A and optimal path on B as we go along.</strong> We&rsquo;ll accumulate the best path as we walk over the list, left to right. That&rsquo;s a left fold.</p>
+<p>At the beginning the optimal paths were <code>[]</code> and <code>[]</code> for A and B respectively. We examined the section <code>Section 50 10 30</code> and concluded that the new optimal path to <em>A1</em> is <code>[(B,10),(C,30)]</code> and the optimal path to <em>B1</em> is <code>[(B,10)]</code>. If you look at this step as a function, it takes a pair of paths and a section and produces a new pair of paths. The type is <code>(Path, Path) -&gt; Section -&gt; (Path, Path).</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">data</span> <span class="kt">Section</span> <span class="ow">=</span> <span class="kt">Section</span> <span class="p">{</span><span class="n">getA</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">getB</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">getC</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">}</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>
+<span class="kr">type</span> <span class="kt">RoadSystem</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Section</span><span class="p">]</span>
+
+<span class="nf">heathrowToLondon</span> <span class="ow">::</span> <span class="kt">RoadSystem</span>
+<span class="nf">heathrowToLondon</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Section</span> <span class="mi">50</span> <span class="mi">10</span> <span class="mi">30</span><span class="p">,</span> <span class="kt">Section</span> <span class="mi">5</span> <span class="mi">90</span> <span class="mi">20</span><span class="p">,</span> <span class="kt">Section</span> <span class="mi">40</span> <span class="mi">2</span> <span class="mi">25</span><span class="p">,</span> <span class="kt">Section</span> <span class="mi">10</span> <span class="mi">8</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="kr">data</span> <span class="kt">Label</span> <span class="ow">=</span> <span class="kt">A</span> <span class="o">|</span> <span class="kt">B</span> <span class="o">|</span> <span class="kt">C</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>
+<span class="kr">type</span> <span class="kt">Path</span> <span class="ow">=</span> <span class="p">[(</span><span class="kt">Label</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
+
+<span class="nf">roadStep</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Path</span><span class="p">,</span> <span class="kt">Path</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">Section</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="kt">Path</span><span class="p">,</span> <span class="kt">Path</span><span class="p">)</span>
+<span class="nf">roadStep</span> <span class="p">(</span><span class="n">pathA</span><span class="p">,</span> <span class="n">pathB</span><span class="p">)</span> <span class="p">(</span><span class="kt">Section</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span> <span class="ow">=</span> 
+  <span class="kr">let</span> <span class="n">priceA</span> <span class="ow">=</span> <span class="n">sum</span> <span class="o">$</span> <span class="n">map</span> <span class="n">snd</span> <span class="n">pathA</span>
+      <span class="n">priceB</span> <span class="ow">=</span> <span class="n">sum</span> <span class="o">$</span> <span class="n">map</span> <span class="n">snd</span> <span class="n">pathB</span>
+      <span class="n">forwardPriceToA</span> <span class="ow">=</span> <span class="n">priceA</span> <span class="o">+</span> <span class="n">a</span>
+      <span class="n">crossPriceToA</span> <span class="ow">=</span> <span class="n">priceB</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
+      <span class="n">forwardPriceToB</span> <span class="ow">=</span> <span class="n">priceB</span> <span class="o">+</span> <span class="n">b</span>
+      <span class="n">crossPriceToB</span> <span class="ow">=</span> <span class="n">priceA</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="n">c</span>
+      <span class="n">newPathToA</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">forwardPriceToA</span> <span class="o">&lt;=</span> <span class="n">crossPriceToA</span> <span class="kr">then</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span><span class="n">a</span><span class="p">)</span><span class="kt">:</span><span class="n">pathA</span> <span class="kr">else</span> <span class="p">(</span><span class="kt">C</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="kt">:</span><span class="p">(</span><span class="kt">B</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="kt">:</span><span class="n">pathB</span>
+      <span class="n">newPathToB</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">forwardPriceToB</span> <span class="o">&lt;=</span> <span class="n">crossPriceToB</span> <span class="kr">then</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="kt">:</span><span class="n">pathB</span> <span class="kr">else</span> <span class="p">(</span><span class="kt">C</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="kt">:</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span><span class="n">a</span><span class="p">)</span><span class="kt">:</span><span class="n">pathA</span>
+  <span class="kr">in</span> <span class="p">(</span><span class="n">newPathToA</span><span class="p">,</span> <span class="n">newPathToB</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now that we have a function that takes a pair of paths and a section and produces a new optimal path, we can just easily do a left fold over a list of sections.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">optimalPath</span> <span class="ow">::</span> <span class="kt">RoadSystem</span> <span class="ow">-&gt;</span> <span class="kt">Path</span>
+<span class="nf">optimalPath</span> <span class="n">roadSystem</span> <span class="ow">=</span> 
+  <span class="kr">let</span> <span class="p">(</span><span class="n">bestAPath</span><span class="p">,</span> <span class="n">bestBPath</span><span class="p">)</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">roadStep</span> <span class="p">(</span><span class="kt">[]</span><span class="p">,</span><span class="kt">[]</span><span class="p">)</span> <span class="n">roadSystem</span>
+  <span class="kr">in</span> <span class="kr">if</span> <span class="n">sum</span> <span class="p">(</span><span class="n">map</span> <span class="n">snd</span> <span class="n">bestAPath</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">sum</span> <span class="p">(</span><span class="n">map</span> <span class="n">snd</span> <span class="n">bestBPath</span><span class="p">)</span>
+     <span class="kr">then</span> <span class="n">reverse</span> <span class="n">bestAPath</span>
+     <span class="kr">else</span> <span class="n">reverse</span> <span class="n">bestBPath</span>
+     
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">optimalPath</span> <span class="n">heathrowToLondon</span>  
+<span class="p">[(</span><span class="kt">B</span><span class="p">,</span><span class="mi">10</span><span class="p">),(</span><span class="kt">C</span><span class="p">,</span><span class="mi">30</span><span class="p">),(</span><span class="kt">A</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="kt">C</span><span class="p">,</span><span class="mi">20</span><span class="p">),(</span><span class="kt">B</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="kt">B</span><span class="p">,</span><span class="mi">8</span><span class="p">),(</span><span class="kt">C</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>       
+</code></pre></td></tr></table>
+</div>
+</div><p>We get the result we wanna. But in the last step <code>(C,0)</code>, represent we are in London. Due to its price is 0, we still can get the right result.</p>
+<p>We have the function that finds an optimal path based on, now we just have to read a textual representation of a road system from the standard input, convert it into a type of <code>RoadSystem</code>, run that through our <code>optimalPath</code> function and print the path.</p>
+<ol>
+<li>First off, let&rsquo;s make a function that takes a list and splits it into groups of the same size. We&rsquo;ll call it <code>groupsOf</code>. For a parameter of <code>[1..10]</code>, <code>groupsOf 3</code> should return <code>[[1,2,3],[4,5,6],[7,8,9],[10]]</code>.</li>
+<li>Then we write a main function, including build the list, build the RoadSystem and calculate optimal path</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.Environment</span>
+<span class="kr">import</span> <span class="nn">System.Directory</span>
+<span class="kr">import</span> <span class="nn">System.IO</span>
+<span class="kr">import</span> <span class="nn">System.IO.Error</span>
+<span class="kr">import</span> <span class="nn">System.Random</span>
+<span class="kr">import</span> <span class="nn">Data.List</span> 
+
+<span class="kr">data</span> <span class="kt">Section</span> <span class="ow">=</span> <span class="kt">Section</span> <span class="p">{</span><span class="n">getA</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">getB</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">getC</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">}</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>
+<span class="kr">type</span> <span class="kt">RoadSystem</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Section</span><span class="p">]</span>
+
+<span class="nf">heathrowToLondon</span> <span class="ow">::</span> <span class="kt">RoadSystem</span>
+<span class="nf">heathrowToLondon</span> <span class="ow">=</span> <span class="p">[</span><span class="kt">Section</span> <span class="mi">50</span> <span class="mi">10</span> <span class="mi">30</span><span class="p">,</span> <span class="kt">Section</span> <span class="mi">5</span> <span class="mi">90</span> <span class="mi">20</span><span class="p">,</span> <span class="kt">Section</span> <span class="mi">40</span> <span class="mi">2</span> <span class="mi">25</span><span class="p">,</span> <span class="kt">Section</span> <span class="mi">10</span> <span class="mi">8</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="kr">data</span> <span class="kt">Label</span> <span class="ow">=</span> <span class="kt">A</span> <span class="o">|</span> <span class="kt">B</span> <span class="o">|</span> <span class="kt">C</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>
+<span class="kr">type</span> <span class="kt">Path</span> <span class="ow">=</span> <span class="p">[(</span><span class="kt">Label</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
+
+<span class="nf">roadStep</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Path</span><span class="p">,</span> <span class="kt">Path</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">Section</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="kt">Path</span><span class="p">,</span> <span class="kt">Path</span><span class="p">)</span>
+<span class="nf">roadStep</span> <span class="p">(</span><span class="n">pathA</span><span class="p">,</span> <span class="n">pathB</span><span class="p">)</span> <span class="p">(</span><span class="kt">Section</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span> <span class="ow">=</span> 
+  <span class="kr">let</span> <span class="n">priceA</span> <span class="ow">=</span> <span class="n">sum</span> <span class="o">$</span> <span class="n">map</span> <span class="n">snd</span> <span class="n">pathA</span>
+      <span class="n">priceB</span> <span class="ow">=</span> <span class="n">sum</span> <span class="o">$</span> <span class="n">map</span> <span class="n">snd</span> <span class="n">pathB</span>
+      <span class="n">forwardPriceToA</span> <span class="ow">=</span> <span class="n">priceA</span> <span class="o">+</span> <span class="n">a</span>
+      <span class="n">crossPriceToA</span> <span class="ow">=</span> <span class="n">priceB</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
+      <span class="n">forwardPriceToB</span> <span class="ow">=</span> <span class="n">priceB</span> <span class="o">+</span> <span class="n">b</span>
+      <span class="n">crossPriceToB</span> <span class="ow">=</span> <span class="n">priceA</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="n">c</span>
+      <span class="n">newPathToA</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">forwardPriceToA</span> <span class="o">&lt;=</span> <span class="n">crossPriceToA</span> <span class="kr">then</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span><span class="n">a</span><span class="p">)</span><span class="kt">:</span><span class="n">pathA</span> <span class="kr">else</span> <span class="p">(</span><span class="kt">C</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="kt">:</span><span class="p">(</span><span class="kt">B</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="kt">:</span><span class="n">pathB</span>
+      <span class="n">newPathToB</span> <span class="ow">=</span> <span class="kr">if</span> <span class="n">forwardPriceToB</span> <span class="o">&lt;=</span> <span class="n">crossPriceToB</span> <span class="kr">then</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="kt">:</span><span class="n">pathB</span> <span class="kr">else</span> <span class="p">(</span><span class="kt">C</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="kt">:</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span><span class="n">a</span><span class="p">)</span><span class="kt">:</span><span class="n">pathA</span>
+  <span class="kr">in</span> <span class="p">(</span><span class="n">newPathToA</span><span class="p">,</span> <span class="n">newPathToB</span><span class="p">)</span>
+      
+<span class="nf">optimalPath</span> <span class="ow">::</span> <span class="kt">RoadSystem</span> <span class="ow">-&gt;</span> <span class="kt">Path</span>
+<span class="nf">optimalPath</span> <span class="n">roadSystem</span> <span class="ow">=</span> 
+  <span class="kr">let</span> <span class="p">(</span><span class="n">bestAPath</span><span class="p">,</span> <span class="n">bestBPath</span><span class="p">)</span> <span class="ow">=</span> <span class="n">foldl</span> <span class="n">roadStep</span> <span class="p">(</span><span class="kt">[]</span><span class="p">,</span><span class="kt">[]</span><span class="p">)</span> <span class="n">roadSystem</span>
+  <span class="kr">in</span> <span class="kr">if</span> <span class="n">sum</span> <span class="p">(</span><span class="n">map</span> <span class="n">snd</span> <span class="n">bestAPath</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">sum</span> <span class="p">(</span><span class="n">map</span> <span class="n">snd</span> <span class="n">bestBPath</span><span class="p">)</span>
+     <span class="kr">then</span> <span class="n">reverse</span> <span class="n">bestAPath</span>
+     <span class="kr">else</span> <span class="n">reverse</span> <span class="n">bestBPath</span>
+     
+<span class="nf">groupOf</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[[</span><span class="n">a</span><span class="p">]]</span>
+<span class="nf">groupOf</span> <span class="mi">0</span> <span class="kr">_</span> <span class="ow">=</span> <span class="n">undefined</span>
+<span class="nf">groupOf</span> <span class="kr">_</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="kt">[]</span>
+<span class="nf">groupOf</span> <span class="n">n</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">take</span> <span class="n">n</span> <span class="n">xs</span> <span class="kt">:</span> <span class="n">groupOf</span> <span class="n">n</span> <span class="p">(</span><span class="n">drop</span> <span class="n">n</span> <span class="n">xs</span><span class="p">)</span>
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">handle</span> <span class="ow">&lt;-</span> <span class="n">openFile</span> <span class="s">&#34;paths.txt&#34;</span> <span class="kt">ReadMode</span>
+  <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">hGetContents</span> <span class="n">handle</span>
+  <span class="kr">let</span> <span class="n">threes</span> <span class="ow">=</span> <span class="n">groupOf</span> <span class="mi">3</span> <span class="p">(</span><span class="n">map</span> <span class="n">read</span> <span class="o">$</span> <span class="n">lines</span> <span class="n">contents</span><span class="p">)</span>
+      <span class="n">roadSystem</span> <span class="ow">=</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Section</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span> <span class="n">threes</span>
+      <span class="n">path</span> <span class="ow">=</span> <span class="n">optimalPath</span> <span class="n">roadSystem</span>
+      <span class="n">pathString</span> <span class="ow">=</span> <span class="n">concat</span> <span class="o">$</span> <span class="n">map</span> <span class="p">(</span> <span class="n">show</span> <span class="o">.</span> <span class="n">fst</span> <span class="p">)</span> <span class="n">path</span> 
+      <span class="n">pathPrice</span> <span class="ow">=</span> <span class="n">sum</span> <span class="o">$</span> <span class="n">map</span> <span class="n">snd</span> <span class="n">path</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">&#34;The best path is : &#34;</span> <span class="o">++</span> <span class="n">pathString</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">&#34;The Price is: &#34;</span> <span class="o">++</span> <span class="n">show</span> <span class="n">pathPrice</span>
+  <span class="n">hClose</span> <span class="n">handle</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">The best path to take is: BCACBBC  
+The price is: 75  
+</code></pre></td></tr></table>
+</div>
+</div><p>The program success!</p>
+<p>You can use your knowledge of the <code>Data.Random</code> module to generate a much longer system of roads, which you can then feed to what we just wrote. <strong>If you get stack overflows, try using <code>foldl'</code> instead of <code>foldl</code>, because <code>foldl'</code> is strict.</strong></p>
+<h2 id="reference">reference</h2>
+<p><a href="http://learnyouahaskell.com/functionally-solving-problems">http://learnyouahaskell.com/functionally-solving-problems</a></p>
+<p><a href="https://www.cntofu.com/book/140/zh-cn/ch10/functionally-solving-problems.md">https://www.cntofu.com/book/140/zh-cn/ch10/functionally-solving-problems.md</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-29
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/haskell8/">
+            <span class="next-text nav-default">Input and Output</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
