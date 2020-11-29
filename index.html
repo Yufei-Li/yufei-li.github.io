@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2020-11-21T01:34:54+08:00" />
+<meta property="og:updated_time" content="2020-11-26T23:56:24+08:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -106,6 +106,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell8/">Input and Output</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-26 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      I/O action 1 2 3 4  ghci&gt; :t putStrLn putStrLn :: String -&gt; IO () ghci&gt; :t putStrLn &#34;hello, world&#34; putStrLn &#34;hello, world&#34; :: IO ()   We can read the type of putStrLn like this: putStrLn takes a string and returns an I/O action that has a result type of ()(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell8/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell7/">Making Own Types and Typeclasses</a></h1>
@@ -192,27 +213,6 @@ maximum 1 2 3 4 5  maximum&#39; :: (Ord a) =&gt; [a] -&gt; a maximum&#39; [] = e
     </div>
     <div class="read-more">
       <a href="/post/haskell4/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell3/">Syntax in Functions</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-18 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      pattern matching 1 2 3 4 5 6 7 8 9 10  lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 x = &#34;not 7&#34; lucky7 7 --&#34;lucy 7&#34; -- if lucky7 x at front of lucky7 7 lucky7 x = &#34;not 7&#34; lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 7 --&#34;not 7&#34;   because lucky7 x will match with lucky7 7 and lucky7 7 = &quot;lucky 7&quot; won&rsquo;t be checked.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell3/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

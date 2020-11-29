@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Sat, 21 Nov 2020 01:34:54 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2020 23:56:24 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Input and Output</title>
+      <link>https://yufei-li.github.io/post/haskell8/</link>
+      <pubDate>Thu, 26 Nov 2020 23:56:24 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/haskell8/</guid>
+      <description>I/O action 1 2 3 4  ghci&amp;gt; :t putStrLn putStrLn :: String -&amp;gt; IO () ghci&amp;gt; :t putStrLn &amp;#34;hello, world&amp;#34; putStrLn &amp;#34;hello, world&amp;#34; :: IO ()   We can read the type of putStrLn like this: putStrLn takes a string and returns an I/O action that has a result type of ()(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent</description>
+    </item>
     
     <item>
       <title>Making Own Types and Typeclasses</title>

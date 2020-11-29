@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Input and Output - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="I/O action 1 2 3 4  ghci&amp;gt; :t putStrLn putStrLn :: String -&amp;gt; IO () ghci&amp;gt; :t putStrLn &amp;#34;hello, world&amp;#34; putStrLn &amp;#34;hello, world&amp;#34; :: IO ()   We can read the type of putStrLn like this: putStrLn takes a string and returns an I/O action that has a result type of ()(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/haskell8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Input and Output" />
+<meta property="og:description" content="I/O action 1 2 3 4  ghci&gt; :t putStrLn putStrLn :: String -&gt; IO () ghci&gt; :t putStrLn &#34;hello, world&#34; putStrLn &#34;hello, world&#34; :: IO ()   We can read the type of putStrLn like this: putStrLn takes a string and returns an I/O action that has a result type of ()(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/haskell8/" />
+<meta property="article:published_time" content="2020-11-26T23:56:24+08:00" />
+<meta property="article:modified_time" content="2020-11-26T23:56:24+08:00" />
+<meta itemprop="name" content="Input and Output">
+<meta itemprop="description" content="I/O action 1 2 3 4  ghci&gt; :t putStrLn putStrLn :: String -&gt; IO () ghci&gt; :t putStrLn &#34;hello, world&#34; putStrLn &#34;hello, world&#34; :: IO ()   We can read the type of putStrLn like this: putStrLn takes a string and returns an I/O action that has a result type of ()(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent">
+<meta itemprop="datePublished" content="2020-11-26T23:56:24&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-26T23:56:24&#43;08:00" />
+<meta itemprop="wordCount" content="5611">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Input and Output"/>
+<meta name="twitter:description" content="I/O action 1 2 3 4  ghci&gt; :t putStrLn putStrLn :: String -&gt; IO () ghci&gt; :t putStrLn &#34;hello, world&#34; putStrLn &#34;hello, world&#34; :: IO ()   We can read the type of putStrLn like this: putStrLn takes a string and returns an I/O action that has a result type of ()(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Input and Output</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-26 </span>
+        <div class="post-category">
+            <a href="/categories/haskell/"> Haskell </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#io-action">I/O action</a></li>
+    <li><a href="#files-and-streams">Files and streams</a>
+      <ul>
+        <li><a href="#open-and-read-a-file">Open and read a file</a></li>
+        <li><a href="#a-to-do-list">a to do list</a></li>
+      </ul>
+    </li>
+    <li><a href="#command-line-arguments">Command line arguments</a></li>
+    <li><a href="#randomness">Randomness</a></li>
+    <li><a href="#bytestrings">bytestrings</a></li>
+    <li><a href="#exceptions">exceptions</a></li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="io-action">I/O action</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">putStrLn</span>
+<span class="nf">putStrLn</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">putStrLn</span> <span class="s">&#34;hello, world&#34;</span>
+<span class="nf">putStrLn</span> <span class="s">&#34;hello, world&#34;</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We can read the type of <code>putStrLn</code> like this: <code>putStrLn</code> takes a string and returns an <code>I/O action</code> that has a result type of <code>()</code>(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+    <span class="n">putStrLn</span> <span class="s">&#34;Hello, what&#39;s your name?&#34;</span>
+    <span class="n">name</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>
+    <span class="n">putStrLn</span> <span class="p">(</span><span class="s">&#34;Hey &#34;</span> <span class="o">++</span> <span class="n">name</span> <span class="o">++</span> <span class="s">&#34;, you rock!&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Each of these steps is an I/O action. And all of them are in a <code>do</code> , so main is <strong>one</strong> I/O action. The action that we got has a type of <code>IO ()</code>, because that&rsquo;s the type of the last I/O action inside. The last type of I/O action decides the type of I/O action of <code>do</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">getLine</span>
+<span class="nf">getLine</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="kt">String</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>getLine</code> is an I/O action that contains a result type of <code>String</code>. <code>getLine</code> has a type of <code>IO String</code>, so <code>name</code> will have a type of <code>String</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">nameTag</span> <span class="ow">=</span> <span class="s">&#34;Hello, my name is &#34;</span> <span class="o">++</span> <span class="n">getLine</span> 
+<span class="c1">-- invalid, because getLine is IO String, must use &lt;- to get the string inside</span>
+
+<span class="nf">foo</span> <span class="ow">&lt;-</span> <span class="n">putStrLn</span> <span class="s">&#34;Hello, what&#39;s your name?&#34;</span>
+<span class="nf">name</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>
+<span class="nf">putStrLn</span> <span class="p">(</span><span class="s">&#34;Hey &#34;</span> <span class="o">++</span> <span class="n">name</span> <span class="o">++</span> <span class="s">&#34;, you rock!&#34;</span><span class="p">)</span>
+<span class="c1">-- valid, but foo would just have a value of ()</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>another case: type out an I/O action in GHCI</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">putStrLn</span> <span class="s">&#34;HEEY&#34;</span>  
+<span class="kt">HEEY</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>Even when we just punch out a number or call a function in GHCI and press return, it will evaluate it (as much as it needs) and then call <code>show</code> on it and then it will print that string to the terminal using <code>putStrLn</code> implicitly.</p>
+</li>
+<li>
+<p><strong>Example function of I/O action</strong></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+    <span class="n">line</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>
+    <span class="kr">if</span> <span class="n">null</span> <span class="n">line</span>
+        <span class="kr">then</span> <span class="n">return</span> <span class="nb">()</span>
+        <span class="kr">else</span> <span class="kr">do</span>
+            <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">reverseWords</span> <span class="n">line</span>
+            <span class="n">main</span>
+
+<span class="nf">reverseWords</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+<span class="nf">reverseWords</span> <span class="ow">=</span> <span class="n">unwords</span> <span class="o">.</span> <span class="n">map</span> <span class="n">reverse</span> <span class="o">.</span> <span class="n">words</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<ul>
+<li>
+<p><strong>reverseWords function</strong>:</p>
+</li>
+<li>
+<p>it will call <code>words</code> first, the  <code>map reverse</code> and <code>unwords</code> . If the <code>line</code> is &ldquo;hey there man&rdquo;, <code>reverseWord line</code> will be &ldquo;yeh ereht nam&rdquo;</p>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><strong>main function</strong>:</li>
+<li><strong>Important</strong>: In haskell, every if must have an else to make sure every expression will get a corresponding value</li>
+<li>We make the <code>if</code> so that when a condition is true (in our case, the line that we entered is blank), we perform one I/O action and when it isn&rsquo;t, the I/O action under the <em>else</em> is performed. That&rsquo;s why in an <code>I/O do</code> block, if-else have to have a form of <code>if condition then I/O action else  I/O action</code>.  Both <code>then</code> and <code>else</code> must have a I/O action to make sure <code>do</code> function is an I/O action.</li>
+<li>in <code>else</code>, we recuresively call <code>main</code>, it is ok since <code>main</code> is also a I/O action.</li>
+<li>if <code>if</code> is true, <code>then return ()</code>. <strong>the returnin Haskell is really nothing like the return in most other languages!</strong> In Haskell (in I/O actions specifically), it makes an I/O action out of a pure value.So in an I/O context, <code>return &quot;haha&quot;</code> will have a type of <code>IO String</code>.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>  
+    <span class="n">return</span> <span class="nb">()</span>  
+    <span class="n">return</span> <span class="s">&#34;HAHAHA&#34;</span>  
+    <span class="n">line</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>  
+    <span class="n">return</span> <span class="s">&#34;BLAH BLAH BLAH&#34;</span>  
+    <span class="n">return</span> <span class="mi">4</span>  
+    <span class="n">putStrLn</span> <span class="n">line</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>All these <code>returns</code> do is that they make I/O actions that don&rsquo;t really do anything except have an encapsulated result and that result is thrown away because it isn&rsquo;t bound to a name.<code>return</code> is sort of the opposite to <code>&lt;-</code></li>
+</ul>
+</li>
+<li>
+<p><strong>some functions that are useful when dealing with I/O.</strong></p>
+</li>
+<li>
+<p><strong>putStr</strong></p>
+</li>
+<li>
+<ul>
+<li>is much like <code>putStrLn</code> in that it takes a string as a parameter and returns an I/O action that will print that string to the terminal, only <code>putStr</code> doesn&rsquo;t jump into a new line after printing out the string while <code>putStrLn</code> does.</li>
+</ul>
+</li>
+<li>
+<p><strong>putChar</strong></p>
+</li>
+<li>
+<ul>
+<li>takes a character and returns an I/O action that will print it out to the terminal</li>
+<li><code>putStr</code> is actually defined recursively with the help of <code>putChar</code>. The edge condition of <code>putStr</code> is the empty string, so if we&rsquo;re printing an empty string, just return an I/O action that does nothing by using <code>return ()</code>. If it&rsquo;s not empty, then print the first character of the string by doing <code>putChar</code> and then print of them using <code>putStr</code>.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>   <span class="n">putChar</span> <span class="sc">&#39;t&#39;</span>  
+            <span class="n">putChar</span> <span class="sc">&#39;e&#39;</span>  
+            <span class="n">putChar</span> <span class="sc">&#39;h&#39;</span>  
+              
+<span class="nf">putStr</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">IO</span> <span class="nb">()</span>  
+<span class="nf">putStr</span> <span class="kt">[]</span> <span class="ow">=</span> <span class="n">return</span> <span class="nb">()</span>  
+<span class="nf">putStr</span> <span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span> <span class="ow">=</span> <span class="kr">do</span>  
+    <span class="n">putChar</span> <span class="n">x</span>  
+    <span class="n">putStr</span> <span class="n">xs</span>              
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>print</strong></p>
+</li>
+<li>
+<ul>
+<li>it&rsquo;s just <code>putStrLn . show</code>. It first runs <code>show</code> on a value and then feeds that to <code>putStrLn</code>, which returns an I/O action that will print out our value.</li>
+<li>When we want to print out strings, we usually use <code>putStrLn</code> because we don&rsquo;t want the quotes around them, but for printing out values of other types to the terminal, <code>print</code> is used the most.</li>
+</ul>
+</li>
+<li>
+<p><strong>getChar</strong></p>
+</li>
+<li>
+<ul>
+<li>is an I/O action that reads a character from the input, the result contained within the I/O action is a <code>Char</code>. Due to buffering, reading of the characters won&rsquo;t actually happen until the user mashes the return key.</li>
+<li>Due to buffering, the execution of the program will begin only when after we&rsquo;ve hit return and not after every inputted character. But once we press return, it acts on what we&rsquo;ve been putting in so far.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>     
+    <span class="n">c</span> <span class="ow">&lt;-</span> <span class="n">getChar</span>  
+    <span class="kr">if</span> <span class="n">c</span> <span class="o">/=</span> <span class="sc">&#39; &#39;</span>  
+        <span class="kr">then</span> <span class="kr">do</span>  
+            <span class="n">putChar</span> <span class="n">c</span>  
+            <span class="n">main</span>  
+        <span class="kr">else</span> <span class="n">return</span> <span class="nb">()</span>  
+  
+<span class="o">$</span> <span class="n">runhaskell</span> <span class="n">getchar_test</span><span class="o">.</span><span class="n">hs</span>  
+<span class="nf">hello</span> <span class="n">sir</span>  
+<span class="nf">hello</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>when</strong></p>
+</li>
+<li>
+<ul>
+<li>is found in <strong>Control.Monad</strong>.  It takes <strong>a boolean value and an I/O action</strong> if that boolean value is <code>True</code>, it returns the same I/O action that we supplied to it. However, if it&rsquo;s <code>False</code>, it returns the <code>return ()</code>, action, so an I/O action that doesn&rsquo;t do anything.  It&rsquo;s useful for encapsulating the <code>if \*something\* then do \*some I/O action\* else return ()</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Control.Monad</span>   
+    
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>  
+    <span class="n">c</span> <span class="ow">&lt;-</span> <span class="n">getChar</span>  
+    <span class="n">when</span> <span class="p">(</span><span class="n">c</span> <span class="o">/=</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">$</span> <span class="kr">do</span>  
+        <span class="n">putChar</span> <span class="n">c</span>  
+        <span class="n">main</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>sequence</strong></p>
+</li>
+<li>
+<ul>
+<li>takes a list of I/O actions and returns an I/O actions that will perform those actions one after the other.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+    <span class="n">a</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>
+    <span class="n">b</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>
+    <span class="n">c</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>
+    <span class="n">print</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">]</span>
+  
+<span class="c1">-- same as</span>
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+    <span class="n">rs</span> <span class="ow">&lt;-</span> <span class="n">sequence</span> <span class="p">[</span><span class="n">getLine</span><span class="p">,</span> <span class="n">getLine</span><span class="p">,</span> <span class="n">getLine</span><span class="p">]</span>
+    <span class="n">print</span> <span class="n">rs</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>**mapM and mapM_**</p>
+</li>
+<li>
+<ul>
+<li>Because mapping a function that returns an I/O action over a list and then sequencing it is so common, the utility functions mapM and mapM_ were introduced. <code>mapM</code> takes a function and a list, maps the function over the list and then sequences it. <code>mapM_</code> does the same, only it throws away the result later. We usually use <code>mapM_</code> when we don&rsquo;t care what result our sequenced I/O actions have.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">mapM</span> <span class="n">print</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>  
+<span class="mi">1</span>  
+<span class="mi">2</span>  
+<span class="mi">3</span>  
+<span class="p">[</span><span class="nb">()</span><span class="p">,</span><span class="nb">()</span><span class="p">,</span><span class="nb">()</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">mapM_</span> <span class="n">print</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>  
+<span class="mi">1</span>  
+<span class="mi">2</span>  
+<span class="mi">3</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>forever</strong></p>
+</li>
+<li>
+<ul>
+<li>
+<p>takes an I/O action and returns an I/O action that just repeats the I/O action it got forever.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Control.Monad</span>  
+<span class="kr">import</span> <span class="nn">Data.Char</span>  
+      
+<span class="nf">main</span> <span class="ow">=</span> <span class="n">forever</span> <span class="o">$</span> <span class="kr">do</span>  
+    <span class="n">putStr</span> <span class="s">&#34;Give me some input: &#34;</span>  
+    <span class="n">l</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>  
+    <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">map</span> <span class="n">toUpper</span> <span class="n">l</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>forM</strong></p>
+</li>
+<li>
+<ul>
+<li>is like <code>mapM</code>, only that it has its parameters switched around. The first parameter is the list and the second one is the function to map over that list, which is then sequenced.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Control.Monad</span>  
+    
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>   
+    <span class="n">colors</span> <span class="ow">&lt;-</span> <span class="n">forM</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="p">(</span><span class="nf">\</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="kr">do</span>  
+        <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">&#34;Which color do you associate with the number &#34;</span> <span class="o">++</span> <span class="n">show</span> <span class="n">a</span> <span class="o">++</span> <span class="s">&#34;?&#34;</span>  
+        <span class="n">color</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>  
+        <span class="n">return</span> <span class="n">color</span><span class="p">)</span>  
+    <span class="c1">-- colors is [I/O string, I/O string, I/O string, I/O string]</span>
+    <span class="n">putStrLn</span> <span class="s">&#34;The colors that you associate with 1, 2, 3 and 4 are: &#34;</span>  
+    <span class="n">mapM</span> <span class="n">putStrLn</span> <span class="n">colors</span>  
+      
+<span class="o">$</span> <span class="n">runhaskell</span> <span class="n">form_test</span><span class="o">.</span><span class="n">hs</span>  
+<span class="kt">Which</span> <span class="n">color</span> <span class="kr">do</span> <span class="n">you</span> <span class="n">associate</span> <span class="n">with</span> <span class="n">the</span> <span class="n">number</span> <span class="mi">1</span><span class="o">?</span>  
+<span class="nf">white</span>  
+<span class="kt">Which</span> <span class="n">color</span> <span class="kr">do</span> <span class="n">you</span> <span class="n">associate</span> <span class="n">with</span> <span class="n">the</span> <span class="n">number</span> <span class="mi">2</span><span class="o">?</span>  
+<span class="nf">blue</span>  
+<span class="kt">Which</span> <span class="n">color</span> <span class="kr">do</span> <span class="n">you</span> <span class="n">associate</span> <span class="n">with</span> <span class="n">the</span> <span class="n">number</span> <span class="mi">3</span><span class="o">?</span>  
+<span class="nf">red</span>  
+<span class="kt">Which</span> <span class="n">color</span> <span class="kr">do</span> <span class="n">you</span> <span class="n">associate</span> <span class="n">with</span> <span class="n">the</span> <span class="n">number</span> <span class="mi">4</span><span class="o">?</span>  
+<span class="nf">orange</span>  
+<span class="kt">The</span> <span class="n">colors</span> <span class="n">that</span> <span class="n">you</span> <span class="n">associate</span> <span class="n">with</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="n">and</span> <span class="mi">4</span> <span class="n">are</span><span class="kt">:</span>  
+<span class="nf">white</span>  
+<span class="nf">blue</span>  
+<span class="nf">red</span>  
+<span class="nf">orange</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>We could have actually done that without <code>forM</code>, only with <code>forM</code> it&rsquo;s more readable. Normally we write <code>forM</code> when we want to map and sequence some actions that we define there on the spot using <em>do</em> notation. In the same vein, we could have replaced the last line with <code>forM colors putStrLn.</code></li>
+</ul>
+</li>
+</ul>
+<p>Don&rsquo;t think of a function like <code>putStrLn</code> as a function that takes a string and prints it to the screen. Think of it as a function that takes a string and returns an I/O action. That I/O action will, when performed, print beautiful poetry to your terminal.</p>
+<h2 id="files-and-streams">Files and streams</h2>
+<p><code>getContents</code> is an I/O action that reads everything from the standard input until it encounters an end-of-file character. When we do <code>foo &lt;- getContents</code>, it doesn&rsquo;t read all of the input at once, until you really need the input</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Control.Monad</span>
+<span class="kr">import</span> <span class="nn">Data.Char</span>
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="n">forever</span> <span class="o">$</span> <span class="kr">do</span>
+  <span class="n">putStr</span> <span class="s">&#34;Give me some input:&#34;</span>
+  <span class="n">l</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">map</span> <span class="n">toUpper</span> <span class="n">l</span>
+   
+<span class="c1">-- two program are same</span>
+<span class="kr">import</span> <span class="nn">Data.Char</span>
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">getContents</span>
+  <span class="n">putStr</span> <span class="p">(</span><span class="n">map</span> <span class="n">toUpper</span> <span class="n">contents</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>a program only output the short lines:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Char</span>
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">getContents</span>
+  <span class="n">putStr</span> <span class="p">(</span><span class="n">shortLinesOnly</span> <span class="n">contents</span><span class="p">)</span>
+  
+<span class="nf">shortLinesOnly</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+<span class="nf">shortLinesOnly</span> <span class="n">input</span> <span class="ow">=</span>
+  <span class="kr">let</span> <span class="n">allLines</span> <span class="ow">=</span> <span class="n">lines</span> <span class="n">input</span>
+  <span class="c1">-- lines will turn &#34;hello\nworld&#34; to [&#34;hello&#34;, &#34;world&#34;]</span>
+      <span class="n">shortLines</span> <span class="ow">=</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="n">line</span> <span class="ow">-&gt;</span> <span class="n">length</span> <span class="n">line</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="n">allLines</span>
+      <span class="n">result</span> <span class="ow">=</span> <span class="n">unlines</span> <span class="n">shortLines</span>
+  <span class="kr">in</span> <span class="n">result</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>Interact</strong></p>
+</li>
+<li>
+<ul>
+<li><code>interact</code> takes a function of type <code>String -&gt; String</code> as a parameter and returns an I/O action that will take some input, run that function on it and then print out the function&rsquo;s result.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Char</span>
+  
+<span class="nf">main</span> <span class="ow">=</span> <span class="n">interact</span> <span class="n">shortLinesOnly</span>
+    
+<span class="nf">shortLinesOnly</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+<span class="nf">shortLinesOnly</span> <span class="n">input</span> <span class="ow">=</span>
+  <span class="kr">let</span> <span class="n">allLines</span> <span class="ow">=</span> <span class="n">lines</span> <span class="n">input</span>
+      <span class="n">shortLines</span> <span class="ow">=</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="n">line</span> <span class="ow">-&gt;</span> <span class="n">length</span> <span class="n">line</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="n">allLines</span>
+      <span class="n">result</span> <span class="ow">=</span> <span class="n">unlines</span> <span class="n">shortLines</span>
+  <span class="kr">in</span> <span class="n">result</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>a program to tell whether palindrome</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">respondPalindromes</span> <span class="n">contents</span> <span class="ow">=</span> <span class="n">unlines</span> <span class="p">(</span><span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">xs</span> <span class="ow">-&gt;</span>
+  <span class="kr">if</span> <span class="n">isPalindrome</span> <span class="n">xs</span> <span class="kr">then</span> <span class="s">&#34;palindrome&#34;</span> <span class="kr">else</span> <span class="s">&#34;not palindrome&#34;</span><span class="p">)</span> <span class="p">(</span><span class="n">lines</span> <span class="n">contents</span><span class="p">))</span>
+    <span class="kr">where</span> <span class="n">isPalindrome</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">xs</span> <span class="o">==</span> <span class="n">reverse</span> <span class="n">xs</span>
+      
+<span class="c1">-- point-free form</span>
+<span class="nf">respondPalindromes</span> <span class="ow">=</span> <span class="n">unlines</span> <span class="o">.</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">xs</span> <span class="ow">-&gt;</span>
+  <span class="kr">if</span> <span class="n">isPalindrome</span> <span class="n">xs</span> <span class="kr">then</span> <span class="s">&#34;palindrome&#34;</span> <span class="kr">else</span> <span class="s">&#34;not palindrome&#34;</span><span class="p">)</span> <span class="o">.</span> <span class="n">lines</span>
+    <span class="kr">where</span> <span class="n">isPalindrome</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">xs</span> <span class="o">==</span> <span class="n">reverse</span> <span class="n">xs</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="open-and-read-a-file">Open and read a file</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.IO</span>
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">handle</span> <span class="ow">&lt;-</span> <span class="n">openFile</span> <span class="s">&#34;test.txt&#34;</span> <span class="kt">ReadMode</span>
+  <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">hGetContents</span> <span class="n">handle</span>
+  <span class="n">putStr</span> <span class="n">contents</span>
+  <span class="n">hClose</span> <span class="n">handle</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>OpenFile</strong> function: <code>openFile :: FilePath -&gt; IOMode -&gt; IO Handle</code>, FilePath is a type synonym of String, <code>type FilePath = String</code>, IOMode has four values: <code>data IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode  </code></p>
+<p><strong>hGetContents</strong> function: this function is similar to <code>getContents</code>, but <code>getContents</code> get input from stdin, <code>hGetContents</code> get input from a file handle.</p>
+<p>In the program, <code>handle</code> is file handle, <code>contents</code> is the content in the file</p>
+<p><strong>hClose</strong> function: this function receive a file handle and close this file.</p>
+<p><strong>another way to achieve</strong> this program is <strong>withFile</strong> function. <code>withFile :: FilePath -&gt; IOMode -&gt; (Handle -&gt; IO a) -&gt; IO a</code>, it is simple to use since we have lambda</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.IO</span>
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">withFile</span> <span class="s">&#34;test.txt&#34;</span> <span class="kt">ReadMode</span> <span class="p">(</span><span class="nf">\</span><span class="n">handle</span> <span class="ow">-&gt;</span> <span class="kr">do</span>
+    <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">hGetContents</span> <span class="n">handle</span>
+    <span class="n">putStr</span> <span class="n">contents</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>a withFile function write by our own:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">withFile&#39;</span> <span class="ow">::</span> <span class="kt">FilePath</span> <span class="ow">-&gt;</span> <span class="kt">IOMode</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="kt">Handle</span> <span class="ow">-&gt;</span> <span class="kt">IO</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">IO</span> <span class="n">a</span>
+<span class="nf">withFile&#39;</span> <span class="n">path</span> <span class="n">mode</span> <span class="n">f</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">handle</span> <span class="ow">&lt;-</span> <span class="n">openFile</span> <span class="n">path</span> <span class="n">mode</span>
+  <span class="n">result</span> <span class="ow">&lt;-</span> <span class="n">f</span> <span class="n">handle</span>
+  <span class="c1">-- result is a</span>
+  <span class="n">hClose</span> <span class="n">handle</span>
+  <span class="n">return</span> <span class="n">result</span>
+  <span class="c1">-- return result is IO a</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Just like we have <code>hGetContents</code> that works like <code>getContents</code> but for a specific file, there&rsquo;s also <code>hGetLine</code>, hPutStr, <code>hPutStrLn</code>, <code>hGetChar</code>, etc. Example: <code>putStrLn</code> is a function that takes a string and returns an I/O action that will print out that string to the terminal and a newline after it.</p>
+<ul>
+<li>
+<p><strong>readFile</strong></p>
+<ul>
+<li><code>readFile :: FilePath -&gt; IO String</code></li>
+<li>with <code>readFile</code>, since we cannot get file handle to close the file, the haskell do that for us</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.IO</span>
+  
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">readFile</span> <span class="s">&#34;test.txt&#34;</span>
+  <span class="n">putStr</span> <span class="n">contents</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>writeFile</strong></p>
+<ul>
+<li>
+<p><code>writeFile :: FilePath -&gt; String -&gt; IO ()</code></p>
+</li>
+<li>
+<p>It takes a path to a file and a string to write to that file and returns an I/O action that will do the writing. <strong>If such a file already exists, it will be stomped down to zero length before being written on.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.IO</span>
+<span class="kr">import</span> <span class="nn">Data.Char</span> 
+    
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">readFile</span> <span class="s">&#34;test.txt&#34;</span>
+  <span class="n">writeFile</span> <span class="s">&#34;test_capital.txt&#34;</span> <span class="p">(</span><span class="n">map</span> <span class="n">toUpper</span> <span class="n">contents</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>if <code>writeFile &quot;tes.txt&quot; (map toUpper contents)</code>, the program will raise error <code>openFile: resource busy (file is locked) </code></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>appendFile</strong></p>
+<ul>
+<li>has a type signature that&rsquo;s just like <code>writeFile</code>, only <code>appendFile</code> doesn&rsquo;t truncate the file to zero length if it already exists but it appends stuff to it.</li>
+</ul>
+</li>
+</ul>
+<h3 id="a-to-do-list">a to do list</h3>
+<p>Let&rsquo;s say we have a file <em>todo.txt</em> that has one task per line that we have to do. Now let&rsquo;s make a program that takes a line from the standard input and adds that to our to-do list.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.IO</span>
+<span class="kr">import</span> <span class="nn">Data.Char</span> 
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">todoItem</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>
+  <span class="n">appendFile</span> <span class="s">&#34;todo.txt&#34;</span> <span class="p">(</span><span class="n">todoItem</span> <span class="o">++</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>We talked about how doing <code>contents &lt;- hGetContents handle</code> doesn&rsquo;t cause the whole file to be read at once and stored in-memory.</li>
+<li>
+<ul>
+<li>For text files, the default buffering is line-buffering usually. That means that the smallest part of the file to be read at once is one line. That&rsquo;s why in this case it actually reads a line, prints it to the output, reads the next line, prints it, etc.</li>
+<li>For binary files, the default buffering is usually block-buffering. That means that it will read the file chunk by chunk. The chunk size is some size that your operating system thinks is cool.</li>
+</ul>
+</li>
+<li>You can control how exactly buffering is done by using the <code>hSetBuffering</code> function. It takes a handle and a <code>BufferMode</code>and returns an I/O action that sets the buffering.</li>
+<li><code>BufferMode</code> is a simple enumeration data type and the possible values it can hold are: <code>NoBuffering</code>, <code>LineBuffering</code> or <code>BlockBuffering (Maybe Int)</code>. The <code>Maybe Int</code> is for how big the chunk should be, in bytes. If it&rsquo;s <code>Nothing</code>, then the operating system determines the chunk size. <code>NoBuffering</code> means that it will be read one character at a time. <code>NoBuffering</code> usually sucks as a buffering mode because it has to access the disk so much.</li>
+</ul>
+<p>Then we modify print file program, we modify the buffer instead of read one line once</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.IO</span>
+<span class="kr">import</span> <span class="nn">Data.Char</span> 
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">withFile</span> <span class="s">&#34;test.txt&#34;</span> <span class="kt">ReadMode</span> <span class="p">(</span><span class="nf">\</span><span class="n">handle</span> <span class="ow">-&gt;</span> <span class="kr">do</span>
+    <span class="n">hSetBuffering</span> <span class="n">handle</span> <span class="o">$</span> <span class="kt">BlockBuffering</span> <span class="p">(</span><span class="kt">Just</span> <span class="mi">2048</span><span class="p">)</span>
+    <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">hGetContents</span> <span class="n">handle</span>
+    <span class="n">putStr</span> <span class="n">contents</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Reading files in bigger chunks can help if we want to minimize disk access or when our file is actually a slow network resource.</strong></p>
+<ul>
+<li><strong>hFlush</strong> function: a function that takes a handle and returns an I/O action that will flush the buffer of the file associated with the handle</li>
+</ul>
+<p>We already made a program to add a new item to our to-do list in <em>todo.txt</em>, now let&rsquo;s make a program to remove an item. We&rsquo;ll be using a few new functions from <code>System.Directory</code> and one new function from <code>System.IO</code>, but they&rsquo;ll all be explained.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.IO</span>
+<span class="kr">import</span> <span class="nn">System.Directory</span>
+<span class="kr">import</span> <span class="nn">Data.List</span> 
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>        
+    <span class="n">handle</span> <span class="ow">&lt;-</span> <span class="n">openFile</span> <span class="s">&#34;todo.txt&#34;</span> <span class="kt">ReadMode</span>  
+    <span class="p">(</span><span class="n">tempName</span><span class="p">,</span> <span class="n">tempHandle</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">openTempFile</span> <span class="s">&#34;.&#34;</span> <span class="s">&#34;temp&#34;</span>  
+    <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">hGetContents</span> <span class="n">handle</span>  
+    <span class="kr">let</span> <span class="n">todoTasks</span> <span class="ow">=</span> <span class="n">lines</span> <span class="n">contents</span>     
+        <span class="n">numberedTasks</span> <span class="ow">=</span> <span class="n">zipWith</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="n">line</span> <span class="ow">-&gt;</span> <span class="n">show</span> <span class="n">n</span> <span class="o">++</span> <span class="s">&#34; - &#34;</span> <span class="o">++</span> <span class="n">line</span><span class="p">)</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="p">]</span> <span class="n">todoTasks</span>     
+    <span class="n">putStrLn</span> <span class="s">&#34;These are your TO-DO items:&#34;</span>  
+    <span class="n">putStr</span> <span class="o">$</span> <span class="n">unlines</span> <span class="n">numberedTasks</span>  
+    <span class="n">putStrLn</span> <span class="s">&#34;Which one do you want to delete?&#34;</span>     
+    <span class="n">numberString</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>     
+    <span class="kr">let</span> <span class="n">number</span> <span class="ow">=</span> <span class="n">read</span> <span class="n">numberString</span>     
+        <span class="n">newTodoItems</span> <span class="ow">=</span> <span class="n">delete</span> <span class="p">(</span><span class="n">todoTasks</span> <span class="o">!!</span> <span class="n">number</span><span class="p">)</span> <span class="n">todoTasks</span>     
+    <span class="n">hPutStr</span> <span class="n">tempHandle</span> <span class="o">$</span> <span class="n">unlines</span> <span class="n">newTodoItems</span>  
+    <span class="n">hClose</span> <span class="n">handle</span>  
+    <span class="n">hClose</span> <span class="n">tempHandle</span>  
+    <span class="n">removeFile</span> <span class="s">&#34;todo.txt&#34;</span>  
+    <span class="n">renameFile</span> <span class="n">tempName</span> <span class="s">&#34;todo.txt&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>The process to list the to-do list:</strong></p>
+<ul>
+<li>
+<p>At first, we just open <em>todo.txt</em> in read mode and bind its handle to <code>handle</code>.</p>
+</li>
+<li>
+<p>Next,there is a new function in  <code>System.IO</code> — <code>openTempFile</code>. It takes a path to a temporary directory and a template name for a file and opens a temporary file.</p>
+<ul>
+<li>
+<p>We used <code>&quot;.&quot;</code> for the temporary directory, because <strong><code>.</code> denotes the current directory on just about any OS.</strong> We used <code>&quot;temp&quot;</code> as the template name for the temporary file.</p>
+</li>
+<li>
+<p>It returns an I/O action that makes the temporary file and the result in that I/O action is a pair of values: the name of the temporary file and a handle.</p>
+</li>
+<li>
+<p>It&rsquo;s better practice to use <code>openTempFile</code> so you&rsquo;re probably not overwriting anything.</p>
+</li>
+<li>
+<p>The reason we didn&rsquo;t use <code>getCurrentDirectory</code> to get the current directory and then pass it to <code>openTempFile</code> but instead just passed <code>&quot;.&quot;</code> to openTempFile is because <code>.</code> refers to the current directory on unix-like system and Windows</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Next up, we bind the contents of <em>todo.txt</em> to <code>contents</code>.</p>
+</li>
+<li>
+<p>Then, split that string into a list of strings, each string one line. So <code>todoTasks</code> is now something like <code>[&quot;Iron the dishes&quot;, &quot;Dust the dog&quot;, &quot;Take salad out of the oven&quot;]</code>.</p>
+</li>
+<li>
+<p>We zip the numbers from 0 onwards and that list with a function that takes a number, so <code>numberedTasks</code> is <code>[&quot;0 - Iron the dishes&quot;, &quot;1 - Dust the dog&quot; ....</code> .</p>
+</li>
+<li>
+<p>We join that list of strings into a single newline delimited string with <code>unlines</code> and print that string out to the terminal. Note that instead of doing that, we could have also done <code>mapM putStrLn numberedTasks</code></p>
+</li>
+</ul>
+<p><strong>The process to delete a task:</strong></p>
+<ul>
+<li>Let&rsquo;s say they want to delete number 1, so they input <code>1</code>. <code>numberString</code> is now <code>&quot;1&quot;</code> and because we want a number, not a string, we run <code>read</code> on that to get <code>1</code> and bind that to <code>number</code>.</li>
+<li><code>(todoTasks !! number)</code>(number is now <strong>1</strong>) returns <code>&quot;Dust the dog&quot;</code>.</li>
+<li>join the <code>newTodoItems</code> into a single string with <code>unlines</code> before writing it to the temporary file that we opened. The old file is now unchanged and the temporary file contains all the lines that the old one does, except the one we deleted.</li>
+<li>After that we close both the original and the temporary files and then we remove the original one with removeFile, which, as you can see, takes a path to a file and deletes it. After deleting the old <em>todo.txt</em>, we use <strong>renameFile</strong> to rename the temporary file to <em>todo.txt</em>.</li>
+<li>Be careful, <code>removeFile</code> and <code>renameFile</code> (which are both in <code>System.Directory</code> by the way) take file <strong>paths as their parameters, not handles.</strong></li>
+</ul>
+<h2 id="command-line-arguments">Command line arguments</h2>
+<p>There are two problems in our to-do list program:</p>
+<ol>
+<li>the path of to-do file is fixed.</li>
+<li>2131</li>
+</ol>
+<p><strong>To solve first problem:</strong></p>
+<p>One way to solve the first problem is to always ask the user which file they want to use as their to-do list. But it&rsquo;s not so good, because it requires the user to run the program, wait for the program to ask something and then tell that to the program. That&rsquo;s why it&rsquo;s sometimes better to have the user tell the program what they want when they run the program, instead of having the program ask the user once it&rsquo;s run. And what better way to have the user tell the program what they want it to do when they run it than via command line arguments!</p>
+<p>The <code>System.Environment</code> module has two cool I/O actions. One is <code>getArgs</code>, which has a type of <code>getArgs :: IO [String]</code> and is an I/O action that will get the arguments that the program was run with and have as its contained result a list with the arguments. <code>getProgName</code> has a type of <code>getProgName :: IO String</code> and is an I/O action that contains the program name.</p>
+<p><strong>a program to show the function of <code>getProgName</code> and <code>getArgs</code>:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.Environment</span>
+<span class="kr">import</span> <span class="nn">Data.List</span> 
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>        
+    <span class="n">arg</span> <span class="ow">&lt;-</span> <span class="n">getArgs</span>  <span class="c1">-- arg is [String]</span>
+    <span class="n">progName</span> <span class="ow">&lt;-</span> <span class="n">getProgName</span>
+    <span class="n">putStrLn</span> <span class="s">&#34;The arguments are:&#34;</span>
+    <span class="n">mapM</span> <span class="n">putStrLn</span> <span class="n">arg</span>
+    <span class="n">putStrLn</span> <span class="s">&#34;The program name is:&#34;</span>
+    <span class="n">putStrLn</span> <span class="n">progName</span> 
+    
+<span class="c1">-- it will show the arguments and name of this program</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now, we&rsquo;re going to join that into one program, what it does will depend on the command line arguments. We&rsquo;re also going to make it so it can operate on different files, not just <em>todo.txt</em>. We&rsquo;re not going to concern ourselves with possible bad input too much right now.</p>
+<p>Our program will be made so that if we want to add the task <code>Find the magic sword of power</code> to the file <em>todo.txt</em>, we have to punch in <code>todo add todo.txt &quot;Find the magic sword of power&quot;</code> in our terminal. To view the tasks we&rsquo;ll just do <code>todo view todo.txt</code> and to remove the task with the index of 2, we&rsquo;ll do <code>todo remove todo.txt 2</code>.</p>
+<p><strong>The process to achieve this to-do program:</strong></p>
+<ol>
+<li>
+<p>We&rsquo;ll start by making a dispatch association list. It&rsquo;s going to be a simple association list that has command line arguments as keys and functions as their corresponding values. All these functions will be of type <code>[String] -&gt; IO ()</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.Environment</span>
+<span class="kr">import</span> <span class="nn">System.Directory</span>
+<span class="kr">import</span> <span class="nn">System.IO</span>
+<span class="kr">import</span> <span class="nn">Data.List</span> 
+   
+<span class="nf">dispatch</span> <span class="ow">::</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">IO</span><span class="nb">()</span><span class="p">)]</span>
+<span class="nf">dispatch</span> <span class="ow">=</span> <span class="p">[(</span><span class="s">&#34;add&#34;</span><span class="p">,</span> <span class="n">add</span><span class="p">),</span> <span class="p">(</span><span class="s">&#34;view&#34;</span><span class="p">,</span> <span class="n">view</span><span class="p">),</span> <span class="p">(</span><span class="s">&#34;remove&#34;</span><span class="p">,</span> <span class="n">remove</span><span class="p">)]</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>mian</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">main = do
+  (command : args) &lt;- getArgs
+  let (Just action) = lookup command dispatch
+  action args
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>bind the arugments to <code>(command: args)</code>,  If we call our program like <code>todo add todo.txt &quot;Spank the monkey&quot;</code>, <code>command</code> will be <code>&quot;add&quot;</code> and <code>args</code> will be <code>[&quot;todo.xt&quot;, &quot;Spank the monkey&quot;].</code></li>
+<li>we look up our command in the dispatch list. Because <code>&quot;add&quot;</code> points to <code>add</code>, we get <code>Just add</code> as a result.</li>
+<li>Finally, we call our <code>action</code> functionThat will return an I/O action that either adds an item, displays a list of items or deletes an item. If we follow our concrete example so far and our <code>action</code> function is <code>add</code>, it will get called with <code>args</code> (so <code>[&quot;todo.txt&quot;, &quot;Spank the monkey&quot;]</code>) and return an I/O action that adds <code>Spank the monkey</code> to <em>todo.txt</em>.</li>
+</ul>
+</li>
+<li>
+<p>add/view/remove</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">add</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">IO</span><span class="nb">()</span>
+<span class="nf">add</span> <span class="p">[</span><span class="n">filename</span><span class="p">,</span> <span class="n">todoItem</span><span class="p">]</span> <span class="ow">=</span> <span class="n">appendFile</span> <span class="n">filename</span> <span class="p">(</span><span class="n">todoItem</span> <span class="o">++</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">)</span>
+   
+<span class="nf">view</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">IO</span><span class="nb">()</span>
+<span class="nf">view</span> <span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">readFile</span> <span class="n">filename</span>
+  <span class="kr">let</span> <span class="n">todoTasks</span> <span class="ow">=</span> <span class="n">lines</span> <span class="n">contents</span>
+      <span class="n">numberedTasks</span> <span class="ow">=</span> <span class="n">zipWith</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="n">line</span> <span class="ow">-&gt;</span> <span class="n">show</span> <span class="n">n</span> <span class="o">++</span> <span class="s">&#34;-&#34;</span> <span class="o">++</span> <span class="n">line</span><span class="p">)</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span> <span class="n">todoTasks</span>
+  <span class="n">putStr</span> <span class="o">$</span> <span class="n">unlines</span> <span class="n">numberedTasks</span>
+     
+<span class="nf">remove</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">IO</span><span class="nb">()</span>
+<span class="nf">remove</span> <span class="p">[</span><span class="n">filename</span><span class="p">,</span> <span class="n">numberString</span><span class="p">]</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">handle</span> <span class="ow">&lt;-</span> <span class="n">openFile</span> <span class="n">filename</span> <span class="kt">ReadMode</span>
+  <span class="p">(</span><span class="n">tempName</span><span class="p">,</span> <span class="n">tempHandle</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">openTempFile</span> <span class="s">&#34;.&#34;</span> <span class="s">&#34;temp&#34;</span>
+  <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">hGetContents</span> <span class="n">handle</span>
+  <span class="kr">let</span> <span class="n">number</span> <span class="ow">=</span> <span class="n">read</span> <span class="n">numberString</span>
+      <span class="n">todoTasks</span> <span class="ow">=</span> <span class="n">lines</span> <span class="n">contents</span>
+      <span class="n">newTodoItems</span> <span class="ow">=</span> <span class="n">delete</span> <span class="p">(</span><span class="n">todoTasks</span> <span class="o">!!</span> <span class="n">number</span><span class="p">)</span> <span class="n">todoTasks</span>
+  <span class="n">hPutStr</span> <span class="n">tempHandle</span> <span class="o">$</span> <span class="n">unlines</span> <span class="n">newTodoItems</span>
+  <span class="n">hClose</span> <span class="n">handle</span>
+  <span class="n">hClose</span> <span class="n">tempHandle</span>
+  <span class="n">removeFile</span> <span class="n">filename</span>
+  <span class="n">renameFile</span> <span class="n">tempName</span> <span class="n">filename</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="randomness">Randomness</h2>
+<p>Many times while programming, you need to get some random data. Maybe you&rsquo;re making a game where a die needs to be thrown or you need to generate some test data to test out your program. In this section, we&rsquo;ll take a look at how to make Haskell generate seemingly random data.</p>
+<p>How do other languages make seemingly random numbers? Well, <strong>they take various info from your computer</strong>, like the current time, how much and where you moved your mouse and what kind of noises you made behind your computer and based on that, give a number that looks really random. The combination of those factors (that randomness) is probably different in any given moment in time, so you get a different random number.</p>
+<p>In haskell, in <code>System.Random</code> module. It has all the functions that satisfy our need for randomness.</p>
+<ul>
+<li>
+<p><strong>random</strong></p>
+</li>
+<li>
+<ul>
+<li>
+<p><code>random :: (RandomGen g, Random a) =&gt; g -&gt; (a, g)</code>.</p>
+</li>
+<li>
+<p>The RandomGen typeclass is for types that can act as sources of randomness. The Random typeclass is for things that can take on random values. A boolean value can take on a random value, namely <strong>True</strong> or <strong>False</strong>. A number can also take up a plethora of different random values.</p>
+</li>
+<li>
+<p>To use our <code>random</code> function, we have to get our hands on one of those random generators. The <code>System.Random</code> module exports a cool type, namely StdGen that is an instance of the <code>RandomGen</code> typeclass.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>random generator</strong></p>
+</li>
+<li>
+<p>To manually make your own random generator, use the <code>mkStdGen</code> function. It has a type of <code>mkStdGen :: Int -&gt; StdGen</code>. It takes an integer and based on that, gives us a random generator.</p>
+<ul>
+<li>the first element of tuple is our random number, the second element is a new random generator</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">random</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="mi">100</span><span class="p">)</span>
+<span class="c1">-- the random function can return a value of any type that&#39;s part of the Random typeclass, so we have to inform Haskell what kind of type we want</span>
+  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">random</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="mi">100</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">StdGen</span><span class="p">)</span>  
+<span class="p">(</span><span class="o">-</span><span class="mi">1352021624</span><span class="p">,</span><span class="mi">651872571</span> <span class="mi">1655838864</span><span class="p">)</span>  
+<span class="c1">-- if we run the prgram again, we will get the same result</span>
+  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">random</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="mi">949494</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">StdGen</span><span class="p">)</span>  
+<span class="p">(</span><span class="mi">539963926</span><span class="p">,</span><span class="mi">466647808</span> <span class="mi">1655838864</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p><strong>a function that simulates tossing a coin three times</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">threeCoins</span> <span class="ow">::</span> <span class="kt">StdGen</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt">Bool</span><span class="p">,</span> <span class="kt">Bool</span><span class="p">)</span>  
+<span class="nf">threeCoins</span> <span class="n">gen</span> <span class="ow">=</span>   
+    <span class="kr">let</span> <span class="p">(</span><span class="n">firstCoin</span><span class="p">,</span> <span class="n">newGen</span><span class="p">)</span> <span class="ow">=</span> <span class="n">random</span> <span class="n">gen</span>  
+        <span class="p">(</span><span class="n">secondCoin</span><span class="p">,</span> <span class="n">newGen&#39;</span><span class="p">)</span> <span class="ow">=</span> <span class="n">random</span> <span class="n">newGen</span>  
+        <span class="p">(</span><span class="n">thirdCoin</span><span class="p">,</span> <span class="n">newGen&#39;&#39;</span><span class="p">)</span> <span class="ow">=</span> <span class="n">random</span> <span class="n">newGen&#39;</span>  
+    <span class="kr">in</span>  <span class="p">(</span><span class="n">firstCoin</span><span class="p">,</span> <span class="n">secondCoin</span><span class="p">,</span> <span class="n">thirdCoin</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><strong>randoms</strong></p>
+<ul>
+<li>
+<p>takes a generator and returns an infinite sequence of values based on that generator.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">5</span> <span class="o">$</span> <span class="n">randoms</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="mi">11</span><span class="p">)</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>  
+<span class="p">[</span><span class="o">-</span><span class="mi">1807975507</span><span class="p">,</span><span class="mi">545074951</span><span class="p">,</span><span class="o">-</span><span class="mi">1015194702</span><span class="p">,</span><span class="o">-</span><span class="mi">1622477312</span><span class="p">,</span><span class="o">-</span><span class="mi">502893664</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">5</span> <span class="o">$</span> <span class="n">randoms</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="mi">11</span><span class="p">)</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">Bool</span><span class="p">]</span>  
+<span class="p">[</span><span class="kt">True</span><span class="p">,</span><span class="kt">True</span><span class="p">,</span><span class="kt">True</span><span class="p">,</span><span class="kt">True</span><span class="p">,</span><span class="kt">False</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">5</span> <span class="o">$</span> <span class="n">randoms</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="mi">11</span><span class="p">)</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span>  
+<span class="p">[</span><span class="mf">7.904789e-2</span><span class="p">,</span><span class="mf">0.62691015</span><span class="p">,</span><span class="mf">0.26363158</span><span class="p">,</span><span class="mf">0.12223756</span><span class="p">,</span><span class="mf">0.38291094</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>randomR</strong></p>
+<ul>
+<li>
+<p><code>randomR :: (RandomGen g, Random a) :: (a, a) -&gt; g -&gt; (a, g)</code></p>
+</li>
+<li>
+<p>takes as its first parameter a pair of values that set the lower and upper bounds and the final value produced will be within those bounds</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">randomR</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="mi">359353</span><span class="p">)</span>  
+<span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1494289578</span> <span class="mi">40692</span><span class="p">)</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">randomR</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="mi">35935335</span><span class="p">)</span>  
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1250031057</span> <span class="mi">40692</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><strong>randomRs</strong></p>
+<ul>
+<li>
+<p>produces a stream of random values within our defined ranges</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">10</span> <span class="o">$</span> <span class="n">randomRs</span> <span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="sc">&#39;z&#39;</span><span class="p">)</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">Char</span><span class="p">]</span>  
+<span class="s">&#34;ndkxbvmomg&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<p><code>System.Random</code> offers the getStdGen I/O action, which has a type of <code>IO StdGen</code>. When your program starts, it asks the system for a good random number generator and stores that in a so called global generator. <code>getStdGen</code> fetches you that global random generator when you bind it to something.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.Random</span>  
+  
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>  
+    <span class="n">gen</span> <span class="ow">&lt;-</span> <span class="n">getStdGen</span>  
+    <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">take</span> <span class="mi">20</span> <span class="p">(</span><span class="n">randomRs</span> <span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="sc">&#39;z&#39;</span><span class="p">)</span> <span class="n">gen</span><span class="p">)</span>  
+    <span class="n">gen2</span> <span class="ow">&lt;-</span> <span class="n">getStdGen</span>  
+    <span class="n">putStr</span> <span class="o">$</span> <span class="n">take</span> <span class="mi">20</span> <span class="p">(</span><span class="n">randomRs</span> <span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="sc">&#39;z&#39;</span><span class="p">)</span> <span class="n">gen2</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>But when we use <code>getStdGen</code> twice, we will get the same global generator. To get two different string, we should get first 20 characters as first string, the next 20 characters as second string. To do this, we need <code>splitAt</code> in <code>Data.List</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">gen</span> <span class="ow">&lt;-</span> <span class="n">getStdGen</span>
+  <span class="kr">let</span> <span class="n">randomChars</span> <span class="ow">=</span> <span class="n">randomRs</span> <span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="sc">&#39;z&#39;</span><span class="p">)</span> <span class="n">gen</span>
+      <span class="p">(</span><span class="n">first20</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span> <span class="ow">=</span> <span class="n">splitAt</span> <span class="mi">20</span> <span class="n">randomChars</span>
+      <span class="p">(</span><span class="n">second20</span><span class="p">,</span> <span class="kr">_</span><span class="p">)</span> <span class="ow">=</span> <span class="n">splitAt</span> <span class="mi">20</span> <span class="n">rest</span>
+  <span class="n">putStrLn</span> <span class="n">first20</span>
+  <span class="n">putStrLn</span> <span class="n">second20</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Another way is use <code>newStdGen</code>, , which splits our current random generator into two generators. It updates the global random generator with one of them and encapsulates the other as its result. Not only do we get a new random generator when we bind <code>newStdGen</code> to something, the global one gets updated as well, so if we do <code>getStdGen</code> again and bind it to something, we&rsquo;ll get a generator that&rsquo;s not the same as <code>gen</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.Random</span>  
+  
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>     
+    <span class="n">gen</span> <span class="ow">&lt;-</span> <span class="n">getStdGen</span>     
+    <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">take</span> <span class="mi">20</span> <span class="p">(</span><span class="n">randomRs</span> <span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="sc">&#39;z&#39;</span><span class="p">)</span> <span class="n">gen</span><span class="p">)</span>     
+    <span class="n">gen&#39;</span> <span class="ow">&lt;-</span> <span class="n">newStdGen</span>  
+    <span class="n">putStr</span> <span class="o">$</span> <span class="n">take</span> <span class="mi">20</span> <span class="p">(</span><span class="n">randomRs</span> <span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="sc">&#39;z&#39;</span><span class="p">)</span> <span class="n">gen&#39;</span><span class="p">)</span>     
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>a little program that will make the user guess which number it&rsquo;s thinking of</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">System.Random</span>  
+<span class="kr">import</span> <span class="nn">Control.Monad</span><span class="p">(</span><span class="n">when</span><span class="p">)</span>  
+  
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>  
+    <span class="n">gen</span> <span class="ow">&lt;-</span> <span class="n">getStdGen</span>  
+    <span class="n">askForNumber</span> <span class="n">gen</span>  
+  
+<span class="nf">askForNumber</span> <span class="ow">::</span> <span class="kt">StdGen</span> <span class="ow">-&gt;</span> <span class="kt">IO</span> <span class="nb">()</span>  
+<span class="nf">askForNumber</span> <span class="n">gen</span> <span class="ow">=</span> <span class="kr">do</span>  
+    <span class="kr">let</span> <span class="p">(</span><span class="n">randNumber</span><span class="p">,</span> <span class="n">newGen</span><span class="p">)</span> <span class="ow">=</span> <span class="n">randomR</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="n">gen</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">StdGen</span><span class="p">)</span>  
+    <span class="n">putStr</span> <span class="s">&#34;Which number in the range from 1 to 10 am I thinking of? &#34;</span>  
+    <span class="n">numberString</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>  
+    <span class="n">when</span> <span class="p">(</span><span class="n">not</span> <span class="o">$</span> <span class="n">null</span> <span class="n">numberString</span><span class="p">)</span> <span class="o">$</span> <span class="kr">do</span>  
+        <span class="kr">let</span> <span class="n">number</span> <span class="ow">=</span> <span class="n">read</span> <span class="n">numberString</span>  
+        <span class="kr">if</span> <span class="n">randNumber</span> <span class="o">==</span> <span class="n">number</span>   
+            <span class="kr">then</span> <span class="n">putStrLn</span> <span class="s">&#34;You are correct!&#34;</span>  
+            <span class="kr">else</span> <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">&#34;Sorry, it was &#34;</span> <span class="o">++</span> <span class="n">show</span> <span class="n">randNumber</span>  
+        <span class="n">askForNumber</span> <span class="n">newGen</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="bytestrings">bytestrings</h2>
+<p>Processing files as strings has one drawback: it tends to be slow. As you know, <strong>String</strong> is a type synonym for <code>[Char]</code>. <code>Char</code>s don&rsquo;t have a fixed size, because it takes several bytes to represent a character from, say, Unicode.</p>
+<p>That overhead doesn&rsquo;t bother us so much most of the time, but it turns out to be a liability when reading big files and manipulating them. That&rsquo;s why Haskell has <code>bytestrings</code>. Bytestrings are sort of like lists, only each element is one byte (or 8 bits) in size. The way they handle laziness is also different.</p>
+<p>There two types of Bytestrings : strict and lazy.</p>
+<ul>
+<li><strong>Strict bytestrings</strong> reside in <code>Data.ByteString</code> and they do away with the laziness completely. There are no promises involved; a strict bytestring represents a series of bytes in an array. You can&rsquo;t have things like infinite strict bytestrings. If you evaluate the first byte of a strict bytestring, you have to evaluate it whole.
+<ul>
+<li>The upside is that there&rsquo;s less overhead because there are no thunks (the technical term for <em>promise</em>) involved.</li>
+<li>The downside is that they&rsquo;re likely to fill your memory up faster because they&rsquo;re read into memory at once.</li>
+</ul>
+</li>
+<li><strong>Lazy Bytestrings</strong> resides in <code>Data.ByteString.Lazy</code>. They&rsquo;re lazy, but not quite as lazy as lists. Like we said before, there are as many thunks in a list as there are elements. That&rsquo;s what makes them kind of slow for some purposes. Lazy bytestrings take a different approach — they are stored in chunks (not to be confused with thunks!), each chunk has a size of 64K. So if you evaluate a byte in a lazy bytestring (by printing it or something), the first 64K will be evaluated. After that, it&rsquo;s just a promise for the rest of the chunks. Lazy bytestrings are kind of like lists of strict bytestrings with a size of 64K.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Data.ByteString.Lazy</span> <span class="k">as</span> <span class="n">B</span>  
+<span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Data.ByteString</span> <span class="k">as</span> <span class="n">S</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>know more about functions of Bytestrings: <a href="https://www.cntofu.com/book/140/zh-cn/ch09/input-and-output.md">https://www.cntofu.com/book/140/zh-cn/ch09/input-and-output.md</a></p>
+<h2 id="exceptions">exceptions</h2>
+<p>Haskell has a very good type system. Algebraic data types allow for types like <code>Maybe</code> and <code>Either</code> and we can use values of those types to represent results that may be there or not.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="mi">4</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">0</span>  
+<span class="o">***</span> <span class="kt">Exception:</span> <span class="n">divide</span> <span class="n">by</span> <span class="n">zero</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">head</span> <span class="kt">[]</span>  
+<span class="o">***</span> <span class="kt">Exception:</span> <span class="kt">Prelude</span><span class="o">.</span><span class="n">head</span><span class="kt">:</span> <span class="n">empty</span> <span class="n">list</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>if the file doesn&rsquo;t exist :</strong></p>
+<ul>
+<li>
+<p>One way to do that is to check if the file exists before trying to open it by using the <code>doesFileExist</code> function from <code>System.Directory</code>.</p>
+</li>
+<li>
+<p><code>doesFileExist</code> has a type of <code>doesFileExist :: FilePath -&gt; IO Bool</code>,which means that it returns an I/O action that has as its result a boolean value which tells us if the file exists. <strong>We can&rsquo;t just use <code>doesFileExist</code> in an <em>if</em> expression directly.</strong></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span> 
+  <span class="p">(</span><span class="n">fileName</span> <span class="kt">:</span> <span class="kr">_</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">getArgs</span>
+  <span class="n">fileExists</span> <span class="ow">&lt;-</span> <span class="n">doesFileExist</span> <span class="n">fileName</span>
+  <span class="kr">if</span> <span class="n">fileExists</span> 
+    <span class="kr">then</span> <span class="kr">do</span> 
+      <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">readFile</span> <span class="n">fileName</span>
+      <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">&#34;The file has &#34;</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">length</span> <span class="p">(</span><span class="n">lines</span> <span class="n">contents</span><span class="p">))</span> <span class="o">++</span><span class="s">&#34; lines&#34;</span>
+    <span class="kr">else</span> <span class="kr">do</span>
+      <span class="n">putStrLn</span> <span class="s">&#34;The file doesn&#39;t exist&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>another way is to use <code>Exception</code>. We&rsquo;re going to take advantage of the catch function from <code>System.IO.Error</code>. Its type is <code>catch :: IO a -&gt; (IOError -&gt; IO a) -&gt; IO a</code>. It takes two parameters.</p>
+<ul>
+<li>The first one is an I/O action. For instance, it could be an I/O action that tries to open a file.</li>
+<li>The second one is the so-called handler. If the first I/O action passed to <code>catch</code> throws an I/O exception, that exception gets passed to the handler, which then decides what to do. So the final result is an I/O action that will either act the same as the first parameter or it will do what the handler tells it if the first I/O action throws an exception.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="n">toTry</span> <span class="p">`</span><span class="n">catchIOError</span><span class="p">`</span> <span class="n">handler</span>
+  
+<span class="nf">toTry</span> <span class="ow">::</span> <span class="kt">IO</span><span class="nb">()</span>
+<span class="nf">toTry</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="p">(</span><span class="n">fileName</span> <span class="kt">:</span> <span class="kr">_</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">getArgs</span>
+  <span class="n">contents</span> <span class="ow">&lt;-</span> <span class="n">readFile</span> <span class="n">fileName</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">&#34;The file has &#34;</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">length</span> <span class="p">(</span><span class="n">lines</span> <span class="n">contents</span><span class="p">))</span> <span class="o">++</span><span class="s">&#34; lines&#34;</span>
+   
+<span class="nf">handler</span> <span class="ow">::</span> <span class="kt">IOError</span> <span class="ow">-&gt;</span> <span class="kt">IO</span> <span class="nb">()</span>  
+<span class="nf">handler</span> <span class="n">e</span>  
+    <span class="o">|</span> <span class="n">isDoesNotExistError</span> <span class="n">e</span> <span class="ow">=</span> <span class="n">putStrLn</span> <span class="s">&#34;The file doesn&#39;t exist!&#34;</span>  
+    <span class="o">|</span> <span class="n">otherwise</span> <span class="ow">=</span> <span class="n">ioError</span> <span class="n">e</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>There are several predicates that act on <code>IOError</code> and if a guard doesn&rsquo;t evaluate to <code>True</code>, evaluation falls through to the next guard. The predicates that act on <code>IOError</code> are:</p>
+<ul>
+<li>isAlreadyExistsError</li>
+<li>isDoesNotExistError</li>
+<li>isAlreadyInUseError</li>
+<li>isFullError</li>
+<li>isEOFError</li>
+<li>isIllegalOperation</li>
+<li>isPermissionError</li>
+<li>isUserError</li>
+</ul>
+</li>
+</ul>
+<h2 id="reference">reference</h2>
+<p><a href="http://learnyouahaskell.com/input-and-output">http://learnyouahaskell.com/input-and-output</a></p>
+<p><a href="https://www.cntofu.com/book/140/zh-cn/ch09/input-and-output.md">https://www.cntofu.com/book/140/zh-cn/ch09/input-and-output.md</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/haskell7/">
+            <span class="next-text nav-default">Making Own Types and Typeclasses</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
