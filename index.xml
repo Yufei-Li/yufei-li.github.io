@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
-    <lastBuildDate>Sun, 29 Nov 2020 16:42:48 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 13 Jan 2021 12:24:42 +0800</lastBuildDate>
     
 	<atom:link href="https://yufei-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>java笔记(1)</title>
+      <link>https://yufei-li.github.io/post/javanote1/</link>
+      <pubDate>Wed, 13 Jan 2021 12:24:42 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/javanote1/</guid>
+      <description>hello world 1 2 3 4 5 public class practice1 { public static void main(String[] args){ System.out.println(&amp;#34;hello world&amp;#34;); // print hello world } } run java program 1 2 javac hello.java // produce a java class program java hello // java + the name of java class program the java program must contain public static void main(String[] args) to run if there is a public class in the program, the</description>
+    </item>
+    
+    <item>
+      <title>Networking Intro</title>
+      <link>https://yufei-li.github.io/post/networking_intro/</link>
+      <pubDate>Thu, 03 Dec 2020 16:38:58 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/networking_intro/</guid>
+      <description>build a simple python chat server 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 # server import socket port = 9876 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) sock.bind((&amp;#34;&amp;#34;, port)) sock.listen(1) newsock, addr = sock.accept() while (True): encoded_text = newsock.recv(1024) text = encoded_text.decode() print(&amp;#34;&amp;gt;&amp;gt;&amp;#34;, text, &amp;#34;&amp;lt;&amp;lt;&amp;#34;) 1 2 3 4 5 6 7 8 9 10 11 12 # client import socket port = 9876 ip</description>
+    </item>
+    
+    <item>
+      <title>Functors, Applicative Functors and Monoids</title>
+      <link>https://yufei-li.github.io/post/haskell10/</link>
+      <pubDate>Sun, 29 Nov 2020 21:09:10 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/haskell10/</guid>
+      <description>functors revison Functors are things that can be map, like lists, Maybe, trees. We can discribe these types by Functor typeclass. This typeclass only have one method: fmap, fmap :: (a -&amp;gt; b) -&amp;gt; f a -&amp;gt; f b. It says: give me a function that takes an a and returns a b and a box with an a (or several of them) inside it and I&amp;rsquo;ll give you a box with a b (or several of them) inside it.</description>
+    </item>
     
     <item>
       <title>Functionally Solving Problems</title>
@@ -20,6 +47,15 @@
       <guid>https://yufei-li.github.io/post/haskell9/</guid>
       <description>In this chapter, we probably won&amp;rsquo;t be introducing any new concepts, we&amp;rsquo;ll just be flexing our newly acquired Haskell muscles and practicing our coding skills.
 Reverse Polish notation calculator Usually when we write mathematical expressions in school, we write them in an infix manner. For instance, we write 10 - (4 + 3) * 2.Reverse Polish notation is another way of writing down mathematical expressions. Initially it looks a bit weird, but it&amp;rsquo;s actually pretty easy to understand and use because there&amp;rsquo;s no need for parentheses and it&amp;rsquo;s very easy to punch into a calculator.</description>
+    </item>
+    
+    <item>
+      <title>specification</title>
+      <link>https://yufei-li.github.io/post/specification/</link>
+      <pubDate>Fri, 27 Nov 2020 13:09:11 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/specification/</guid>
+      <description>catogories of specification requirements specification  specify what piece of software is supposed to do before writing software a collabration of software producer and software user  formal specification  mathmatical expression of what software is going to do and how will it work  interface specification  is related to api , how to use a library  protocal specification  make sure the work between two programmers can interpretted correctly  semantics and syntax  to achieve interoperability, we need to specify the semantics and syntax  semantics   explain what do the message mean</description>
     </item>
     
     <item>

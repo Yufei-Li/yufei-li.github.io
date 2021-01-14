@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2020-11-29T16:42:48+08:00" />
+<meta property="og:updated_time" content="2021-01-13T12:24:42+08:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -108,6 +108,95 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell8/">Input and Output</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-26 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      I/O action 1 2 3 4  ghci&gt; :t putStrLn putStrLn :: String -&gt; IO () ghci&gt; :t putStrLn &#34;hello, world&#34; putStrLn &#34;hello, world&#34; :: IO ()   We can read the type of putStrLn like this: putStrLn takes a string and returns an I/O action that has a result type of ()(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell8/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell7/">Making Own Types and Typeclasses</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-21 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Algebraic data types intro One way to make type is to use the data keyword to define a type. Let&rsquo;s see how the Bool type is defined in the standard library: data Bool = False|True. We can read as: the Bool type can have a value of True or False. Both the type name and the value constructors have to be capital cased.
+  example: build Shape type in Haskell:data Shape = Circle Float Float Float | Rectangle Float Float Float Float , The Circle value constructor has three fields, which take floats.
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell7/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell6/">Module</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-19 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Loading modules All the functions, types and typeclasses that we&rsquo;ve dealt with so far were part of the Prelude module, which is imported by default.
+The syntax for importing modules in a Haskell script is import &lt;module name&gt;
+nub is a function defined in Data.List that takes a list and remove duplicate elements from the list
+1 2 3 4  import Data.List numUniques :: (Eq a) =&gt; [a] -&gt; Int numUniques = length .
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell6/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell5/">High Order Functions</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-19 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Haskell functions can take functions as parameters and return functions as return values. A function that does either of those is called a higher order function.
+curried functions Every function in Haskell officially only takes one parameter. All the functions that accepted several parameters so far have been curried functions. For example, max function. Doing max 4 5 first creates a function that takes a parameter and returns either 4 or that parameter, depending on which is bigger.
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell5/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell4/">Recursion</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-11-18 </span>
@@ -124,91 +213,6 @@ maximum 1 2 3 4 5  maximum&#39; :: (Ord a) =&gt; [a] -&gt; a maximum&#39; [] = e
     </div>
     <div class="read-more">
       <a href="/post/haskell4/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell3/">Syntax in Functions</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-18 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      pattern matching 1 2 3 4 5 6 7 8 9 10  lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 x = &#34;not 7&#34; lucky7 7 --&#34;lucy 7&#34; -- if lucky7 x at front of lucky7 7 lucky7 x = &#34;not 7&#34; lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 7 --&#34;not 7&#34;   because lucky7 x will match with lucky7 7 and lucky7 7 = &quot;lucky 7&quot; won&rsquo;t be checked.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell3/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell2/">Type &amp; Typeclasses</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-18 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      types in haskell :t can tell us the type of some expressions
-1 2 3 4 5  :t &#39;a&#39; -- &#39;a&#39; :: Char :t True -- True :: Bool  :t &#34;Haskell&#34; -- &#34;Haskell&#34; :: [Char]  :t (True, 4) -- (True, 4) :: (Bool, Int)  :t 4 == 5 -- 4 == 5 :: Bool    :: means &ldquo;has type of&rdquo; . [Char] means a list of characters, [Char] is equal to String, using String is more clear and easy to read.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell2/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python_file_operation1/">python file operation(1)</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-17 </span>
-      <div class="post-category">
-          <a href="/categories/python/"> python </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      read as text mode 1 2 3 4 5 6 7 8 9  def test_write(): file = open(&#34;store.txt&#34;, &#34;wt&#34;) file.write(&#34;Hello\n&#34;) file.write(&#34;World\n&#34;) file.close() with open(&#34;store.txt&#34;, &#34;rt&#34;) as file2: # no need for file.close() for line in file2: print(line)   read as byte mode 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20  def test_nums_texts(): file = open(&#34;nums.txt&#34;, &#34;wt&#34;) # write as text 1000000 1000001 1000002 1000003 1000004 .
-    </div>
-    <div class="read-more">
-      <a href="/post/python_file_operation1/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell1/">Haskell Basic Knowledge</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-16 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8  True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to   functions succ  returns following item in an enumeration  1 2 3 4  succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ (60 * 3) --181 -&gt; 180 + 1   div  returns how many times the first number can be divided by the second one  1 2 3  div 92 7 97 `div` 7 -- 13   write functions  The string before :: is function name, after :: is parameter list, including parameter and return value, connected by -&gt;, the last value is return value.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell1/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
@@ -251,7 +255,8 @@ maximum 1 2 3 4 5  maximum&#39; :: (Ord a) =&gt; [a] -&gt; a maximum&#39; [] = e
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

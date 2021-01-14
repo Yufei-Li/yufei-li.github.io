@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on 李雨菲的博客 Li Yufei&#39;s Blog</title>
+    <link>https://yufei-li.github.io/categories/java/</link>
+    <description>Recent content in java on 李雨菲的博客 Li Yufei&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>商业转载请联系作者获得授权，非商业转载请注明出处。</copyright>
+    <lastBuildDate>Wed, 13 Jan 2021 12:24:42 +0800</lastBuildDate>
+    
+	<atom:link href="https://yufei-li.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>java笔记(1)</title>
+      <link>https://yufei-li.github.io/post/javanote1/</link>
+      <pubDate>Wed, 13 Jan 2021 12:24:42 +0800</pubDate>
+      
+      <guid>https://yufei-li.github.io/post/javanote1/</guid>
+      <description>hello world 1 2 3 4 5 public class practice1 { public static void main(String[] args){ System.out.println(&amp;#34;hello world&amp;#34;); // print hello world } } run java program 1 2 javac hello.java // produce a java class program java hello // java + the name of java class program the java program must contain public static void main(String[] args) to run if there is a public class in the program, the</description>
+    </item>
+    
+  </channel>
+</rss>

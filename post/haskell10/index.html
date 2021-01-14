@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Functors, Applicative Functors and Monoids - 李雨菲的博客 Li Yufei&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="李雨菲Li Yufei" /><meta name="description" content="functors revison Functors are things that can be map, like lists, Maybe, trees. We can discribe these types by Functor typeclass. This typeclass only have one method: fmap, fmap :: (a -&amp;gt; b) -&amp;gt; f a -&amp;gt; f b. It says: give me a function that takes an a and returns a b and a box with an a (or several of them) inside it and I&amp;rsquo;ll give you a box with a b (or several of them) inside it." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
+
+
+<link rel="canonical" href="https://yufei-li.github.io/post/haskell10/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Functors, Applicative Functors and Monoids" />
+<meta property="og:description" content="functors revison Functors are things that can be map, like lists, Maybe, trees. We can discribe these types by Functor typeclass. This typeclass only have one method: fmap, fmap :: (a -&gt; b) -&gt; f a -&gt; f b. It says: give me a function that takes an a and returns a b and a box with an a (or several of them) inside it and I&rsquo;ll give you a box with a b (or several of them) inside it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yufei-li.github.io/post/haskell10/" />
+<meta property="article:published_time" content="2020-11-29T21:09:10+08:00" />
+<meta property="article:modified_time" content="2020-11-29T21:09:10+08:00" />
+<meta itemprop="name" content="Functors, Applicative Functors and Monoids">
+<meta itemprop="description" content="functors revison Functors are things that can be map, like lists, Maybe, trees. We can discribe these types by Functor typeclass. This typeclass only have one method: fmap, fmap :: (a -&gt; b) -&gt; f a -&gt; f b. It says: give me a function that takes an a and returns a b and a box with an a (or several of them) inside it and I&rsquo;ll give you a box with a b (or several of them) inside it.">
+<meta itemprop="datePublished" content="2020-11-29T21:09:10&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-29T21:09:10&#43;08:00" />
+<meta itemprop="wordCount" content="1891">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Functors, Applicative Functors and Monoids"/>
+<meta name="twitter:description" content="functors revison Functors are things that can be map, like lists, Maybe, trees. We can discribe these types by Functor typeclass. This typeclass only have one method: fmap, fmap :: (a -&gt; b) -&gt; f a -&gt; f b. It says: give me a function that takes an a and returns a b and a box with an a (or several of them) inside it and I&rsquo;ll give you a box with a b (or several of them) inside it."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Li Yufei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Blogs博客</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Li Yufei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Blogs博客</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Functors, Applicative Functors and Monoids</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-29 </span>
+        <div class="post-category">
+            <a href="/categories/haskell/"> Haskell </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#functors-revison">functors revison</a>
+      <ul>
+        <li><a href="#io-action-as-a-functor">I/O action as a functor</a></li>
+        <li><a href="#-r-as-a-functor">(-&gt;)r as a functor</a></li>
+        <li><a href="#functor-laws">functor laws</a></li>
+      </ul>
+    </li>
+    <li><a href="#applicative-functors">Applicative functors</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="functors-revison">functors revison</h2>
+<p><strong>Functors</strong> are things that can be <code>map</code>, like lists, Maybe, trees. We can discribe these types by <code>Functor</code> typeclass. This typeclass only have one method: <code>fmap</code>, <code>fmap :: (a -&gt; b) -&gt; f a -&gt; f b</code>. It says: give me a function that takes an <strong>a</strong> and returns a <strong>b</strong> and a box with an <strong>a</strong> (or several of them) inside it and I&rsquo;ll give you a box with a <strong>b</strong> (or several of them) inside it. It kind of applies the function to the element inside the box.</p>
+<p>If we want to make a type constructor an instance of <code>Functor</code>, it has to have a kind of <code>* -&gt; \*</code>, which means that it has to take exactly one concrete type as a type parameter. For example, <code>Maybe</code> can be made an instance because it takes one type parameter to produce a concrete type, like <code>Maybe Int</code> or <code>Maybe String</code>. In this section, we will have two more functor instances: <code>IO</code> and <code>(-&gt;)r</code></p>
+<h3 id="io-action-as-a-functor">I/O action as a functor</h3>
+<p>Let&rsquo;s see how <code>IO</code> is an instance of <code>Functor</code>. When we <code>fmap</code> a function over an I/O action, we want to get back an I/O action that does the same thing, but has our function applied over its result value.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Functor</span> <span class="kt">IO</span> <span class="kr">where</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="n">action</span> <span class="ow">=</span> <span class="kr">do</span>  
+        <span class="n">result</span> <span class="ow">&lt;-</span> <span class="n">action</span>  
+        <span class="n">return</span> <span class="p">(</span><span class="n">f</span> <span class="n">result</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Firstly, bind the content of the action to <code>result</code></li>
+<li>Then <code>return (f result)</code>, so we return an I/O action.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>  
+    <span class="n">line</span> <span class="ow">&lt;-</span> <span class="n">getLine</span>
+    <span class="kr">let</span> <span class="n">line&#39;</span> <span class="ow">=</span> <span class="n">reverse</span> <span class="n">line</span>
+    <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">&#34;you said &#34;</span> <span class="o">++</span> <span class="n">line&#39;</span> <span class="o">++</span> <span class="s">&#34; backwards&#34;</span>
+    
+<span class="c1">-- write in fmap</span>
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span>  
+    <span class="n">line</span> <span class="ow">&lt;-</span> <span class="n">fmap</span> <span class="n">reverse</span> <span class="n">getLine</span>
+    <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">&#34;you said &#34;</span> <span class="o">++</span> <span class="n">line</span> <span class="o">++</span> <span class="s">&#34; backwards&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>in the second program, we map over <code>Just &quot;hello&quot;</code> to get <code>Just &quot;olleh&quot;</code>, then use <code>&lt;-</code> to get it. <code>getLine</code> is a I/O action, after <code>fmap reverse</code> , we still get I/O action.</li>
+<li><code>fmap (++!) getLine</code> will add a ! at the end of the string, like <code>hello!</code>, instead of <code>h!e!l!l!o!</code>. Thus, if you wanna bind the content of I/O action to apply a function, you could use <code>fmap</code>. You can write that function in top level, even write as a lambda function or function composition.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Char</span>  
+<span class="kr">import</span> <span class="nn">Data.List</span>  
+  
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span> <span class="n">line</span> <span class="ow">&lt;-</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">intersperse</span> <span class="sc">&#39;-&#39;</span> <span class="o">.</span> <span class="n">reverse</span> <span class="o">.</span> <span class="n">map</span> <span class="n">toUpper</span><span class="p">)</span> <span class="n">getLine</span>  
+          <span class="n">putStrLn</span> <span class="n">line</span>  
+
+<span class="o">$</span> <span class="n">runhaskell</span> <span class="n">fmapping_io</span><span class="o">.</span><span class="n">hs</span>  
+<span class="nf">hello</span> <span class="n">there</span>  
+<span class="kt">E</span><span class="o">-</span><span class="kt">R</span><span class="o">-</span><span class="kt">E</span><span class="o">-</span><span class="kt">H</span><span class="o">-</span><span class="kt">T</span><span class="o">-</span> <span class="o">-</span><span class="kt">O</span><span class="o">-</span><span class="kt">L</span><span class="o">-</span><span class="kt">L</span><span class="o">-</span><span class="kt">E</span><span class="o">-</span><span class="kt">H</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="-r-as-a-functor">(-&gt;)r as a functor</h3>
+<p>The function type <code>r -&gt; a</code> can be rewritten as <code>(-&gt;) r a</code>, much like we can write <code>2 + 3</code> as <code>(+) 2 3</code>. When But remember, we said that a type constructor has to take exactly one type parameter so that it can be made an instance of <strong>Functor</strong>. That&rsquo;s why <strong>we can&rsquo;t make <code>(-&gt;)</code> an instance of Functor, but if we partially apply it to <code>(-&gt;) r</code>,</strong> it doesn&rsquo;t pose any problems. If the syntax allowed for type constructors to be partially applied with sections (like we can partially apply <strong>+</strong> by doing <code>(2+)</code>, which is the same as <code>(+) 2</code>), <strong>you could write <code>(-&gt;) r</code> as <code>(r -&gt;)</code></strong>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Functor</span> <span class="p">((</span><span class="ow">-&gt;</span><span class="p">)</span> <span class="n">r</span><span class="p">)</span> <span class="kr">where</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="n">g</span> <span class="ow">=</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="p">(</span><span class="n">g</span> <span class="n">x</span><span class="p">))</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>First of all, let&rsquo;s think about <code>fmap</code>'s type. It&rsquo;s <code>fmap :: (a -&gt; b) -&gt; f a -&gt; f b</code>.  If we replace all the <code>f</code> with <code>(-&gt;) r</code>, the <code>fmap</code> will become <code>fmap :: (a -&gt; b) -&gt; ((-&gt;) r a) -&gt; ((-&gt;) r b)</code>. Then we can write <code>(-&gt;) r a</code> and <code>(-&gt; r b)</code> types as infix <code>r -&gt; a</code> and <code>r -&gt; b</code>, like we normally do with functions. What we get now is <code>fmap :: (a -&gt; b) -&gt; (r -&gt; a) -&gt; (r -&gt; b).</code>. Thus, mapping one function over a function has to produce a function.</p>
+<p>If you look at how the instance is defined above, you&rsquo;ll see that it&rsquo;s just function composition. Another way to write this instance would be:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Functor</span> <span class="p">((</span><span class="ow">-&gt;</span><span class="p">)</span> <span class="n">r</span><span class="p">)</span> <span class="kr">where</span>  
+    <span class="n">fmap</span> <span class="ow">=</span> <span class="p">(</span><span class="o">.</span><span class="p">)</span>  
+    
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">fmap</span> <span class="p">(</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span>  
+<span class="nf">fmap</span> <span class="p">(</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">a</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span> <span class="mi">1</span>  
+<span class="mi">303</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span> <span class="p">`</span><span class="n">fmap</span><span class="p">`</span> <span class="p">(</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span> <span class="o">$</span> <span class="mi">1</span>  
+<span class="mi">303</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span> <span class="o">.</span> <span class="p">(</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span> <span class="o">$</span> <span class="mi">1</span>  
+<span class="mi">303</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">show</span> <span class="o">.</span> <span class="p">(</span><span class="o">*</span><span class="mi">3</span><span class="p">))</span> <span class="p">(</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="mi">1</span>  
+<span class="s">&#34;300&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>When we first learned about curried functions, we said that all Haskell functions actually take one parameter. In the same vein, if we write <code>fmap :: (a -&gt; b) -&gt; (f a -&gt; f b)</code>, we can think of <code>fmap</code> not as a function that takes one function and a functor and returns a functor, but as a function that takes a function and returns a new function that&rsquo;s just like the old one, only it takes a functor as a parameter and returns a functor as the result.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">fmap</span> <span class="p">(</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>  
+<span class="nf">fmap</span> <span class="p">(</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Functor</span> <span class="n">f</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">f</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">a</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">replicate</span> <span class="mi">3</span><span class="p">)</span>  
+<span class="nf">fmap</span> <span class="p">(</span><span class="n">replicate</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Functor</span> <span class="n">f</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="n">f</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>The expression <code>fmap (\*2)</code> is a function that takes a functor <code>f</code> , which can be a list, a <code>Maybe</code> , an <code>Either String</code>, whatever. If we use it on a <code>Maybe a</code>, it&rsquo;ll apply <code>replicate 3</code> to the value inside the <code>Just</code>, or if it&rsquo;s <code>Nothing</code>, then it stays <code>Nothing</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">replicate</span> <span class="mi">3</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  
+<span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">replicate</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="kt">Just</span> <span class="mi">4</span><span class="p">)</span>  
+<span class="kt">Just</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">replicate</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="kt">Right</span> <span class="s">&#34;blah&#34;</span><span class="p">)</span>  
+<span class="kt">Right</span> <span class="p">[</span><span class="s">&#34;blah&#34;</span><span class="p">,</span><span class="s">&#34;blah&#34;</span><span class="p">,</span><span class="s">&#34;blah&#34;</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">replicate</span> <span class="mi">3</span><span class="p">)</span> <span class="kt">Nothing</span>  
+<span class="kt">Nothing</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">replicate</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="kt">Left</span> <span class="s">&#34;foo&#34;</span><span class="p">)</span>  
+<span class="kt">Left</span> <span class="s">&#34;foo&#34;</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="functor-laws">functor laws</h3>
+<p>If a thing become functor, they must obey some laws.</p>
+<ol>
+<li>
+<p>The first functor law states that if we map the <code>id</code> function over a functor, the functor that we get back should be the same as the original functor.</p>
+<p>if we look at the implementation of <code>fmap</code> for, say, <code>Maybe</code>, we can figure out why the first functor law holds.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Functor</span> <span class="kt">Maybe</span> <span class="kr">where</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="p">(</span><span class="kt">Just</span> <span class="n">x</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">Just</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span><span class="p">)</span>  
+    <span class="n">fmap</span> <span class="n">f</span> <span class="kt">Nothing</span> <span class="ow">=</span> <span class="kt">Nothing</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>The second law says that composing two functions and then mapping the resulting function over a functor should be the same as first mapping one function over the functor and then mapping the other one.</p>
+<p>Formally written, that means that <code>fmap (f . g) = fmap f . fmap g</code>. Or to write it in another way, for any functor <em>F</em>, the following should hold: <code>fmap (f . g) F = fmap f (fmap g F)</code></p>
+</li>
+</ol>
+<h2 id="applicative-functors">Applicative functors</h2>
+<p>In this section, we&rsquo;ll take a look at applicative functors, which are beefed up functors, represented in Haskell by the <code>Applicative</code> typeclass, found in the <code>Control.Applicative</code> module.</p>
+<p>when we were mapping functions over functors, we usually mapped functions that take only one parameter. But how about map a function that has two parameters? For example, <code>fmap (*) (Just 3</code>) results in <code>Just ((*) 3)</code>, which can also be written as <code>Just (* 3)</code> if we use sections. We get a function wrapped in a Just.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">fmap</span> <span class="p">(</span><span class="o">++</span><span class="p">)</span> <span class="p">(</span><span class="kt">Just</span> <span class="s">&#34;hey&#34;</span><span class="p">)</span>  
+<span class="nf">fmap</span> <span class="p">(</span><span class="o">++</span><span class="p">)</span> <span class="p">(</span><span class="kt">Just</span> <span class="s">&#34;hey&#34;</span><span class="p">)</span> <span class="ow">::</span> <span class="kt">Maybe</span> <span class="p">([</span><span class="kt">Char</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="kt">Char</span><span class="p">])</span>  
+<span class="c1">-- a function that take a string and return a string</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We see how by mapping &ldquo;multi-parameter&rdquo; functions over functors, we get functors that contain functions inside them. So now what can we do with them? We can map functions that take these functions as parameters over them, because whatever is inside a functor will be given to the function that we&rsquo;re mapping over it as a parameter.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">a</span> <span class="ow">=</span> <span class="n">fmap</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">:</span><span class="n">t</span> <span class="n">a</span>  
+<span class="nf">a</span> <span class="ow">::</span> <span class="p">[</span><span class="kt">Integer</span> <span class="ow">-&gt;</span> <span class="kt">Integer</span><span class="p">]</span>  
+<span class="c1">-- a = [1 * , 2 * , 3 * , 4 * ]</span>
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="nf">\</span><span class="n">f</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="mi">9</span><span class="p">)</span> <span class="n">a</span>  
+<span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">36</span><span class="p">]</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>But what if we have a functor value of <code>Just (3 \*)</code> and a functor value of <code>Just 5</code> and we want to take out the function from <code>Just (3 \*)</code> and map it over <code>Just 5</code>? With normal functors, we&rsquo;re out of luck, because all they support is just mapping normal functions over existing functors.</p>
+<p>Meet the <code>Applicative</code> typeclass. It lies in the <code>Control.Applicative</code> module and it defines two methods, <code>pure</code> and <code>&lt;\*&gt;</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">class (Functor f) =&gt; Applicative f where  
+    pure :: a -&gt; f a  
+    (&lt;*&gt;) :: f (a -&gt; b) -&gt; f a -&gt; f b  
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>The first line says that if we want to make a type constructor part of the <code>Applicative</code> typeclass, it has to be in <code>Functor</code> first. That&rsquo;s why if we know that if a type constructor is part of the <code>Applicative</code> typeclass, it&rsquo;s also in <code>Functor</code>, so we can use <code>fmap</code> on it.</li>
+<li>The type declaration of pure is <code>pure :: a -&gt; f a</code>. <code>f</code> plays the role of our applicative functor instance here.  <code>pure</code> should take a value of any type and return an applicative functor with that value inside it.</li>
+<li>The has a type declaration of <code>f (a -&gt; b) -&gt; f a -&gt; f b</code>. It&rsquo;s a sort of a beefed up <code>fmap</code>. Whereas <code>fmap</code> takes a function and a functor and applies the function inside the functor, <strong>&lt;*&gt;</strong> takes a functor that <strong>has a function in it and another functor and sort of extracts that function from the first functor and then maps it over the second one</strong>. When I say <em>extract</em>, I actually sort of mean <em>run</em> and then extract.</li>
+</ol>
+<ul>
+<li>
+<p>The impletation for <code>Maybe</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">instance</span> <span class="kt">Applicative</span> <span class="kt">Maybe</span> <span class="kr">where</span>  
+    <span class="n">pure</span> <span class="ow">=</span> <span class="kt">Just</span>  
+    <span class="kt">Nothing</span> <span class="o">&lt;*&gt;</span> <span class="kr">_</span> <span class="ow">=</span> <span class="kt">Nothing</span>  
+    <span class="p">(</span><span class="kt">Just</span> <span class="n">f</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="n">something</span> <span class="ow">=</span> <span class="n">fmap</span> <span class="n">f</span> <span class="n">something</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>From the class definition we see that the <code>f</code> that plays the role of the applicative functor should take one concrete type as a parameter, so we write <code>instance Applicative Maybe where</code> instead of writing <code>instance Applicative (Maybe a) where</code>.</p>
+<ul>
+<li>We wrote <code>pure = Just</code>, because value constructors like <code>Just</code> are normal functions. We could have also written <code>pure x = Just x</code>.</li>
+<li>If the first parameter is not a <code>Nothing</code>, but <strong>a <code>Just</code> with some function inside it</strong>, we say that we then want to map that function over the second parameter. This also takes care of the case where the second parameter is <code>Nothing</code>, because doing <code>fmap</code> with any function over a <code>Nothing</code> will return a <code>Nothing</code>.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">9</span>  
+<span class="kt">Just</span> <span class="mi">12</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">10</span>  
+<span class="kt">Just</span> <span class="mi">13</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">9</span>  
+<span class="kt">Just</span> <span class="mi">12</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="o">++</span><span class="s">&#34;hahah&#34;</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Nothing</span>  
+<span class="kt">Nothing</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="kt">Nothing</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="s">&#34;woot&#34;</span>  
+<span class="kt">Nothing</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>Applicative functors allow you to operate on several functors with a single function.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">3</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">5</span>  
+<span class="kt">Just</span> <span class="mi">8</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">3</span> <span class="o">&lt;*&gt;</span> <span class="kt">Nothing</span>  
+<span class="kt">Nothing</span>  
+<span class="nf">ghci</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Nothing</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">5</span>  
+<span class="kt">Nothing</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>&lt;*&gt; is left-associative, which means that <code>pure (+) &lt;*&gt; Just 3 &lt;*&gt; Just 5</code> is the same as <code>(pure (+) &lt;*&gt; Just 3) &lt;*&gt; Just 5</code>.</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">李雨菲Li Yufei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-29
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/networking_intro/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Networking Intro</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/haskell9/">
+            <span class="next-text nav-default">Functionally Solving Problems</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/Yufei-Li" class="iconfont icon-github" title="github"></a>
+  <a href="https://yufei-li.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">商业转载请联系作者获得授权，非商业转载请注明出处。</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
