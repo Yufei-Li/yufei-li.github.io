@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2022-12-28T11:12:48+08:00" />
+<meta property="og:updated_time" content="2023-02-09T11:12:48+08:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -106,6 +106,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell10/">Functors, Applicative Functors and Monoids</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-29 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      functors revison Functors are things that can be map, like lists, Maybe, trees. We can discribe these types by Functor typeclass. This typeclass only have one method: fmap, fmap :: (a -&gt; b) -&gt; f a -&gt; f b. It says: give me a function that takes an a and returns a b and a box with an a (or several of them) inside it and I&rsquo;ll give you a box with a b (or several of them) inside it.
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell10/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell9/">Functionally Solving Problems</a></h1>
@@ -192,30 +213,6 @@ Reverse Polish notation calculator Usually when we write mathematical expression
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell6/">Module</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-19 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Loading modules All the functions, types and typeclasses that we&rsquo;ve dealt with so far were part of the Prelude module, which is imported by default.
-The syntax for importing modules in a Haskell script is import &lt;module name&gt;
-nub is a function defined in Data.List that takes a list and remove duplicate elements from the list
-1 2 3 4  import Data.List numUniques :: (Eq a) =&gt; [a] -&gt; Int numUniques = length .
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell6/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -255,7 +252,7 @@ nub is a function defined in Data.List that takes a list and remove duplicate el
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
