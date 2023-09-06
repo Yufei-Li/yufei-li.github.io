@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2023-02-09T11:12:48+08:00" />
+<meta property="og:updated_time" content="2023-09-06T08:56:50-04:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -108,6 +108,69 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/javanote2/">java笔记(2)</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-01-14 </span>
+      <div class="post-category">
+          <a href="/categories/java/"> java </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      class &amp; object define class 1 2 3 4 5 6 [修饰符] class 类名 { 零个到多个构造器定义 零个到多个成员变量 零个到多个方法 } 修饰符：public、final、abstra
+    </div>
+    <div class="read-more">
+      <a href="/post/javanote2/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/javanote1/">java笔记(1)</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-01-13 </span>
+      <div class="post-category">
+          <a href="/categories/java/"> java </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      hello world 1 2 3 4 5 public class practice1 { public static void main(String[] args){ System.out.println(&#34;hello world&#34;); // print hello world } } run java program 1 2 javac hello.java // produce a java class program java hello // java + the name of java class program the java program must contain public static void main(String[] args) to run if there is a public class in the program, the
+    </div>
+    <div class="read-more">
+      <a href="/post/javanote1/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/networking_intro/">Networking Intro</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-12-03 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9Cnetworking/"> 计算机网络Networking </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      build a simple python chat server 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 # server import socket port = 9876 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) sock.bind((&#34;&#34;, port)) sock.listen(1) newsock, addr = sock.accept() while (True): encoded_text = newsock.recv(1024) text = encoded_text.decode() print(&#34;&gt;&gt;&#34;, text, &#34;&lt;&lt;&#34;) 1 2 3 4 5 6 7 8 9 10 11 12 # client import socket port = 9876 ip
+    </div>
+    <div class="read-more">
+      <a href="/post/networking_intro/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell10/">Functors, Applicative Functors and Monoids</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-11-29 </span>
@@ -145,70 +208,6 @@ Reverse Polish notation calculator Usually when we write mathematical expression
     </div>
     <div class="read-more">
       <a href="/post/haskell9/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/specification/">specification</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-27 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      catogories of specification requirements specification  specify what piece of software is supposed to do before writing software a collabration of software producer and software user  formal specification  mathmatical expression of what software is going to do and how will it work  interface specification  is related to api , how to use a library  protocal specification  make sure the work between two programmers can interpretted correctly  semantics and syntax  to achieve interoperability, we need to specify the semantics and syntax  semantics   explain what do the message mean
-    </div>
-    <div class="read-more">
-      <a href="/post/specification/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell8/">Input and Output</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-26 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      I/O action 1 2 3 4  ghci&gt; :t putStrLn putStrLn :: String -&gt; IO () ghci&gt; :t putStrLn &#34;hello, world&#34; putStrLn &#34;hello, world&#34; :: IO ()   We can read the type of putStrLn like this: putStrLn takes a string and returns an I/O action that has a result type of ()(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell8/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell7/">Making Own Types and Typeclasses</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-21 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Algebraic data types intro One way to make type is to use the data keyword to define a type. Let&rsquo;s see how the Bool type is defined in the standard library: data Bool = False|True. We can read as: the Bool type can have a value of True or False. Both the type name and the value constructors have to be capital cased.
-  example: build Shape type in Haskell:data Shape = Circle Float Float Float | Rectangle Float Float Float Float , The Circle value constructor has three fields, which take floats.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell7/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

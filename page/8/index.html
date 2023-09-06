@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2023-02-09T11:12:48+08:00" />
+<meta property="og:updated_time" content="2023-09-06T08:56:50-04:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -108,6 +108,69 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python_note_1/">python note(1)</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-10-08 </span>
+      <div class="post-category">
+          <a href="/categories/python/"> python </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      unit test function 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  def gcd(a, b): # a b must be positive if not ( a&gt;0 and b&gt;0 ): raise ArithmeticError(&#34;%s, %smust be positive integer&#34;%(a, b)) while not a == b: if a &gt; b: a = a - b else: b = b - a return a def test_gcd(): ax = -42 bx = 30 result = gcd(ax, bx) assert (result == 6) test_gcd()   a unit test for gcd function
+    </div>
+    <div class="read-more">
+      <a href="/post/python_note_1/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/c3/">c语言笔记(3)</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-09-05 </span>
+      <div class="post-category">
+          <a href="/categories/c%E8%AF%AD%E8%A8%80/"> c语言 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      左值和右值 左值：标识的应该是个存储位置，内存中的位置，左值可以是个变量名，或者是个表达式，但表达式必须表示的是个内存位置 右值：就是个值，变量
+    </div>
+    <div class="read-more">
+      <a href="/post/c3/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/c2/">c语言笔记(2)</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-09-05 </span>
+      <div class="post-category">
+          <a href="/categories/c%E8%AF%AD%E8%A8%80/"> c语言 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      switch语句 switch语法 1 2 3 4 5 6 7 8 9 10 switch(expression){ case constant-expression : statement(s); break; /* 可选的 */ case constant-expression : statement(s); break; /* 可选的 */ /* 可以有任意数量的 case 语句 */ default : /* 可选的 */ statement(s); } switch
+    </div>
+    <div class="read-more">
+      <a href="/post/c2/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/c1/">c语言笔记(1)</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-08-30 </span>
@@ -144,69 +207,6 @@
     </div>
     <div class="read-more">
       <a href="/post/python_thread/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/github_upload/">github上传</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-08-19 </span>
-      <div class="post-category">
-          <a href="/categories/cs%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E8%83%BD-cs-skills/"> cs必备小技能 cs skills </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      在github上建立相应的repository 在终端进入想要上传的文件夹，git init 配置 ssh , 输入：ssh-keygen -t rsa -C &ldquo;yufeili_cloris@163.com&rdquo; (登录githu
-    </div>
-    <div class="read-more">
-      <a href="/post/github_upload/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/pytorch_basic/">Pytorch基础</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-08-03 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0machine-learning/"> 机器学习machine learning </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      PyTorch是一个开源的python机器学习库，基于Torch，用于自然语言处理等应用程序。PyTorch的前身是Torch，其底层和To
-    </div>
-    <div class="read-more">
-      <a href="/post/pytorch_basic/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mlemap/">最大似然估计(MLE)和最大后验概率估计(MAP)</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-08-03 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%B0%8F%E7%9F%A5%E8%AF%86probability-theory/"> 概率论小知识probability theory </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      似然函数 对于这个函数： P(x|θ) 输入有两个：x表示某一个具体的数据；θ表示模型的参数。 如果θ是已知确定的，x是变量，这个函数叫做概率函数(
-    </div>
-    <div class="read-more">
-      <a href="/post/mlemap/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

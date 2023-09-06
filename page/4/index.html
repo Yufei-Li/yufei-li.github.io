@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2023-02-09T11:12:48+08:00" />
+<meta property="og:updated_time" content="2023-09-06T08:56:50-04:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -108,6 +108,70 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/specification/">specification</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-27 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      catogories of specification requirements specification  specify what piece of software is supposed to do before writing software a collabration of software producer and software user  formal specification  mathmatical expression of what software is going to do and how will it work  interface specification  is related to api , how to use a library  protocal specification  make sure the work between two programmers can interpretted correctly  semantics and syntax  to achieve interoperability, we need to specify the semantics and syntax  semantics   explain what do the message mean
+    </div>
+    <div class="read-more">
+      <a href="/post/specification/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell8/">Input and Output</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-26 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      I/O action 1 2 3 4  ghci&gt; :t putStrLn putStrLn :: String -&gt; IO () ghci&gt; :t putStrLn &#34;hello, world&#34; putStrLn &#34;hello, world&#34; :: IO ()   We can read the type of putStrLn like this: putStrLn takes a string and returns an I/O action that has a result type of ()(i.e. the empty tuple, also know as unit). Becuase print a string has no meaning to return a value, so we return a () to represent
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell8/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell7/">Making Own Types and Typeclasses</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-21 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Algebraic data types intro One way to make type is to use the data keyword to define a type. Let&rsquo;s see how the Bool type is defined in the standard library: data Bool = False|True. We can read as: the Bool type can have a value of True or False. Both the type name and the value constructors have to be capital cased.
+  example: build Shape type in Haskell:data Shape = Circle Float Float Float | Rectangle Float Float Float Float , The Circle value constructor has three fields, which take floats.
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell7/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell6/">Module</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-11-19 </span>
@@ -148,71 +212,6 @@ curried functions Every function in Haskell officially only takes one parameter.
     </div>
     <div class="read-more">
       <a href="/post/haskell5/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell4/">Recursion</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-18 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Recursion is important to Haskell because unlike imperative languages, you do computations in Haskell by declaring what something is instead of declaring how you get it. That&rsquo;s why there are no while loops or for loops in Haskell and instead we many times have to use recursion to declare what something is.
-maximum 1 2 3 4 5  maximum&#39; :: (Ord a) =&gt; [a] -&gt; a maximum&#39; [] = error &#34;empty list&#34; -- crash condition maximum&#39; [x] = x -- edge condition maximum&#39; (x:xs) = max x maxnum where maxnum = maximum&#39; xs   replicate 1 2 3 4 5  replicate&#39; :: (Integral a) =&gt; a -&gt; b -&gt; [b] replicate&#39; a b | a &lt; 0 = error &#34;error:negative int&#34; | a == 0 = [] | a &gt; 0 = b : replicate&#39; (a-1) b   Num is not a subclass of Ord.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell4/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell3/">Syntax in Functions</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-18 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      pattern matching 1 2 3 4 5 6 7 8 9 10  lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 x = &#34;not 7&#34; lucky7 7 --&#34;lucy 7&#34; -- if lucky7 x at front of lucky7 7 lucky7 x = &#34;not 7&#34; lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 7 --&#34;not 7&#34;   because lucky7 x will match with lucky7 7 and lucky7 7 = &quot;lucky 7&quot; won&rsquo;t be checked.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell3/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell2/">Type &amp; Typeclasses</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-18 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      types in haskell :t can tell us the type of some expressions
-1 2 3 4 5  :t &#39;a&#39; -- &#39;a&#39; :: Char :t True -- True :: Bool  :t &#34;Haskell&#34; -- &#34;Haskell&#34; :: [Char]  :t (True, 4) -- (True, 4) :: (Bool, Int)  :t 4 == 5 -- 4 == 5 :: Bool    :: means &ldquo;has type of&rdquo; . [Char] means a list of characters, [Char] is equal to String, using String is more clear and easy to read.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell2/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
