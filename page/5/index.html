@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2023-09-10T13:48:43-04:00" />
+<meta property="og:updated_time" content="2023-09-12T14:46:58-04:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -106,6 +106,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/specification/">specification</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-27 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      catogories of specification requirements specification  specify what piece of software is supposed to do before writing software a collabration of software producer and software user  formal specification  mathmatical expression of what software is going to do and how will it work  interface specification  is related to api , how to use a library  protocal specification  make sure the work between two programmers can interpretted correctly  semantics and syntax  to achieve interoperability, we need to specify the semantics and syntax  semantics   explain what do the message mean
+    </div>
+    <div class="read-more">
+      <a href="/post/specification/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell8/">Input and Output</a></h1>
@@ -191,28 +212,6 @@ curried functions Every function in Haskell officially only takes one parameter.
     </div>
     <div class="read-more">
       <a href="/post/haskell5/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell4/">Recursion</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-18 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Recursion is important to Haskell because unlike imperative languages, you do computations in Haskell by declaring what something is instead of declaring how you get it. That&rsquo;s why there are no while loops or for loops in Haskell and instead we many times have to use recursion to declare what something is.
-maximum 1 2 3 4 5  maximum&#39; :: (Ord a) =&gt; [a] -&gt; a maximum&#39; [] = error &#34;empty list&#34; -- crash condition maximum&#39; [x] = x -- edge condition maximum&#39; (x:xs) = max x maxnum where maxnum = maximum&#39; xs   replicate 1 2 3 4 5  replicate&#39; :: (Integral a) =&gt; a -&gt; b -&gt; [b] replicate&#39; a b | a &lt; 0 = error &#34;error:negative int&#34; | a == 0 = [] | a &gt; 0 = b : replicate&#39; (a-1) b   Num is not a subclass of Ord.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell4/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
