@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2023-09-17T11:31:18-04:00" />
+<meta property="og:updated_time" content="2023-09-18T01:31:18-04:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -106,6 +106,30 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell6/">Module</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-19 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Loading modules All the functions, types and typeclasses that we&rsquo;ve dealt with so far were part of the Prelude module, which is imported by default.
+The syntax for importing modules in a Haskell script is import &lt;module name&gt;
+nub is a function defined in Data.List that takes a list and remove duplicate elements from the list
+1 2 3 4  import Data.List numUniques :: (Eq a) =&gt; [a] -&gt; Int numUniques = length .
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell6/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell5/">High Order Functions</a></h1>
@@ -189,27 +213,6 @@ maximum 1 2 3 4 5  maximum&#39; :: (Ord a) =&gt; [a] -&gt; a maximum&#39; [] = e
     </div>
     <div class="read-more">
       <a href="/post/haskell2/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python_file_operation1/">python file operation(1)</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-17 </span>
-      <div class="post-category">
-          <a href="/categories/python/"> python </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      read as text mode 1 2 3 4 5 6 7 8 9  def test_write(): file = open(&#34;store.txt&#34;, &#34;wt&#34;) file.write(&#34;Hello\n&#34;) file.write(&#34;World\n&#34;) file.close() with open(&#34;store.txt&#34;, &#34;rt&#34;) as file2: # no need for file.close() for line in file2: print(line)   read as byte mode 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20  def test_nums_texts(): file = open(&#34;nums.txt&#34;, &#34;wt&#34;) # write as text 1000000 1000001 1000002 1000003 1000004 .
-    </div>
-    <div class="read-more">
-      <a href="/post/python_file_operation1/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

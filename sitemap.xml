@@ -3,7 +3,35 @@
   
   <url>
     <loc>https://yufei-li.github.io/categories/</loc>
-    <lastmod>2023-09-17T11:31:18-04:00</lastmod>
+    <lastmod>2023-09-18T01:31:18-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/</loc>
+    <lastmod>2023-09-18T01:31:18-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/politics_is_the_art_of_the_possible/</loc>
+    <lastmod>2023-09-18T01:31:18-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/</loc>
+    <lastmod>2023-09-18T01:31:18-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-09-18T01:31:18-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -16,21 +44,7 @@
   </url>
   
   <url>
-    <loc>https://yufei-li.github.io/post/</loc>
-    <lastmod>2023-09-17T11:31:18-04:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://yufei-li.github.io/categories/%E6%97%A5%E6%9C%AC%E5%8E%86%E5%8F%B2/</loc>
-    <lastmod>2023-09-17T11:31:18-04:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/</loc>
     <lastmod>2023-09-17T11:31:18-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -101,13 +115,6 @@
   
   <url>
     <loc>https://yufei-li.github.io/post/libido/</loc>
-    <lastmod>2023-06-01T09:10:44-04:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-06-01T09:10:44-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
