@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2023-09-24T23:41:18-04:00" />
+<meta property="og:updated_time" content="2023-10-29T01:57:08-04:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -108,6 +108,49 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell4/">Recursion</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-18 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Recursion is important to Haskell because unlike imperative languages, you do computations in Haskell by declaring what something is instead of declaring how you get it. That&rsquo;s why there are no while loops or for loops in Haskell and instead we many times have to use recursion to declare what something is.
+maximum 1 2 3 4 5  maximum&#39; :: (Ord a) =&gt; [a] -&gt; a maximum&#39; [] = error &#34;empty list&#34; -- crash condition maximum&#39; [x] = x -- edge condition maximum&#39; (x:xs) = max x maxnum where maxnum = maximum&#39; xs   replicate 1 2 3 4 5  replicate&#39; :: (Integral a) =&gt; a -&gt; b -&gt; [b] replicate&#39; a b | a &lt; 0 = error &#34;error:negative int&#34; | a == 0 = [] | a &gt; 0 = b : replicate&#39; (a-1) b   Num is not a subclass of Ord.
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell4/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell3/">Syntax in Functions</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-18 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      pattern matching 1 2 3 4 5 6 7 8 9 10  lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 x = &#34;not 7&#34; lucky7 7 --&#34;lucy 7&#34; -- if lucky7 x at front of lucky7 7 lucky7 x = &#34;not 7&#34; lucky7 :: (Integral a) =&gt; a -&gt; String lucky7 7 = &#34;lucky 7&#34; lucky7 7 --&#34;not 7&#34;   because lucky7 x will match with lucky7 7 and lucky7 7 = &quot;lucky 7&quot; won&rsquo;t be checked.
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell3/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell2/">Type &amp; Typeclasses</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-11-18 </span>
@@ -166,48 +209,6 @@
     </div>
     <div class="read-more">
       <a href="/post/haskell1/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/c6/">c语言笔记(6)</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-13 </span>
-      <div class="post-category">
-          <a href="/categories/c%E8%AF%AD%E8%A8%80/"> c语言 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Function-like macros define macros that work in a similar way like a function call. This is known as function-like macros. in SQUARE(x), there must be no gap between SQUARE and (x) the function-like macros simply do replacement, so in the macro definition, ((x) * (x)) the brackets are needed, otherwise (x * x) = (5 + 1 * 5 + 1) = (5 + 5 + 1) = 11 1
-    </div>
-    <div class="read-more">
-      <a href="/post/c6/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/c_localtime/">localtime function</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-12 </span>
-      <div class="post-category">
-          <a href="/categories/c%E8%AF%AD%E8%A8%80/"> c语言 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      tm structure in c 1 2 3 4 5 6 7 8 9 10 11 struct tm { int tm_sec; /* seconds, range 0 to 59 */ int tm_min; /* minutes, range 0 to 59 */ int tm_hour; /* hours, range 0 to 23 */ int tm_mday; /* day of the month, range 1 to 31 */ int tm_mon; /* month, range 0 to 11 */ int tm_year; /* The
-    </div>
-    <div class="read-more">
-      <a href="/post/c_localtime/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

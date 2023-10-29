@@ -3,14 +3,42 @@
   
   <url>
     <loc>https://yufei-li.github.io/categories/</loc>
-    <lastmod>2023-09-24T23:41:18-04:00</lastmod>
+    <lastmod>2023-10-29T01:57:08-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://yufei-li.github.io/post/</loc>
-    <lastmod>2023-09-24T23:41:18-04:00</lastmod>
+    <lastmod>2023-10-29T01:57:08-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/categories/%E4%B8%AD%E5%9B%BD%E5%8E%86%E5%8F%B2/</loc>
+    <lastmod>2023-10-29T01:57:08-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/</loc>
+    <lastmod>2023-10-29T01:57:08-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/zhenfan_movement/</loc>
+    <lastmod>2023-10-29T01:57:08-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://yufei-li.github.io/post/chinesemodernhistory_1/</loc>
+    <lastmod>2023-10-09T16:50:48-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,13 +52,6 @@
   
   <url>
     <loc>https://yufei-li.github.io/categories/%E6%97%A5%E6%9C%AC%E5%8E%86%E5%8F%B2/</loc>
-    <lastmod>2023-09-24T23:41:18-04:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/</loc>
     <lastmod>2023-09-24T23:41:18-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -87,13 +108,6 @@
   
   <url>
     <loc>https://yufei-li.github.io/post/themodernpoliticsofthetaipingheavenlykingdom/</loc>
-    <lastmod>2023-09-09T15:42:16-04:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://yufei-li.github.io/categories/%E4%B8%AD%E5%9B%BD%E5%8E%86%E5%8F%B2/</loc>
     <lastmod>2023-09-09T15:42:16-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
