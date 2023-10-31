@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2023-10-29T01:57:08-04:00" />
+<meta property="og:updated_time" content="2023-10-30T22:41:38-04:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -106,6 +106,28 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell5/">High Order Functions</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-19 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Haskell functions can take functions as parameters and return functions as return values. A function that does either of those is called a higher order function.
+curried functions Every function in Haskell officially only takes one parameter. All the functions that accepted several parameters so far have been curried functions. For example, max function. Doing max 4 5 first creates a function that takes a parameter and returns either 4 or that parameter, depending on which is bigger.
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell5/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell4/">Recursion</a></h1>
@@ -188,27 +210,6 @@ maximum 1 2 3 4 5  maximum&#39; :: (Ord a) =&gt; [a] -&gt; a maximum&#39; [] = e
     </div>
     <div class="read-more">
       <a href="/post/python_file_operation1/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell1/">Haskell Basic Knowledge</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-16 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Boolean Algebra &amp; Equality 1 2 3 4 5 6 7 8  True &amp;&amp; False --False True || False --True not True --False 21 == 21 --True &#34;Hello&#34; == &#34;Hello&#34; --True &#34;Hello&#34; == 123 --Error 5 /= 7 --True, not equal to   functions succ  returns following item in an enumeration  1 2 3 4  succ 5 --6 succ &#39;a&#39; --b succ 60 * 3 --183 -&gt; 61 * 3 succ (60 * 3) --181 -&gt; 180 + 1   div  returns how many times the first number can be divided by the second one  1 2 3  div 92 7 97 `div` 7 -- 13   write functions  The string before :: is function name, after :: is parameter list, including parameter and return value, connected by -&gt;, the last value is return value.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell1/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
