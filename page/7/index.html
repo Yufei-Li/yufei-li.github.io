@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://yufei-li.github.io/" />
-<meta property="og:updated_time" content="2023-11-08T15:01:26+08:00" />
+<meta property="og:updated_time" content="2023-12-06T04:56:08-05:00" />
 <meta itemprop="name" content="李雨菲的博客 Li Yufei&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="李雨菲的博客 Li Yufei&#39;s Blog"/>
@@ -106,6 +106,28 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/haskell7/">Making Own Types and Typeclasses</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-21 </span>
+      <div class="post-category">
+          <a href="/categories/haskell/"> Haskell </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Algebraic data types intro One way to make type is to use the data keyword to define a type. Let&rsquo;s see how the Bool type is defined in the standard library: data Bool = False|True. We can read as: the Bool type can have a value of True or False. Both the type name and the value constructors have to be capital cased.
+  example: build Shape type in Haskell:data Shape = Circle Float Float Float | Rectangle Float Float Float Float , The Circle value constructor has three fields, which take floats.
+    </div>
+    <div class="read-more">
+      <a href="/post/haskell7/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/haskell6/">Module</a></h1>
@@ -191,28 +213,6 @@ maximum 1 2 3 4 5  maximum&#39; :: (Ord a) =&gt; [a] -&gt; a maximum&#39; [] = e
     </div>
     <div class="read-more">
       <a href="/post/haskell3/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/haskell2/">Type &amp; Typeclasses</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-11-18 </span>
-      <div class="post-category">
-          <a href="/categories/haskell/"> Haskell </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      types in haskell :t can tell us the type of some expressions
-1 2 3 4 5  :t &#39;a&#39; -- &#39;a&#39; :: Char :t True -- True :: Bool  :t &#34;Haskell&#34; -- &#34;Haskell&#34; :: [Char]  :t (True, 4) -- (True, 4) :: (Bool, Int)  :t 4 == 5 -- 4 == 5 :: Bool    :: means &ldquo;has type of&rdquo; . [Char] means a list of characters, [Char] is equal to String, using String is more clear and easy to read.
-    </div>
-    <div class="read-more">
-      <a href="/post/haskell2/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
